@@ -486,6 +486,48 @@
   .bold { font-weight: 700; }
   .small { font-size: 11px; color: var(--text-light); }
 
+  /* EDITION NAV */
+  .edition-nav{background:#0F2548;border-bottom:2px solid var(--ashley-gold);position:sticky;top:0;z-index:200;}
+  .edition-nav-inner{max-width:960px;margin:0 auto;padding:8px 32px;display:flex;align-items:center;gap:10px;overflow-x:auto;}
+  .edition-nav-label{font-size:9px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;white-space:nowrap;flex-shrink:0;}
+  .edition-btn{background:none;border:1px solid rgba(255,255,255,.15);padding:5px 13px;border-radius:20px;font-size:11px;font-weight:600;color:rgba(255,255,255,.55);cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0;}
+  .edition-btn:hover{color:rgba(255,255,255,.9);border-color:rgba(255,255,255,.4);}
+  .edition-btn.active{background:var(--ashley-gold);color:#0F2548;font-weight:800;border-color:var(--ashley-gold);}
+  .edition{display:none;}
+  .edition.active{display:block;}
+
+  /* CONDENSED EDITION */
+  .ed-page{max-width:900px;margin:0 auto;padding:0 16px 56px;}
+  .ed-hdr{background:var(--ashley-navy);padding:0;}
+  .ed-hdr-stripe{height:4px;background:linear-gradient(90deg,var(--ashley-gold),#E8C86A,var(--ashley-gold));}
+  .ed-hdr-inner{max-width:900px;margin:0 auto;padding:24px 32px 20px;display:flex;justify-content:space-between;align-items:flex-end;}
+  .ed-hdr h2{font-family:'Playfair Display',serif;font-size:22px;color:#fff;font-weight:800;line-height:1.2;}
+  .ed-hdr .ed-sub{font-size:11px;color:rgba(255,255,255,.5);margin-top:4px;}
+  .ed-hdr .ed-date{text-align:right;font-size:11px;color:var(--ashley-gold);font-weight:600;text-transform:uppercase;letter-spacing:1px;}
+  .ed-card{background:#fff;border-radius:8px;padding:16px 22px;margin-top:14px;box-shadow:0 1px 4px rgba(0,0,0,.07);}
+  .ed-card-title{font-size:10px;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:.7px;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+  .ed-card-icon{width:26px;height:26px;border-radius:5px;background:var(--ashley-navy);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;}
+  .ed-bullet{display:flex;gap:10px;padding:10px 12px;background:var(--ashley-light);border-radius:6px;border-left:3px solid var(--ashley-navy);margin-bottom:8px;}
+  .ed-bullet .bnum{font-size:16px;font-weight:800;color:var(--ashley-gold);line-height:1;flex-shrink:0;width:18px;}
+  .ed-bullet p{font-size:12px;color:var(--text);line-height:1.5;}
+  .ed-bullet p strong{color:var(--ashley-navy);}
+  .ed-alert-banner{background:var(--ashley-navy);border-radius:8px;margin-top:14px;overflow:hidden;}
+  .ed-alert-hdr{background:var(--red);padding:9px 22px;font-size:10px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.8px;}
+  .ed-alerts{padding:14px 22px;display:flex;flex-direction:column;gap:10px;}
+  .ed-alert-item{display:grid;grid-template-columns:1fr 1fr;gap:10px;border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:10px;}
+  .ed-alert-item:last-child{border-bottom:none;padding-bottom:0;}
+  .ed-alabel{font-size:9px;font-weight:700;color:var(--ashley-gold);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;}
+  .ed-atext{font-size:11px;color:rgba(255,255,255,.8);line-height:1.45;}
+  .ed-aclabel{font-size:9px;font-weight:700;color:#86EFAC;text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;}
+  .ed-rec-list{display:flex;flex-direction:column;gap:8px;}
+  .ed-rec{border-radius:6px;overflow:hidden;border:1px solid var(--border);}
+  .ed-rec-hdr{padding:9px 14px;background:var(--ashley-navy);display:flex;gap:9px;align-items:center;}
+  .ed-rec-num{font-size:10px;font-weight:800;color:var(--ashley-gold);background:rgba(201,168,76,.15);width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .ed-rec-title{font-size:12px;font-weight:700;color:#fff;}
+  .ed-rec-body{padding:10px 14px;display:flex;gap:12px;}
+  .ed-rec-que{font-size:11px;color:var(--text);line-height:1.45;flex:1;}
+  .ed-rec-tag{font-size:9px;font-weight:600;padding:2px 7px;border-radius:10px;background:var(--ashley-light);color:var(--ashley-navy);white-space:nowrap;align-self:flex-start;}
+
   /* PASSWORD WALL */
   #pgwall{position:fixed;inset:0;background:#1B3A6B;display:flex;align-items:center;justify-content:center;z-index:9999;}
   #pgbox{background:#fff;border-radius:12px;padding:32px;width:340px;text-align:center;}
@@ -519,6 +561,17 @@ function pgcheck(){
   }
 }
 </script>
+
+<!-- EDITION NAV -->
+<div class="edition-nav" id="edition-nav" style="display:none">
+  <div class="edition-nav-inner">
+    <span class="edition-nav-label">Ediciones</span>
+    <div id="edition-tabs"></div>
+  </div>
+</div>
+
+<!-- EDITION: 7 MAYO 2026 -->
+<div id="ed-2026-05-07" class="edition active">
 
 <!-- HEADER -->
 <div class="header">
@@ -1414,6 +1467,244 @@ function pgcheck(){
   <span><strong>Ashley Furniture Colombia</strong> · Radar Competitivo Semanal · Confidencial</span>
   <span>Generado por Agente Editor · 7 de mayo de 2026 · <strong>Edición #1 (actualizado)</strong></span>
 </div>
+
+</div><!-- /ed-2026-05-07 -->
+
+
+<!-- EDITION: 11 MAYO 2026 -->
+<div id="ed-2026-05-11" class="edition">
+<div class="ed-hdr">
+  <div class="ed-hdr-stripe"></div>
+  <div class="ed-hdr-inner">
+    <div>
+      <div class="header-logo">Ashley Colombia</div>
+      <h2 class="ed-hdr">Radar Competitivo<br>Muebles Colombia</h2>
+      <div class="ed-sub">Inteligencia competitiva semanal · Comité de Gerencia</div>
+    </div>
+    <div>
+      <div class="ed-date">Semana del 11 de mayo de 2026</div>
+      <div style="font-size:10px;color:rgba(255,255,255,.35);margin-top:3px;">Edición #2 · Agente Editor</div>
+    </div>
+  </div>
+</div>
+<div class="ed-page">
+
+  <div class="ed-alert-banner">
+    <div class="ed-alert-hdr">⚡ Alertas urgentes — acción requerida antes del viernes 15 de mayo</div>
+    <div class="ed-alerts">
+      <div class="ed-alert-item">
+        <div><div class="ed-alabel">🔴 Alerta #1 — Jamar</div><div class="ed-atext">"72 Horas de Descuento" (mayo 8–10) hasta -60% en muebles y colchones — coincide con Ashley Aniversario Sale 2026.</div></div>
+        <div><div class="ed-aclabel">✅ Acción sugerida</div><div class="ed-atext">Marketing Digital activa contenido orgánico + paid Meta/Instagram enfatizando calidad-garantía-experiencia vs precio de ocasión de Jamar. Activar @flakycartagena. Deadline: miércoles 13 mayo.</div></div>
+      </div>
+      <div class="ed-alert-item">
+        <div><div class="ed-alabel">🔴 Alerta #2 — Aristas en Medellín</div><div class="ed-atext">Aristas abrió primera tienda fuera de Bogotá en C.C. Oviedo Medellín — ciudad objetivo para la 4ª tienda Ashley.</div></div>
+        <div><div class="ed-aclabel">✅ Acción sugerida</div><div class="ed-atext">Revisar estrategia de ubicación y timing apertura Ashley Medellín. Preparar plan de diferenciación para el lanzamiento. Responsable: Expansión + Gerencia. Deadline: viernes 15 mayo.</div></div>
+      </div>
+      <div class="ed-alert-item">
+        <div><div class="ed-alabel">🔴 Alerta #3 — Jamar financiamiento</div><div class="ed-atext">Activa "Pague en Junio" (diferimiento primera cuota) simultánea a las 72 horas — muy efectiva en conversión.</div></div>
+        <div><div class="ed-aclabel">✅ Acción sugerida</div><div class="ed-atext">Verificar con equipo financiero si Ashley puede activar oferta similar de financiamiento diferido para el Aniversario Sale. Responsable: Financiero + Marketing. Deadline: jueves 14 mayo.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ed-card">
+    <div class="ed-card-title"><div class="ed-card-icon">📋</div>Resumen ejecutivo — 4 insights clave</div>
+    <div class="ed-bullet"><span class="bnum">1</span><p><strong>Jamar "72 Horas de Descuento":</strong> Hasta -60% en la misma semana del Aniversario Sale Ashley. El solapamiento exige que Ashley refuerce el mensaje de valor (calidad + garantía + experiencia de tienda) vs agresividad de precio de Jamar.</p></div>
+    <div class="ed-bullet"><span class="bnum">2</span><p><strong>Aristas ya en Medellín (C.C. Oviedo):</strong> Primera tienda fuera de Bogotá, meta $120B COP en 2026 (+54% en cifras absolutas). Llegará al mercado con tracción previa cuando Ashley abra su 4ª tienda. Requiere análisis de ubicación y diferenciación.</p></div>
+    <div class="ed-bullet"><span class="bnum">3</span><p><strong>Ashley lidera crecimiento porcentual:</strong> Q1 2026 en +71% YoY ($4.560B COP). Jamar crece +40%, Aristas proyecta +54% en cifras absolutas — Ashley supera en velocidad porcentual. Este liderazgo debe comunicarse con mayor intensidad.</p></div>
+    <div class="ed-bullet"><span class="bnum">4</span><p><strong>Instagram purga global 6-8 mayo:</strong> Homecenter perdió ~4.000 seguidores (990K→986K), Tugó ~2.000 (341K→339K). Las variaciones negativas son atribuibles al evento global — no alarmar internamente.</p></div>
+  </div>
+
+  <div class="ed-card">
+    <div class="ed-card-title"><div class="ed-card-icon">💡</div>Recomendaciones estratégicas</div>
+    <div class="ed-rec-list">
+      <div class="ed-rec"><div class="ed-rec-hdr"><div class="ed-rec-num">1</div><div class="ed-rec-title">Activar contenido de valor vs Jamar -60%</div></div><div class="ed-rec-body"><div class="ed-rec-que">Campaña digital enfatizando calidad, garantía y experiencia de tienda Ashley como diferenciador frente al descuento masivo de Jamar. Activar @flakycartagena si disponible.</div><div class="ed-rec-tag">Marketing · 13 mayo</div></div></div>
+      <div class="ed-rec"><div class="ed-rec-hdr"><div class="ed-rec-num">2</div><div class="ed-rec-title">Análisis de ubicación Medellín — urgente</div></div><div class="ed-rec-body"><div class="ed-rec-que">Aristas ya está en Oviedo Medellín. Ashley debe confirmar CC objetivo y diferenciador de posicionamiento antes de anunciar apertura.</div><div class="ed-rec-tag">Expansión · 15 mayo</div></div></div>
+      <div class="ed-rec"><div class="ed-rec-hdr"><div class="ed-rec-num">3</div><div class="ed-rec-title">Evaluar financiamiento diferido</div></div><div class="ed-rec-body"><div class="ed-rec-que">Jamar activa "Pague en Junio" con alta conversión. Ashley debería evaluar cuota diferida o primera cuota gratis para el Aniversario Sale.</div><div class="ed-rec-tag">Financiero · 14 mayo</div></div></div>
+      <div class="ed-rec"><div class="ed-rec-hdr"><div class="ed-rec-num">4</div><div class="ed-rec-title">Comunicar liderazgo de crecimiento +71%</div></div><div class="ed-rec-body"><div class="ed-rec-que">Ashley crece más rápido porcentualmente que cualquier competidor verificado. Activar narrative B2B y medios con datos Q1 2026.</div><div class="ed-rec-tag">Marketing · Esta semana</div></div></div>
+    </div>
+  </div>
+
+</div>
+<div class="footer">
+  <span><strong>Ashley Furniture Colombia</strong> · Radar Competitivo Semanal · Confidencial</span>
+  <span>Generado por Agente Editor · 11 de mayo de 2026 · <strong>Edición #2</strong></span>
+</div>
+</div><!-- /ed-2026-05-11 -->
+
+
+<!-- EDITION: 18 MAYO 2026 -->
+<div id="ed-2026-05-18" class="edition">
+<div class="ed-hdr">
+  <div class="ed-hdr-stripe"></div>
+  <div class="ed-hdr-inner">
+    <div>
+      <div class="header-logo">Ashley Colombia</div>
+      <h2 class="ed-hdr">Radar Competitivo<br>Muebles Colombia</h2>
+      <div class="ed-sub">Inteligencia competitiva semanal · Comité de Gerencia</div>
+    </div>
+    <div>
+      <div class="ed-date">Semana del 18 de mayo de 2026</div>
+      <div style="font-size:10px;color:rgba(255,255,255,.35);margin-top:3px;">Edición #3 · Agente Editor</div>
+    </div>
+  </div>
+</div>
+<div class="ed-page">
+
+  <div class="ed-alert-banner">
+    <div class="ed-alert-hdr">⚡ Alertas urgentes — acción requerida antes del viernes 22 de mayo</div>
+    <div class="ed-alerts">
+      <div class="ed-alert-item">
+        <div><div class="ed-alabel">🔴 Alerta #1 — Jamar flagship Santa Bárbara</div><div class="ed-atext">Apertura de flagship Santa Bárbara en junio 2026 — inversión $15.000M COP, 45 empleos directos. Llegará a 23 tiendas. Meta 2030: 50 tiendas. Ubicación zona norte/Usaquén.</div></div>
+        <div><div class="ed-aclabel">✅ Acción sugerida</div><div class="ed-atext">Activar campaña digital geolocalizada en zona norte/Usaquén antes de la apertura de Jamar. Considerar oferta exclusiva "Elige Ashley en el norte de Bogotá" con envío 24h. Responsable: Marketing + E-commerce. Deadline: viernes 22 mayo.</div></div>
+      </div>
+      <div class="ed-alert-item">
+        <div><div class="ed-alabel">🔴 Alerta #2 — SEO crítico</div><div class="ed-atext">Ashley ausente del top 3 en las 5 búsquedas SEO clave: "sofá sala Bogotá", "muebles sala Colombia", "cama doble Medellín", "comedor 6 puestos Colombia", "muebles hogar Colombia".</div></div>
+        <div><div class="ed-aclabel">✅ Acción sugerida</div><div class="ed-atext">Brief urgente a agencia SEM/SEO para posicionarse en las 5 búsquedas clave. Esta brecha tarda 60–90 días en cerrarse — cada día de demora es tráfico que va a Jamar e IKEA. Deadline: 25 mayo.</div></div>
+      </div>
+      <div class="ed-alert-item">
+        <div><div class="ed-alabel">🟡 Alerta #3 — Interzum Bogotá</div><div class="ed-atext">Interzum Bogotá 12-15 mayo: feria sectorial más importante de la industria del mueble en América Latina. +300 expositores, 17 países, 15.000 visitantes profesionales.</div></div>
+        <div><div class="ed-aclabel">✅ Acción sugerida</div><div class="ed-atext">Confirmar si Ashley tuvo presencia. Si no, evaluar participación 2027 y networking con proveedores de la feria. Responsable: Gerencia + Expansión.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ed-card">
+    <div class="ed-card-title"><div class="ed-card-icon">📋</div>Resumen ejecutivo — 4 insights clave</div>
+    <div class="ed-bullet"><span class="bnum">1</span><p><strong>Jamar en modo ofensivo total:</strong> Apertura flagship Santa Bárbara en junio ($15B COP), campaña 75 aniversario y Credijamar 0% activos simultáneamente. Es la semana de mayor presión competitiva de Jamar en 2026. Ashley debe contrarrestar con visibilidad en el eje Santa Bárbara/Usaquén.</p></div>
+    <div class="ed-bullet"><span class="bnum">2</span><p><strong>SEO crítico: Ashley invisible en Google Colombia.</strong> Para las 5 búsquedas de mayor intención de compra, Ashley no aparece en ningún top 3 orgánico. IKEA lidera "sofá sala Bogotá", Aristas lidera "comedor 6 puestos Colombia". El canal orgánico está dejando dinero sobre la mesa.</p></div>
+    <div class="ed-bullet"><span class="bnum">3</span><p><strong>Ashley mantiene liderazgo de crecimiento porcentual.</strong> Q1 2026 creció +71% YoY. Ningún competidor verificado supera ese ritmo: Aristas proyecta +54% para el año completo. Ashley sigue siendo la marca de muebles de mayor crecimiento porcentual en Colombia.</p></div>
+    <div class="ed-bullet"><span class="bnum">4</span><p><strong>Interzum Bogotá 12-15 mayo 2026:</strong> La feria sectorial más importante de América Latina se realizó esta semana en Corferias. Confirmar presencia Ashley. Si no hubo presencia, evaluar participación en 2027 y networking con proveedores de la feria.</p></div>
+  </div>
+
+  <div class="ed-card">
+    <div class="ed-card-title"><div class="ed-card-icon">💡</div>Recomendaciones estratégicas</div>
+    <div class="ed-rec-list">
+      <div class="ed-rec"><div class="ed-rec-hdr"><div class="ed-rec-num">1</div><div class="ed-rec-title">Campaña geolocalizada norte Bogotá vs Jamar</div></div><div class="ed-rec-body"><div class="ed-rec-que">Activar pauta digital en zona Usaquén/Santa Bárbara antes de la apertura del flagship Jamar en junio. Oferta diferenciadora en financiamiento o experiencia.</div><div class="ed-rec-tag">Marketing · 22 mayo</div></div></div>
+      <div class="ed-rec"><div class="ed-rec-hdr"><div class="ed-rec-num">2</div><div class="ed-rec-title">Brief SEO a agencia — urgente</div></div><div class="ed-rec-body"><div class="ed-rec-que">Ashley invisible en Google Colombia en 5 búsquedas clave. La brecha tarda 60–90 días en cerrarse. Brief a agencia SEM/SEO con prioridad en "sofá sala Bogotá" y "muebles hogar Colombia".</div><div class="ed-rec-tag">Marketing Digital · 25 mayo</div></div></div>
+      <div class="ed-rec"><div class="ed-rec-hdr"><div class="ed-rec-num">3</div><div class="ed-rec-title">Comunicar liderazgo de crecimiento</div></div><div class="ed-rec-body"><div class="ed-rec-que">+71% Q1 2026 YoY no está siendo comunicado como activo de marca. Activar narrative en medios y redes: "la marca de muebles que más crece en Colombia".</div><div class="ed-rec-tag">Marketing · Esta semana</div></div></div>
+      <div class="ed-rec"><div class="ed-rec-hdr"><div class="ed-rec-num">4</div><div class="ed-rec-title">Capitalizar rating 5.0 — comunicación activa</div></div><div class="ed-rec-body"><div class="ed-rec-que">Ashley 5.0 Multiparque y 4.9 Carrera 19 — el rating más alto del sector. Lanzar "La mueblería mejor calificada de Colombia" en redes, web y punto de venta.</div><div class="ed-rec-tag">Marketing · Esta semana</div></div></div>
+      <div class="ed-rec"><div class="ed-rec-hdr"><div class="ed-rec-num">5</div><div class="ed-rec-title">Agenda Interzum 2027</div></div><div class="ed-rec-body"><div class="ed-rec-que">Si Ashley no participó en Interzum 2026, definir estrategia de presencia 2027 y comenzar networking con proveedores identificados en la feria.</div><div class="ed-rec-tag">Gerencia · 30 mayo</div></div></div>
+    </div>
+  </div>
+
+</div>
+<div class="footer">
+  <span><strong>Ashley Furniture Colombia</strong> · Radar Competitivo Semanal · Confidencial</span>
+  <span>Generado por Agente Editor · 18 de mayo de 2026 · <strong>Edición #3</strong></span>
+</div>
+</div><!-- /ed-2026-05-18 -->
+
+
+<!-- EDITION: 19 MAYO 2026 -->
+<div id="ed-2026-05-19" class="edition">
+<div class="ed-hdr">
+  <div class="ed-hdr-stripe"></div>
+  <div class="ed-hdr-inner">
+    <div>
+      <div class="header-logo">Ashley Colombia</div>
+      <h2 class="ed-hdr">Radar Competitivo<br>Muebles Colombia</h2>
+      <div class="ed-sub">Inteligencia competitiva semanal · Comité de Gerencia</div>
+    </div>
+    <div>
+      <div class="ed-date">Semana del 19 de mayo de 2026</div>
+      <div style="font-size:10px;color:rgba(255,255,255,.35);margin-top:3px;">Edición #4 · Agente Editor</div>
+    </div>
+  </div>
+</div>
+<div class="ed-page">
+
+  <div class="ed-alert-banner">
+    <div class="ed-alert-hdr">⚡ Alertas urgentes — acción requerida antes del viernes 23 de mayo</div>
+    <div class="ed-alerts">
+      <div class="ed-alert-item">
+        <div><div class="ed-alabel">🔴 Alerta #1 — Jamar "Hot Days"</div><div class="ed-atext">Campaña activa con hasta 70% de descuento en muebles y colchones — simultánea con el Aniversario Sale 2026 de Ashley. Pauta masiva en Meta y tiendas físicas. Mayor ofensiva comercial de Jamar en lo que va del año.</div></div>
+        <div><div class="ed-aclabel">✅ Acción sugerida</div><div class="ed-atext">No competir por precio. Reforzar diferencial Ashley en redes: ratings 5.0/4.9 Google, calidad americana, garantía y experiencia de tienda. Activar contenido orgánico y paid esta semana. Responsable: Gerencia Comercial + Marketing. Deadline: martes 20 mayo.</div></div>
+      </div>
+      <div class="ed-alert-item">
+        <div><div class="ed-alabel">🔴 Alerta #2 — Aristas Medellín operativa</div><div class="ed-atext">Aristas confirmó apertura de su primera tienda fuera de Bogotá en C.C. Oviedo (Medellín) — la ciudad objetivo #1 de Ashley para su 4ª tienda. Ya opera con 9 tiendas y meta $120.000M COP en 2026.</div></div>
+        <div><div class="ed-aclabel">✅ Acción sugerida</div><div class="ed-atext">Definir antes del 31 mayo ubicación y timeline de apertura Ashley Medellín. Evaluar C.C. El Tesoro o Santafé como alternativa diferenciada a Oviedo donde ya está Aristas. Responsable: Gerencia General + Expansión. Deadline: viernes 29 mayo.</div></div>
+      </div>
+      <div class="ed-alert-item">
+        <div><div class="ed-alabel">🟡 Alerta #3 — BoConcept prepara 4ª tienda</div><div class="ed-atext">BoConcept Colombia confirma preparación de su 4ª tienda (ciudad destino sin confirmar). Actualmente tiene 3 tiendas en Bogotá y Medellín. Es el franquiciado #1 en ventas/tienda en América Latina con EBITDA récord en 2025.</div></div>
+        <div><div class="ed-aclabel">✅ Acción sugerida</div><div class="ed-atext">Monitorear ciudad elegida por BoConcept — si es Barranquilla o Cali, anticipa el segmento premium donde Ashley aún no llega. Responsable: Inteligencia Comercial. Deadline: viernes 23 mayo.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ed-card">
+    <div class="ed-card-title"><div class="ed-card-icon">📋</div>Resumen ejecutivo — 4 insights clave</div>
+    <div class="ed-bullet"><span class="bnum">1</span><p><strong>Jamar "Hot Days" hasta -70% — respuesta urgente:</strong> Jamar lanzó su mayor campaña de descuentos del año en simultáneo con el Aniversario Sale Ashley. El riesgo es que consumidores indecisos elijan precio sobre calidad. Ashley debe activar hoy el mensaje de valor diferencial: ratings 5.0, calidad americana, garantía real y experiencia de tienda sin igual.</p></div>
+    <div class="ed-bullet"><span class="bnum">2</span><p><strong>Aristas ya está en Medellín (C.C. Oviedo):</strong> El competidor de diseño más agresivo de Colombia llegó a la ciudad objetivo #1 de Ashley con tracción de marca consolidada. Cada semana de demora en la apertura Ashley Medellín, Aristas consolida terreno. La ventana en el segmento premium diseño en Medellín sigue abierta, pero no por mucho tiempo.</p></div>
+    <div class="ed-bullet"><span class="bnum">3</span><p><strong>SEO: Ashley invisible en 5 búsquedas clave (0/5):</strong> IKEA aparece en 4/5 búsquedas, Falabella en 4/5, Aristas en 2/5. Ashley en ninguna. El tráfico orgánico de alta intención de compra se está yendo a la competencia semana a semana. La brecha tarda 60–90 días en cerrarse — cada día sin brief a la agencia es tráfico perdido.</p></div>
+    <div class="ed-bullet"><span class="bnum">4</span><p><strong>Ashley sigue liderando crecimiento porcentual del sector:</strong> +71% en Q1 2026 vs Q1 2025 ($4.560B COP). Aristas proyecta +54% en cifras absolutas (base ~5× mayor); Jamar y Homecenter sin cifras públicas. Este liderazgo no está siendo comunicado al mercado como activo de marca — oportunidad inmediata de diferenciación.</p></div>
+  </div>
+
+  <div class="ed-card">
+    <div class="ed-card-title"><div class="ed-card-icon">💡</div>Recomendaciones estratégicas</div>
+    <div class="ed-rec-list">
+      <div class="ed-rec"><div class="ed-rec-hdr"><div class="ed-rec-num">1</div><div class="ed-rec-title">Contrarrestar Jamar con mensaje de valor — urgente</div></div><div class="ed-rec-body"><div class="ed-rec-que">Activar hoy contenido digital (Stories + Posts) con ratings 5.0/4.9, calidad americana y garantía Ashley. No bajar precio. La campaña "Hot Days" de Jamar dura esta semana — ventana de acción inmediata.</div><div class="ed-rec-tag">Marketing + Comercial · Martes 20 mayo</div></div></div>
+      <div class="ed-rec"><div class="ed-rec-hdr"><div class="ed-rec-num">2</div><div class="ed-rec-title">Acelerar hoja de ruta expansión Medellín</div></div><div class="ed-rec-body"><div class="ed-rec-que">Definir ubicación, inversión y timeline antes del 31 mayo. Aristas ya está en Oviedo, IKEA en Envigado, Tugó instalado. Evaluar C.C. El Tesoro o Santafé como diferenciador estratégico vs Oviedo.</div><div class="ed-rec-tag">Gerencia + Expansión · 29 mayo</div></div></div>
+      <div class="ed-rec"><div class="ed-rec-hdr"><div class="ed-rec-num">3</div><div class="ed-rec-title">Brief SEO a agencia — 5 búsquedas clave</div></div><div class="ed-rec-body"><div class="ed-rec-que">Ashley en 0/5 búsquedas de mayor intención de compra. Brief urgente: "sofá sala Bogotá", "muebles sala Colombia", "cama doble Medellín", "comedor 6 puestos Colombia", "muebles hogar Colombia". La brecha tarda 60–90 días en cerrarse.</div><div class="ed-rec-tag">Marketing Digital · 5 junio</div></div></div>
+      <div class="ed-rec"><div class="ed-rec-hdr"><div class="ed-rec-num">4</div><div class="ed-rec-title">Comunicar liderazgo +71% como activo de marca</div></div><div class="ed-rec-body"><div class="ed-rec-que">Ashley es la marca de muebles de mayor crecimiento porcentual en Colombia y este dato no está siendo explotado. Desarrollar pieza de contenido para redes, prensa y B2B: "+78% en 2025, +71% en Q1 2026 — la mueblería que más crece en Colombia".</div><div class="ed-rec-tag">Marketing + CEO · 5 junio</div></div></div>
+    </div>
+  </div>
+
+</div>
+<div class="footer">
+  <span><strong>Ashley Furniture Colombia</strong> · Radar Competitivo Semanal · Confidencial</span>
+  <span>Generado por Agente Editor · 19 de mayo de 2026 · <strong>Edición #4</strong></span>
+</div>
+</div><!-- /ed-2026-05-19 -->
+
+
+<script>
+// Edition registry — newest first
+const EDITIONS = [
+  { id: 'ed-2026-05-07', label: '7 mayo 2026', num: '#1' },
+  { id: 'ed-2026-05-11', label: '11 mayo 2026', num: '#2' },
+  { id: 'ed-2026-05-18', label: '18 mayo 2026', num: '#3' },
+  { id: 'ed-2026-05-19', label: '19 mayo 2026', num: '#4' },
+];
+
+function buildNav() {
+  const tabs = document.getElementById('edition-tabs');
+  if (!tabs) return;
+  tabs.innerHTML = '';
+  // Show newest first
+  const sorted = [...EDITIONS].reverse();
+  sorted.forEach(function(ed, i) {
+    const btn = document.createElement('button');
+    btn.className = 'edition-btn' + (i === 0 ? ' active' : '');
+    btn.textContent = (i === 0 ? '★ ' : '') + ed.label + ' ' + ed.num;
+    btn.onclick = function() { showEdition(ed.id); };
+    tabs.appendChild(btn);
+  });
+}
+
+function showEdition(targetId) {
+  document.querySelectorAll('.edition').forEach(function(el) { el.classList.remove('active'); });
+  document.querySelectorAll('.edition-btn').forEach(function(btn) { btn.classList.remove('active'); });
+  const target = document.getElementById(targetId);
+  if (target) target.classList.add('active');
+  // Find matching button
+  const sorted = [...EDITIONS].reverse();
+  sorted.forEach(function(ed, i) {
+    if (ed.id === targetId) {
+      const btns = document.querySelectorAll('.edition-btn');
+      if (btns[i]) btns[i].classList.add('active');
+    }
+  });
+  window.scrollTo(0, 0);
+}
+
+// Show newest edition by default
+window.addEventListener('load', function() {
+  const sorted = [...EDITIONS].reverse();
+  if (sorted.length > 0) showEdition(sorted[0].id);
+  buildNav();
+});
+</script>
 
 </body>
 </html>
