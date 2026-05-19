@@ -539,8 +539,8 @@ function pgcheck(){
         </tr>
         <tr style="background:white;border-top:1px solid #f0f0f0;">
           <td style="padding:13px 18px;">
-            <div style="font-weight:600;color:#37474f;">No a la vista — Estimado</div>
-            <div style="font-size:11px;color:#888;margin-top:2px;">Sin estados de cuenta · pendiente info de Alejandro</div>
+            <div style="font-weight:600;color:#37474f;">No a la Vista — INBUMAX BF-3</div>
+            <div style="font-size:11px;color:#388e3c;margin-top:2px;">Estado de posición confirmado · 17/05/2026</div>
           </td>
           <td style="padding:13px 18px;text-align:right;color:#37474f;font-weight:600;">$12,467,076</td>
           <td style="padding:13px 18px;text-align:right;color:#555;">0.6724%</td>
@@ -662,29 +662,29 @@ function pgcheck(){
   </div>
 
   <!-- ── Portafolio No Líquido ── -->
-  <p class="section-title" style="margin-top:24px;">Portafolio No Líquido — Estimado</p>
+  <p class="section-title" style="margin-top:24px;">Portafolio No Líquido — INBUMAX BF-3</p>
   <div style="background:#f0f4ff;border:1px solid #c5d3ef;border-radius:12px;padding:20px 24px;margin-bottom:20px;">
     <p style="font-size:12px;color:#555;margin-bottom:16px;line-height:1.6;">
-      El portafolio total se estima en <strong>$12,000,000 MXN</strong> (snapshot 17/05/2026).
+      El portafolio total es <strong>$13,356,943 MXN</strong> (snapshot 17/05/2026).
       La cuenta Casa de Bolsa a la vista (INBUMAX) representa <strong>$889,867 MXN</strong>.
-      El resto — <strong>$12,467,076 MXN</strong> — está en instrumentos no digitalizados
-      (fondos, CETES, bonos) administrados por Alejandro Méndez Segura (Inbursa).
-      El rendimiento estimado usa el % mensual promedio de INBUMAX como referencia.
+      El portafolio no líquido INBUMAX BF-3 — <strong>$12,467,076 MXN</strong> — son
+      905.706 títulos a $13.765036 cada uno, administrado por Alejandro Méndez Segura (Inbursa).
+      El rendimiento proyectado usa el % mensual promedio de INBUMAX como referencia.
     </p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;">
       <div style="background:white;border-radius:10px;padding:16px 18px;box-shadow:0 1px 4px rgba(0,0,0,.07);">
         <div style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;">Portafolio total (snapshot)</div>
-        <div style="font-size:22px;font-weight:700;color:#1B3A6B;">$12,000,000</div>
+        <div style="font-size:22px;font-weight:700;color:#1B3A6B;">$13,356,943</div>
       </div>
       <div style="background:white;border-radius:10px;padding:16px 18px;box-shadow:0 1px 4px rgba(0,0,0,.07);">
         <div style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;">A la vista (INBUMAX — CB)</div>
         <div style="font-size:22px;font-weight:700;color:#2E6DB4;">$889,867</div>
-        <div style="font-size:11px;color:#aaa;margin-top:4px;">7.4% del total</div>
+        <div style="font-size:11px;color:#aaa;margin-top:4px;">6.7% del total</div>
       </div>
       <div style="background:white;border-radius:10px;padding:16px 18px;box-shadow:0 1px 4px rgba(0,0,0,.07);">
-        <div style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;">No a la vista (estimado)</div>
+        <div style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;">No a la vista — INBUMAX BF-3</div>
         <div style="font-size:22px;font-weight:700;color:#37474f;">$12,467,076</div>
-        <div style="font-size:11px;color:#aaa;margin-top:4px;">103.9% del total</div>
+        <div style="font-size:11px;color:#aaa;margin-top:4px;">93.3% del total</div>
       </div>
       <div style="background:white;border-radius:10px;padding:16px 18px;box-shadow:0 1px 4px rgba(0,0,0,.07);">
         <div style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;">Rend. bruto %/mes (prom. CB)</div>
@@ -699,7 +699,7 @@ function pgcheck(){
       <div style="background:#fff3e0;border-radius:10px;padding:16px 18px;box-shadow:0 1px 4px rgba(0,0,0,.07);border:1px solid #ffcc80;">
         <div style="font-size:11px;color:#e65100;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;">Rend. estimado/año (no líquido)</div>
         <div style="font-size:26px;font-weight:700;color:#e65100;">$1,005,948</div>
-        <div style="font-size:11px;color:#ef6c00;margin-top:4px;">Estimación basada en historial INBUMAX</div>
+        <div style="font-size:11px;color:#ef6c00;margin-top:4px;">Proyección basada en historial INBUMAX</div>
       </div>
     </div>
     <div style="margin-top:16px;padding:12px 16px;background:#fff8e1;border-radius:8px;border-left:4px solid #ffc107;font-size:12px;color:#555;line-height:1.6;">
@@ -1422,5 +1422,155 @@ if (CB_LABELS.length > 0) {
 }
 
 </script>
+
+<!-- ===== CHAT FLOTANTE ===== -->
+<style>
+#cb-btn{position:fixed;bottom:24px;right:24px;width:58px;height:58px;border-radius:50%;background:#1B3A6B;color:#fff;font-size:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.35);z-index:9000;transition:transform .18s,box-shadow .18s;user-select:none;}
+#cb-btn:hover{transform:scale(1.1);box-shadow:0 6px 24px rgba(0,0,0,.45);}
+#cb-panel{position:fixed;bottom:94px;right:24px;width:360px;height:520px;background:#fff;border-radius:18px;box-shadow:0 8px 36px rgba(0,0,0,.22);display:none;flex-direction:column;z-index:9001;overflow:hidden;font-family:'Segoe UI',Arial,sans-serif;}
+#cb-panel.cb-open{display:flex;}
+#cb-head{background:#1B3A6B;color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;}
+#cb-head span{font-weight:700;font-size:14px;}
+#cb-head small{display:block;font-size:11px;opacity:.75;margin-top:2px;}
+#cb-close{background:none;border:none;color:#fff;font-size:20px;cursor:pointer;line-height:1;padding:0 4px;}
+#cb-sugs{padding:8px 10px;display:flex;flex-wrap:wrap;gap:5px;border-bottom:1px solid #eef0f6;}
+.cb-sug{background:#f0f4ff;border:1px solid #c7d4f0;border-radius:20px;padding:4px 11px;font-size:11.5px;cursor:pointer;color:#1B3A6B;transition:background .15s;white-space:nowrap;}
+.cb-sug:hover{background:#dce8ff;}
+#cb-msgs{flex:1;overflow-y:auto;padding:12px 10px;display:flex;flex-direction:column;gap:8px;}
+.cb-user{align-self:flex-end;background:#1B3A6B;color:#fff;padding:8px 14px;border-radius:16px 16px 4px 16px;max-width:82%;font-size:13.5px;line-height:1.45;word-break:break-word;}
+.cb-ai{align-self:flex-start;background:#f0f4ff;color:#1a1a2e;padding:8px 14px;border-radius:16px 16px 16px 4px;max-width:86%;font-size:13.5px;line-height:1.55;word-break:break-word;white-space:pre-wrap;}
+.cb-dot{color:#888;font-size:22px;letter-spacing:2px;padding:4px 10px;}
+#cb-inp-row{display:flex;padding:10px;border-top:1px solid #eef0f6;gap:8px;align-items:center;}
+#cb-inp{flex:1;padding:9px 14px;border:1.5px solid #dce3f0;border-radius:24px;font-size:13.5px;outline:none;font-family:inherit;}
+#cb-inp:focus{border-color:#1B3A6B;}
+#cb-send{background:#1B3A6B;color:#fff;border:none;border-radius:50%;width:38px;height:38px;font-size:17px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+#cb-send:hover{background:#15306a;}
+</style>
+
+<div id="cb-btn" onclick="cbToggle()" title="Preguntar al asistente">💬</div>
+
+<div id="cb-panel">
+  <div id="cb-head">
+    <div>
+      <span>Nirvana</span>
+      <small>Pregunta sobre tus gastos e inversiones</small>
+    </div>
+    <button id="cb-close" onclick="cbToggle()">✕</button>
+  </div>
+  <div id="cb-sugs">
+    <button class="cb-sug" onclick="cbSug(this)">¿Cuánto gasté este mes?</button>
+    <button class="cb-sug" onclick="cbSug(this)">¿Cuánto tengo invertido?</button>
+    <button class="cb-sug" onclick="cbSug(this)">¿Cuántos meses duran mis ahorros?</button>
+    <button class="cb-sug" onclick="cbSug(this)">¿Cuál es mi mayor gasto?</button>
+  </div>
+  <div id="cb-msgs"></div>
+  <div id="cb-inp-row">
+    <input id="cb-inp" type="text" placeholder="Escribe tu pregunta..." onkeydown="if(event.key==='Enter')cbSend()">
+    <button id="cb-send" onclick="cbSend()">&#10148;</button>
+  </div>
+</div>
+
+<script>
+const CB_WORKER = 'REEMPLAZAR_CON_TU_WORKER_URL'; // ej: https://tableros-chat.TU_USUARIO.workers.dev
+
+let cbIsOpen = false;
+let cbHistory = [];
+
+function cbToggle() {
+  cbIsOpen = !cbIsOpen;
+  const p = document.getElementById('cb-panel');
+  if (cbIsOpen) {
+    p.classList.add('cb-open');
+    if (cbHistory.length === 0) cbAddBubble('ai', '¡Hola! Soy Nirvana, tu asistente financiero. Puedo responder preguntas sobre tus gastos, inversiones y proyecciones. ¿En qué te ayudo?');
+    setTimeout(() => document.getElementById('cb-inp').focus(), 60);
+  } else {
+    p.classList.remove('cb-open');
+  }
+}
+
+function cbAddBubble(role, text) {
+  const el = document.createElement('div');
+  el.className = role === 'user' ? 'cb-user' : 'cb-ai';
+  el.textContent = text;
+  const msgs = document.getElementById('cb-msgs');
+  msgs.appendChild(el);
+  msgs.scrollTop = msgs.scrollHeight;
+  return el;
+}
+
+function cbSug(btn) {
+  document.getElementById('cb-inp').value = btn.textContent;
+  cbSend();
+}
+
+function cbBuildCtx() {
+  const n = PERIODOS.length;
+  const mes = PERIODOS[n - 1];
+  const gastoTot = GASTO_REAL[n - 1];
+  const gastoAmex = GASTOS_AMEX[n - 1];
+  const gastoBco = GASTOS_BANCO[n - 1];
+  const ingr = INGR_MES[n - 1];
+  const avg3 = Math.round(GASTO_REAL.slice(-3).reduce((a, b) => a + b, 0) / 3);
+  const saldoCB = CB_SALDOS[CB_SALDOS.length - 1];
+  const totalPort = Math.round(FC_DATA[0] * 1e6);
+  const cats = CAT_LABS.map((l, i) => '  • ' + l + ': $' + CAT_VALS[i].toLocaleString('es-MX') + ' MXN').join('\n');
+  const proy = PROY_LABS.map((l, i) => '  • Gasto ' + l + ': ' + PROY_VALS[i] + ' años').join('\n');
+
+  return 'Eres un asistente financiero personal, amable y paciente. Hablas en español sencillo y claro.\n' +
+    'Solo contestas preguntas sobre las finanzas de la persona titular de este tablero.\n' +
+    'No menciones nombres. Usa "usted" si necesitas dirigirte a la persona.\n' +
+    'Da respuestas cortas y concretas usando los datos disponibles. Todos los montos están en pesos mexicanos (MXN).\n\n' +
+    '=== DATOS FINANCIEROS ===\n' +
+    'Último mes con datos: ' + mes + '\n' +
+    'Gasto total último mes: $' + gastoTot.toLocaleString('es-MX') + ' MXN\n' +
+    '  • American Express: $' + gastoAmex.toLocaleString('es-MX') + ' MXN\n' +
+    '  • Banco / transferencias: $' + gastoBco.toLocaleString('es-MX') + ' MXN\n' +
+    'Ingreso registrado último mes: $' + ingr.toLocaleString('es-MX') + ' MXN\n' +
+    'Promedio gasto mensual (últimos 3 meses): $' + avg3.toLocaleString('es-MX') + ' MXN\n\n' +
+    'Portafolio Casa de Bolsa (a la vista, último saldo): $' + saldoCB.toLocaleString('es-MX') + ' MXN\n' +
+    'Portafolio total estimado (incluyendo inversiones no líquidas): $' + totalPort.toLocaleString('es-MX') + ' MXN\n\n' +
+    'Principales categorías de gasto (histórico total):\n' + cats + '\n\n' +
+    'Proyección años hasta agotar portafolio según nivel de gasto:\n' + proy;
+}
+
+async function cbSend() {
+  const inp = document.getElementById('cb-inp');
+  const q = inp.value.trim();
+  if (!q) return;
+  if (CB_WORKER.includes('REEMPLAZAR')) {
+    cbAddBubble('ai', '⚙️ El asistente aún no está configurado. Falta conectar el Worker de Cloudflare. Contacta a Pablo.');
+    return;
+  }
+  inp.value = '';
+  cbAddBubble('user', q);
+  cbHistory.push({ role: 'user', content: q });
+
+  const loader = document.createElement('div');
+  loader.className = 'cb-dot';
+  loader.textContent = '···';
+  document.getElementById('cb-msgs').appendChild(loader);
+  document.getElementById('cb-msgs').scrollTop = 99999;
+
+  try {
+    const res = await fetch(CB_WORKER, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        systemContext: cbBuildCtx(),
+        messages: cbHistory.slice(-10)
+      })
+    });
+    const d = await res.json();
+    loader.remove();
+    const reply = d.reply || 'No se pudo obtener respuesta.';
+    cbAddBubble('ai', reply);
+    cbHistory.push({ role: 'assistant', content: reply });
+  } catch (e) {
+    loader.remove();
+    cbAddBubble('ai', 'Error de conexión. Por favor intenta de nuevo.');
+  }
+}
+</script>
+
 </body>
 </html>

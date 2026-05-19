@@ -1461,4 +1461,154 @@ function printInforme(){
 }
 
 </script>
+
+<!-- ===== CHAT FLOTANTE ===== -->
+<style>
+#cb-btn{position:fixed;bottom:24px;right:24px;width:58px;height:58px;border-radius:50%;background:#1B3A6B;color:#fff;font-size:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.35);z-index:9000;transition:transform .18s,box-shadow .18s;user-select:none;}
+#cb-btn:hover{transform:scale(1.1);box-shadow:0 6px 24px rgba(0,0,0,.45);}
+#cb-panel{position:fixed;bottom:94px;right:24px;width:360px;height:520px;background:#fff;border-radius:18px;box-shadow:0 8px 36px rgba(0,0,0,.22);display:none;flex-direction:column;z-index:9001;overflow:hidden;font-family:'Segoe UI',Arial,sans-serif;}
+#cb-panel.cb-open{display:flex;}
+#cb-head{background:#1B3A6B;color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;}
+#cb-head span{font-weight:700;font-size:14px;}
+#cb-head small{display:block;font-size:11px;opacity:.75;margin-top:2px;}
+#cb-close{background:none;border:none;color:#fff;font-size:20px;cursor:pointer;line-height:1;padding:0 4px;}
+#cb-sugs{padding:8px 10px;display:flex;flex-wrap:wrap;gap:5px;border-bottom:1px solid #eef0f6;}
+.cb-sug{background:#f0f4ff;border:1px solid #c7d4f0;border-radius:20px;padding:4px 11px;font-size:11.5px;cursor:pointer;color:#1B3A6B;transition:background .15s;white-space:nowrap;}
+.cb-sug:hover{background:#dce8ff;}
+#cb-msgs{flex:1;overflow-y:auto;padding:12px 10px;display:flex;flex-direction:column;gap:8px;}
+.cb-user{align-self:flex-end;background:#1B3A6B;color:#fff;padding:8px 14px;border-radius:16px 16px 4px 16px;max-width:82%;font-size:13.5px;line-height:1.45;word-break:break-word;}
+.cb-ai{align-self:flex-start;background:#f0f4ff;color:#1a1a2e;padding:8px 14px;border-radius:16px 16px 16px 4px;max-width:86%;font-size:13.5px;line-height:1.55;word-break:break-word;white-space:pre-wrap;}
+.cb-dot{color:#888;font-size:22px;letter-spacing:2px;padding:4px 10px;}
+#cb-inp-row{display:flex;padding:10px;border-top:1px solid #eef0f6;gap:8px;align-items:center;}
+#cb-inp{flex:1;padding:9px 14px;border:1.5px solid #dce3f0;border-radius:24px;font-size:13.5px;outline:none;font-family:inherit;}
+#cb-inp:focus{border-color:#1B3A6B;}
+#cb-send{background:#1B3A6B;color:#fff;border:none;border-radius:50%;width:38px;height:38px;font-size:17px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+#cb-send:hover{background:#15306a;}
+</style>
+
+<div id="cb-btn" onclick="cbToggle()" title="Preguntar al asistente">💬</div>
+
+<div id="cb-panel">
+  <div id="cb-head">
+    <div>
+      <span>Nirvana</span>
+      <small>Pregunta sobre flujo de caja y saldos</small>
+    </div>
+    <button id="cb-close" onclick="cbToggle()">✕</button>
+  </div>
+  <div id="cb-sugs">
+    <button class="cb-sug" onclick="cbSug(this)">¿Cuánto hay en total?</button>
+    <button class="cb-sug" onclick="cbSug(this)">¿Cuál es el flujo mensual?</button>
+    <button class="cb-sug" onclick="cbSug(this)">¿Cuáles son los mayores gastos?</button>
+    <button class="cb-sug" onclick="cbSug(this)">¿Cuánto tiempo duran los fondos?</button>
+  </div>
+  <div id="cb-msgs"></div>
+  <div id="cb-inp-row">
+    <input id="cb-inp" type="text" placeholder="Escribe tu pregunta..." onkeydown="if(event.key==='Enter')cbSend()">
+    <button id="cb-send" onclick="cbSend()">&#10148;</button>
+  </div>
+</div>
+
+<script>
+const CB_WORKER = 'REEMPLAZAR_CON_TU_WORKER_URL'; // ej: https://tableros-chat.TU_USUARIO.workers.dev
+
+let cbIsOpen = false;
+let cbHistory = [];
+
+function cbToggle() {
+  cbIsOpen = !cbIsOpen;
+  const p = document.getElementById('cb-panel');
+  if (cbIsOpen) {
+    p.classList.add('cb-open');
+    if (cbHistory.length === 0) cbAddBubble('ai', '¡Hola! Soy Nirvana, tu asistente financiero. Puedo responder preguntas sobre los saldos, flujos y gastos de las dos empresas. ¿En qué te ayudo?');
+    setTimeout(() => document.getElementById('cb-inp').focus(), 60);
+  } else {
+    p.classList.remove('cb-open');
+  }
+}
+
+function cbAddBubble(role, text) {
+  const el = document.createElement('div');
+  el.className = role === 'user' ? 'cb-user' : 'cb-ai';
+  el.textContent = text;
+  const msgs = document.getElementById('cb-msgs');
+  msgs.appendChild(el);
+  msgs.scrollTop = msgs.scrollHeight;
+  return el;
+}
+
+function cbSug(btn) {
+  document.getElementById('cb-inp').value = btn.textContent;
+  cbSend();
+}
+
+function cbBuildCtx() {
+  const fmt = v => Math.round(v).toLocaleString('es-CO');
+  const jCats = JUA.cat_labels.map((l, i) => '  • ' + l + ': $' + fmt(JUA.cat_values[i]) + ' COP').join('\n');
+  const pCats = PER.cat_labels.map((l, i) => '  • ' + l + ': $' + fmt(PER.cat_values[i]) + ' COP').join('\n');
+  const totalSaldo = JUA.balance + PER.balance;
+  const totalFlujo = JUA.flujo_net_12m + PER.flujo_net_12m;
+
+  return 'Eres un asistente financiero profesional y conciso. Hablas en español.\n' +
+    'Solo contestas preguntas sobre las finanzas de AS (las empresas JUANAMMBU y La Perojosa).\n' +
+    'No menciones nombres de personas. Usa "AS" si necesitas referirte al titular.\n' +
+    'Da respuestas cortas con datos concretos. Los montos están en pesos colombianos (COP).\n\n' +
+    '=== DATOS FINANCIEROS ===\n\n' +
+    'JUANAMMBU SAS:\n' +
+    '  Saldo actual: $' + fmt(JUA.balance) + ' COP\n' +
+    '  Ingreso promedio mensual (12m): $' + fmt(JUA.avg_ing_12m) + ' COP\n' +
+    '  Gasto promedio mensual (12m): $' + fmt(JUA.avg_gas_12m) + ' COP\n' +
+    '  Flujo neto mensual promedio: $' + fmt(JUA.flujo_net_12m) + ' COP\n' +
+    '  Categorías principales de gasto:\n' + jCats + '\n\n' +
+    'LA PEROJOSA SAS:\n' +
+    '  Saldo actual: $' + fmt(PER.balance) + ' COP\n' +
+    '  Ingreso promedio mensual (12m): $' + fmt(PER.avg_ing_12m) + ' COP\n' +
+    '  Gasto promedio mensual (12m): $' + fmt(PER.avg_gas_12m) + ' COP\n' +
+    '  Flujo neto mensual promedio: $' + fmt(PER.flujo_net_12m) + ' COP\n' +
+    '  Categorías principales de gasto:\n' + pCats + '\n\n' +
+    'TOTALES COMBINADOS:\n' +
+    '  Saldo total: $' + fmt(totalSaldo) + ' COP\n' +
+    '  Flujo neto mensual combinado: $' + fmt(totalFlujo) + ' COP\n' +
+    '  (Aproximadamente $' + (totalSaldo / 1e6).toFixed(1) + 'M COP / $' + (totalSaldo / 4200).toFixed(0) + ' USD al tipo de cambio ~4200)';
+}
+
+async function cbSend() {
+  const inp = document.getElementById('cb-inp');
+  const q = inp.value.trim();
+  if (!q) return;
+  if (CB_WORKER.includes('REEMPLAZAR')) {
+    cbAddBubble('ai', '⚙️ El asistente aún no está configurado. Falta conectar el Worker de Cloudflare. Contacta a Pablo.');
+    return;
+  }
+  inp.value = '';
+  cbAddBubble('user', q);
+  cbHistory.push({ role: 'user', content: q });
+
+  const loader = document.createElement('div');
+  loader.className = 'cb-dot';
+  loader.textContent = '···';
+  document.getElementById('cb-msgs').appendChild(loader);
+  document.getElementById('cb-msgs').scrollTop = 99999;
+
+  try {
+    const res = await fetch(CB_WORKER, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        systemContext: cbBuildCtx(),
+        messages: cbHistory.slice(-10)
+      })
+    });
+    const d = await res.json();
+    loader.remove();
+    const reply = d.reply || 'No se pudo obtener respuesta.';
+    cbAddBubble('ai', reply);
+    cbHistory.push({ role: 'assistant', content: reply });
+  } catch (e) {
+    loader.remove();
+    cbAddBubble('ai', 'Error de conexión. Por favor intenta de nuevo.');
+  }
+}
+</script>
+
 </body></html>
