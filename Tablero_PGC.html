@@ -1516,8 +1516,8 @@ function cbBuildCtx() {
   }).join('\n');
   const avg3 = Math.round(GASTO_REAL.slice(-3).reduce((a,b)=>a+b,0)/3);
 
-  // 2. Categorías por mes — 6 meses
-  const catsMes = PERIODOS.slice(-6).map(p => {
+  // 2. Categorías por mes — 24 meses
+  const catsMes = PERIODOS.slice(-24).map(p => {
     const cats = CATS_POR_MES[p] || {};
     return p + ': ' + Object.entries(cats).sort((a,b)=>b[1]-a[1])
       .map(([c,v]) => c + '=$' + N(v)).join(' | ');
@@ -1561,7 +1561,12 @@ function cbBuildCtx() {
     '[BENEFICIARIOS ALL-TIME top50 — nombre[cat]:$total(#tx)]\n'+allT+'\n\n'+
     '[TRANSACCIONES — últimos 2 meses — fecha|descripción|monto|cat|fuente]\n'+txDet+'\n\n'+
     '[CATEGORÍAS HISTÓRICAS TOTALES]\n'+cH+'\n\n'+
-    '[INVERSIONES]\n'+inv+'\n\n'+
+    '[INVERSIONES]\n'+inv+'\n'+
+    '[CB HISTORIAL 12 MESES — mes|saldo|rend.bruto%|rend.neto%|retiro|costo]\n'+
+    CB_LABELS.slice(-12).map((l,i)=>{
+      const idx=CB_SALDOS.length-12+i;
+      return l+'|$'+N(CB_SALDOS[idx])+'|'+CB_BRUTO[idx].toFixed(4)+'%|'+CB_NETO[idx].toFixed(4)+'%|ret$'+N(CB_RETIROS[idx])+'|cost$'+N(CB_COSTOS[idx]);
+    }).join('\n')+'\n\n'+
     '[PROYECCIÓN RUNWAY]\n'+proy;
 }
 
