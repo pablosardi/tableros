@@ -1544,32 +1544,47 @@ function cbSug(btn) {
 
 function cbBuildCtx() {
   const fmt = v => Math.round(v).toLocaleString('es-CO');
-  const jCats = JUA.cat_labels.map((l, i) => '  • ' + l + ': $' + fmt(JUA.cat_values[i]) + ' COP').join('\n');
-  const pCats = PER.cat_labels.map((l, i) => '  • ' + l + ': $' + fmt(PER.cat_values[i]) + ' COP').join('\n');
   const totalSaldo = JUA.balance + PER.balance;
   const totalFlujo = JUA.flujo_net_12m + PER.flujo_net_12m;
 
-  return 'Eres un asistente financiero profesional y conciso. Hablas en español.\n' +
-    'Solo contestas preguntas sobre las finanzas de AS (las empresas JUANAMMBU y La Perojosa).\n' +
-    'No menciones nombres de personas. Usa "AS" si necesitas referirte al titular.\n' +
-    'Da respuestas cortas con datos concretos. Los montos están en pesos colombianos (COP).\n\n' +
-    '=== DATOS FINANCIEROS ===\n\n' +
-    'JUANAMMBU SAS:\n' +
-    '  Saldo actual: $' + fmt(JUA.balance) + ' COP\n' +
-    '  Ingreso promedio mensual (12m): $' + fmt(JUA.avg_ing_12m) + ' COP\n' +
-    '  Gasto promedio mensual (12m): $' + fmt(JUA.avg_gas_12m) + ' COP\n' +
-    '  Flujo neto mensual promedio: $' + fmt(JUA.flujo_net_12m) + ' COP\n' +
-    '  Categorías principales de gasto:\n' + jCats + '\n\n' +
-    'LA PEROJOSA SAS:\n' +
-    '  Saldo actual: $' + fmt(PER.balance) + ' COP\n' +
-    '  Ingreso promedio mensual (12m): $' + fmt(PER.avg_ing_12m) + ' COP\n' +
-    '  Gasto promedio mensual (12m): $' + fmt(PER.avg_gas_12m) + ' COP\n' +
-    '  Flujo neto mensual promedio: $' + fmt(PER.flujo_net_12m) + ' COP\n' +
-    '  Categorías principales de gasto:\n' + pCats + '\n\n' +
-    'TOTALES COMBINADOS:\n' +
-    '  Saldo total: $' + fmt(totalSaldo) + ' COP\n' +
-    '  Flujo neto mensual combinado: $' + fmt(totalFlujo) + ' COP\n' +
-    '  (Aproximadamente $' + (totalSaldo / 1e6).toFixed(1) + 'M COP / $' + (totalSaldo / 4200).toFixed(0) + ' USD al tipo de cambio ~4200)';
+  // Últimos 12 meses JUANAMMBU
+  const nJ = JUA.meses.length;
+  const juaHist = JUA.meses.slice(-12).map((m, i) => {
+    const idx = nJ - 12 + i;
+    return '  ' + m + ': ingreso $' + fmt(JUA.ingresos[idx]) + ' | gasto $' + fmt(JUA.gastos[idx]) + ' | flujo $' + fmt(JUA.flujo[idx]);
+  }).join('\n');
+
+  // Últimos 12 meses LA PEROJOSA
+  const nP = PER.meses.length;
+  const perHist = PER.meses.slice(-12).map((m, i) => {
+    const idx = nP - 12 + i;
+    return '  ' + m + ': ingreso $' + fmt(PER.ingresos[idx]) + ' | gasto $' + fmt(PER.gastos[idx]) + ' | flujo $' + fmt(PER.flujo[idx]);
+  }).join('\n');
+
+  const jCats = JUA.cat_labels.map((l, i) => '  • ' + l + ': $' + fmt(JUA.cat_values[i]) + ' COP (total histórico)').join('\n');
+  const pCats = PER.cat_labels.map((l, i) => '  • ' + l + ': $' + fmt(PER.cat_values[i]) + ' COP (total histórico)').join('\n');
+
+  return 'Eres Nirvana, un asistente financiero profesional y conciso. Hablas en español.\n' +
+    'Solo contestas preguntas sobre las finanzas de AS (las dos empresas: JUANAMMBU SAS y La Perojosa SAS).\n' +
+    'IMPORTANTE: Usa SIEMPRE los datos numéricos disponibles. Si la pregunta menciona algo que aparece en una categoría o en el historial mensual, usa ese dato para responder directamente.\n' +
+    'Los montos están en pesos colombianos (COP). Da respuestas concisas con números concretos.\n\n' +
+    '=== JUANAMMBU SAS ===\n' +
+    'Saldo actual: $' + fmt(JUA.balance) + ' COP\n' +
+    'Ingreso promedio mensual (12m): $' + fmt(JUA.avg_ing_12m) + ' COP\n' +
+    'Gasto promedio mensual (12m): $' + fmt(JUA.avg_gas_12m) + ' COP\n' +
+    'Flujo neto mensual promedio: $' + fmt(JUA.flujo_net_12m) + ' COP\n' +
+    'Historial últimos 12 meses:\n' + juaHist + '\n' +
+    'Categorías de gasto (histórico total):\n' + jCats + '\n\n' +
+    '=== LA PEROJOSA SAS ===\n' +
+    'Saldo actual: $' + fmt(PER.balance) + ' COP\n' +
+    'Ingreso promedio mensual (12m): $' + fmt(PER.avg_ing_12m) + ' COP\n' +
+    'Gasto promedio mensual (12m): $' + fmt(PER.avg_gas_12m) + ' COP\n' +
+    'Flujo neto mensual promedio: $' + fmt(PER.flujo_net_12m) + ' COP\n' +
+    'Historial últimos 12 meses:\n' + perHist + '\n' +
+    'Categorías de gasto (histórico total):\n' + pCats + '\n\n' +
+    '=== TOTALES COMBINADOS ===\n' +
+    'Saldo total: $' + fmt(totalSaldo) + ' COP (~$' + (totalSaldo / 4200).toFixed(0) + ' USD)\n' +
+    'Flujo neto mensual combinado: $' + fmt(totalFlujo) + ' COP';
 }
 
 async function cbSend() {

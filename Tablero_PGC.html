@@ -1505,32 +1505,46 @@ function cbSug(btn) {
 
 function cbBuildCtx() {
   const n = PERIODOS.length;
-  const mes = PERIODOS[n - 1];
-  const gastoTot = GASTO_REAL[n - 1];
-  const gastoAmex = GASTOS_AMEX[n - 1];
-  const gastoBco = GASTOS_BANCO[n - 1];
-  const ingr = INGR_MES[n - 1];
   const avg3 = Math.round(GASTO_REAL.slice(-3).reduce((a, b) => a + b, 0) / 3);
+  const avg6 = Math.round(GASTO_REAL.slice(-6).reduce((a, b) => a + b, 0) / 6);
   const saldoCB = CB_SALDOS[CB_SALDOS.length - 1];
   const totalPort = Math.round(FC_DATA[0] * 1e6);
-  const cats = CAT_LABS.map((l, i) => '  • ' + l + ': $' + CAT_VALS[i].toLocaleString('es-MX') + ' MXN').join('\n');
-  const proy = PROY_LABS.map((l, i) => '  • Gasto ' + l + ': ' + PROY_VALS[i] + ' años').join('\n');
 
-  return 'Eres un asistente financiero personal, amable y paciente. Hablas en español sencillo y claro.\n' +
-    'Solo contestas preguntas sobre las finanzas de la persona titular de este tablero.\n' +
-    'No menciones nombres. Usa "usted" si necesitas dirigirte a la persona.\n' +
-    'Da respuestas cortas y concretas usando los datos disponibles. Todos los montos están en pesos mexicanos (MXN).\n\n' +
-    '=== DATOS FINANCIEROS ===\n' +
-    'Último mes con datos: ' + mes + '\n' +
-    'Gasto total último mes: $' + gastoTot.toLocaleString('es-MX') + ' MXN\n' +
-    '  • American Express: $' + gastoAmex.toLocaleString('es-MX') + ' MXN\n' +
-    '  • Banco / transferencias: $' + gastoBco.toLocaleString('es-MX') + ' MXN\n' +
-    'Ingreso registrado último mes: $' + ingr.toLocaleString('es-MX') + ' MXN\n' +
-    'Promedio gasto mensual (últimos 3 meses): $' + avg3.toLocaleString('es-MX') + ' MXN\n\n' +
-    'Portafolio Casa de Bolsa (a la vista, último saldo): $' + saldoCB.toLocaleString('es-MX') + ' MXN\n' +
-    'Portafolio total estimado (incluyendo inversiones no líquidas): $' + totalPort.toLocaleString('es-MX') + ' MXN\n\n' +
-    'Principales categorías de gasto (histórico total):\n' + cats + '\n\n' +
-    'Proyección años hasta agotar portafolio según nivel de gasto:\n' + proy;
+  // Últimos 12 meses detallados
+  const hist = PERIODOS.slice(-12).map((p, i) => {
+    const idx = n - 12 + i;
+    return '  ' + p + ': gasto $' + Math.round(GASTO_REAL[idx]).toLocaleString('es-MX') +
+      ' (Amex $' + Math.round(GASTOS_AMEX[idx]).toLocaleString('es-MX') +
+      ' + banco $' + Math.round(GASTOS_BANCO[idx]).toLocaleString('es-MX') + ')' +
+      (INGR_MES[idx] > 0 ? ' | ingreso $' + Math.round(INGR_MES[idx]).toLocaleString('es-MX') : '');
+  }).join('\n');
+
+  // Todas las categorías
+  const cats = CAT_LABS.map((l, i) => '  • ' + l + ': $' + Math.round(CAT_VALS[i]).toLocaleString('es-MX') + ' MXN (total histórico)').join('\n');
+
+  // Portafolio CB últimos 6 meses
+  const cbHist = CB_LABELS.slice(-6).map((l, i) => {
+    const idx = CB_SALDOS.length - 6 + i;
+    return '  ' + l + ': $' + Math.round(CB_SALDOS[idx]).toLocaleString('es-MX') +
+      ' (rend. bruto ' + CB_BRUTO[idx].toFixed(4) + '%/mes)';
+  }).join('\n');
+
+  const proy = PROY_LABS.map((l, i) => '  Gasto ' + l + ': ' + PROY_VALS[i] + ' años hasta agotar portafolio').join('\n');
+
+  return 'Eres Nirvana, un asistente financiero personal, amable y paciente. Hablas en español sencillo y claro.\n' +
+    'Solo contestas preguntas sobre las finanzas de la persona titular de este tablero (MXN - pesos mexicanos).\n' +
+    'IMPORTANTE: Usa SIEMPRE los datos numéricos que tienes. Si la pregunta menciona algo que aparece en una categoría (por ejemplo "Julio" aparece en "Cuidado Julio — Enfermeros"), usa ese dato para responder.\n' +
+    'Da respuestas cortas y concretas. Si no tienes el dato exacto, usa los totales disponibles y explícalo.\n' +
+    'No menciones nombres de personas. Usa "usted" si te diriges a la titular.\n\n' +
+    '=== HISTORIAL MENSUAL (últimos 12 meses) ===\n' + hist + '\n\n' +
+    'Promedio gasto mensual últimos 3 meses: $' + avg3.toLocaleString('es-MX') + ' MXN\n' +
+    'Promedio gasto mensual últimos 6 meses: $' + avg6.toLocaleString('es-MX') + ' MXN\n\n' +
+    '=== CATEGORÍAS DE GASTO (total histórico acumulado) ===\n' + cats + '\n\n' +
+    '=== PORTAFOLIO DE INVERSIONES ===\n' +
+    'Portafolio a la vista (INBUMAX CB) - últimos 6 meses:\n' + cbHist + '\n' +
+    'Portafolio no líquido (INBUMAX BF-3): $12,467,076 MXN (905.706 títulos × $13.765036)\n' +
+    'TOTAL PORTAFOLIO: $' + totalPort.toLocaleString('es-MX') + ' MXN (snapshot 17/05/2026)\n\n' +
+    '=== PROYECCIÓN RUNWAY ===\n' + proy;
 }
 
 async function cbSend() {
