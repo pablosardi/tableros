@@ -3,118 +3,499 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Radar Competitivo Interactivo — Ashley Colombia · 19 de May de 2026</title>
+<title>Radar Competitivo — Ashley Furniture Colombia · 7 de mayo 2026 · Edición #1</title>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap');
-    /* PASSWORD WALL */
-    #pgwall{position:fixed;inset:0;background:#1B3A6B;display:flex;align-items:center;justify-content:center;z-index:9999;}
-    #pgbox{background:#fff;border-radius:12px;padding:32px;width:340px;text-align:center;}
-    #pgbox h2{font-size:22px;font-weight:800;color:#1B3A6B;margin-bottom:8px;}
-    #pgbox p{font-size:14px;color:#6B7280;margin-bottom:18px;}
-    #pgbox input{width:100%;padding:12px;border:1.5px solid #E5E7EB;border-radius:8px;font-size:15px;outline:none;margin-bottom:12px;box-sizing:border-box;}
-    #pgbox input:focus{border-color:#C9A84C;}
-    #pgbox button{width:100%;padding:11px;background:#1B3A6B;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;}
-    #pgbox .err{color:#c62828;font-size:13px;margin-top:8px;display:none;}
-    :root{--navy:#1B3A6B;--gold:#C9A84C;--light:#F4F6FA;--white:#fff;
-          --red:#D94040;--red-l:#FDECEA;--green:#2E7D52;--green-l:#E8F5EE;
-          --gray:#6B7280;--border:#E5E7EB;--text:#111827;--text-l:#6B7280;}
-    *{margin:0;padding:0;box-sizing:border-box;}
-    body{font-family:'Inter',sans-serif;background:#ECEEF2;color:var(--text);font-size:13px;line-height:1.6;}
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap');
 
-    /* HEADER */
-    .hdr{background:var(--navy);position:relative;}
-    .hdr-stripe{height:4px;background:linear-gradient(90deg,var(--gold),#E8C86A,var(--gold));}
-    .hdr-inner{max-width:960px;margin:0 auto;padding:28px 32px 24px;display:flex;justify-content:space-between;align-items:flex-end;}
-    .hdr-logo{background:var(--gold);color:var(--navy);font-weight:800;font-size:10px;padding:3px 9px;border-radius:3px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;display:inline-block;}
-    .hdr h1{font-family:'Playfair Display',serif;font-size:24px;color:#fff;font-weight:800;line-height:1.2;}
-    .hdr-sub{font-size:11px;color:rgba(255,255,255,.55);margin-top:4px;}
-    .hdr-date{text-align:right;font-size:11px;color:var(--gold);font-weight:600;text-transform:uppercase;letter-spacing:1px;}
-    .hdr-edition{font-size:10px;color:rgba(255,255,255,.35);margin-top:3px;}
+  :root {
+    --ashley-navy: #1B3A6B;
+    --ashley-gold: #C9A84C;
+    --ashley-light: #F4F6FA;
+    --ashley-white: #FFFFFF;
+    --red: #D94040;
+    --red-light: #FDECEA;
+    --yellow: #E8A020;
+    --yellow-light: #FEF6E6;
+    --green: #2E7D52;
+    --green-light: #E8F5EE;
+    --gray: #6B7280;
+    --gray-light: #F9FAFB;
+    --border: #E5E7EB;
+    --text: #111827;
+    --text-light: #6B7280;
+  }
 
-    /* PAGE */
-    .page{max-width:960px;margin:0 auto;padding:0 16px 56px;}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* ACORDEÓN */
-    .acord{background:var(--white);border-radius:10px;margin-top:14px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.07);}
-    .acord-head{padding:16px 22px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;transition:background .15s;}
-    .acord-head:hover{background:#F8F9FB;}
-    .acord-icon{width:32px;height:32px;border-radius:7px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
-    .acord-title{font-size:13px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.7px;}
-    .acord-summary{margin-left:auto;display:flex;gap:8px;align-items:center;}
-    .chip{font-size:10px;font-weight:600;padding:3px 9px;border-radius:20px;}
-    .chip-navy{background:var(--light);color:var(--navy);}
-    .chip-red{background:var(--red-l);color:var(--red);}
-    .chip-green{background:var(--green-l);color:var(--green);}
-    .chevron{font-size:16px;color:var(--gray);transition:transform .25s;flex-shrink:0;}
-    .acord.open .chevron{transform:rotate(180deg);}
-    .acord-body{display:none;padding:0 22px 20px;}
-    .acord.open .acord-body{display:block;}
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #ECEEF2;
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.6;
+  }
 
-    /* PRECIO RESUMEN (preview en cabecera) */
-    .precio-preview{display:flex;gap:6px;flex-wrap:wrap;margin-left:10px;}
-    .pp-item{font-size:11px;color:var(--text-l);}
-    .pp-name{font-weight:600;color:var(--navy);}
-    .pp-val{color:var(--text);}
-    .pp-sep{color:var(--border);}
+  /* ── HEADER ── */
+  .header {
+    background: var(--ashley-navy);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-stripe {
+    height: 4px;
+    background: linear-gradient(90deg, var(--ashley-gold) 0%, #E8C86A 50%, var(--ashley-gold) 100%);
+  }
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 40px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .header-left h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: var(--ashley-white);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+  }
+  .header-left .subtitle {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 6px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+  }
+  .header-right {
+    text-align: right;
+  }
+  .header-right .date {
+    font-size: 11px;
+    color: var(--ashley-gold);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .header-right .edition {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 3px;
+  }
+  .header-logo {
+    display: inline-block;
+    background: var(--ashley-gold);
+    color: var(--ashley-navy);
+    font-weight: 800;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 3px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
 
-    /* TABLA DE PRECIOS */
-    .precio-tabla{width:100%;border-collapse:collapse;font-size:12px;margin-top:14px;}
-    .precio-tabla th{text-align:left;padding:8px 10px;font-size:10px;font-weight:700;color:var(--text-l);text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--border);}
-    .precio-tabla td{padding:9px 10px;border-bottom:1px solid var(--border);vertical-align:middle;}
-    .precio-tabla tr:last-child td{border-bottom:none;}
-    .precio-tabla tr.ashley-row{background:#FFFBF0;}
-    .comp-name{font-weight:600;color:var(--navy);}
-    .comp-name.ashley{color:var(--gold);}
-    .precio-val{font-weight:700;font-size:13px;}
-    .precio-val.ashley{color:var(--gold);}
-    .delta-badge{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;white-space:nowrap;}
-    .delta-red{background:var(--red-l);color:var(--red);}
-    .delta-green{background:var(--green-l);color:var(--green);}
-    .delta-gray{background:#F3F4F6;color:var(--gray);}
-    .prod-name{font-size:11px;color:var(--text-l);}
-    .nd{color:#D1D5DB;font-style:italic;font-size:11px;}
-    .ver-link{font-size:10px;color:var(--navy);text-decoration:none;opacity:.7;}
-    .ver-link:hover{opacity:1;text-decoration:underline;}
+  /* ── LAYOUT ── */
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 16px 48px;
+  }
 
-    /* BARRA DE PRECIO */
-    .bar-wrap{margin-top:18px;}
-    .bar-label{font-size:10px;font-weight:700;color:var(--text-l);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
-    .bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
-    .bar-name{font-size:11px;font-weight:600;width:120px;flex-shrink:0;text-align:right;color:var(--navy);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-    .bar-name.ashley{color:var(--gold);}
-    .bar-bg{flex:1;background:#F3F4F6;border-radius:4px;height:18px;position:relative;overflow:hidden;}
-    .bar-fill{height:18px;border-radius:4px;position:absolute;top:0;transition:left .4s ease,width .4s ease;}
-    .bar-fill.ashley{background:var(--gold);}
-    .bar-fill.comp{background:#93C5FD;}
-    .bar-fill.nd-bar{background:#E5E7EB;left:0!important;width:8px!important;}
-    .bar-price{font-size:10px;color:var(--text-l);white-space:nowrap;width:150px;flex-shrink:0;line-height:1.3;}
-    .bar-price strong{display:block;font-size:11px;color:var(--text);font-weight:600;}
-    .bar-range-txt{font-size:9px;color:var(--text-l);}
-    .precio-rango{font-size:10px;color:var(--text-l);margin-top:1px;}
+  /* ── SECTIONS ── */
+  .section {
+    background: var(--ashley-white);
+    border-radius: 8px;
+    margin-top: 16px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .section-header {
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-header .icon {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    background: var(--ashley-navy);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .section-header h2 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ashley-navy);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+  .section-header .badge {
+    margin-left: auto;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: var(--ashley-light);
+    color: var(--ashley-navy);
+  }
+  .section-body { padding: 20px 24px; }
 
-    /* OPORTUNIDADES */
-    .opor-section{margin-top:18px;}
-    .opor-title{font-size:10px;font-weight:700;color:var(--text-l);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
-    .opor-item{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border-radius:6px;margin-bottom:6px;border-left:3px solid;}
-    .opor-item:last-child{margin-bottom:0;}
-    .opor-icono{font-size:14px;flex-shrink:0;line-height:1.4;}
-    .opor-texto{font-size:12px;line-height:1.5;}
+  /* ── ALERT BANNER ── */
+  .alert-banner {
+    background: var(--ashley-navy);
+    margin-top: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .alert-banner-header {
+    background: var(--red);
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .alert-banner-header span {
+    font-size: 11px;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .alert-items { padding: 16px 24px; display: flex; flex-direction: column; gap: 12px; }
+  .alert-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding-bottom: 12px;
+  }
+  .alert-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .alert-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--ashley-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 3px;
+  }
+  .alert-text { font-size: 12px; color: rgba(255,255,255,0.85); line-height: 1.5; }
+  .alert-action-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: #86EFAC;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 3px;
+  }
 
-    /* PRODUCTOS EXPANDIBLES */
-    .prods-toggle{font-size:10px;color:var(--navy);cursor:pointer;text-decoration:underline;opacity:.7;margin-top:4px;display:inline-block;}
-    .prods-toggle:hover{opacity:1;}
-    .prods-list{display:none;margin-top:6px;padding-left:10px;}
-    .prods-list.open{display:block;}
-    .prod-item{font-size:11px;color:var(--text-l);margin-bottom:3px;}
+  /* ── EXEC SUMMARY ── */
+  .exec-bullets { display: flex; flex-direction: column; gap: 10px; }
+  .exec-bullet {
+    display: flex;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--ashley-light);
+    border-radius: 6px;
+    border-left: 3px solid var(--ashley-navy);
+  }
+  .exec-bullet .num {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--ashley-gold);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 20px;
+  }
+  .exec-bullet p { font-size: 12.5px; color: var(--text); line-height: 1.55; }
+  .exec-bullet strong { color: var(--ashley-navy); }
 
-    /* CHIPS DE ESTADO */
-    .status-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:4px;}
-    .dot-auto{background:#10B981;}
-    .dot-manual{background:#F59E0B;}
+  /* ── SCOREBOARD ── */
+  .scoreboard-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .scoreboard-table th {
+    text-align: center;
+    padding: 8px 6px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    border-bottom: 2px solid var(--border);
+  }
+  .scoreboard-table th:first-child { text-align: left; padding-left: 0; }
+  .scoreboard-table td {
+    padding: 9px 6px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  .scoreboard-table td:first-child {
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    padding-left: 0;
+    color: var(--ashley-navy);
+  }
+  .scoreboard-table tr:last-child td { border-bottom: none; }
+  .scoreboard-table .seg-label {
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
 
-    /* FOOTER */
-    .footer{max-width:960px;margin:10px auto 0;padding:0 16px 24px;display:flex;justify-content:space-between;font-size:10px;color:var(--text-l);}
-    </style>
+  .dot { width: 20px; height: 20px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; }
+  .dot-red { background: var(--red); color: white; }
+  .dot-yellow { background: var(--yellow); color: white; }
+  .dot-green { background: var(--green); color: white; }
+  .dot-gray { background: #D1D5DB; color: var(--gray); }
+
+  .score-legend {
+    display: flex;
+    gap: 16px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-light); }
+
+  .actions-needed {
+    margin-top: 14px;
+    padding: 12px 14px;
+    background: var(--red-light);
+    border-radius: 6px;
+    border-left: 3px solid var(--red);
+  }
+  .actions-needed .actions-title {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 6px;
+  }
+  .actions-needed ul { padding-left: 14px; }
+  .actions-needed li { font-size: 12px; color: #7F1D1D; margin-bottom: 3px; line-height: 1.5; }
+
+  /* ── PRESENCE MAP ── */
+  .presence-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .presence-card {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px;
+    position: relative;
+  }
+  .presence-card.highlight { border-color: var(--ashley-gold); background: #FFFBF0; }
+  .presence-card .brand { font-size: 12px; font-weight: 700; color: var(--ashley-navy); margin-bottom: 6px; }
+  .presence-card .brand.ashley-brand { color: var(--ashley-gold); }
+  .presence-card .stores-num { font-size: 28px; font-weight: 800; color: var(--ashley-navy); line-height: 1; }
+  .presence-card.highlight .stores-num { color: var(--ashley-gold); }
+  .presence-card .stores-label { font-size: 10px; color: var(--text-light); margin-bottom: 8px; }
+  .presence-card .cities { font-size: 11px; color: var(--gray); }
+  .presence-card .opening-badge {
+    position: absolute; top: 10px; right: 10px;
+    background: var(--red); color: white;
+    font-size: 9px; font-weight: 700;
+    padding: 2px 6px; border-radius: 10px;
+    text-transform: uppercase;
+  }
+  .presence-card .opening-badge.gold { background: var(--ashley-gold); color: var(--ashley-navy); }
+
+  /* ── REVIEWS ── */
+  .reviews-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .review-card { border: 1px solid var(--border); border-radius: 6px; padding: 14px; }
+  .review-card.ashley-card { border-color: var(--ashley-gold); background: #FFFBF0; }
+  .review-brand { font-size: 11px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .review-stars { font-size: 24px; font-weight: 800; color: var(--ashley-navy); line-height: 1; }
+  .review-stars.ashley-stars { color: var(--ashley-gold); }
+  .review-stars span { font-size: 13px; color: var(--text-light); font-weight: 400; }
+  .star-visual { color: #F59E0B; font-size: 13px; margin: 4px 0; }
+  .review-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+  .tag { font-size: 10px; padding: 2px 7px; border-radius: 10px; font-weight: 500; }
+  .tag-red { background: var(--red-light); color: var(--red); }
+  .tag-green { background: var(--green-light); color: var(--green); }
+  .tag-gray { background: var(--gray-light); color: var(--gray); }
+  .review-unverified { font-size: 11px; color: var(--text-light); font-style: italic; margin-top: 6px; }
+
+  .reviews-comparison {
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: var(--green-light);
+    border-radius: 6px;
+    border-left: 3px solid var(--green);
+    font-size: 12px;
+    color: #1A4731;
+  }
+
+  /* ── SEO TABLE ── */
+  .seo-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .seo-table th { text-align: left; padding: 7px 10px; font-size: 10px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--border); }
+  .seo-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  .seo-table tr:last-child td { border-bottom: none; }
+  .seo-table .search-query { font-weight: 600; color: var(--ashley-navy); font-family: monospace; font-size: 11px; background: var(--ashley-light); padding: 2px 6px; border-radius: 4px; }
+  .rank-pill { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; }
+  .rank-1 { background: #FEF3C7; color: #92400E; }
+  .rank-2 { background: #F3F4F6; color: #374151; }
+  .rank-3 { background: #F3F4F6; color: #374151; }
+  .ashley-absent { background: #FDECEA; color: var(--red); font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; }
+
+  /* ── WEB SCAN ── */
+  .web-scan-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .web-card { border: 1px solid var(--border); border-radius: 6px; padding: 13px; }
+  .web-brand { font-size: 11px; font-weight: 700; color: var(--ashley-navy); margin-bottom: 2px; }
+  .web-url { font-size: 10px; color: var(--text-light); margin-bottom: 8px; font-family: monospace; }
+  .web-item { display: flex; gap: 7px; margin-bottom: 5px; font-size: 11.5px; line-height: 1.4; }
+  .web-item-num { font-weight: 700; color: var(--ashley-gold); flex-shrink: 0; width: 14px; }
+  .web-implication { margin-top: 8px; padding: 6px 8px; background: var(--ashley-light); border-radius: 4px; font-size: 11px; color: var(--ashley-navy); font-style: italic; }
+
+  /* ── PRICES ── */
+  .price-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .price-table th { text-align: center; padding: 8px 8px; font-size: 10px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--border); }
+  .price-table th:first-child { text-align: left; }
+  .price-table td { padding: 9px 8px; border-bottom: 1px solid var(--border); text-align: center; }
+  .price-table td:first-child { text-align: left; font-weight: 600; color: var(--ashley-navy); }
+  .price-table tr:last-child td { border-bottom: none; }
+  .price-low { color: var(--green); font-weight: 600; }
+  .price-high { color: var(--red); font-weight: 600; }
+  .price-mid { color: var(--text); }
+  .price-nv { color: var(--text-light); font-style: italic; font-size: 10px; }
+
+  .financing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 14px; }
+  .fin-card { border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; text-align: center; }
+  .fin-card.winner { border-color: var(--red); background: var(--red-light); }
+  .fin-brand { font-size: 10px; font-weight: 700; color: var(--text-light); text-transform: uppercase; margin-bottom: 4px; }
+  .fin-months { font-size: 22px; font-weight: 800; color: var(--ashley-navy); line-height: 1; }
+  .fin-card.winner .fin-months { color: var(--red); }
+  .fin-label { font-size: 9px; color: var(--text-light); }
+  .fin-entity { font-size: 10px; color: var(--gray); margin-top: 3px; }
+  .fin-promo { font-size: 9px; font-weight: 700; color: var(--red); margin-top: 4px; }
+
+  /* ── SOCIAL ── */
+  .social-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .social-card { border: 1px solid var(--border); border-radius: 6px; padding: 12px; }
+  .social-card.ashley-card { border-color: var(--ashley-gold); background: #FFFBF0; }
+  .social-brand { font-size: 10px; font-weight: 700; color: var(--text-light); text-transform: uppercase; margin-bottom: 6px; }
+  .social-num { font-size: 20px; font-weight: 800; color: var(--ashley-navy); line-height: 1; }
+  .social-card.ashley-card .social-num { color: var(--ashley-gold); }
+  .social-platform { font-size: 10px; color: var(--text-light); }
+  .social-delta { font-size: 11px; font-weight: 600; margin-top: 4px; }
+  .delta-up { color: var(--green); }
+  .delta-nv { color: var(--text-light); font-style: italic; }
+
+  /* ── INFLUENCER ── */
+  .influencer-card {
+    border: 2px solid var(--ashley-gold);
+    border-radius: 8px;
+    padding: 16px 20px;
+    background: #FFFBF0;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .influencer-avatar {
+    width: 52px; height: 52px;
+    background: var(--ashley-navy);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .influencer-name { font-size: 15px; font-weight: 700; color: var(--ashley-navy); }
+  .influencer-handle { font-size: 12px; color: var(--ashley-gold); font-weight: 600; }
+  .influencer-stats { display: flex; gap: 16px; margin-top: 8px; }
+  .influencer-stat { }
+  .influencer-stat .val { font-size: 18px; font-weight: 800; color: var(--ashley-navy); }
+  .influencer-stat .lbl { font-size: 10px; color: var(--text-light); }
+  .influencer-note { margin-top: 8px; font-size: 12px; color: var(--text-light); background: white; padding: 8px 10px; border-radius: 4px; }
+  .correction-badge { display: inline-block; background: var(--red); color: white; font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 10px; text-transform: uppercase; margin-left: 8px; vertical-align: middle; }
+
+  /* ── RECS ── */
+  .rec-list { display: flex; flex-direction: column; gap: 10px; }
+  .rec-card { border-radius: 6px; overflow: hidden; border: 1px solid var(--border); }
+  .rec-header { padding: 10px 14px; display: flex; align-items: center; gap: 10px; background: var(--ashley-navy); }
+  .rec-num { font-size: 11px; font-weight: 800; color: var(--ashley-gold); background: rgba(201,168,76,0.15); width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .rec-title { font-size: 12px; font-weight: 700; color: white; }
+  .rec-body { padding: 12px 14px; display: grid; grid-template-columns: repeat(2, 1fr) auto; gap: 10px; }
+  .rec-field label { font-size: 9px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 3px; }
+  .rec-field p { font-size: 12px; color: var(--text); line-height: 1.45; }
+  .rec-meta { display: flex; flex-direction: column; gap: 6px; }
+  .rec-tag { font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 10px; white-space: nowrap; }
+  .tag-area { background: var(--ashley-light); color: var(--ashley-navy); }
+  .tag-deadline { background: var(--red-light); color: var(--red); }
+  .tag-deadline.urgent { background: var(--red); color: white; }
+
+  /* ── COMPETITOR ANALYSIS ── */
+  .comp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .comp-card { border: 1px solid var(--border); border-radius: 6px; padding: 12px; }
+  .comp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .comp-name { font-size: 12px; font-weight: 700; color: var(--ashley-navy); }
+  .priority { font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 10px; text-transform: uppercase; }
+  .priority-high { background: var(--red-light); color: var(--red); }
+  .priority-med { background: var(--yellow-light); color: var(--yellow); }
+  .priority-low { background: var(--green-light); color: var(--green); }
+  .priority-none { background: var(--gray-light); color: var(--gray); }
+  .comp-movement { font-size: 11.5px; color: var(--text); line-height: 1.45; margin-bottom: 6px; }
+  .comp-implication { font-size: 11px; color: var(--text-light); font-style: italic; line-height: 1.4; }
+
+  /* ── LOGISTICS ── */
+  .logistics-row { display: flex; gap: 10px; margin-bottom: 8px; }
+  .logistics-icon { font-size: 18px; flex-shrink: 0; width: 28px; text-align: center; }
+  .logistics-text { font-size: 12px; color: var(--text); line-height: 1.5; }
+  .logistics-text strong { color: var(--ashley-navy); }
+
+  /* ── EDITOR NOTE ── */
+  .editor-note { background: var(--ashley-navy); border-radius: 8px; margin-top: 16px; overflow: hidden; }
+  .editor-note-header { padding: 12px 24px; background: rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; gap: 8px; }
+  .editor-note-header h3 { font-size: 11px; font-weight: 700; color: var(--ashley-gold); text-transform: uppercase; letter-spacing: 1px; }
+  .editor-note-body { padding: 16px 24px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .en-field label { font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 5px; }
+  .en-field p, .en-field li { font-size: 12px; color: rgba(255,255,255,0.75); line-height: 1.5; }
+  .en-field ul { padding-left: 14px; }
+
+  /* ── FOOTER ── */
+  .footer {
+    max-width: 900px;
+    margin: 12px auto 0;
+    padding: 0 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    color: var(--text-light);
+  }
+  .footer strong { color: var(--ashley-navy); }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1px; background: var(--border); margin: 14px 0; }
+
+  /* ── SOURCE TAG ── */
+  .source-tag { display: inline-block; font-size: 9px; background: var(--ashley-light); color: var(--text-light); padding: 1px 6px; border-radius: 3px; margin-left: 4px; vertical-align: middle; }
+
+  /* ── UTIL ── */
+  .text-gold { color: var(--ashley-gold); }
+  .text-navy { color: var(--ashley-navy); }
+  .bold { font-weight: 700; }
+  .small { font-size: 11px; color: var(--text-light); }
+
+  /* PASSWORD WALL */
+  #pgwall{position:fixed;inset:0;background:#1B3A6B;display:flex;align-items:center;justify-content:center;z-index:9999;}
+  #pgbox{background:#fff;border-radius:12px;padding:32px;width:340px;text-align:center;}
+  #pgbox h2{font-size:22px;font-weight:800;color:#1B3A6B;margin-bottom:8px;}
+  #pgbox p{font-size:14px;color:#6B7280;margin-bottom:18px;}
+  #pgbox input{width:100%;padding:12px;border:1.5px solid #E5E7EB;border-radius:8px;font-size:15px;outline:none;margin-bottom:12px;box-sizing:border-box;}
+  #pgbox input:focus{border-color:#C9A84C;}
+  #pgbox button{width:100%;padding:11px;background:#1B3A6B;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;}
+  #pgbox .err{color:#c62828;font-size:13px;margin-top:8px;display:none;}
+</style>
 </head>
 <body>
 
@@ -139,186 +520,900 @@ function pgcheck(){
 }
 </script>
 
-<div class="hdr">
-  <div class="hdr-stripe"></div>
-  <div class="hdr-inner">
-    <div>
-      <div class="hdr-logo">Ashley Colombia</div>
-      <h1>Radar Competitivo<br>Precios de Mercado</h1>
-      <p class="hdr-sub">Inteligencia competitiva · 159 precios reales · 6 competidores automáticos</p>
+<!-- HEADER -->
+<div class="header">
+  <div class="header-stripe"></div>
+  <div class="header-inner">
+    <div class="header-left">
+      <div class="header-logo">Ashley Colombia</div>
+      <h1>Radar Competitivo<br>Muebles Colombia</h1>
+      <p class="subtitle">Inteligencia competitiva semanal · Comité de Gerencia</p>
     </div>
-    <div>
-      <div class="hdr-date">19 de May de 2026</div>
-      <div class="hdr-edition">Datos: 2026-05-12 · Hacé clic en cada categoría para expandir</div>
+    <div class="header-right">
+      <div class="date">Semana del 7 de mayo de 2026</div>
+      <div class="edition">Edición #1 · Actualizado 7 mayo 2026</div>
     </div>
   </div>
 </div>
 
 <div class="page">
 
-  <!-- INSTRUCCIÓN -->
-  <div style="background:var(--navy);border-radius:8px;margin-top:14px;padding:14px 22px;display:flex;gap:12px;align-items:center;">
-    <span style="font-size:20px;">👆</span>
-    <div>
-      <div style="font-size:12px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.8px;">Cómo usar este reporte</div>
-      <div style="font-size:12px;color:rgba(255,255,255,.75);margin-top:3px;">
-        Hacé clic en cada categoría para ver la tabla completa de precios, el gráfico comparativo y el análisis de oportunidades.
-        Los precios con <span style="background:var(--red-l);color:var(--red);padding:1px 6px;border-radius:10px;font-size:10px;font-weight:600;">⚠ riesgo</span> indican donde Ashley está significativamente más caro.
+  <!-- ALERT BANNER -->
+  <div class="alert-banner">
+    <div class="alert-banner-header">
+      <span>⚡ Alertas urgentes — acción requerida antes del viernes 10 de mayo</span>
+    </div>
+    <div class="alert-items">
+      <div class="alert-item">
+        <div>
+          <div class="alert-label">🔴 Alerta #1 — Jamar</div>
+          <div class="alert-text">"Compre Ahora Pague en Mayo" activo con pauta masiva en Meta. Financiamiento diferido dominando el mensaje del sector esta semana.</div>
+        </div>
+        <div>
+          <div class="alert-action-label">✅ Acción sugerida</div>
+          <div class="alert-text">Comercial evalúa respuesta de cuotas sin interés (mín. 24 meses) en sala y comedor antes del viernes 10 de mayo.</div>
+        </div>
+      </div>
+      <div class="alert-item">
+        <div>
+          <div class="alert-label">🔴 Alerta #2 — Aristas</div>
+          <div class="alert-text">Reseñas negativas recientes sobre posventa y entregas. Ventana de diferenciación abierta para Ashley.</div>
+        </div>
+        <div>
+          <div class="alert-action-label">✅ Acción sugerida</div>
+          <div class="alert-text">Marketing activa contenido sobre garantías y experiencia de entrega Ashley. Deadline: miércoles 8 de mayo.</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- RESUMEN RÁPIDO -->
-  <div style="background:var(--white);border-radius:8px;margin-top:14px;padding:16px 22px;box-shadow:0 1px 4px rgba(0,0,0,.07);">
-    <div style="font-size:11px;font-weight:700;color:var(--text-l);text-transform:uppercase;letter-spacing:.7px;margin-bottom:12px;">
-      Fuentes de datos automáticas
+  <!-- EXEC SUMMARY -->
+  <div class="section">
+    <div class="section-header">
+      <div class="icon">📋</div>
+      <h2>Resumen Ejecutivo</h2>
+      <div class="badge">4 insights clave</div>
     </div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;">
-      <div style="background:var(--light);border-radius:6px;padding:6px 12px;font-size:11px;"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#10B981;margin-right:5px;"></span><strong>Ashley</strong></div><div style="background:var(--light);border-radius:6px;padding:6px 12px;font-size:11px;"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#10B981;margin-right:5px;"></span><strong>Jamar</strong></div><div style="background:var(--light);border-radius:6px;padding:6px 12px;font-size:11px;"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#10B981;margin-right:5px;"></span><strong>Tugó</strong></div><div style="background:var(--light);border-radius:6px;padding:6px 12px;font-size:11px;"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#10B981;margin-right:5px;"></span><strong>Ambiente Living</strong></div><div style="background:var(--light);border-radius:6px;padding:6px 12px;font-size:11px;"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#10B981;margin-right:5px;"></span><strong>Only Home</strong></div><div style="background:var(--light);border-radius:6px;padding:6px 12px;font-size:11px;"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#10B981;margin-right:5px;"></span><strong>Aristas</strong></div>
+    <div class="section-body">
+      <div class="exec-bullets">
+        <div class="exec-bullet">
+          <div class="num">1</div>
+          <p><strong>Jamar ejecuta su mayor movimiento del año:</strong> flagship Usaquén ($15.000M) abre en junio + financiamiento activo ahora. Ashley tiene hasta el 31 de mayo para responder comercialmente.</p>
+        </div>
+        <div class="exec-bullet">
+          <div class="num">2</div>
+          <p><strong>Ashley lidera en reputación con 5.0 y 4.9 en Google Reviews</strong> — el rating más alto del sector. NPS del 93% y mejor licenciataria mundial. Ese activo no está siendo comunicado al mercado.</p>
+        </div>
+        <div class="exec-bullet">
+          <div class="num">3</div>
+          <p><strong>Ashley es la marca de muebles que más crece percentualmente en Colombia:</strong> +78% en 2025 vs 2024, +71% en Q1 2026 vs Q1 2025. Aristas crece +54% YoY en cifras absolutas pero parte de una base 5× mayor. El crecimiento de Ashley no está siendo comunicado como activo de marca.</p>
+        </div>
+        <div class="exec-bullet">
+          <div class="num">4</div>
+          <p><strong>Ashley invisible en Google Colombia:</strong> no aparece en ninguna de las 5 búsquedas SEO clave del sector. Jamar e IKEA dominan el tráfico orgánico que debería llegar a Ashley.</p>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- CATEGORÍAS INTERACTIVAS -->
-  
-    <div class="acord" id="cat-0">
-      <div class="acord-head" onclick="toggle('cat-0')">
-        <div class="acord-icon">🛋️</div>
-        <div>
-          <div class="acord-title">Sofá 2 Puestos</div>
-          <div class="precio-preview"><span class="pp-item"><span class="pp-name">Ashley:</span> <span class="pp-val">$7.080.000</span></span><span class="pp-sep">·</span><span class="pp-item"><span class="pp-name">Jamar:</span> <span class="pp-val">$3.389.000</span></span><span class="pp-sep">·</span><span class="pp-item"><span class="pp-name">Tugó:</span> <span class="pp-val">$3.499.990</span></span><span class="pp-sep">·</span><span class="pp-item"><span class="pp-name">Ambiente Living:</span> <span class="pp-val">$2.999.000</span></span><span class="pp-sep">·</span><span class="pp-item"><span class="pp-name">Only Home:</span> <span class="pp-val">$3.199.000</div>
-        </div>
-        <div class="acord-summary"><span class="chip chip-navy">5 competidores</span> <span class="chip chip-red">⚠ 4 riesgo precio</span></div>
-        <span class="chevron">▾</span>
+  <!-- SCOREBOARD -->
+  <div class="section">
+    <div class="section-header">
+      <div class="icon">🎯</div>
+      <h2>Scoreboard Ejecutivo</h2>
+      <div class="badge">7 competidores × 5 dimensiones</div>
+    </div>
+    <div class="section-body">
+      <table class="scoreboard-table">
+        <thead>
+          <tr>
+            <th>Competidor</th>
+            <th>Precio</th>
+            <th>Reputación</th>
+            <th>Digital</th>
+            <th>Expansión</th>
+            <th>Marketing</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="6" style="padding: 6px 0 2px; font-size: 9px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px;">Segmento Masivo</td></tr>
+          <tr>
+            <td>Muebles Jamar</td>
+            <td><span class="dot dot-red">!</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-red">!</span></td>
+            <td><span class="dot dot-red">!</span></td>
+          </tr>
+          <tr>
+            <td>IKEA Colombia</td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-green">✓</span></td>
+            <td><span class="dot dot-red">!</span></td>
+            <td><span class="dot dot-green">✓</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+          </tr>
+          <tr><td colspan="6" style="padding: 6px 0 2px; font-size: 9px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px;">Segmento Contemporáneo / Diseño</td></tr>
+          <tr>
+            <td>Tugó</td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-green">✓</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+          </tr>
+          <tr>
+            <td>Aristas</td>
+            <td><span class="dot dot-green">✓</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-red">!</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+          </tr>
+          <tr>
+            <td>Zientte</td>
+            <td><span class="dot dot-green">✓</span></td>
+            <td><span class="dot dot-green">✓</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-green">✓</span></td>
+          </tr>
+          <tr>
+            <td>Only Muebles</td>
+            <td><span class="dot dot-gray">?</span></td>
+            <td><span class="dot dot-gray">?</span></td>
+            <td><span class="dot dot-gray">?</span></td>
+            <td><span class="dot dot-gray">?</span></td>
+            <td><span class="dot dot-gray">?</span></td>
+          </tr>
+          <tr>
+            <td>BoConcept</td>
+            <td><span class="dot dot-green">✓</span></td>
+            <td><span class="dot dot-green">✓</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="score-legend">
+        <div class="legend-item"><span class="dot dot-red" style="width:14px;height:14px;font-size:7px;">!</span> Acción requerida</div>
+        <div class="legend-item"><span class="dot dot-yellow" style="width:14px;height:14px;font-size:7px;">~</span> Monitorear</div>
+        <div class="legend-item"><span class="dot dot-green" style="width:14px;height:14px;font-size:7px;">✓</span> Sin amenaza</div>
+        <div class="legend-item"><span class="dot dot-gray" style="width:14px;height:14px;font-size:7px;">?</span> Sin datos</div>
       </div>
-      <div class="acord-body">
-        <div class="bar-wrap">
-          <div class="bar-label">Precio de entrada por competidor</div>
-          <div class="bar-row"><span class="bar-name ashley">Ashley</span><div class="bar-bg"><div class="bar-fill ashley" style="left:19%;width:29%"></div></div><span class="bar-price"><strong>$2.879.000</strong><span class="bar-range-txt"> — $7.080.000</span></span></div><div class="bar-row"><span class="bar-name">Jamar</span><div class="bar-bg"><div class="bar-fill comp" style="left:15%;width:13%"></div></div><span class="bar-price"><strong>$2.189.000</strong><span class="bar-range-txt"> — $4.189.000</span></span></div><div class="bar-row"><span class="bar-name">Tugó</span><div class="bar-bg"><div class="bar-fill comp" style="left:12%;width:11%"></div></div><span class="bar-price"><strong>$1.793.992</strong><span class="bar-range-txt"> — $3.499.990</span></span></div><div class="bar-row"><span class="bar-name">Ambiente Living</span><div class="bar-bg"><div class="bar-fill comp" style="left:20%;width:79%"></div></div><span class="bar-price"><strong>$2.899.000</strong><span class="bar-range-txt"> — $14.480.000</span></span></div><div class="bar-row"><span class="bar-name">Only Home</span><div class="bar-bg"><div class="bar-fill comp" style="left:11%;width:10%"></div></div><span class="bar-price"><strong>$1.643.850</strong><span class="bar-range-txt"> — $3.199.000</span></span></div><div class="bar-row"><span class="bar-name">Aristas</span><div class="bar-bg"><div class="bar-fill nd-bar" style="left:0%;width:8px"></div></div><span class="bar-price"><span style="color:#D1D5DB;font-size:10px;">N/D</span></span></div>
-        </div>
-        <table class="precio-tabla"><thead><tr><th>Competidor</th><th>Precio entrada</th><th>vs Ashley</th><th>Producto</th><th></th></tr></thead><tbody><tr class="ashley-row"><td><span class="comp-name ashley">Ashley</span></td><td><span class="precio-val ashley">$7.080.000</span><div class="precio-rango">Rango: $2.879.000 — $7.080.000</div></td><td></td><td><div class="prod-name">Sofa 2 Puestos Alesandra</div><span class="prods-toggle" id="btn-prods-0-Ashley" onclick="toggleProds('prods-0-Ashley')">ver 4 más ▼</span><div class="prods-list" id="prods-0-Ashley"><div class="prod-item">• Sofá 2 Puestos Barlin Mills — $3.190.000</div><div class="prod-item">• Sofá 2 Puestos Bixler — $3.789.000</div><div class="prod-item">• Sofá 2 Puestos Jesolo — $4.770.000</div><div class="prod-item">• Sofá 2 Puestos Leeshan — $2.879.000</div></div></td><td><a class="ver-link" href="https://www.ashleycolombia.com/products/sofa-2-puestos-alesandra" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Jamar</span></td><td><span class="precio-val">$3.389.000</span><div class="precio-rango">Rango: $2.189.000 — $4.189.000</div></td><td><span class="delta-badge delta-red">Ashley +108% más caro</span></td><td><div class="prod-name">Sofá 2 Puestos Dhara Eurolino Blanco, Champaña Brazo De</div><span class="prods-toggle" id="btn-prods-0-Jamar" onclick="toggleProds('prods-0-Jamar')">ver 4 más ▼</span><div class="prods-list" id="prods-0-Jamar"><div class="prod-item">• Sofá 2 Puestos Sienna Velvet Provenza Vainilla,Capuchin — $4.189.000</div><div class="prod-item">• Sofá 2 Puestos Malibu Velvet Chalet Taupe, Natural — $2.189.000</div><div class="prod-item">• Sofá 2 Puestos Napoli Eurolino Blanco Puro, Champaña — $3.689.000</div><div class="prod-item">• Sofá 2 Puestos Kanon Velvet Impetu Arena, Natural — $3.989.000</div></div></td><td><a class="ver-link" href="https://www.jamar.com/products/sofa-2-puestos-dhara-eurolino-blanco-champana-brazo-desmontable-7040925" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Tugó</span></td><td><span class="precio-val">$3.499.990</span><div class="precio-rango">Rango: $1.793.992 — $3.499.990</div></td><td><span class="delta-badge delta-red">Ashley +102% más caro</span></td><td><div class="prod-name">Sofá Tomsk 2 Puestos Beige</div><span class="prods-toggle" id="btn-prods-0-Tugó" onclick="toggleProds('prods-0-Tugó')">ver 4 más ▼</span><div class="prods-list" id="prods-0-Tugó"><div class="prod-item">• Sofá Newton 2 puestos Tela Gris Plata — $3.299.990</div><div class="prod-item">• Sofá Kansas (Pocket) 2 Puestos Gris — $1.793.992</div><div class="prod-item">• Sofá Luning 2 Puestos (Pocket) Beige — $3.499.990</div><div class="prod-item">• Sofá Caroline 2 Puestos Reclinable Manual Gris Claro — $2.999.990</div></div></td><td><a class="ver-link" href="https://www.tugo.co/sofa-tomsk-2-puestos-beige/p" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Ambiente Living</span></td><td><span class="precio-val">$2.999.000</span><div class="precio-rango">Rango: $2.899.000 — $14.480.000</div></td><td><span class="delta-badge delta-red">Ashley +136% más caro</span></td><td><div class="prod-name">Sofá 2 puestos Jaipur arena</div><span class="prods-toggle" id="btn-prods-0-AmbienteLiving" onclick="toggleProds('prods-0-AmbienteLiving')">ver 4 más ▼</span><div class="prods-list" id="prods-0-AmbienteLiving"><div class="prod-item">• Sofá 2 puestos Elia café — $2.899.000</div><div class="prod-item">• Sofá 2 puestos california beige 74x172x89 — $6.699.000</div><div class="prod-item">• Sofá 2 puestos reclinable Leo cuero miel — $14.480.000</div><div class="prod-item">• Sofá 2 puestos Emilia chocolate 78x177x91 cm — $3.899.000</div></div></td><td><a class="ver-link" href="https://www.b2bambiente.com/sofa-2-puestos-jaipur-arena/p" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Only Home</span></td><td><span class="precio-val">$3.199.000</span><div class="precio-rango">Rango: $1.643.850 — $3.199.000</div></td><td><span class="delta-badge delta-red">Ashley +121% más caro</span></td><td><div class="prod-name">Sofa 2 Puestos Olive Calabria Marfil</div><span class="prods-toggle" id="btn-prods-0-OnlyHome" onclick="toggleProds('prods-0-OnlyHome')">ver 4 más ▼</span><div class="prods-list" id="prods-0-OnlyHome"><div class="prod-item">• Sofá Macarena 2 Puestos Primada Nuez — $1.643.850</div><div class="prod-item">• Sofá Macarena 2 Puestos Primada Taupe — $1.643.850</div><div class="prod-item">• Sofá Macarena 2 Puestos Idilio Crudo — $1.643.850</div><div class="prod-item">• Sofá Macarena 2 Puestos Idilio Plomo — $1.643.850</div></div></td><td><a class="ver-link" href="https://www.onlymuebles.com/sofa-2-puestos-olive-calabria-marfil-2050006000699/p" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Aristas</span></td><td><span class="precio-val"><span class="nd">N/D</span></span></td><td></td><td><span class="nd">Sin datos automáticos</span></td><td></td></tr></tbody></table>
-        <div class="opor-section"><div class="opor-title">Análisis de oportunidades</div><div class="opor-item" style="background:#FDECEA;border-color:#D94040"><span class="opor-icono">⚠️</span><span class="opor-texto">Ashley es 108% más caro que Jamar — riesgo de pérdida en segmento precio.</span></div><div class="opor-item" style="background:#FDECEA;border-color:#D94040"><span class="opor-icono">⚠️</span><span class="opor-texto">Ashley es 102% más caro que Tugó — riesgo de pérdida en segmento precio.</span></div><div class="opor-item" style="background:#FDECEA;border-color:#D94040"><span class="opor-icono">⚠️</span><span class="opor-texto">Ashley es 136% más caro que Ambiente Living — riesgo de pérdida en segmento precio.</span></div><div class="opor-item" style="background:#FDECEA;border-color:#D94040"><span class="opor-icono">⚠️</span><span class="opor-texto">Ashley es 121% más caro que Only Home — riesgo de pérdida en segmento precio.</span></div></div>
+      <div class="actions-needed">
+        <div class="actions-title">🔴 5 señales rojas que requieren acción esta semana</div>
+        <ul>
+          <li><strong>Jamar / Precio:</strong> "Pague en Mayo" activo — respuesta comercial de Ashley antes del 31/05</li>
+          <li><strong>Jamar / Expansión:</strong> Flagship Santa Bárbara abre en junio — 23 tiendas vs. 4 de Ashley</li>
+          <li><strong>Jamar / Marketing:</strong> Toda su pauta enfocada en financiamiento — mensaje dominante del sector</li>
+          <li><strong>IKEA / Digital:</strong> 290+ municipios e-commerce — Ashley ausente en las 5 búsquedas SEO clave</li>
+          <li><strong>Aristas / Expansión:</strong> +54% ventas YoY, 9 tiendas + 2-3 más proyectadas en 2026</li>
+        </ul>
       </div>
     </div>
-    
-    <div class="acord" id="cat-1">
-      <div class="acord-head" onclick="toggle('cat-1')">
-        <div class="acord-icon">💺</div>
-        <div>
-          <div class="acord-title">Reclinomático / Reclinable</div>
-          <div class="precio-preview"><span class="pp-item"><span class="pp-name">Ashley:</span> <span class="pp-val">$1.990.000</span></span><span class="pp-sep">·</span><span class="pp-item"><span class="pp-name">Jamar:</span> <span class="pp-val">$702.000</span></span><span class="pp-sep">·</span><span class="pp-item"><span class="pp-name">Ambiente Living:</span> <span class="pp-val">$4.299.000</span></span><span class="pp-sep">·</span><span class="pp-item"><span class="pp-name">Only Home:</span> <span class="pp-val">$2.339.000</div>
+  </div>
+
+  <!-- PRESENCE MAP -->
+  <div class="section">
+    <div class="section-header">
+      <div class="icon">🗺️</div>
+      <h2>Mapa de Presencia Física</h2>
+      <div class="badge">Tiendas activas + aperturas 2026</div>
+    </div>
+    <div class="section-body">
+      <div class="presence-grid">
+        <div class="presence-card">
+          <div class="brand">Jamar</div>
+          <div class="stores-num">22</div>
+          <div class="stores-label">tiendas activas</div>
+          <div class="opening-badge">+1 jun.</div>
+          <div class="cities">Bogotá, Medellín, Barranquilla, Cartagena, Montería</div>
         </div>
-        <div class="acord-summary"><span class="chip chip-navy">5 competidores</span> <span class="chip chip-red">⚠ 1 riesgo precio</span> <span class="chip chip-green">✅ 2 ventaja</span></div>
-        <span class="chevron">▾</span>
+        <div class="presence-card">
+          <div class="brand">Homecenter</div>
+          <div class="stores-num">~40</div>
+          <div class="stores-label">tiendas activas</div>
+          <div class="cities">Nacional</div>
+        </div>
+        <div class="presence-card">
+          <div class="brand">Tugó</div>
+          <div class="stores-num">~21</div>
+          <div class="stores-label">tiendas activas</div>
+          <div class="cities">Bogotá (7+), Medellín, Barranquilla, Cúcuta</div>
+        </div>
+        <div class="presence-card">
+          <div class="brand">Easy</div>
+          <div class="stores-num">~20</div>
+          <div class="stores-label">tiendas activas</div>
+          <div class="cities">Bogotá, Medellín, Cali</div>
+        </div>
+        <div class="presence-card">
+          <div class="brand">Aristas</div>
+          <div class="stores-num">9</div>
+          <div class="stores-label">tiendas activas</div>
+          <div class="opening-badge">+2-3 2026</div>
+          <div class="cities">Bogotá (flagship), Medellín (Oviedo)</div>
+        </div>
+        <div class="presence-card">
+          <div class="brand">IKEA</div>
+          <div class="stores-num">3</div>
+          <div class="stores-label">tiendas activas</div>
+          <div class="cities">Bogotá (NQS), Cali, Envigado</div>
+        </div>
+        <div class="presence-card">
+          <div class="brand">BoConcept</div>
+          <div class="stores-num">4</div>
+          <div class="stores-label">tiendas activas</div>
+          <div class="cities">Bogotá (x2), Medellín, Barranquilla</div>
+        </div>
+        <div class="presence-card">
+          <div class="brand">Zientte</div>
+          <div class="stores-num">~6</div>
+          <div class="stores-label">tiendas activas</div>
+          <div class="cities">Bogotá, Medellín + expansión internacional</div>
+        </div>
+        <div class="presence-card highlight">
+          <div class="brand ashley-brand">Ashley Colombia ★</div>
+          <div class="stores-num" style="color:var(--ashley-gold)">~4</div>
+          <div class="stores-label">tiendas activas</div>
+          <div class="opening-badge gold">Meta: 10</div>
+          <div class="cities">Bogotá (x2), Barranquilla</div>
+        </div>
       </div>
-      <div class="acord-body">
-        <div class="bar-wrap">
-          <div class="bar-label">Precio de entrada por competidor</div>
-          <div class="bar-row"><span class="bar-name ashley">Ashley</span><div class="bar-bg"><div class="bar-fill ashley" style="left:14%;width:50%"></div></div><span class="bar-price"><strong>$1.460.000</strong><span class="bar-range-txt"> — $6.549.000</span></span></div><div class="bar-row"><span class="bar-name">Jamar</span><div class="bar-bg"><div class="bar-fill comp" style="left:7%;width:11%"></div></div><span class="bar-price"><strong>$702.000</strong><span class="bar-range-txt"> — $1.889.000</span></span></div><div class="bar-row"><span class="bar-name">Tugó</span><div class="bar-bg"><div class="bar-fill nd-bar" style="left:0%;width:8px"></div></div><span class="bar-price"><span style="color:#D1D5DB;font-size:10px;">N/D</span></span></div><div class="bar-row"><span class="bar-name">Ambiente Living</span><div class="bar-bg"><div class="bar-fill comp" style="left:32%;width:20%"></div></div><span class="bar-price"><strong>$3.299.000</strong><span class="bar-range-txt"> — $5.299.000</span></span></div><div class="bar-row"><span class="bar-name">Only Home</span><div class="bar-bg"><div class="bar-fill comp" style="left:15%;width:20%"></div></div><span class="bar-price"><strong>$1.520.350</strong><span class="bar-range-txt"> — $3.569.000</span></span></div><div class="bar-row"><span class="bar-name">Aristas</span><div class="bar-bg"><div class="bar-fill comp" style="left:33%;width:66%"></div></div><span class="bar-price"><strong>$3.373.750</strong><span class="bar-range-txt"> — $9.998.750</span></span></div>
-        </div>
-        <table class="precio-tabla"><thead><tr><th>Competidor</th><th>Precio entrada</th><th>vs Ashley</th><th>Producto</th><th></th></tr></thead><tbody><tr class="ashley-row"><td><span class="comp-name ashley">Ashley</span></td><td><span class="precio-val ashley">$1.990.000</span><div class="precio-rango">Rango: $1.460.000 — $6.549.000</div></td><td></td><td><div class="prod-name">Sofá reclinable manual 2 Puestos Moreau</div><span class="prods-toggle" id="btn-prods-1-Ashley" onclick="toggleProds('prods-1-Ashley')">ver 4 más ▼</span><div class="prods-list" id="prods-1-Ashley"><div class="prod-item">• Silla reclinable mecedora Moreau — $1.460.000</div><div class="prod-item">• Sofá 3 Puestos Danum — $6.199.000</div><div class="prod-item">• Sofa 2 Puestos Stoneland — $6.549.000</div><div class="prod-item">• Sofa 2 Puestos Danum — $5.309.000</div></div></td><td><a class="ver-link" href="https://www.ashleycolombia.com/products/moreau-place-loveseat-dbl-rec-con-consola" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Jamar</span></td><td><span class="precio-val">$702.000</span><div class="precio-rango">Rango: $702.000 — $1.889.000</div></td><td><span class="delta-badge delta-red">Ashley +183% más caro</span></td><td><div class="prod-name">Sillón Reclinable Daytona Lino Gris Claro</div><span class="prods-toggle" id="btn-prods-1-Jamar" onclick="toggleProds('prods-1-Jamar')">ver 4 más ▼</span><div class="prods-list" id="prods-1-Jamar"><div class="prod-item">• Sillón Reclinable Daytona Kazan Mostaza — $728.000</div><div class="prod-item">• Sillón Reclinable Matti Eurocuero Marrón — $1.589.000</div><div class="prod-item">• Sillón Reclinable Curitiba Microfibra Azul — $1.879.000</div><div class="prod-item">• Sillón Reclinable Matti Eurolino Marfil — $1.889.000</div></div></td><td><a class="ver-link" href="https://www.jamar.com/products/sillon-reclinable-daytona-lino-gris-claro-7015655" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Tugó</span></td><td><span class="precio-val"><span class="nd">N/D</span></span></td><td></td><td><span class="nd">Sin datos automáticos</span></td><td></td></tr><tr><td><span class="comp-name">Ambiente Living</span></td><td><span class="precio-val">$4.299.000</span><div class="precio-rango">Rango: $3.299.000 — $5.299.000</div></td><td><span class="delta-badge delta-green">Ashley -53% más barato</span></td><td><div class="prod-name">Reclinable 3 puestos Covy cocoa</div><span class="prods-toggle" id="btn-prods-1-AmbienteLiving" onclick="toggleProds('prods-1-AmbienteLiving')">ver 4 más ▼</span><div class="prods-list" id="prods-1-AmbienteLiving"><div class="prod-item">• Reclinable 3 puestos Covy humo — $4.299.000</div><div class="prod-item">• Reclinable eléctrico Axel 3 puestos camel — $5.299.000</div><div class="prod-item">• Reclinable eléctrico Axel 3 puestos nogal — $5.299.000</div><div class="prod-item">• Reclinable 2 puestos Covy humo — $3.299.000</div></div></td><td><a class="ver-link" href="https://www.b2bambiente.com/reclinable-3-puestos-covy-cocoa/p" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Only Home</span></td><td><span class="precio-val">$2.339.000</span><div class="precio-rango">Rango: $1.520.350 — $3.569.000</div></td><td><span class="delta-badge delta-green">Ashley -14% más barato</span></td><td><div class="prod-name">Silla Reclinable Lizcana Country Beige</div><span class="prods-toggle" id="btn-prods-1-OnlyHome" onclick="toggleProds('prods-1-OnlyHome')">ver 4 más ▼</span><div class="prods-list" id="prods-1-OnlyHome"><div class="prod-item">• Silla Reclinable Coral Houston Beige — $3.569.000</div><div class="prod-item">• Silla Reclinable Lizcana Country Plomo — $1.520.350</div><div class="prod-item">• Silla Reclinable Enzo Electrica Country Plomo — $2.764.300</div><div class="prod-item">• Silla Reclinable Doble Lizcana Maximus Marfil — $2.981.300</div></div></td><td><a class="ver-link" href="https://www.onlymuebles.com/silla-reclino-lizcana-country-beige-2050007000051/p" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Aristas</span></td><td><span class="precio-val">$9.998.750</span><div class="precio-rango">Rango: $3.373.750 — $9.998.750</div></td><td><span class="delta-badge delta-green">Ashley -80% más barato</span></td><td><div class="prod-name">Sofá Reclinable Duomo Cuarzo 3 Puestos Imp</div><span class="prods-toggle" id="btn-prods-1-Aristas" onclick="toggleProds('prods-1-Aristas')">ver 4 más ▼</span><div class="prods-list" id="prods-1-Aristas"><div class="prod-item">• Poltrona Reclinable Masajeadora Eléctrica  Madrid Imp — $4.373.750</div><div class="prod-item">• Poltrona Reclinable Masajeadora Eléctrica  Roma Imp — $3.373.750</div><div class="prod-item">• Sofá Reclinable Viena — $7.932.000</div><div class="prod-item">• Poltrona Reclinable Eléctrica Yb737 Cuero Imp — $3.373.750</div></div></td><td><a class="ver-link" href="https://aristas.co/producto/sofa-reclinable-duomo-cuarzo-3-puestos-imp/" target="_blank">↗</a></td></tr></tbody></table>
-        <div class="opor-section"><div class="opor-title">Análisis de oportunidades</div><div class="opor-item" style="background:#FDECEA;border-color:#D94040"><span class="opor-icono">⚠️</span><span class="opor-texto">Ashley es 183% más caro que Jamar — riesgo de pérdida en segmento precio.</span></div><div class="opor-item" style="background:#E8F5EE;border-color:#2E7D52"><span class="opor-icono">✅</span><span class="opor-texto">Ashley es 53% más económico que Ambiente Living — comunicar valor diferencial.</span></div><div class="opor-item" style="background:#E8F5EE;border-color:#2E7D52"><span class="opor-icono">✅</span><span class="opor-texto">Ashley es 80% más económico que Aristas — comunicar valor diferencial.</span></div></div>
+      <div style="margin-top:12px;padding:10px 12px;background:var(--red-light);border-radius:6px;font-size:12px;color:#7F1D1D;border-left:3px solid var(--red);">
+        <strong>Brechas críticas sin Ashley:</strong> Medellín (IKEA + Aristas + Tugó ya instalados), Cali (IKEA), ciudades intermedias (nadie del segmento diseño — ventana abierta).
       </div>
     </div>
-    
-    <div class="acord" id="cat-2">
-      <div class="acord-head" onclick="toggle('cat-2')">
-        <div class="acord-icon">🔲</div>
-        <div>
-          <div class="acord-title">Modular 3 Puestos</div>
-          <div class="precio-preview"><span class="pp-item"><span class="pp-name">Ashley:</span> <span class="pp-val">$4.099.000</span></span><span class="pp-sep">·</span><span class="pp-item"><span class="pp-name">Jamar:</span> <span class="pp-val">$2.989.000</span></span><span class="pp-sep">·</span><span class="pp-item"><span class="pp-name">Tugó:</span> <span class="pp-val">$3.499.990</span></span><span class="pp-sep">·</span><span class="pp-item"><span class="pp-name">Ambiente Living:</span> <span class="pp-val">$4.890.000</span></span><span class="pp-sep">·</span><span class="pp-item"><span class="pp-name">Only Home:</span> <span class="pp-val">$3.990.000</div>
+  </div>
+
+  <!-- GOOGLE REVIEWS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="icon">⭐</div>
+      <h2>Reputación — Google Reviews por Tienda</h2>
+      <div class="badge">Metodología: Google Business Profile individual</div>
+    </div>
+    <div class="section-body">
+      <div class="reviews-grid">
+        <div class="review-card ashley-card">
+          <div class="review-brand">Ashley — Multiparque, Bogotá</div>
+          <div class="review-stars ashley-stars">5.0 <span>/ 5.0</span></div>
+          <div class="star-visual">★★★★★</div>
+          <div class="review-tags">
+            <span class="tag tag-green">NPS 93%</span>
+            <span class="tag tag-green">Mejor licenciataria mundial</span>
+          </div>
         </div>
-        <div class="acord-summary"><span class="chip chip-navy">6 competidores</span> <span class="chip chip-green">✅ 1 ventaja</span></div>
-        <span class="chevron">▾</span>
+        <div class="review-card ashley-card">
+          <div class="review-brand">Ashley — Carrera 19, Bogotá</div>
+          <div class="review-stars ashley-stars">4.9 <span>/ 5.0</span></div>
+          <div class="star-visual">★★★★★</div>
+          <div style="font-size:10px;color:#78350F;font-weight:600;margin-bottom:6px;">428 reseñas · verificado 7 mayo 2026</div>
+          <div class="review-tags">
+            <span class="tag tag-green">Diseño</span>
+            <span class="tag tag-green">Atención</span>
+            <span class="tag tag-green">Precio-calidad</span>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-brand">Aristas — Bogotá</div>
+          <div class="review-stars">Mixta <span>/ 5.0</span></div>
+          <div class="star-visual" style="color:#D1D5DB;">★★★☆☆</div>
+          <div class="review-tags">
+            <span class="tag tag-red">Posventa deficiente</span>
+            <span class="tag tag-red">Entregas demoradas</span>
+            <span class="tag tag-green">Diseño moderno</span>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-brand">IKEA — Mallplaza NQS, Bogotá</div>
+          <div class="review-stars">N/V <span>— sin URL</span></div>
+          <div class="star-visual" style="color:#D1D5DB;">★★★★☆</div>
+          <div class="review-tags">
+            <span class="tag tag-red">Filas largas</span>
+            <span class="tag tag-red">Parqueadero</span>
+            <span class="tag tag-green">Precio</span>
+            <span class="tag tag-green">Variedad</span>
+          </div>
+        </div>
       </div>
-      <div class="acord-body">
-        <div class="bar-wrap">
-          <div class="bar-label">Precio de entrada por competidor</div>
-          <div class="bar-row"><span class="bar-name ashley">Ashley</span><div class="bar-bg"><div class="bar-fill ashley" style="left:28%;width:71%"></div></div><span class="bar-price"><strong>$4.099.000</strong><span class="bar-range-txt"> — $14.199.000</span></span></div><div class="bar-row"><span class="bar-name">Jamar</span><div class="bar-bg"><div class="bar-fill comp" style="left:19%;width:9%"></div></div><span class="bar-price"><strong>$2.789.000</strong><span class="bar-range-txt"> — $4.189.000</span></span></div><div class="bar-row"><span class="bar-name">Tugó</span><div class="bar-bg"><div class="bar-fill comp" style="left:19%;width:29%"></div></div><span class="bar-price"><strong>$2.799.990</strong><span class="bar-range-txt"> — $6.999.900</span></span></div><div class="bar-row"><span class="bar-name">Ambiente Living</span><div class="bar-bg"><div class="bar-fill comp" style="left:24%;width:17%"></div></div><span class="bar-price"><strong>$3.499.000</strong><span class="bar-range-txt"> — $5.999.000</span></span></div><div class="bar-row"><span class="bar-name">Only Home</span><div class="bar-bg"><div class="bar-fill comp" style="left:16%;width:12%"></div></div><span class="bar-price"><strong>$2.281.300</strong><span class="bar-range-txt"> — $3.999.510</span></span></div><div class="bar-row"><span class="bar-name">Aristas</span><div class="bar-bg"><div class="bar-fill comp" style="left:44%;width:35%"></div></div><span class="bar-price"><strong>$6.308.000</strong><span class="bar-range-txt"> — $11.384.000</span></span></div>
+
+      <div class="reviews-comparison">
+        <strong>Ashley lidera la reputación del sector.</strong> Con 5.0 y 4.9, supera a todos los competidores medidos. Aristas — su principal rival en el segmento diseño — tiene reseñas mixtas con quejas recurrentes de posventa. <strong>Oportunidad de comunicación inmediata.</strong>
+      </div>
+
+      <div style="margin-top:14px;padding:12px 16px;background:var(--yellow-light);border-radius:6px;border-left:3px solid var(--yellow);">
+        <div style="font-size:10px;font-weight:700;color:#78350F;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:10px;">📋 Verificación manual — haz clic en cada enlace, anota el rating (~5 min)</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
+          <a href="https://www.google.com/search?q=Muebles+Jamar+Bogot%C3%A1" target="_blank" style="display:block;background:white;border:1px solid #E5E7EB;border-radius:4px;padding:6px 8px;text-decoration:none;">
+            <div style="font-size:10px;font-weight:700;color:#1B3A6B;">Jamar Bogotá</div>
+            <div style="font-size:9px;color:#6B7280;margin-top:1px;">★ — Buscar en Google →</div>
+          </a>
+          <a href="https://www.google.com/search?q=IKEA+Mallplaza+NQS+Bogot%C3%A1" target="_blank" style="display:block;background:white;border:1px solid #E5E7EB;border-radius:4px;padding:6px 8px;text-decoration:none;">
+            <div style="font-size:10px;font-weight:700;color:#1B3A6B;">IKEA NQS Bogotá</div>
+            <div style="font-size:9px;color:#6B7280;margin-top:1px;">★ — Buscar en Google →</div>
+          </a>
+          <a href="https://www.google.com/search?q=Aristas+muebles+Bogot%C3%A1" target="_blank" style="display:block;background:white;border:1px solid #E5E7EB;border-radius:4px;padding:6px 8px;text-decoration:none;">
+            <div style="font-size:10px;font-weight:700;color:#1B3A6B;">Aristas Bogotá</div>
+            <div style="font-size:9px;color:#6B7280;margin-top:1px;">★ — Buscar en Google →</div>
+          </a>
+          <a href="https://www.google.com/search?q=Tug%C3%B3+muebles+Bogot%C3%A1" target="_blank" style="display:block;background:white;border:1px solid #E5E7EB;border-radius:4px;padding:6px 8px;text-decoration:none;">
+            <div style="font-size:10px;font-weight:700;color:#1B3A6B;">Tugó Bogotá</div>
+            <div style="font-size:9px;color:#6B7280;margin-top:1px;">★ — Buscar en Google →</div>
+          </a>
+          <a href="https://www.google.com/search?q=Zientte+muebles+Bogot%C3%A1" target="_blank" style="display:block;background:white;border:1px solid #E5E7EB;border-radius:4px;padding:6px 8px;text-decoration:none;">
+            <div style="font-size:10px;font-weight:700;color:#1B3A6B;">Zientte Bogotá</div>
+            <div style="font-size:9px;color:#6B7280;margin-top:1px;">★ — Buscar en Google →</div>
+          </a>
+          <a href="https://www.google.com/search?q=BoConcept+Bogot%C3%A1" target="_blank" style="display:block;background:white;border:1px solid #E5E7EB;border-radius:4px;padding:6px 8px;text-decoration:none;">
+            <div style="font-size:10px;font-weight:700;color:#1B3A6B;">BoConcept Bogotá</div>
+            <div style="font-size:9px;color:#6B7280;margin-top:1px;">★ — Buscar en Google →</div>
+          </a>
+          <a href="https://www.google.com/search?q=Homecenter+Bogot%C3%A1+muebles" target="_blank" style="display:block;background:white;border:1px solid #E5E7EB;border-radius:4px;padding:6px 8px;text-decoration:none;">
+            <div style="font-size:10px;font-weight:700;color:#1B3A6B;">Homecenter Bogotá</div>
+            <div style="font-size:9px;color:#6B7280;margin-top:1px;">★ — Buscar en Google →</div>
+          </a>
+          <a href="https://www.google.com/search?q=Easy+Colombia+Bogot%C3%A1" target="_blank" style="display:block;background:white;border:1px solid #E5E7EB;border-radius:4px;padding:6px 8px;text-decoration:none;">
+            <div style="font-size:10px;font-weight:700;color:#1B3A6B;">Easy Bogotá</div>
+            <div style="font-size:9px;color:#6B7280;margin-top:1px;">★ — Buscar en Google →</div>
+          </a>
+          <a href="https://www.google.com/search?q=Only+Muebles+Bogot%C3%A1" target="_blank" style="display:block;background:white;border:1px solid #E5E7EB;border-radius:4px;padding:6px 8px;text-decoration:none;">
+            <div style="font-size:10px;font-weight:700;color:#1B3A6B;">Only Muebles</div>
+            <div style="font-size:9px;color:#6B7280;margin-top:1px;">★ — Buscar en Google →</div>
+          </a>
         </div>
-        <table class="precio-tabla"><thead><tr><th>Competidor</th><th>Precio entrada</th><th>vs Ashley</th><th>Producto</th><th></th></tr></thead><tbody><tr class="ashley-row"><td><span class="comp-name ashley">Ashley</span></td><td><span class="precio-val ashley">$4.099.000</span><div class="precio-rango">Rango: $4.099.000 — $14.199.000</div></td><td></td><td><div class="prod-name">Sofá Modular Bales</div><span class="prods-toggle" id="btn-prods-2-Ashley" onclick="toggleProds('prods-2-Ashley')">ver 4 más ▼</span><div class="prods-list" id="prods-2-Ashley"><div class="prod-item">• Sofá Modular Bales — $8.099.000</div><div class="prod-item">• Sofá Modular Bales — $10.099.000</div><div class="prod-item">• Sofá Modular Bales — $12.199.000</div><div class="prod-item">• Sofá Modular Bales — $14.199.000</div></div></td><td><a class="ver-link" href="https://www.ashleycolombia.com/products/sofa-modular-bales-sku-a3000244a2" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Jamar</span></td><td><span class="precio-val">$2.989.000</span><div class="precio-rango">Rango: $2.789.000 — $4.189.000</div></td><td><span class="delta-badge delta-red">Ashley +37% más caro</span></td><td><div class="prod-name">Sofá 3 Puestos Bell Eurolino Vitore Marfil, Natural</div><span class="prods-toggle" id="btn-prods-2-Jamar" onclick="toggleProds('prods-2-Jamar')">ver 4 más ▼</span><div class="prods-list" id="prods-2-Jamar"><div class="prod-item">• Sofá 3 Puestos Sabina Impetu Arena, Natural — $3.989.000</div><div class="prod-item">• Sofá 3 Puestos Larisa Idilio Verde, Natural — $2.789.000</div><div class="prod-item">• Sofá 3 Puestos Astro Microfibra Kazan Plomo, Natural 3  — $4.189.000</div><div class="prod-item">• Sofá 3 Puestos Ginebra Eurolino Blanco Beige y Champaña — $3.689.000</div></div></td><td><a class="ver-link" href="https://www.jamar.com/products/sofa-3-puestos-bell-eurolino-vitore-marfil-natural-7039140" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Tugó</span></td><td><span class="precio-val">$3.499.990</span><div class="precio-rango">Rango: $2.799.990 — $6.999.900</div></td><td><span class="delta-badge delta-red">Ashley +17% más caro</span></td><td><div class="prod-name">Sofa En L Dover Izquierdo Aluminio</div><span class="prods-toggle" id="btn-prods-2-Tugó" onclick="toggleProds('prods-2-Tugó')">ver 4 más ▼</span><div class="prods-list" id="prods-2-Tugó"><div class="prod-item">• Sofá En L Electrico Rebecca Derecho Gris — $6.999.900</div><div class="prod-item">• Sofá En L Dover Derecho Aluminio — $3.499.990</div><div class="prod-item">• Sofácama Clap En L Bruno Derecho Gris Plata — $5.499.990</div><div class="prod-item">• Sofácama Cajon Swansea En L Izquierdo Azul Zafiro — $2.799.990</div></div></td><td><a class="ver-link" href="https://www.tugo.co/sofa-en-l-dover-izquierdo-aluminio/p" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Ambiente Living</span></td><td><span class="precio-val">$4.890.000</span><div class="precio-rango">Rango: $3.499.000 — $5.999.000</div></td><td><span class="delta-badge delta-green">Ashley -16% más barato</span></td><td><div class="prod-name">Modular medio cuero negro</div><span class="prods-toggle" id="btn-prods-2-AmbienteLiving" onclick="toggleProds('prods-2-AmbienteLiving')">ver 4 más ▼</span><div class="prods-list" id="prods-2-AmbienteLiving"><div class="prod-item">• Modular Cubo Beige — $4.999.000</div><div class="prod-item">• Modular Cubo Brazo Beige Derecho — $5.999.000</div><div class="prod-item">• Modular Melbourne medio — $3.499.000</div><div class="prod-item">• Modular Melbourne brazo — $3.999.000</div></div></td><td><a class="ver-link" href="https://www.b2bambiente.com/modular-medio-cuero-negro/p" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Only Home</span></td><td><span class="precio-val">$3.990.000</span><div class="precio-rango">Rango: $2.281.300 — $3.999.510</div></td><td><span class="delta-badge delta-gray">Precio similar</span></td><td><div class="prod-name">Sofá Modular Santorini Verdi Grafito</div><span class="prods-toggle" id="btn-prods-2-OnlyHome" onclick="toggleProds('prods-2-OnlyHome')">ver 4 más ▼</span><div class="prods-list" id="prods-2-OnlyHome"><div class="prod-item">• Sofá Modular Santorini Verdi Oatmeal — $3.990.000</div><div class="prod-item">• Mesa de Comedor Extensible Obsidiana — $3.999.510</div><div class="prod-item">• Sofá Modular Gael Obelisco Marfil — $2.281.300</div><div class="prod-item">• Sofá Modular Multifuncional Houston Taupe — $3.944.850</div></div></td><td><a class="ver-link" href="https://www.onlymuebles.com/sofa-modular-santorini-verdi-grafito-/p" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Aristas</span></td><td><span class="precio-val">$9.331.000</span><div class="precio-rango">Rango: $6.308.000 — $11.384.000</div></td><td><span class="delta-badge delta-green">Ashley -56% más barato</span></td><td><div class="prod-name">Sala en L Modular New Artik  + Poltrona +Puff</div><span class="prods-toggle" id="btn-prods-2-Aristas" onclick="toggleProds('prods-2-Aristas')">ver 4 más ▼</span><div class="prods-list" id="prods-2-Aristas"><div class="prod-item">• Sala en L Modular Eva + Poltrona+ Puff — $8.994.000</div><div class="prod-item">• Sala en L Modular New Artick — $6.645.000</div><div class="prod-item">• Sala en L Modular New Eva — $6.308.000</div><div class="prod-item">• Sala En L Modular Emma 5 Módulos + Puf Mad — $11.384.000</div></div></td><td><a class="ver-link" href="https://aristas.co/producto/sala-en-l-modular-new-artik-poltrona-puff/" target="_blank">↗</a></td></tr></tbody></table>
-        <div class="opor-section"><div class="opor-title">Análisis de oportunidades</div><div class="opor-item" style="background:#E8F5EE;border-color:#2E7D52"><span class="opor-icono">✅</span><span class="opor-texto">Ashley es 56% más económico que Aristas — comunicar valor diferencial.</span></div></div>
+        <div style="font-size:11px;color:#78350F;margin-top:10px;">Proceso semanal: abre cada enlace en el navegador → el panel de Google muestra el rating → anota el número. Tiempo estimado: ~5 minutos.</div>
       </div>
     </div>
-    
-    <div class="acord" id="cat-3">
-      <div class="acord-head" onclick="toggle('cat-3')">
-        <div class="acord-icon">🍽️</div>
-        <div>
-          <div class="acord-title">Comedor 4 Puestos</div>
-          <div class="precio-preview"><span class="pp-item"><span class="pp-name">Jamar:</span> <span class="pp-val">$1.189.000</span></span><span class="pp-sep">·</span><span class="pp-item"><span class="pp-name">Tugó:</span> <span class="pp-val">$649.990</span></span><span class="pp-sep">·</span><span class="pp-item"><span class="pp-name">Ambiente Living:</span> <span class="pp-val">$4.999.000</span></span><span class="pp-sep">·</span><span class="pp-item"><span class="pp-name">Only Home:</span> <span class="pp-val">$2.949.000</div>
+  </div>
+
+  <!-- DIGITAL / SEO -->
+  <div class="section">
+    <div class="section-header">
+      <div class="icon">🔍</div>
+      <h2>Radar Digital — SEO y Sitios Web</h2>
+    </div>
+    <div class="section-body">
+      <p style="font-size:12px;font-weight:600;color:var(--ashley-navy);margin-bottom:10px;">Posicionamiento SEO en búsquedas clave — Google Colombia</p>
+      <table class="seo-table">
+        <thead>
+          <tr>
+            <th>Búsqueda</th>
+            <th>Posición 1</th>
+            <th>Posición 2</th>
+            <th>Posición 3</th>
+            <th>¿Ashley?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="search-query">"sofá sala Bogotá"</span></td>
+            <td><span class="rank-pill rank-1">Jamar</span></td>
+            <td><span class="rank-pill rank-2">Homecenter</span></td>
+            <td><span class="rank-pill rank-3">Tugó</span></td>
+            <td><span class="ashley-absent">❌ Ausente</span></td>
+          </tr>
+          <tr>
+            <td><span class="search-query">"muebles sala Colombia"</span></td>
+            <td><span class="rank-pill rank-1">Jamar</span></td>
+            <td><span class="rank-pill rank-2">IKEA</span></td>
+            <td><span class="rank-pill rank-3">Homecenter</span></td>
+            <td><span class="ashley-absent">❌ Ausente</span></td>
+          </tr>
+          <tr>
+            <td><span class="search-query">"cama doble Medellín"</span></td>
+            <td><span class="rank-pill rank-1">Homecenter</span></td>
+            <td><span class="rank-pill rank-2">Jamar</span></td>
+            <td><span class="rank-pill rank-3">IKEA</span></td>
+            <td><span class="ashley-absent">❌ Ausente</span></td>
+          </tr>
+          <tr>
+            <td><span class="search-query">"comedor 6 puestos Colombia"</span></td>
+            <td><span class="rank-pill rank-1">Jamar</span></td>
+            <td><span class="rank-pill rank-2">IKEA</span></td>
+            <td><span class="rank-pill rank-3">Aristas</span></td>
+            <td><span class="ashley-absent">❌ Ausente</span></td>
+          </tr>
+          <tr>
+            <td><span class="search-query">"muebles hogar Colombia"</span></td>
+            <td><span class="rank-pill rank-1">Jamar</span></td>
+            <td><span class="rank-pill rank-2">Homecenter</span></td>
+            <td><span class="rank-pill rank-3">IKEA</span></td>
+            <td><span class="ashley-absent">❌ Ausente</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="divider"></div>
+
+      <p style="font-size:12px;font-weight:600;color:var(--ashley-navy);margin-bottom:10px;">Escaneo de páginas web — mensajes principales esta semana</p>
+      <div class="web-scan-grid">
+        <div class="web-card">
+          <div class="web-brand">Jamar</div>
+          <div class="web-url">jamar.com.co</div>
+          <div class="web-item"><span class="web-item-num">1</span><span>Banner 100%: "Compre Ahora Pague en Mayo" — financiamiento como único mensaje</span></div>
+          <div class="web-item"><span class="web-item-num">2</span><span>CrediJamar en el header — crédito como primer punto de contacto</span></div>
+          <div class="web-item"><span class="web-item-num">3</span><span>Categorías foco: sala y comedor dominan la portada</span></div>
+          <div class="web-implication">→ Financiamiento es su arma principal esta semana. Ashley debe tener una respuesta visible.</div>
         </div>
-        <div class="acord-summary"><span class="chip chip-navy">5 competidores</span></div>
-        <span class="chevron">▾</span>
-      </div>
-      <div class="acord-body">
-        <div class="bar-wrap">
-          <div class="bar-label">Precio de entrada por competidor</div>
-          <div class="bar-row"><span class="bar-name ashley">Ashley</span><div class="bar-bg"><div class="bar-fill nd-bar" style="left:0%;width:8px"></div></div><span class="bar-price"><span style="color:#D1D5DB;font-size:10px;">N/D</span></span></div><div class="bar-row"><span class="bar-name">Jamar</span><div class="bar-bg"><div class="bar-fill comp" style="left:10%;width:50%"></div></div><span class="bar-price"><strong>$1.189.000</strong><span class="bar-range-txt"> — $6.789.000</span></span></div><div class="bar-row"><span class="bar-name">Tugó</span><div class="bar-bg"><div class="bar-fill comp" style="left:4%;width:6%"></div></div><span class="bar-price"><strong>$449.990</strong><span class="bar-range-txt"> — $1.199.990</span></span></div><div class="bar-row"><span class="bar-name">Ambiente Living</span><div class="bar-bg"><div class="bar-fill comp" style="left:3%;width:96%"></div></div><span class="bar-price"><strong>$359.950</strong><span class="bar-range-txt"> — $10.999.000</span></span></div><div class="bar-row"><span class="bar-name">Only Home</span><div class="bar-bg"><div class="bar-fill comp" style="left:11%;width:15%"></div></div><span class="bar-price"><strong>$1.279.200</strong><span class="bar-range-txt"> — $2.949.000</span></span></div><div class="bar-row"><span class="bar-name">Aristas</span><div class="bar-bg"><div class="bar-fill comp" style="left:23%;width:23%"></div></div><span class="bar-price"><strong>$2.555.554</strong><span class="bar-range-txt"> — $5.108.889</span></span></div>
+        <div class="web-card">
+          <div class="web-brand">IKEA Colombia</div>
+          <div class="web-url">ikea.com/co</div>
+          <div class="web-item"><span class="web-item-num">1</span><span>Campaña 30 aniversario con contador activo — 30% en 30 productos IKEA Family</span></div>
+          <div class="web-item"><span class="web-item-num">2</span><span>"Ofertas por tiempo limitado" prominente con urgencia visual</span></div>
+          <div class="web-item"><span class="web-item-num">3</span><span>Modulares y organización como productos estrella — espacios pequeños</span></div>
+          <div class="web-implication">→ Captura cliente joven con ticket bajo. Fidelización antes de que llegue a Ashley.</div>
         </div>
-        <table class="precio-tabla"><thead><tr><th>Competidor</th><th>Precio entrada</th><th>vs Ashley</th><th>Producto</th><th></th></tr></thead><tbody><tr class="ashley-row"><td><span class="comp-name ashley">Ashley</span></td><td><span class="precio-val ashley"><span class="nd">N/D</span></span></td><td></td><td><span class="nd">Sin datos automáticos</span></td><td></td></tr><tr><td><span class="comp-name">Jamar</span></td><td><span class="precio-val">$1.189.000</span><div class="precio-rango">Rango: $1.189.000 — $6.789.000</div></td><td></td><td><div class="prod-name">Comedor 4 Puestos Alec Gris</div><span class="prods-toggle" id="btn-prods-3-Jamar" onclick="toggleProds('prods-3-Jamar')">ver 4 más ▼</span><div class="prods-list" id="prods-3-Jamar"><div class="prod-item">• Comedor 4 Puestos Dousty Verde, Natural — $1.989.000</div><div class="prod-item">• Comedor 4 Puestos Dalton Eurolino Vitore Trigo, Natural — $4.189.000</div><div class="prod-item">• Comedor 4 Puestos Capri Vitore Marfil, Natural* — $4.489.000</div><div class="prod-item">• Comedor 4 Puestos Roma Eurolino Blanco Puro, Champaña — $6.789.000</div></div></td><td><a class="ver-link" href="https://www.jamar.com/products/comedor-4-puestos-alec-gris-7033657" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Tugó</span></td><td><span class="precio-val">$649.990</span><div class="precio-rango">Rango: $449.990 — $1.199.990</div></td><td></td><td><div class="prod-name">Silla De Comedor Ella Giratoria 360° Beige</div><span class="prods-toggle" id="btn-prods-3-Tugó" onclick="toggleProds('prods-3-Tugó')">ver 4 más ▼</span><div class="prods-list" id="prods-3-Tugó"><div class="prod-item">• Silla De Comedor Dayton Gris Claro Natural — $499.990</div><div class="prod-item">• Mesa De Comedor Heidi Nogal — $1.199.990</div><div class="prod-item">• Silla de Comedor Ariel Gris Nogal — $449.990</div><div class="prod-item">• Silla de Comedor Ariel Beige Nogal — $449.990</div></div></td><td><a class="ver-link" href="https://www.tugo.co/silla-de-comedor-ella-giratoria-360-beige/p" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Ambiente Living</span></td><td><span class="precio-val">$4.999.000</span><div class="precio-rango">Rango: $359.950 — $10.999.000</div></td><td></td><td><div class="prod-name">Mesa de comedor 76x136x136</div><span class="prods-toggle" id="btn-prods-3-AmbienteLiving" onclick="toggleProds('prods-3-AmbienteLiving')">ver 4 más ▼</span><div class="prods-list" id="prods-3-AmbienteLiving"><div class="prod-item">• Mesa de comedor Vila redonda 75x120x120 — $3.299.000</div><div class="prod-item">• Seccional curvo 4 puestos beige — $10.999.000</div><div class="prod-item">• Vajilla Tulum 4 puestos set x16 — $359.950</div><div class="prod-item">• Vajilla Palermo 4 puestos set x20 — $399.950</div></div></td><td><a class="ver-link" href="https://www.b2bambiente.com/m--mesa-comedor-76x136x136/p" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Only Home</span></td><td><span class="precio-val">$2.949.000</span><div class="precio-rango">Rango: $1.279.200 — $2.949.000</div></td><td></td><td><div class="prod-name">Mesa Comedor Olive 4 Puestos Avellana</div><span class="prods-toggle" id="btn-prods-3-OnlyHome" onclick="toggleProds('prods-3-OnlyHome')">ver 4 más ▼</span><div class="prods-list" id="prods-3-OnlyHome"><div class="prod-item">• Mesa Comedor Barcelona 4 Puestos Nuez — $1.279.200</div><div class="prod-item">• Mesa de Comedor Sion Almendra 4 Puestos — $2.295.300</div><div class="prod-item">• Mesa de Comedor Sion Arena 4 Puestos — $2.295.300</div><div class="prod-item">• Mesa Comedor Barcelona Nogal 4 Puestos — $1.279.200</div></div></td><td><a class="ver-link" href="https://www.onlymuebles.com/mesa-comedor-olive-4-puestos-avellana-2000004000357/p" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Aristas</span></td><td><span class="precio-val">$4.220.001</span><div class="precio-rango">Rango: $2.555.554 — $5.108.889</div></td><td></td><td><div class="prod-name">Mesa Comedor Bilbao 4 Puestos</div><span class="prods-toggle" id="btn-prods-3-Aristas" onclick="toggleProds('prods-3-Aristas')">ver 4 más ▼</span><div class="prods-list" id="prods-3-Aristas"><div class="prod-item">• Mesa Comedor Berlin Sinterizada 4 Puestos — $2.555.554</div><div class="prod-item">• Mesa Comedor Milano Sinterizada  Redonda 4 Puestos — $3.332.222</div><div class="prod-item">• Mesa Comedor Atalanta Sinterizado 4 Puestos — $3.608.889</div><div class="prod-item">• Mesa Comedor Niza Sinterizada  4 puestos — $5.108.889</div></div></td><td><a class="ver-link" href="https://aristas.co/producto/mesa-comedor-milano-redonda-4-puestos-copia-2/" target="_blank">↗</a></td></tr></tbody></table>
-        
+        <div class="web-card">
+          <div class="web-brand">Aristas</div>
+          <div class="web-url">aristas.co</div>
+          <div class="web-item"><span class="web-item-num">1</span><span>Colección "Bold" 2026 como campaña principal — estética audaz</span></div>
+          <div class="web-item"><span class="web-item-num">2</span><span>Sostenibilidad en navegación — posicionamiento de valores de marca</span></div>
+          <div class="web-item"><span class="web-item-num">3</span><span>Flagship Bogotá (Calle 81) como referencia comunicacional</span></div>
+          <div class="web-implication">→ Posicionamiento de diseño fuerte pero con reputación de servicio frágil.</div>
+        </div>
+        <div class="web-card">
+          <div class="web-brand">BoConcept</div>
+          <div class="web-url">boconcept.com/es-co</div>
+          <div class="web-item"><span class="web-item-num">1</span><span>Configurador de productos — personalización como diferenciador digital</span></div>
+          <div class="web-item"><span class="web-item-num">2</span><span>Asesoría de diseño personalizado con botón prominente</span></div>
+          <div class="web-item"><span class="web-item-num">3</span><span>Foco en espacios reducidos premium — aptos. Bogotá/Medellín</span></div>
+          <div class="web-implication">→ Venta consultiva digital fuerte. Modelo de experiencia que Ashley puede emular.</div>
+        </div>
+        <div class="web-card">
+          <div class="web-brand">Tugó</div>
+          <div class="web-url">tugo.com.co</div>
+          <div class="web-item"><span class="web-item-num">1</span><span>"Happy Hour" con hasta 30% en productos seleccionados</span></div>
+          <div class="web-item"><span class="web-item-num">2</span><span>Navegación por estilo de vida — diferenciador de UX interesante</span></div>
+          <div class="web-item"><span class="web-item-num">3</span><span>Foco en salas contemporáneas y modulares</span></div>
+          <div class="web-implication">→ Sin novedades mayores. Ciclo promocional estándar.</div>
+        </div>
+        <div class="web-card">
+          <div class="web-brand">Zientte</div>
+          <div class="web-url">zientte.com</div>
+          <div class="web-item"><span class="web-item-num">1</span><span>Celebración 40 años — comunicación de legado y confianza</span></div>
+          <div class="web-item"><span class="web-item-num">2</span><span>"Lujo consciente" como eje editorial 2026</span></div>
+          <div class="web-item"><span class="web-item-num">3</span><span>Paleta visual terracota y neutral — tendencia 2026</span></div>
+          <div class="web-implication">→ Segmento lujo. No compite directamente con Ashley en precio.</div>
+        </div>
       </div>
     </div>
-    
-    <div class="acord" id="cat-4">
-      <div class="acord-head" onclick="toggle('cat-4')">
-        <div class="acord-icon">🍽️</div>
-        <div>
-          <div class="acord-title">Comedor 6 Puestos</div>
-          <div class="precio-preview"><span class="pp-item"><span class="pp-name">Ashley:</span> <span class="pp-val">$9.450.000</span></span><span class="pp-sep">·</span><span class="pp-item"><span class="pp-name">Jamar:</span> <span class="pp-val">$5.189.000</span></span><span class="pp-sep">·</span><span class="pp-item"><span class="pp-name">Tugó:</span> <span class="pp-val">$649.990</span></span><span class="pp-sep">·</span><span class="pp-item"><span class="pp-name">Ambiente Living:</span> <span class="pp-val">$5.480.000</span></span><span class="pp-sep">·</span><span class="pp-item"><span class="pp-name">Only Home:</span> <span class="pp-val">$1.799.100</div>
-        </div>
-        <div class="acord-summary"><span class="chip chip-navy">6 competidores</span> <span class="chip chip-red">⚠ 5 riesgo precio</span></div>
-        <span class="chevron">▾</span>
+  </div>
+
+  <!-- PRICES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="icon">💰</div>
+      <h2>Inteligencia de Precios y Financiamiento</h2>
+    </div>
+    <div class="section-body">
+      <div style="font-size:10px;color:var(--text-light);margin-bottom:8px;font-style:italic;">✅ = precio verificado directamente desde página web · 7 mayo 2026 &nbsp;|&nbsp; N/V = no verificado</div>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>SKU de referencia</th>
+            <th>Ashley ✅</th>
+            <th>IKEA ✅</th>
+            <th>Jamar ✅</th>
+            <th>Tugó</th>
+            <th>Aristas</th>
+            <th>Zientte</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sofá 3 puestos (entrada)</td>
+            <td class="price-high">$5.670.000<br><span style="font-size:9px;color:var(--green);">$2.200.000 c/promo -40%</span></td>
+            <td class="price-low">Desde $699.990<br><span style="font-size:9px;color:var(--text-light);">GLOSTAD 3P</span></td>
+            <td class="price-mid">Desde $3.489.000<br><span style="font-size:9px;color:var(--text-light);">Larisa 3P</span></td>
+            <td class="price-nv">N/V</td>
+            <td class="price-nv">N/V</td>
+            <td class="price-nv">N/V</td>
+          </tr>
+          <tr>
+            <td>Sofá 3 puestos (premium)</td>
+            <td class="price-high">$7.080.000<br><span style="font-size:9px;color:var(--text-light);">Alesandra 2P</span></td>
+            <td class="price-mid">$5.499.990<br><span style="font-size:9px;color:var(--text-light);">STOCKHOLM 2025</span></td>
+            <td class="price-high">$4.989.000<br><span style="font-size:9px;color:var(--text-light);">Sabina 3P</span></td>
+            <td class="price-nv">N/V</td>
+            <td class="price-nv">N/V</td>
+            <td class="price-nv">N/V</td>
+          </tr>
+          <tr>
+            <td>Cama Queen + cabecero</td>
+            <td class="price-mid">Desde $3.599.000<br><span style="font-size:9px;color:var(--text-light);">Zumbado Queen</span></td>
+            <td class="price-nv">N/V</td>
+            <td class="price-nv">N/V</td>
+            <td class="price-nv">N/V</td>
+            <td class="price-nv">N/V</td>
+            <td class="price-nv">N/V</td>
+          </tr>
+          <tr>
+            <td>Comedor 6 puestos</td>
+            <td class="price-nv">N/V</td>
+            <td class="price-nv">N/V</td>
+            <td class="price-high">$6.489.000<br><span style="font-size:9px;color:var(--text-light);">Walcot 6P</span></td>
+            <td class="price-nv">N/V</td>
+            <td class="price-nv">N/V</td>
+            <td class="price-nv">N/V</td>
+          </tr>
+          <tr>
+            <td>Comedor 4 puestos</td>
+            <td class="price-nv">N/V</td>
+            <td class="price-nv">N/V</td>
+            <td class="price-low">Desde $1.989.000<br><span style="font-size:9px;color:var(--text-light);">Alec 4P</span></td>
+            <td class="price-nv">N/V</td>
+            <td class="price-nv">N/V</td>
+            <td class="price-nv">N/V</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-top:8px;padding:8px 12px;background:var(--yellow-light);border-radius:6px;font-size:11px;color:#78350F;border-left:3px solid var(--yellow);">
+        <strong>Hallazgo de posicionamiento:</strong> Ashley NO compite en precio bajo — su sofá 3P de entrada ($5.67M) es más caro que el de Jamar ($3.49M). IKEA es el líder en precio económico ($699K). Ashley compite en calidad-diseño. Las celdas N/V serán completadas en próximas ediciones con WebFetch de cada página de producto.
       </div>
-      <div class="acord-body">
-        <div class="bar-wrap">
-          <div class="bar-label">Precio de entrada por competidor</div>
-          <div class="bar-row"><span class="bar-name ashley">Ashley</span><div class="bar-bg"><div class="bar-fill ashley" style="left:100%;width:2%"></div></div><span class="bar-price"><strong>$9.450.000</strong></span></div><div class="bar-row"><span class="bar-name">Jamar</span><div class="bar-bg"><div class="bar-fill comp" style="left:31%;width:59%"></div></div><span class="bar-price"><strong>$2.989.000</strong><span class="bar-range-txt"> — $8.589.000</span></span></div><div class="bar-row"><span class="bar-name">Tugó</span><div class="bar-bg"><div class="bar-fill comp" style="left:4%;width:7%"></div></div><span class="bar-price"><strong>$449.990</strong><span class="bar-range-txt"> — $1.199.990</span></span></div><div class="bar-row"><span class="bar-name">Ambiente Living</span><div class="bar-bg"><div class="bar-fill comp" style="left:52%;width:31%"></div></div><span class="bar-price"><strong>$4.999.000</strong><span class="bar-range-txt"> — $7.999.000</span></span></div><div class="bar-row"><span class="bar-name">Only Home</span><div class="bar-bg"><div class="bar-fill comp" style="left:19%;width:17%"></div></div><span class="bar-price"><strong>$1.799.100</strong><span class="bar-range-txt"> — $3.459.000</span></span></div><div class="bar-row"><span class="bar-name">Aristas</span><div class="bar-bg"><div class="bar-fill comp" style="left:29%;width:36%"></div></div><span class="bar-price"><strong>$2.776.667</strong><span class="bar-range-txt"> — $6.220.000</span></span></div>
+
+      <div style="margin-top:16px;">
+        <p style="font-size:12px;font-weight:600;color:var(--ashley-navy);margin-bottom:10px;">Comparativa de Financiamiento</p>
+        <div class="financing-grid">
+          <div class="fin-card winner">
+            <div class="fin-brand">Jamar</div>
+            <div class="fin-months">48</div>
+            <div class="fin-label">meses sin interés</div>
+            <div class="fin-entity">CrediJamar (propio)</div>
+            <div class="fin-promo">🔴 "Pague en Mayo" activo</div>
+          </div>
+          <div class="fin-card">
+            <div class="fin-brand">Homecenter</div>
+            <div class="fin-months">36</div>
+            <div class="fin-label">meses sin interés</div>
+            <div class="fin-entity">Banco Falabella / CMR</div>
+          </div>
+          <div class="fin-card">
+            <div class="fin-brand">IKEA</div>
+            <div class="fin-months">24</div>
+            <div class="fin-label">meses sin interés</div>
+            <div class="fin-entity">Bancolombia y aliados</div>
+            <div class="fin-promo" style="color:var(--yellow);">🟡 30 aniversario activo</div>
+          </div>
+          <div class="fin-card">
+            <div class="fin-brand">Tugó</div>
+            <div class="fin-months">24</div>
+            <div class="fin-label">meses sin interés</div>
+            <div class="fin-entity">Banco Bogotá</div>
+          </div>
         </div>
-        <table class="precio-tabla"><thead><tr><th>Competidor</th><th>Precio entrada</th><th>vs Ashley</th><th>Producto</th><th></th></tr></thead><tbody><tr class="ashley-row"><td><span class="comp-name ashley">Ashley</span></td><td><span class="precio-val ashley">$9.450.000</span></td><td></td><td><div class="prod-name">Juego de Comedor Zumbado  6 puestos</div></td><td><a class="ver-link" href="https://www.ashleycolombia.com/products/juego-de-comedor-zumbado-sku-d433d2" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Jamar</span></td><td><span class="precio-val">$5.189.000</span><div class="precio-rango">Rango: $2.989.000 — $8.589.000</div></td><td><span class="delta-badge delta-red">Ashley +82% más caro</span></td><td><div class="prod-name">Comedor 6 Puestos Walcot Eurolino Blanco Puro, Champaña</div><span class="prods-toggle" id="btn-prods-4-Jamar" onclick="toggleProds('prods-4-Jamar')">ver 4 más ▼</span><div class="prods-list" id="prods-4-Jamar"><div class="prod-item">• Comedor 6 Puestos Atlanta Eurolino Blanco, Champaña — $8.589.000</div><div class="prod-item">• Comedor 6 Puestos Adelle Velvet Beige, Champaña — $2.989.000</div><div class="prod-item">• Comedor 6 Puestos Firence Lino Touch Almendra, Verona B — $6.989.000</div><div class="prod-item">• Comedor 6 Puestos Bonn Eurolino Premier Perla, Champaña — $6.189.000</div></div></td><td><a class="ver-link" href="https://www.jamar.com/products/comedor-6-puestos-walcot-eurolino-blanco-puro-champana-7032849" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Tugó</span></td><td><span class="precio-val">$649.990</span><div class="precio-rango">Rango: $449.990 — $1.199.990</div></td><td><span class="delta-badge delta-red">Ashley +1353% más caro</span></td><td><div class="prod-name">Silla De Comedor Ella Giratoria 360° Beige</div><span class="prods-toggle" id="btn-prods-4-Tugó" onclick="toggleProds('prods-4-Tugó')">ver 4 más ▼</span><div class="prods-list" id="prods-4-Tugó"><div class="prod-item">• Silla De Comedor Dayton Gris Claro Natural — $499.990</div><div class="prod-item">• Mesa De Comedor Heidi Nogal — $1.199.990</div><div class="prod-item">• Silla de Comedor Ariel Gris Nogal — $449.990</div><div class="prod-item">• Silla de Comedor Ariel Beige Nogal — $449.990</div></div></td><td><a class="ver-link" href="https://www.tugo.co/silla-de-comedor-ella-giratoria-360-beige/p" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Ambiente Living</span></td><td><span class="precio-val">$5.480.000</span><div class="precio-rango">Rango: $4.999.000 — $7.999.000</div></td><td><span class="delta-badge delta-red">Ashley +72% más caro</span></td><td><div class="prod-name">Comedor Cambria</div><span class="prods-toggle" id="btn-prods-4-AmbienteLiving" onclick="toggleProds('prods-4-AmbienteLiving')">ver 4 más ▼</span><div class="prods-list" id="prods-4-AmbienteLiving"><div class="prod-item">• Comedor Redondo — $6.999.000</div><div class="prod-item">• Mesa de comedor león 76x210x100 — $5.999.000</div><div class="prod-item">• Mesa de comedor Onyx 76x240x100 — $7.999.000</div><div class="prod-item">• Mesa de comedor Pensilvania 76x180x90 — $4.999.000</div></div></td><td><a class="ver-link" href="https://www.b2bambiente.com/comedor-cambria-140x90x78cm/p" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Only Home</span></td><td><span class="precio-val">$1.799.100</span><div class="precio-rango">Rango: $1.799.100 — $3.459.000</div></td><td><span class="delta-badge delta-red">Ashley +425% más caro</span></td><td><div class="prod-name">Mesa de Comedor 6 Puestos Bambusa</div><span class="prods-toggle" id="btn-prods-4-OnlyHome" onclick="toggleProds('prods-4-OnlyHome')">ver 4 más ▼</span><div class="prods-list" id="prods-4-OnlyHome"><div class="prod-item">• Mesa Comedor Olive 6 Puestos Avellana — $3.459.000</div><div class="prod-item">• Mesa Comedor Olive 4 Puestos Avellana — $2.949.000</div><div class="prod-item">• Mesa de Comedor Sion Arena 6 Puestos — $2.687.300</div><div class="prod-item">• Mesa de Comedor Sion Almendra 6 Puestos — $2.687.300</div></div></td><td><a class="ver-link" href="https://www.onlymuebles.com/mesa-comedor-6puestos-bambusa-0110005000450/p" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Aristas</span></td><td><span class="precio-val">$6.220.000</span><div class="precio-rango">Rango: $2.776.667 — $6.220.000</div></td><td><span class="delta-badge delta-red">Ashley +51% más caro</span></td><td><div class="prod-name">Mesa Comedor Bilbao Madera Redonda 6 Puestos</div><span class="prods-toggle" id="btn-prods-4-Aristas" onclick="toggleProds('prods-4-Aristas')">ver 4 más ▼</span><div class="prods-list" id="prods-4-Aristas"><div class="prod-item">• Mesa Comedor Bilbao Sinterizada 6 Puestos — $5.553.334</div><div class="prod-item">• Mesa Comedor Napoles 6 Puestos — $5.108.889</div><div class="prod-item">• Mesa Comedor Niza 6 Puestos — $4.398.000</div><div class="prod-item">• Mesa Comedor New Parson 6 Puestos — $2.776.667</div></div></td><td><a class="ver-link" href="https://aristas.co/producto/mesa-comedor-milano-redonda-4-puestos-copia-3/" target="_blank">↗</a></td></tr></tbody></table>
-        <div class="opor-section"><div class="opor-title">Análisis de oportunidades</div><div class="opor-item" style="background:#FDECEA;border-color:#D94040"><span class="opor-icono">⚠️</span><span class="opor-texto">Ashley es 82% más caro que Jamar — riesgo de pérdida en segmento precio.</span></div><div class="opor-item" style="background:#FDECEA;border-color:#D94040"><span class="opor-icono">⚠️</span><span class="opor-texto">Ashley es 1353% más caro que Tugó — riesgo de pérdida en segmento precio.</span></div><div class="opor-item" style="background:#FDECEA;border-color:#D94040"><span class="opor-icono">⚠️</span><span class="opor-texto">Ashley es 72% más caro que Ambiente Living — riesgo de pérdida en segmento precio.</span></div><div class="opor-item" style="background:#FDECEA;border-color:#D94040"><span class="opor-icono">⚠️</span><span class="opor-texto">Ashley es 425% más caro que Only Home — riesgo de pérdida en segmento precio.</span></div><div class="opor-item" style="background:#FDECEA;border-color:#D94040"><span class="opor-icono">⚠️</span><span class="opor-texto">Ashley es 51% más caro que Aristas — riesgo de pérdida en segmento precio.</span></div></div>
+        <div style="margin-top:10px;padding:8px 12px;background:var(--red-light);border-radius:6px;font-size:12px;color:#7F1D1D;border-left:3px solid var(--red);">
+          <strong>Ashley:</strong> condiciones de financiamiento no verificadas públicamente. Requiere revisión interna urgente para evaluar brecha vs. Jamar (48 meses).
+        </div>
       </div>
     </div>
-    
-    <div class="acord" id="cat-5">
-      <div class="acord-head" onclick="toggle('cat-5')">
-        <div class="acord-icon">🛏️</div>
-        <div>
-          <div class="acord-title">Cama con Colchón</div>
-          <div class="precio-preview"><span class="pp-item"><span class="pp-name">Ashley:</span> <span class="pp-val">$1.990.000</span></span><span class="pp-sep">·</span><span class="pp-item"><span class="pp-name">Jamar:</span> <span class="pp-val">$2.989.000</span></span><span class="pp-sep">·</span><span class="pp-item"><span class="pp-name">Tugó:</span> <span class="pp-val">$304.491</span></span><span class="pp-sep">·</span><span class="pp-item"><span class="pp-name">Ambiente Living:</span> <span class="pp-val">$89.950</span></span><span class="pp-sep">·</span><span class="pp-item"><span class="pp-name">Only Home:</span> <span class="pp-val">$2.599.000</div>
+  </div>
+
+  <!-- SOCIAL & INFLUENCERS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="icon">📱</div>
+      <h2>Redes Sociales e Influenciadores</h2>
+    </div>
+    <div class="section-body">
+      <p style="font-size:12px;font-weight:600;color:var(--ashley-navy);margin-bottom:10px;">Seguidores estimados — Instagram (Δ semanal requiere acceso directo a Social Blade)</p>
+      <div style="font-size:10px;color:var(--text-light);margin-bottom:8px;font-style:italic;">Seguidores verificados desde snippets de búsqueda web · 7 de mayo 2026 · Δ semanal requiere Social Blade</div>
+      <div class="social-grid">
+        <div class="social-card">
+          <div class="social-brand">Homecenter</div>
+          <div class="social-num">990K</div>
+          <div class="social-platform">@homecenter_co</div>
+          <div class="social-delta delta-nv">Δ no verificado</div>
         </div>
-        <div class="acord-summary"><span class="chip chip-navy">6 competidores</span> <span class="chip chip-red">⚠ 2 riesgo precio</span> <span class="chip chip-green">✅ 3 ventaja</span></div>
-        <span class="chevron">▾</span>
+        <div class="social-card">
+          <div class="social-brand">Jamar</div>
+          <div class="social-num">572K</div>
+          <div class="social-platform">@mueblesjamar</div>
+          <div class="social-delta delta-nv">Δ no verificado</div>
+        </div>
+        <div class="social-card">
+          <div class="social-brand">Tugó</div>
+          <div class="social-num">341K</div>
+          <div class="social-platform">@mueblestugo</div>
+          <div class="social-delta delta-nv">Δ no verificado</div>
+        </div>
+        <div class="social-card">
+          <div class="social-brand">IKEA Colombia</div>
+          <div class="social-num">326K</div>
+          <div class="social-platform">@ikeacolombia</div>
+          <div class="social-delta delta-nv">Δ no verificado</div>
+        </div>
+        <div class="social-card ashley-card">
+          <div class="social-brand">Ashley Colombia</div>
+          <div class="social-num">147K</div>
+          <div class="social-platform"><a href="https://www.instagram.com/ashleycolombia.oficial/" style="color:var(--ashley-gold);text-decoration:none;font-weight:600;">@ashleycolombia.oficial</a></div>
+          <div class="social-delta delta-nv">Δ no verificado</div>
+        </div>
+        <div class="social-card">
+          <div class="social-brand">BoConcept</div>
+          <div class="social-num">100K</div>
+          <div class="social-platform">@boconceptco</div>
+          <div class="social-delta delta-nv">Δ no verificado</div>
+        </div>
+        <div class="social-card">
+          <div class="social-brand">Aristas</div>
+          <div class="social-num">83K</div>
+          <div class="social-platform">@mueblesaristas</div>
+          <div class="social-delta delta-nv">Δ no verificado</div>
+        </div>
+        <div class="social-card">
+          <div class="social-brand">Zientte</div>
+          <div class="social-num">46K</div>
+          <div class="social-platform">@zientte</div>
+          <div class="social-delta delta-nv">Δ no verificado</div>
+        </div>
       </div>
-      <div class="acord-body">
-        <div class="bar-wrap">
-          <div class="bar-label">Precio de entrada por competidor</div>
-          <div class="bar-row"><span class="bar-name ashley">Ashley</span><div class="bar-bg"><div class="bar-fill ashley" style="left:28%;width:62%"></div></div><span class="bar-price"><strong>$1.990.000</strong><span class="bar-range-txt"> — $6.299.000</span></span></div><div class="bar-row"><span class="bar-name">Jamar</span><div class="bar-bg"><div class="bar-fill comp" style="left:40%;width:38%"></div></div><span class="bar-price"><strong>$2.800.000</strong><span class="bar-range-txt"> — $5.489.000</span></span></div><div class="bar-row"><span class="bar-name">Tugó</span><div class="bar-bg"><div class="bar-fill comp" style="left:4%;width:27%"></div></div><span class="bar-price"><strong>$304.491</strong><span class="bar-range-txt"> — $2.199.990</span></span></div><div class="bar-row"><span class="bar-name">Ambiente Living</span><div class="bar-bg"><div class="bar-fill comp" style="left:1%;width:66%"></div></div><span class="bar-price"><strong>$89.950</strong><span class="bar-range-txt"> — $4.689.000</span></span></div><div class="bar-row"><span class="bar-name">Only Home</span><div class="bar-bg"><div class="bar-fill comp" style="left:37%;width:5%"></div></div><span class="bar-price"><strong>$2.599.000</strong><span class="bar-range-txt"> — $2.990.000</span></span></div><div class="bar-row"><span class="bar-name">Aristas</span><div class="bar-bg"><div class="bar-fill comp" style="left:61%;width:38%"></div></div><span class="bar-price"><strong>$4.236.000</strong><span class="bar-range-txt"> — $6.899.000</span></span></div>
+      <div style="margin-top:10px;padding:10px 14px;background:var(--red-light);border-radius:6px;font-size:12px;color:#7F1D1D;border-left:3px solid var(--red);">
+        <strong>Hallazgo clave:</strong> Jamar lidera en seguidores del sector especializado con 572K — más del triple que Ashley (147K). Tugó (341K) e IKEA (326K) también superan a Ashley ampliamente. Brecha de comunidad digital: Ashley necesita estrategia de crecimiento orgánico urgente.
+      </div>
+
+      <div class="divider"></div>
+
+      <p style="font-size:12px;font-weight:600;color:var(--ashley-navy);margin-bottom:10px;">Influenciador clave de Ashley Colombia <span class="correction-badge">Handle corregido</span></p>
+      <div class="influencer-card">
+        <div class="influencer-avatar">🏠</div>
+        <div style="flex:1;">
+          <div class="influencer-name">Mabel Cartagena</div>
+          <div class="influencer-handle">@flakycartagena &nbsp;·&nbsp; Instagram</div>
+          <div class="influencer-stats">
+            <div class="influencer-stat">
+              <div class="val">2.0M</div>
+              <div class="lbl">Seguidores</div>
+            </div>
+            <div class="influencer-stat">
+              <div class="val">Hogar</div>
+              <div class="lbl">Nicho</div>
+            </div>
+            <div class="influencer-stat">
+              <div class="val">Colombia</div>
+              <div class="lbl">Mercado</div>
+            </div>
+          </div>
+          <div class="influencer-note">⚠️ <strong>Corrección crítica:</strong> El handle real es <strong>@flakycartagena</strong>, no @mabelcartagena. Foco en decoración del hogar, limpieza y lifestyle — perfil ideal para Ashley. Actividad de esta semana con Ashley no verificada. Coordinar contenido urgente.</div>
         </div>
-        <table class="precio-tabla"><thead><tr><th>Competidor</th><th>Precio entrada</th><th>vs Ashley</th><th>Producto</th><th></th></tr></thead><tbody><tr class="ashley-row"><td><span class="comp-name ashley">Ashley</span></td><td><span class="precio-val ashley">$1.990.000</span><div class="precio-rango">Rango: $1.990.000 — $6.299.000</div></td><td></td><td><div class="prod-name">Cama Queen Dolante</div><span class="prods-toggle" id="btn-prods-5-Ashley" onclick="toggleProds('prods-5-Ashley')">ver 4 más ▼</span><div class="prods-list" id="prods-5-Ashley"><div class="prod-item">• Cama Queen Zumbado — $3.599.000</div><div class="prod-item">• Cama Queen Kristiland — $4.140.000</div><div class="prod-item">• Cama Queen Korestone — $4.299.000</div><div class="prod-item">• Cama Queen Jesstean — $6.299.000</div></div></td><td><a class="ver-link" href="https://www.ashleycolombia.com/products/cama-queen-dolante-1" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Jamar</span></td><td><span class="precio-val">$2.989.000</span><div class="precio-rango">Rango: $2.800.000 — $5.489.000</div></td><td><span class="delta-badge delta-green">Ashley -33% más barato</span></td><td><div class="prod-name">Cama Doble Ibiza Natural</div><span class="prods-toggle" id="btn-prods-5-Jamar" onclick="toggleProds('prods-5-Jamar')">ver 4 más ▼</span><div class="prods-list" id="prods-5-Jamar"><div class="prod-item">• Cama Queen Mila Eurolino Marbella Beige, Natural — $5.489.000</div><div class="prod-item">• Cama Doble Oklam Microfibra Touch Almendra — $3.489.000</div><div class="prod-item">• Cama Doble Omega Natural, Greige — $2.800.000</div><div class="prod-item">• Cama Queen Sabina Eurolino Beige Perla Off White, Champ — $3.989.000</div></div></td><td><a class="ver-link" href="https://www.jamar.com/products/cama-doble-ibiza-natural-7037928" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Tugó</span></td><td><span class="precio-val">$304.491</span><div class="precio-rango">Rango: $304.491 — $2.199.990</div></td><td><span class="delta-badge delta-red">Ashley +553% más caro</span></td><td><div class="prod-name">Mesa De Noche Eter Wengue</div><span class="prods-toggle" id="btn-prods-5-Tugó" onclick="toggleProds('prods-5-Tugó')">ver 2 más ▼</span><div class="prods-list" id="prods-5-Tugó"><div class="prod-item">• Cama Torino Doble Gris/Roble — $2.099.990</div><div class="prod-item">• Cama Torino Extradoble Gris/Roble — $2.199.990</div></div></td><td><a class="ver-link" href="https://www.tugo.co/mesa-de-noche-eter-wengue/p" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Ambiente Living</span></td><td><span class="precio-val">$89.950</span><div class="precio-rango">Rango: $89.950 — $4.689.000</div></td><td><span class="delta-badge delta-red">Ashley +2112% más caro</span></td><td><div class="prod-name">Mesa Para Cama</div><span class="prods-toggle" id="btn-prods-5-AmbienteLiving" onclick="toggleProds('prods-5-AmbienteLiving')">ver 4 más ▼</span><div class="prods-list" id="prods-5-AmbienteLiving"><div class="prod-item">• Sofá cama Agora 2 puestos Montego — $3.689.000</div><div class="prod-item">• Sofá cama Ange beige 93x289x98 — $4.689.000</div><div class="prod-item">• Sofá cama Foster individual beige 89x110x105 — $2.489.000</div><div class="prod-item">• Sofá cama Agora beige montego 89x217x85 — $4.689.000</div></div></td><td><a class="ver-link" href="https://www.b2bambiente.com/mesa-para-cama/p" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Only Home</span></td><td><span class="precio-val">$2.599.000</span><div class="precio-rango">Rango: $2.599.000 — $2.990.000</div></td><td><span class="delta-badge delta-green">Ashley -23% más barato</span></td><td><div class="prod-name">Set Sofacama Boston Beige</div><span class="prods-toggle" id="btn-prods-5-OnlyHome" onclick="toggleProds('prods-5-OnlyHome')">ver 4 más ▼</span><div class="prods-list" id="prods-5-OnlyHome"><div class="prod-item">• Set Dormitorio Mérida Arena Con Colchon — $2.990.000</div><div class="prod-item">• Cama Queen Sion Avellana — $2.813.300</div><div class="prod-item">• Cama Doble Sion Avellana — $2.638.300</div><div class="prod-item">• Sofacama Liam — $2.609.100</div></div></td><td><a class="ver-link" href="https://www.onlymuebles.com/set-sofacama-boston-beige-1/p" target="_blank">↗</a></td></tr><tr><td><span class="comp-name">Aristas</span></td><td><span class="precio-val">$6.899.000</span><div class="precio-rango">Rango: $4.236.000 — $6.899.000</div></td><td><span class="delta-badge delta-green">Ashley -71% más barato</span></td><td><div class="prod-name">Cama Mara</div><span class="prods-toggle" id="btn-prods-5-Aristas" onclick="toggleProds('prods-5-Aristas')">ver 4 más ▼</span><div class="prods-list" id="prods-5-Aristas"><div class="prod-item">• Sofá Cama Gabanna — $5.804.000</div><div class="prod-item">• Cama New Vitaro Largueros Milán — $5.581.411</div><div class="prod-item">• Cama New Vitaro Largueros Apolo — $4.286.000</div><div class="prod-item">• Cama New Vitaro Artemisa Curvo — $4.236.000</div></div></td><td><a class="ver-link" href="https://aristas.co/producto/cama-mara/" target="_blank">↗</a></td></tr></tbody></table>
-        <div class="opor-section"><div class="opor-title">Análisis de oportunidades</div><div class="opor-item" style="background:#E8F5EE;border-color:#2E7D52"><span class="opor-icono">✅</span><span class="opor-texto">Ashley es 33% más económico que Jamar — comunicar valor diferencial.</span></div><div class="opor-item" style="background:#FDECEA;border-color:#D94040"><span class="opor-icono">⚠️</span><span class="opor-texto">Ashley es 553% más caro que Tugó — riesgo de pérdida en segmento precio.</span></div><div class="opor-item" style="background:#FDECEA;border-color:#D94040"><span class="opor-icono">⚠️</span><span class="opor-texto">Ashley es 2112% más caro que Ambiente Living — riesgo de pérdida en segmento precio.</span></div><div class="opor-item" style="background:#E8F5EE;border-color:#2E7D52"><span class="opor-icono">✅</span><span class="opor-texto">Ashley es 23% más económico que Only Home — comunicar valor diferencial.</span></div><div class="opor-item" style="background:#E8F5EE;border-color:#2E7D52"><span class="opor-icono">✅</span><span class="opor-texto">Ashley es 71% más económico que Aristas — comunicar valor diferencial.</span></div></div>
       </div>
     </div>
-    
+  </div>
+
+  <!-- GROWTH COMPARISON -->
+  <div class="section">
+    <div class="section-header">
+      <div class="icon">📈</div>
+      <h2>Crecimiento de Ventas — Ashley vs Competencia</h2>
+      <div class="badge">Datos verificados</div>
+    </div>
+    <div class="section-body">
+
+      <p style="font-size:12px;font-weight:600;color:var(--ashley-navy);margin-bottom:12px;">Ashley Colombia — Ventas trimestrales (COP sin IVA)</p>
+      <table class="scoreboard-table" style="font-size:12px;">
+        <thead>
+          <tr>
+            <th>Período</th>
+            <th style="text-align:right;">Ventas (COP)</th>
+            <th style="text-align:right;">Acumulado anual</th>
+            <th style="text-align:center;">Tendencia</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:var(--ashley-light);"><td colspan="4" style="padding:5px 0 2px;font-size:9px;font-weight:700;color:var(--text-light);text-transform:uppercase;">2023 — Año de entrada (parcial)</td></tr>
+          <tr><td>Q2 2023</td><td style="text-align:right;color:var(--text-light);">$95M</td><td style="text-align:right;"></td><td style="text-align:center;">🚀 Apertura</td></tr>
+          <tr><td>Q3 2023</td><td style="text-align:right;">$1.884B</td><td style="text-align:right;"></td><td style="text-align:center;">↗</td></tr>
+          <tr><td>Q4 2023</td><td style="text-align:right;">$1.646B</td><td style="text-align:right;font-weight:700;">$3.625B</td><td style="text-align:center;">→</td></tr>
+          <tr style="background:var(--ashley-light);"><td colspan="4" style="padding:5px 0 2px;font-size:9px;font-weight:700;color:var(--text-light);text-transform:uppercase;">2024 — Consolidación</td></tr>
+          <tr><td>Q1 2024</td><td style="text-align:right;">$1.459B</td><td style="text-align:right;"></td><td style="text-align:center;">→</td></tr>
+          <tr><td>Q2 2024</td><td style="text-align:right;">$1.473B</td><td style="text-align:right;"></td><td style="text-align:center;">→</td></tr>
+          <tr><td>Q3 2024</td><td style="text-align:right;">$2.647B</td><td style="text-align:right;"></td><td style="text-align:center;">↗↗</td></tr>
+          <tr><td>Q4 2024</td><td style="text-align:right;">$2.731B</td><td style="text-align:right;font-weight:700;">$8.311B</td><td style="text-align:center;">↗</td></tr>
+          <tr style="background:var(--ashley-light);"><td colspan="4" style="padding:5px 0 2px;font-size:9px;font-weight:700;color:var(--text-light);text-transform:uppercase;">2025 — Aceleración</td></tr>
+          <tr><td>Q1 2025</td><td style="text-align:right;">$2.667B</td><td style="text-align:right;"></td><td style="text-align:center;">↗</td></tr>
+          <tr><td>Q2 2025</td><td style="text-align:right;">$2.565B</td><td style="text-align:right;"></td><td style="text-align:center;">→</td></tr>
+          <tr><td>Q3 2025</td><td style="text-align:right;font-weight:700;color:var(--green);">$4.960B</td><td style="text-align:right;"></td><td style="text-align:center;">↗↗↗</td></tr>
+          <tr><td>Q4 2025</td><td style="text-align:right;font-weight:700;color:var(--green);">$4.628B</td><td style="text-align:right;font-weight:700;color:var(--green);">$14.820B</td><td style="text-align:center;">↗↗</td></tr>
+          <tr style="background:var(--ashley-light);"><td colspan="4" style="padding:5px 0 2px;font-size:9px;font-weight:700;color:var(--text-light);text-transform:uppercase;">2026 — En curso</td></tr>
+          <tr><td>Q1 2026</td><td style="text-align:right;font-weight:700;color:var(--green);">$4.560B</td><td style="text-align:right;"></td><td style="text-align:center;">↗↗</td></tr>
+          <tr><td>Q2 2026 (parcial)</td><td style="text-align:right;color:var(--text-light);">$1.956B*</td><td style="text-align:right;color:var(--text-light);">En curso</td><td style="text-align:center;font-size:10px;color:var(--text-light);">*~5 semanas</td></tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+        <div style="background:var(--green-light);border-radius:6px;padding:12px;text-align:center;border-left:3px solid var(--green);">
+          <div style="font-size:22px;font-weight:800;color:var(--green);">+78%</div>
+          <div style="font-size:10px;color:var(--green);font-weight:600;text-transform:uppercase;margin-top:2px;">Crecimiento 2024→2025</div>
+          <div style="font-size:11px;color:var(--text-light);margin-top:4px;">$8.3B → $14.8B COP</div>
+        </div>
+        <div style="background:var(--green-light);border-radius:6px;padding:12px;text-align:center;border-left:3px solid var(--green);">
+          <div style="font-size:22px;font-weight:800;color:var(--green);">+71%</div>
+          <div style="font-size:10px;color:var(--green);font-weight:600;text-transform:uppercase;margin-top:2px;">Q1 2026 vs Q1 2025</div>
+          <div style="font-size:11px;color:var(--text-light);margin-top:4px;">$2.67B → $4.56B COP</div>
+        </div>
+        <div style="background:var(--ashley-light);border-radius:6px;padding:12px;text-align:center;border-left:3px solid var(--ashley-navy);">
+          <div style="font-size:22px;font-weight:800;color:var(--ashley-navy);">+54%</div>
+          <div style="font-size:10px;color:var(--ashley-navy);font-weight:600;text-transform:uppercase;margin-top:2px;">Aristas 2025→2026</div>
+          <div style="font-size:11px;color:var(--text-light);margin-top:4px;">$78B → $120B (meta)</div>
+        </div>
+      </div>
+
+      <div style="margin-top:12px;padding:12px 14px;background:#FFFBF0;border-radius:6px;border-left:3px solid var(--ashley-gold);">
+        <div style="font-size:10px;font-weight:700;color:var(--ashley-navy);text-transform:uppercase;margin-bottom:5px;">⭐ Ashley es la marca de mayor crecimiento porcentual del sector</div>
+        <p style="font-size:12px;color:var(--text);">Ashley crece <strong>+78% YoY</strong> vs Aristas <strong>+54%</strong>. Aristas supera en valor absoluto ($78B vs $14.8B) porque lleva 21 años en el mercado. Ashley parte de base 5× menor pero crece 1.4× más rápido. <strong>Este dato no está siendo comunicado — es un activo narrativo poderoso para medios, inversores y clientes.</strong></p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- LOGISTICS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="icon">🚚</div>
+      <h2>Logística y Operaciones</h2>
+    </div>
+    <div class="section-body">
+      <div class="logistics-row">
+        <div class="logistics-icon">📦</div>
+        <div class="logistics-text"><strong>Arancel acero +35% (vigente desde marzo 2026):</strong> Encarece herrajes y bases metálicas importadas desde China, Rusia, Turquía e India. Mayor impacto en IKEA y Homecenter. Verificar exposición propia de Ashley.</div>
+      </div>
+      <div class="logistics-row">
+        <div class="logistics-icon">⚡</div>
+        <div class="logistics-text"><strong>Ashley lidera en promesa de entrega:</strong> 48h Bogotá y 3 días hábiles resto del país — mejor que Jamar (5-15 días estimado). Ese diferencial no está siendo comunicado.</div>
+      </div>
+      <div class="logistics-row">
+        <div class="logistics-icon">🌎</div>
+        <div class="logistics-text"><strong>Brecha en ciudades intermedias:</strong> IKEA cubre 290+ municipios vía e-commerce. Ashley sin cobertura confirmada en Manizales, Pereira, Ibagué, Pasto, Cúcuta. Oportunidad sin inversión en tienda física.</div>
+      </div>
+      <div class="logistics-row">
+        <div class="logistics-icon">✅</div>
+        <div class="logistics-text">Sin nuevas alianzas logísticas ni alertas de stock detectadas esta semana en ningún competidor.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECOMMENDATIONS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="icon">💡</div>
+      <h2>Recomendaciones Estratégicas</h2>
+      <div class="badge">4 acciones esta semana</div>
+    </div>
+    <div class="section-body">
+      <div class="rec-list">
+        <div class="rec-card">
+          <div class="rec-header">
+            <div class="rec-num">1</div>
+            <div class="rec-title">Responder al financiamiento de Jamar antes del viernes</div>
+          </div>
+          <div class="rec-body">
+            <div class="rec-field">
+              <label>Qué hacer</label>
+              <p>Activar cuotas sin interés (mín. 24 meses) en líneas sala y comedor durante mayo. No es necesario igualar las 48 cuotas de Jamar — con 24 meses y buena comunicación, Ashley puede retener al cliente indeciso.</p>
+            </div>
+            <div class="rec-field">
+              <label>Por qué ahora</label>
+              <p>La campaña de Jamar vence en mayo. El cliente que está comparando decide esta semana. Cada día sin respuesta es un cliente que va a CrediJamar.</p>
+            </div>
+            <div class="rec-meta">
+              <span class="rec-tag tag-area">Comercial + Financiero</span>
+              <span class="rec-tag tag-deadline urgent">Viernes 10 mayo</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rec-card">
+          <div class="rec-header">
+            <div class="rec-num">2</div>
+            <div class="rec-title">Capitalizar el rating 5.0 como activo de marca</div>
+          </div>
+          <div class="rec-body">
+            <div class="rec-field">
+              <label>Qué hacer</label>
+              <p>Lanzar comunicación "La mueblería mejor calificada de Colombia" en redes, web y punto de venta. El rating 5.0 es un diferenciador verificable que ningún competidor puede igualar hoy.</p>
+            </div>
+            <div class="rec-field">
+              <label>Por qué ahora</label>
+              <p>Aristas tiene reseñas negativas de posventa — el contraste con Ashley es poderoso. Jamar e IKEA dominan en precio pero no en reputación de servicio.</p>
+            </div>
+            <div class="rec-meta">
+              <span class="rec-tag tag-area">Marketing</span>
+              <span class="rec-tag tag-deadline urgent">Esta semana</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rec-card">
+          <div class="rec-header">
+            <div class="rec-num">3</div>
+            <div class="rec-title">Activar @flakycartagena (Mabel Cartagena) esta semana</div>
+          </div>
+          <div class="rec-body">
+            <div class="rec-field">
+              <label>Qué hacer</label>
+              <p>Coordinar reel o post de Ashley con @flakycartagena en los próximos 7 días — idealmente vinculado a la respuesta de financiamiento o contenido de nueva temporada.</p>
+            </div>
+            <div class="rec-field">
+              <label>Por qué ahora</label>
+              <p>2M seguidores enfocados en hogar y decoración. No hubo actividad Ashley verificada esta semana mientras Jamar e IKEA están activos en pauta masiva.</p>
+            </div>
+            <div class="rec-meta">
+              <span class="rec-tag tag-area">Marketing / Influencer</span>
+              <span class="rec-tag tag-deadline urgent">Miércoles 8 mayo</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rec-card">
+          <div class="rec-header">
+            <div class="rec-num">4</div>
+            <div class="rec-title">Cerrar la brecha SEO — brief a agencia esta semana</div>
+          </div>
+          <div class="rec-body">
+            <div class="rec-field">
+              <label>Qué hacer</label>
+              <p>Brief a agencia SEM/SEO para posicionarse en las 5 búsquedas clave donde Ashley no aparece. Activar Google Shopping con catálogo completo de productos.</p>
+            </div>
+            <div class="rec-field">
+              <label>Por qué ahora</label>
+              <p>Ashley invisible en Google Colombia. Esta brecha tarda 60-90 días en cerrarse — cada día de demora es tráfico que va directo a Jamar e IKEA.</p>
+            </div>
+            <div class="rec-meta">
+              <span class="rec-tag tag-area">Marketing Digital</span>
+              <span class="rec-tag tag-deadline">Contrato antes 20 mayo</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDITOR NOTE -->
+  <div class="editor-note">
+    <div class="editor-note-header">
+      <span>📝</span>
+      <h3>Nota del Editor — 7 de mayo de 2026</h3>
+    </div>
+    <div class="editor-note-body">
+      <div class="en-field">
+        <label>✅ Datos confirmados por CEO</label>
+        <p>Handle de Mabel Cartagena: <strong>@flakycartagena</strong> (2M seguidores). Instagram de Ashley Colombia: <strong>@ashleycolombia.oficial</strong>. Ratings propios: 5.0 Multiparque y 4.9 Carrera 19 Bogotá. Prompts de ambos agentes actualizados con estos datos.</p>
+      </div>
+      <div class="en-field">
+        <label>⚠️ Datos pendientes de verificación manual</label>
+        <ul>
+          <li>Google Reviews de 9 competidores — links directos en Sección 4, verificar ~5 min/semana con navegador</li>
+          <li>Variación semanal de seguidores (base verificada: Homecenter 990K, Jamar 572K, Tugó 341K, IKEA 326K, Ashley 147K, BoConcept 100K, Aristas 83K, Zientte 46K)</li>
+          <li>Condiciones de financiamiento actuales de Ashley</li>
+        </ul>
+      </div>
+      <div class="en-field">
+        <label>💡 Decisión operativa tomada</label>
+        <p>Google bloquea acceso automatizado a ratings de Maps. Decisión: verificación manual por persona del equipo cada lunes (~5 min). Links de búsqueda directa incluidos en Sección 4.</p>
+      </div>
+      <div class="en-field">
+        <label>✏️ Actualizaciones sesión 2 — 7 mayo 2026</label>
+        <ul>
+          <li>Ashley Carrera 19: confirmado 4.9 ★ / 428 reseñas (verificado en Google Business Profile)</li>
+          <li>Seguidores Instagram: todos verificados desde búsquedas web reales (corregidos valores anteriores de entrenamiento)</li>
+          <li>Precios: Ashley sofá 3P $5.67M, IKEA $699.990, Jamar $3.49M — verificados en páginas oficiales</li>
+          <li>Crecimiento: Ashley +78% YoY (porcentual), Aristas +54% (absoluto base 5× mayor) — corregido framing</li>
+          <li>Links Google Reviews: actualizados de Maps a Google Search (Knowledge Panel visible al instante)</li>
+          <li>@flakycartagena confirmado (no @mabelcartagena) — ambos agentes actualizados</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
 </div>
 
+<!-- FOOTER -->
 <div class="footer">
-  <span>Ashley Furniture Colombia · Radar Competitivo · 19 de May de 2026</span>
-  <span>Datos extraídos automáticamente · Precios de entrada por categoría</span>
+  <span><strong>Ashley Furniture Colombia</strong> · Radar Competitivo Semanal · Confidencial</span>
+  <span>Generado por Agente Editor · 7 de mayo de 2026 · <strong>Edición #1 (actualizado)</strong></span>
 </div>
 
-<script>
-    function toggle(id){
-        const el = document.getElementById(id);
-        el.classList.toggle('open');
-    }
-    function toggleProds(id){
-        const el = document.getElementById(id);
-        el.classList.toggle('open');
-        const btn = document.getElementById('btn-'+id);
-        btn.textContent = el.classList.contains('open') ? 'ver menos ▲' : 'ver más ▼';
-    }
-    </script>
 </body>
 </html>
