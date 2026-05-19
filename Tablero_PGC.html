@@ -1537,6 +1537,20 @@ function cbBuildCtx() {
     return '  ' + p + ':\n' + (lines || '    (sin datos)');
   }).join('\n');
 
+  // Transacciones individuales — últimos 2 meses completos
+  const ultDos = PERIODOS.slice(-2);
+  const txDetalle = ultDos.map(p => {
+    const txs = TXNS.filter(t => t.fp === p).sort((a, b) => a.v - b.v);
+    const gastos = txs.filter(t => t.v < 0).map(t =>
+      '    ' + t.f + ' | ' + t.d + ' | $' + fmt(-t.v) + ' | ' + t.cat + ' | ' + t.src
+    ).join('\n');
+    const ingresos = txs.filter(t => t.v > 0).map(t =>
+      '    ' + t.f + ' | ' + t.d + ' | +$' + fmt(t.v) + ' | ' + t.cat
+    ).join('\n');
+    return '  ' + p + ' — GASTOS (' + txs.filter(t=>t.v<0).length + ' transacciones):\n' + (gastos||'    ninguno') +
+      '\n  ' + p + ' — INGRESOS:\n' + (ingresos||'    ninguno');
+  }).join('\n\n');
+
   // Categorías históricas totales
   const catsHist = CAT_LABS.map((l, i) => '  • ' + l + ': $' + fmt(CAT_VALS[i])).join('\n');
 
@@ -1549,16 +1563,17 @@ function cbBuildCtx() {
   const proy = PROY_LABS.map((l, i) => '  Gasto ' + l + ': ' + PROY_VALS[i] + ' años').join('\n');
 
   return 'Eres Nirvana, asistente financiero personal, amable y paciente. Hablas en español sencillo.\n' +
-    'Tienes acceso a datos financieros detallados: transacciones individuales, beneficiarios por nombre, categorías por mes.\n' +
+    'Tienes acceso a datos financieros MUY detallados: cada transacción individual con descripción exacta del comercio, monto, fecha, categoría y fuente (Amex o banco).\n' +
     'REGLA FUNDAMENTAL: SIEMPRE responde con los datos disponibles. Nunca digas que no tienes información.\n' +
-    '- Si preguntan por una persona (Alejandra, Julio, enfermero, etc.): búscala en BENEFICIARIOS POR MES y muestra los montos.\n' +
-    '- Si preguntan por un mes o categoría: usa CATEGORÍAS POR MES.\n' +
-    '- Si preguntan cuántas transacciones: usa los conteos del historial mensual.\n' +
+    '- Si preguntan qué compró, en qué tienda o con qué tarjeta: usa TRANSACCIONES INDIVIDUALES (tienes el detalle exacto).\n' +
+    '- Si preguntan por una persona (Alejandra, Julio, enfermero, etc.): búscala en BENEFICIARIOS POR MES y TRANSACCIONES.\n' +
+    '- Si preguntan cuántas transacciones, en qué gastó, cuánto fue en Amex: tienes el dato exacto.\n' +
     'Respuestas concisas con números. Usa "usted" con la titular. Montos en MXN.\n\n' +
     '=== HISTORIAL MENSUAL (12 meses, con conteo de transacciones) ===\n' + hist + '\n' +
     'Promedio gasto últimos 3 meses: $' + fmt(avg3) + ' MXN\n\n' +
     '=== CATEGORÍAS POR MES (últimos 3 meses) ===\n' + catsMes + '\n\n' +
     '=== BENEFICIARIOS POR MES — nombres exactos (últimos 3 meses, top 20) ===\n' + tercs + '\n\n' +
+    '=== TRANSACCIONES INDIVIDUALES — últimos 2 meses (fecha | descripción | monto | categoría | fuente) ===\n' + txDetalle + '\n\n' +
     '=== CATEGORÍAS HISTÓRICAS (total acumulado) ===\n' + catsHist + '\n\n' +
     '=== PORTAFOLIO ===\n' + cbHist + '\n' +
     'No líquido INBUMAX BF-3: $12,467,076 MXN | TOTAL: $' + fmt(totalPort) + ' MXN\n\n' +
