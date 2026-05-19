@@ -1530,7 +1530,7 @@ function cbBuildCtx() {
     if (!tMap[k]) tMap[k] = {t: r.terc, c: r.cat, $: 0, n: 0};
     tMap[k].$ += r.total; tMap[k].n += r.n;
   }));
-  const allT = Object.values(tMap).sort((a,b)=>b.$-a.$).slice(0,50)
+  const allT = Object.values(tMap).sort((a,b)=>b.$-a.$).slice(0,100)
     .map(r => r.t + '[' + r.c + ']:$' + N(r.$) + '(' + r.n + 'tx)').join('\n');
 
   // 4. Transacciones últimos 2 meses (compacto)
@@ -1547,8 +1547,10 @@ function cbBuildCtx() {
     '\nRend.%/mes prom: '+rPct.toFixed(4)+'% | Rend.est/mes: $'+N(rMes)+
     ' | 2 meses: $'+N(rMes*2)+' | 12 meses: $'+N(rMes*12);
 
-  // 6. Categorías históricas totales y proyección
-  const cH = CAT_LABS.map((l,i)=>l+':$'+N(CAT_VALS[i])).join(' | ');
+  // 6. Categorías históricas — top 20 agregadas de todos los meses
+  const catMap2 = {};
+  Object.values(CATS_POR_MES).forEach(cats => Object.entries(cats).forEach(([c,v]) => { catMap2[c] = (catMap2[c]||0) + v; }));
+  const cH = Object.entries(catMap2).sort((a,b)=>b[1]-a[1]).slice(0,20).map(([c,v])=>c+':$'+N(v)).join(' | ');
   const proy = PROY_LABS.map((l,i)=>l+':'+PROY_VALS[i]+'años').join(' | ');
 
   return 'Eres Nirvana, asistente financiero de la titular de este tablero. Español, conciso, profesional.\n'+
