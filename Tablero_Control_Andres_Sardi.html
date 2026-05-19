@@ -1469,7 +1469,7 @@ function printInforme(){
 #cb-panel{position:fixed;bottom:94px;right:24px;width:360px;height:520px;background:#fff;border-radius:18px;box-shadow:0 8px 36px rgba(0,0,0,.22);display:none;flex-direction:column;z-index:9001;overflow:hidden;font-family:'Segoe UI',Arial,sans-serif;}
 #cb-panel.cb-open{display:flex;}
 #cb-head{background:#1B3A6B;color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;}
-#cb-head span{font-weight:700;font-size:15px;font-family:Georgia,'Times New Roman',serif;letter-spacing:.3px;}
+#cb-head span{font-weight:300;font-size:13px;font-family:'Segoe UI',Arial,sans-serif;letter-spacing:4px;text-transform:uppercase;}
 #cb-head small{display:block;font-size:11px;opacity:.75;margin-top:2px;}
 #cb-close{background:none;border:none;color:#fff;font-size:20px;cursor:pointer;line-height:1;padding:0 4px;}
 #cb-sugs{padding:8px 10px;display:flex;flex-wrap:wrap;gap:5px;border-bottom:1px solid #eef0f6;}
@@ -1497,10 +1497,10 @@ function printInforme(){
     <button id="cb-close" onclick="cbToggle()">✕</button>
   </div>
   <div id="cb-sugs">
+    <button class="cb-sug" onclick="cbSug(this)">¿Cuánto cuesta mi papá al mes?</button>
+    <button class="cb-sug" onclick="cbSug(this)">¿Quién recibe nómina?</button>
     <button class="cb-sug" onclick="cbSug(this)">¿Cuánto hay en total?</button>
-    <button class="cb-sug" onclick="cbSug(this)">¿Cuál es el flujo mensual?</button>
     <button class="cb-sug" onclick="cbSug(this)">¿Cuáles son los mayores gastos?</button>
-    <button class="cb-sug" onclick="cbSug(this)">¿Cuánto tiempo duran los fondos?</button>
   </div>
   <div id="cb-msgs"></div>
   <div id="cb-inp-row">
@@ -1520,7 +1520,7 @@ function cbToggle() {
   const p = document.getElementById('cb-panel');
   if (cbIsOpen) {
     p.classList.add('cb-open');
-    if (cbHistory.length === 0) cbAddBubble('ai', '¡Hola! Soy Nirvana, tu asistente financiero. Puedo responder preguntas sobre los saldos, flujos y gastos de las dos empresas. ¿En qué te ayudo?');
+    if (cbHistory.length === 0) cbAddBubble('ai', '¡Hola! Soy Nirvana 💼 Tengo acceso a todas las transacciones de JUANAMMBU y La Perojosa — más de 10,000 movimientos desde 2021. Puedo decirte cuánto cuesta tu papá al mes, quién recibe nómina, cuáles son los mayores gastos, y mucho más. ¿En qué te ayudo?');
     setTimeout(() => document.getElementById('cb-inp').focus(), 60);
   } else {
     p.classList.remove('cb-open');
@@ -1544,53 +1544,70 @@ function cbSug(btn) {
 
 function cbBuildCtx() {
   const fmt = v => Math.round(v).toLocaleString('es-CO');
-  const totalSaldo = JUA.balance + PER.balance;
-  const totalFlujo = JUA.flujo_net_12m + PER.flujo_net_12m;
+  const allP = D.meses;
+  const n = allP.length;
 
-  // Últimos 12 meses JUANAMMBU
-  const nJ = JUA.meses.length;
-  const juaHist = JUA.meses.slice(-12).map((m, i) => {
-    const idx = nJ - 12 + i;
-    return '  ' + m + ': ingreso $' + fmt(JUA.ingresos[idx]) + ' | gasto $' + fmt(JUA.gastos[idx]) + ' | flujo $' + fmt(JUA.flujo[idx]);
+  // Categorías por mes desde TXN
+  const catMes = {};
+  TXN.forEach(t => {
+    const p = t[0], cat = t[4], amt = t[5];
+    if (!catMes[p]) catMes[p] = {};
+    catMes[p][cat] = (catMes[p][cat] || 0) + amt;
+  });
+
+  // Mapa de beneficiarios/pagos desde descripciones TXN
+  const bMap = {};
+  TXN.forEach(t => {
+    const k = t[3] + '§' + t[4];
+    if (!bMap[k]) bMap[k] = { d: t[3], c: t[4], $: 0, n: 0 };
+    bMap[k].$ += t[5]; bMap[k].n++;
+  });
+  const benef = Object.values(bMap).sort((a,b) => b.$-a.$).slice(0,80)
+    .map(b => b.d+'['+b.c+']:$'+fmt(b.$)+'('+b.n+'tx)').join('\n');
+
+  // Historial mensual 12m
+  const hist = allP.slice(-12).map((p, i) => {
+    const idx = n - 12 + i;
+    return p+'|ing$'+fmt(D.ingresos[idx])+'|gas$'+fmt(D.gastos[idx])+'|flu$'+fmt(D.flujo[idx]);
   }).join('\n');
 
-  // Últimos 12 meses LA PEROJOSA
-  const nP = PER.meses.length;
-  const perHist = PER.meses.slice(-12).map((m, i) => {
-    const idx = nP - 12 + i;
-    return '  ' + m + ': ingreso $' + fmt(PER.ingresos[idx]) + ' | gasto $' + fmt(PER.gastos[idx]) + ' | flujo $' + fmt(PER.flujo[idx]);
+  // Categorías por mes 24m (top 8)
+  const cMes = allP.slice(-24).map(p => {
+    const cats = catMes[p] || {};
+    return p+': '+Object.entries(cats).sort((a,b)=>b[1]-a[1]).slice(0,8).map(([c,v])=>c+'=$'+fmt(v)).join('|');
   }).join('\n');
 
-  const jCats = JUA.cat_labels.map((l, i) => '  • ' + l + ': $' + fmt(JUA.cat_values[i]) + ' COP (total histórico)').join('\n');
-  const pCats = PER.cat_labels.map((l, i) => '  • ' + l + ': $' + fmt(PER.cat_values[i]) + ' COP (total histórico)').join('\n');
+  // Transacciones recientes 2 meses (top 30 por monto)
+  const txs = allP.slice(-2).map(p => {
+    const rows = TXN.filter(t => t[0]===p).sort((a,b)=>b[5]-a[5]).slice(0,30);
+    return p+':\n'+rows.map(t => t[1]+'|'+t[3]+'|$'+fmt(t[5])+'|'+t[4]+'|'+t[2]).join('\n');
+  }).join('\n\n');
 
-  return 'Eres Nirvana, la asistente financiera personal de confianza del titular de este tablero. Hablas en español con un tono cercano, cálido y profesional — como un asesor de confianza que explica las finanzas de forma clara.\n' +
-    'Tienes acceso completo a los datos financieros de las dos empresas: JUANAMMBU SAS y La Perojosa SAS.\n' +
-    'CÓMO RESPONDER:\n' +
-    '- Sé cálido y directo. Usa frases como "Con gusto le explico", "Revisando sus datos...", "Me da gusto comentarle que...".\n' +
-    '- Da los números importantes pero nárralos en contexto (ej: "Este mes JUANAMMBU tuvo un flujo positivo de...").\n' +
-    '- Usa emojis con moderación para hacer la respuesta más visual (💼 💰 📊 ✅ 🏦).\n' +
-    '- Si hay algo positivo (flujo positivo, saldo creciente), menciónalo con entusiasmo.\n' +
-    '- Respuestas de 3-6 líneas máximo. Narra los datos, no los listes en bruto.\n' +
-    '- NUNCA digas que no tienes la información — siempre tienes algo útil que decir.\n' +
-    'Montos en pesos colombianos (COP). Usa "usted" con el titular.\n\n' +
-    '=== JUANAMMBU SAS ===\n' +
-    'Saldo actual: $' + fmt(JUA.balance) + ' COP\n' +
-    'Ingreso promedio mensual (12m): $' + fmt(JUA.avg_ing_12m) + ' COP\n' +
-    'Gasto promedio mensual (12m): $' + fmt(JUA.avg_gas_12m) + ' COP\n' +
-    'Flujo neto mensual promedio: $' + fmt(JUA.flujo_net_12m) + ' COP\n' +
-    'Historial últimos 12 meses:\n' + juaHist + '\n' +
-    'Categorías de gasto (histórico total):\n' + jCats + '\n\n' +
-    '=== LA PEROJOSA SAS ===\n' +
-    'Saldo actual: $' + fmt(PER.balance) + ' COP\n' +
-    'Ingreso promedio mensual (12m): $' + fmt(PER.avg_ing_12m) + ' COP\n' +
-    'Gasto promedio mensual (12m): $' + fmt(PER.avg_gas_12m) + ' COP\n' +
-    'Flujo neto mensual promedio: $' + fmt(PER.flujo_net_12m) + ' COP\n' +
-    'Historial últimos 12 meses:\n' + perHist + '\n' +
-    'Categorías de gasto (histórico total):\n' + pCats + '\n\n' +
-    '=== TOTALES COMBINADOS ===\n' +
-    'Saldo total: $' + fmt(totalSaldo) + ' COP (~$' + (totalSaldo / 4200).toFixed(0) + ' USD)\n' +
-    'Flujo neto mensual combinado: $' + fmt(totalFlujo) + ' COP';
+  // Totales históricos por categoría
+  const catTot = {};
+  TXN.forEach(t => { catTot[t[4]] = (catTot[t[4]]||0) + t[5]; });
+  const topCats = Object.entries(catTot).sort((a,b)=>b[1]-a[1]).slice(0,20)
+    .map(([c,v]) => c+':$'+fmt(v)).join(' | ');
+
+  return 'Eres Nirvana, la asistente financiera personal de confianza de Pablo Sardi. Pablo supervisa las finanzas de su padre Andrés Sardi, quien tiene Alzheimer. Hablas en español con un tono cálido, cercano y paciente — como una amiga que sabe mucho de finanzas.\n'+
+    'Tienes acceso COMPLETO a todos los movimientos de JUANAMMBU SAS y La Perojosa SAS — 10,059 transacciones ene 2021 – abr 2026.\n'+
+    'CÓMO RESPONDER:\n'+
+    '- Sé cálida y empática. Usa frases como "Con gusto te explico", "Claro que sí", "Revisando los datos...".\n'+
+    '- Da los números importantes pero explícalos en contexto, de forma simple.\n'+
+    '- Usa emojis con moderación (💼 💰 📊 ✅ 🏦).\n'+
+    '- Respuestas de 3-6 líneas máximo. Narra los datos, no los listes en bruto.\n'+
+    '- NUNCA digas que no tienes la información — siempre tienes algo útil que decir.\n'+
+    'COSTO PAPÁ: Para "¿cuánto cuesta el papá?", suma Nómina/Empleados + Salud/Médico + Farmacia + Supermercados/Mercado de los últimos 12m, divide entre 12, y muestra el desglose sencillo por categoría.\n'+
+    'Montos en pesos colombianos (COP). Usa "te" con Pablo.\n\n'+
+    '[HISTORIAL 12m — periodo|ingresos|gastos|flujo]\n'+hist+'\n\n'+
+    '[CATEGORÍAS POR MES 24m — top8]\n'+cMes+'\n\n'+
+    '[TRANSACCIONES RECIENTES — últimos 2 meses — fecha|desc|monto|cat|empresa]\n'+txs+'\n\n'+
+    '[BENEFICIARIOS HISTÓRICOS top80 — desc[cat]:$total(#tx)]\n'+benef+'\n\n'+
+    '[CATEGORÍAS HISTÓRICAS TOTALES top20]\n'+topCats+'\n\n'+
+    '[SALDOS ACTUALES]\n'+
+    'JUANAMMBU: $'+fmt(JUA.balance)+' | La Perojosa: $'+fmt(PER.balance)+' | TOTAL: $'+fmt(JUA.balance+PER.balance)+' COP (~$'+((JUA.balance+PER.balance)/4200).toFixed(0)+' USD)\n'+
+    'JUA prom 12m: ing$'+fmt(JUA.avg_ing_12m)+' gas$'+fmt(JUA.avg_gas_12m)+' flujo$'+fmt(JUA.flujo_net_12m)+'\n'+
+    'PER prom 12m: ing$'+fmt(PER.avg_ing_12m)+' gas$'+fmt(PER.avg_gas_12m)+' flujo$'+fmt(PER.flujo_net_12m);
 }
 
 async function cbSend() {
@@ -1622,7 +1639,7 @@ async function cbSend() {
     });
     const d = await res.json();
     loader.remove();
-    const reply = d.reply || 'No se pudo obtener respuesta.';
+    const reply = d.reply || ('⚠️ Error: ' + (d.error || 'respuesta vacía') + (d.detail ? ' — ' + JSON.stringify(d.detail).slice(0,120) : ''));
     cbAddBubble('ai', reply);
     cbHistory.push({ role: 'assistant', content: reply });
   } catch (e) {
