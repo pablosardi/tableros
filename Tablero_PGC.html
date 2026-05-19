@@ -1505,112 +1505,64 @@ function cbSug(btn) {
 
 function cbBuildCtx() {
   const n = PERIODOS.length;
-  const fmt = v => Math.round(v).toLocaleString('es-MX');
-  const avg3 = Math.round(GASTO_REAL.slice(-3).reduce((a, b) => a + b, 0) / 3);
-  const totalPort = Math.round(FC_DATA[0] * 1e6);
+  const N = v => Math.round(v).toLocaleString('es-MX');
 
-  // Últimos 12 meses: totales
+  // 1. Resumen mensual — 12 meses (compacto)
   const hist = PERIODOS.slice(-12).map((p, i) => {
     const idx = n - 12 + i;
-    const txCount = TXNS.filter(t => t.fp === p).length;
-    return '  ' + p + ': gasto $' + fmt(GASTO_REAL[idx]) +
-      ' (Amex $' + fmt(GASTOS_AMEX[idx]) + ' + banco $' + fmt(GASTOS_BANCO[idx]) + ')' +
-      (INGR_MES[idx] > 0 ? ' | ingreso $' + fmt(INGR_MES[idx]) : '') +
-      ' | ' + txCount + ' transacciones';
+    const txN = TXNS.filter(t => t.fp === p).length;
+    return p + '|$' + N(GASTO_REAL[idx]) + '|Amex$' + N(GASTOS_AMEX[idx]) + '|Bco$' + N(GASTOS_BANCO[idx]) +
+      (INGR_MES[idx] > 0 ? '|Ing$' + N(INGR_MES[idx]) : '') + '|' + txN + 'tx';
   }).join('\n');
+  const avg3 = Math.round(GASTO_REAL.slice(-3).reduce((a,b)=>a+b,0)/3);
 
-  // Categorías por mes — TODOS los períodos
-  const ultMeses = PERIODOS.slice(-3);
-  const catsMes = PERIODOS.slice(-24).map(p => {
+  // 2. Categorías por mes — 6 meses
+  const catsMes = PERIODOS.slice(-6).map(p => {
     const cats = CATS_POR_MES[p] || {};
-    const lines = Object.entries(cats)
-      .sort((a, b) => b[1] - a[1])
-      .map(([c, v]) => '    - ' + c + ': $' + fmt(v))
-      .join('\n');
-    return '  ' + p + ':\n' + (lines || '    (sin datos)');
+    return p + ': ' + Object.entries(cats).sort((a,b)=>b[1]-a[1])
+      .map(([c,v]) => c + '=$' + N(v)).join(' | ');
   }).join('\n');
 
-  // Beneficiarios/terceros — últimos 3 meses (top 20 por mes)
-  const tercs = ultMeses.map(p => {
-    const rows = (TERC_POR_MES[p] || []).slice(0, 20);
-    const lines = rows.map(r => '    - ' + r.terc + ' [' + r.cat + ']: $' + fmt(r.total) + ' (' + r.n + ' tx)').join('\n');
-    return '  ' + p + ':\n' + (lines || '    (sin datos)');
-  }).join('\n');
+  // 3. Beneficiarios ALL-TIME agregados — top 50 (sin lista de meses para ahorrar tokens)
+  const tMap = {};
+  Object.values(TERC_POR_MES).forEach(rows => rows.forEach(r => {
+    const k = r.terc + '|' + r.cat;
+    if (!tMap[k]) tMap[k] = {t: r.terc, c: r.cat, $: 0, n: 0};
+    tMap[k].$ += r.total; tMap[k].n += r.n;
+  }));
+  const allT = Object.values(tMap).sort((a,b)=>b.$-a.$).slice(0,50)
+    .map(r => r.t + '[' + r.c + ']:$' + N(r.$) + '(' + r.n + 'tx)').join('\n');
 
-  // Beneficiarios — HISTORIAL COMPLETO agregado (todos los períodos)
-  const allTercsMap = {};
-  Object.entries(TERC_POR_MES).forEach(([periodo, rows]) => {
-    rows.forEach(r => {
-      const key = r.terc + '|||' + r.cat;
-      if (!allTercsMap[key]) allTercsMap[key] = {terc: r.terc, cat: r.cat, total: 0, n: 0, meses: []};
-      allTercsMap[key].total += r.total;
-      allTercsMap[key].n += r.n;
-      allTercsMap[key].meses.push(periodo);
-    });
-  });
-  const allTercsLine = Object.values(allTercsMap)
-    .sort((a, b) => b.total - a.total)
-    .slice(0, 80)
-    .map(r => '  - ' + r.terc + ' [' + r.cat + ']: $' + fmt(r.total) + ' total | ' + r.n + ' tx | meses: ' + r.meses.join(', '))
-    .join('\n');
-
-  // Transacciones individuales — HISTORIAL COMPLETO
-  const txDetalle = PERIODOS.slice(-6).map(p => {
-    const txs = TXNS.filter(t => t.fp === p).sort((a, b) => a.v - b.v);
-    const gastos = txs.filter(t => t.v < 0).map(t =>
-      '    ' + t.f + ' | ' + t.d + ' | $' + fmt(-t.v) + ' | ' + t.cat + ' | ' + t.src
-    ).join('\n');
-    const ingresos = txs.filter(t => t.v > 0).map(t =>
-      '    ' + t.f + ' | ' + t.d + ' | +$' + fmt(t.v) + ' | ' + t.cat
-    ).join('\n');
-    return '  ' + p + ' — GASTOS (' + txs.filter(t=>t.v<0).length + ' tx):\n' + (gastos||'    ninguno') +
-      '\n  ' + p + ' — INGRESOS:\n' + (ingresos||'    ninguno');
+  // 4. Transacciones últimos 2 meses (compacto)
+  const txDet = PERIODOS.slice(-2).map(p => {
+    const txs = TXNS.filter(t => t.fp === p && t.v < 0).sort((a,b)=>a.v-b.v);
+    return p + ':\n' + txs.map(t => t.f+'|'+t.d+'|$'+N(-t.v)+'|'+t.cat+'|'+t.src).join('\n');
   }).join('\n\n');
 
-  // Resumen de inversiones (para preguntas sobre rendimientos futuros)
-  const saldoCBActual = CB_SALDOS[CB_SALDOS.length - 1];
-  const saldoBF3 = 12467076;
-  const totalPortActual = saldoCBActual + saldoBF3;
-  const rendPctMes = CB_BRUTO.slice(-6).reduce((a,b) => a+b, 0) / 6;
-  const rendCBMes = Math.round(saldoCBActual * rendPctMes / 100);
-  const rendBF3Mes = Math.round(saldoBF3 * rendPctMes / 100);
-  const rendTotalMes = rendCBMes + rendBF3Mes;
-  const resumenInv = '  INBUMAX Casa de Bolsa (a la vista): $' + fmt(saldoCBActual) + ' MXN → rend. est. $' + fmt(rendCBMes) + '/mes\n' +
-    '  INBUMAX BF-3 (no líquido, 905.706 títulos): $' + fmt(saldoBF3) + ' MXN → rend. est. $' + fmt(rendBF3Mes) + '/mes\n' +
-    '  TOTAL portafolio: $' + fmt(totalPortActual) + ' MXN\n' +
-    '  Rendimiento total estimado/mes: $' + fmt(rendTotalMes) + ' MXN (' + rendPctMes.toFixed(4) + '%/mes prom. 6 meses)\n' +
-    '  Rendimiento estimado próximos 2 meses: $' + fmt(rendTotalMes * 2) + ' MXN\n' +
-    '  Rendimiento estimado próximos 12 meses: $' + fmt(rendTotalMes * 12) + ' MXN';
+  // 5. Inversiones
+  const sCB = CB_SALDOS[CB_SALDOS.length-1], sBF3 = 12467076;
+  const rPct = CB_BRUTO.slice(-6).reduce((a,b)=>a+b,0)/6;
+  const rMes = Math.round((sCB+sBF3)*rPct/100);
+  const inv = 'CB a la vista: $'+N(sCB)+' | BF-3 no líquido: $'+N(sBF3)+' | TOTAL: $'+N(sCB+sBF3)+
+    '\nRend.%/mes prom: '+rPct.toFixed(4)+'% | Rend.est/mes: $'+N(rMes)+
+    ' | 2 meses: $'+N(rMes*2)+' | 12 meses: $'+N(rMes*12);
 
-  // Categorías históricas totales
-  const catsHist = CAT_LABS.map((l, i) => '  • ' + l + ': $' + fmt(CAT_VALS[i])).join('\n');
+  // 6. Categorías históricas totales y proyección
+  const cH = CAT_LABS.map((l,i)=>l+':$'+N(CAT_VALS[i])).join(' | ');
+  const proy = PROY_LABS.map((l,i)=>l+':'+PROY_VALS[i]+'años').join(' | ');
 
-  // CB últimos 4 meses
-  const cbHist = CB_LABELS.slice(-4).map((l, i) => {
-    const idx = CB_SALDOS.length - 4 + i;
-    return '  ' + l + ': $' + fmt(CB_SALDOS[idx]) + ' (rend. ' + CB_BRUTO[idx].toFixed(4) + '%/mes)';
-  }).join('\n');
-
-  const proy = PROY_LABS.map((l, i) => '  Gasto ' + l + ': ' + PROY_VALS[i] + ' años').join('\n');
-
-  return 'Eres Nirvana, asistente financiero personal, amable y paciente. Hablas en español sencillo.\n' +
-    'Tienes acceso a la BASE DE DATOS FINANCIERA COMPLETA de la titular: todas las transacciones, todos los beneficiarios con sus nombres exactos, categorías detalladas por mes durante 24 meses, y proyecciones de inversión.\n' +
-    'REGLA FUNDAMENTAL: SIEMPRE responde con datos concretos. Jamás digas que no tienes información.\n' +
-    '- Transacciones individuales: tienes fecha, descripción exacta del comercio, monto, categoría y fuente (Amex/banco) de los últimos 6 meses.\n' +
-    '- Beneficiarios: tienes el historial COMPLETO de todas las personas/comercios que recibieron dinero, con total acumulado y en qué meses.\n' +
-    '- Categorías: tienes el desglose por categoría de cada mes durante 24 meses.\n' +
-    '- Inversiones: tienes saldos exactos, rendimientos históricos mensuales y proyecciones futuras.\n' +
-    'Respuestas concisas y profesionales. Usa "usted" con la titular. Montos en pesos mexicanos (MXN).\n\n' +
-    '=== HISTORIAL MENSUAL (12 meses, con conteo de transacciones) ===\n' + hist + '\n' +
-    'Promedio gasto últimos 3 meses: $' + fmt(avg3) + ' MXN\n\n' +
-    '=== CATEGORÍAS POR MES — 24 meses completos ===\n' + catsMes + '\n\n' +
-    '=== BENEFICIARIOS POR MES — últimos 3 meses detalle ===\n' + tercs + '\n\n' +
-    '=== BENEFICIARIOS — HISTORIAL COMPLETO (top 80, todos los períodos) ===\n' + allTercsLine + '\n\n' +
-    '=== TRANSACCIONES INDIVIDUALES — últimos 6 meses completos ===\n' + txDetalle + '\n\n' +
-    '=== CATEGORÍAS HISTÓRICAS TOTALES (acumulado todo el tiempo) ===\n' + catsHist + '\n\n' +
-    '=== INVERSIONES Y RENDIMIENTOS ===\n' + resumenInv + '\n' +
-    'CB últimos 4 meses:\n' + cbHist + '\n\n' +
-    '=== PROYECCIÓN RUNWAY ===\n' + proy;
+  return 'Eres Nirvana, asistente financiero de la titular de este tablero. Español, conciso, profesional.\n'+
+    'Tienes su base de datos financiera completa: gastos, ingresos, beneficiarios por nombre exacto, transacciones individuales, inversiones y proyecciones.\n'+
+    'REGLA: Responde SIEMPRE con datos concretos. Nunca digas que no tienes la información.\n'+
+    'Para preguntas sobre personas: busca en BENEFICIARIOS. Para compras específicas: busca en TRANSACCIONES. Para categorías por mes: usa CATEGORÍAS MES.\n'+
+    'Montos en MXN. Usa "usted" con la titular.\n\n'+
+    '[RESUMEN MENSUAL 12m — periodo|gasto|Amex|Banco|Ingreso|#tx]\n'+hist+'\nPromedio 3m: $'+N(avg3)+'\n\n'+
+    '[CATEGORÍAS POR MES — 6m]\n'+catsMes+'\n\n'+
+    '[BENEFICIARIOS ALL-TIME top50 — nombre[cat]:$total(#tx)]\n'+allT+'\n\n'+
+    '[TRANSACCIONES — últimos 2 meses — fecha|descripción|monto|cat|fuente]\n'+txDet+'\n\n'+
+    '[CATEGORÍAS HISTÓRICAS TOTALES]\n'+cH+'\n\n'+
+    '[INVERSIONES]\n'+inv+'\n\n'+
+    '[PROYECCIÓN RUNWAY]\n'+proy;
 }
 
 async function cbSend() {
@@ -1642,12 +1594,13 @@ async function cbSend() {
     });
     const d = await res.json();
     loader.remove();
-    const reply = d.reply || 'No se pudo obtener respuesta.';
+    const reply = d.reply || ('⚠️ Error: ' + (d.error || 'respuesta vacía') +
+      (d.detail ? ' — ' + JSON.stringify(d.detail).slice(0, 120) : ''));
     cbAddBubble('ai', reply);
     cbHistory.push({ role: 'assistant', content: reply });
   } catch (e) {
     loader.remove();
-    cbAddBubble('ai', 'Error de conexión. Por favor intenta de nuevo.');
+    cbAddBubble('ai', '⚠️ Error de conexión: ' + e.message + '. Intenta de nuevo.');
   }
 }
 </script>
