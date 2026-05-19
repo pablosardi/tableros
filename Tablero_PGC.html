@@ -1505,49 +1505,64 @@ function cbSug(btn) {
 
 function cbBuildCtx() {
   const n = PERIODOS.length;
+  const fmt = v => Math.round(v).toLocaleString('es-MX');
   const avg3 = Math.round(GASTO_REAL.slice(-3).reduce((a, b) => a + b, 0) / 3);
-  const avg6 = Math.round(GASTO_REAL.slice(-6).reduce((a, b) => a + b, 0) / 6);
-  const saldoCB = CB_SALDOS[CB_SALDOS.length - 1];
   const totalPort = Math.round(FC_DATA[0] * 1e6);
 
-  // Últimos 12 meses detallados
+  // Últimos 12 meses: totales
   const hist = PERIODOS.slice(-12).map((p, i) => {
     const idx = n - 12 + i;
-    return '  ' + p + ': gasto $' + Math.round(GASTO_REAL[idx]).toLocaleString('es-MX') +
-      ' (Amex $' + Math.round(GASTOS_AMEX[idx]).toLocaleString('es-MX') +
-      ' + banco $' + Math.round(GASTOS_BANCO[idx]).toLocaleString('es-MX') + ')' +
-      (INGR_MES[idx] > 0 ? ' | ingreso $' + Math.round(INGR_MES[idx]).toLocaleString('es-MX') : '');
+    const txCount = TXNS.filter(t => t.fp === p).length;
+    return '  ' + p + ': gasto $' + fmt(GASTO_REAL[idx]) +
+      ' (Amex $' + fmt(GASTOS_AMEX[idx]) + ' + banco $' + fmt(GASTOS_BANCO[idx]) + ')' +
+      (INGR_MES[idx] > 0 ? ' | ingreso $' + fmt(INGR_MES[idx]) : '') +
+      ' | ' + txCount + ' transacciones';
   }).join('\n');
 
-  // Todas las categorías
-  const cats = CAT_LABS.map((l, i) => '  • ' + l + ': $' + Math.round(CAT_VALS[i]).toLocaleString('es-MX') + ' MXN (total histórico)').join('\n');
-
-  // Portafolio CB últimos 6 meses
-  const cbHist = CB_LABELS.slice(-6).map((l, i) => {
-    const idx = CB_SALDOS.length - 6 + i;
-    return '  ' + l + ': $' + Math.round(CB_SALDOS[idx]).toLocaleString('es-MX') +
-      ' (rend. bruto ' + CB_BRUTO[idx].toFixed(4) + '%/mes)';
+  // Categorías por mes — últimos 3 meses
+  const ultMeses = PERIODOS.slice(-3);
+  const catsMes = ultMeses.map(p => {
+    const cats = CATS_POR_MES[p] || {};
+    const lines = Object.entries(cats)
+      .sort((a, b) => b[1] - a[1])
+      .map(([c, v]) => '    - ' + c + ': $' + fmt(v))
+      .join('\n');
+    return '  ' + p + ':\n' + (lines || '    (sin datos)');
   }).join('\n');
 
-  const proy = PROY_LABS.map((l, i) => '  Gasto ' + l + ': ' + PROY_VALS[i] + ' años hasta agotar portafolio').join('\n');
+  // Beneficiarios/terceros — últimos 3 meses (top 20 por mes)
+  const tercs = ultMeses.map(p => {
+    const rows = (TERC_POR_MES[p] || []).slice(0, 20);
+    const lines = rows.map(r => '    - ' + r.terc + ' [' + r.cat + ']: $' + fmt(r.total) + ' (' + r.n + ' tx)').join('\n');
+    return '  ' + p + ':\n' + (lines || '    (sin datos)');
+  }).join('\n');
 
-  return 'Eres Nirvana, un asistente financiero personal, amable y paciente. Hablas en español sencillo y claro.\n' +
-    'Solo contestas preguntas sobre las finanzas de la persona titular de este tablero (MXN - pesos mexicanos).\n' +
-    'REGLA FUNDAMENTAL: NUNCA digas que no tienes información. Siempre responde con los datos que sí tienes.\n' +
-    '- Si preguntan qué compró o en qué gastó: muestra el total del mes, cuánto fue en Amex vs banco, y las categorías históricas más relevantes.\n' +
-    '- Si preguntan por una persona (ej. Julio): búscala en las categorías (ej. "Cuidado Julio — Enfermeros") y usa ese total.\n' +
-    '- Si preguntan por un mes específico: usa el historial mensual. Si preguntan por este mes: usa el último mes disponible.\n' +
-    '- Si no tienes el desglose exacto, di lo que sí sabes y explica brevemente la limitación en una sola línea.\n' +
-    'No menciones nombres de personas. Usa "usted" si te diriges a la titular. Respuestas cortas y concretas.\n\n' +
-    '=== HISTORIAL MENSUAL (últimos 12 meses) ===\n' + hist + '\n\n' +
-    'Promedio gasto mensual últimos 3 meses: $' + avg3.toLocaleString('es-MX') + ' MXN\n' +
-    'Promedio gasto mensual últimos 6 meses: $' + avg6.toLocaleString('es-MX') + ' MXN\n\n' +
-    '=== CATEGORÍAS DE GASTO (total histórico acumulado) ===\n' + cats + '\n\n' +
-    '=== PORTAFOLIO DE INVERSIONES ===\n' +
-    'Portafolio a la vista (INBUMAX CB) - últimos 6 meses:\n' + cbHist + '\n' +
-    'Portafolio no líquido (INBUMAX BF-3): $12,467,076 MXN (905.706 títulos × $13.765036)\n' +
-    'TOTAL PORTAFOLIO: $' + totalPort.toLocaleString('es-MX') + ' MXN (snapshot 17/05/2026)\n\n' +
-    '=== PROYECCIÓN RUNWAY ===\n' + proy;
+  // Categorías históricas totales
+  const catsHist = CAT_LABS.map((l, i) => '  • ' + l + ': $' + fmt(CAT_VALS[i])).join('\n');
+
+  // CB últimos 4 meses
+  const cbHist = CB_LABELS.slice(-4).map((l, i) => {
+    const idx = CB_SALDOS.length - 4 + i;
+    return '  ' + l + ': $' + fmt(CB_SALDOS[idx]) + ' (rend. ' + CB_BRUTO[idx].toFixed(4) + '%/mes)';
+  }).join('\n');
+
+  const proy = PROY_LABS.map((l, i) => '  Gasto ' + l + ': ' + PROY_VALS[i] + ' años').join('\n');
+
+  return 'Eres Nirvana, asistente financiero personal, amable y paciente. Hablas en español sencillo.\n' +
+    'Tienes acceso a datos financieros detallados: transacciones individuales, beneficiarios por nombre, categorías por mes.\n' +
+    'REGLA FUNDAMENTAL: SIEMPRE responde con los datos disponibles. Nunca digas que no tienes información.\n' +
+    '- Si preguntan por una persona (Alejandra, Julio, enfermero, etc.): búscala en BENEFICIARIOS POR MES y muestra los montos.\n' +
+    '- Si preguntan por un mes o categoría: usa CATEGORÍAS POR MES.\n' +
+    '- Si preguntan cuántas transacciones: usa los conteos del historial mensual.\n' +
+    'Respuestas concisas con números. Usa "usted" con la titular. Montos en MXN.\n\n' +
+    '=== HISTORIAL MENSUAL (12 meses, con conteo de transacciones) ===\n' + hist + '\n' +
+    'Promedio gasto últimos 3 meses: $' + fmt(avg3) + ' MXN\n\n' +
+    '=== CATEGORÍAS POR MES (últimos 3 meses) ===\n' + catsMes + '\n\n' +
+    '=== BENEFICIARIOS POR MES — nombres exactos (últimos 3 meses, top 20) ===\n' + tercs + '\n\n' +
+    '=== CATEGORÍAS HISTÓRICAS (total acumulado) ===\n' + catsHist + '\n\n' +
+    '=== PORTAFOLIO ===\n' + cbHist + '\n' +
+    'No líquido INBUMAX BF-3: $12,467,076 MXN | TOTAL: $' + fmt(totalPort) + ' MXN\n\n' +
+    '=== PROYECCIÓN ===\n' + proy;
 }
 
 async function cbSend() {
