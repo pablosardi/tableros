@@ -534,14 +534,19 @@ function pgcheck(){
         <span style="background:#d2992222;color:#d29922;border:1px solid #d29922;border-radius:12px;padding:3px 10px;font-size:11px;">Guardado</span>
       </div>
       <table style="width:100%;font-size:13px;border-collapse:collapse;">
-        <tr><td style="color:#8b949e;padding:5px 0;width:45%;">Cantidad</td><td style="color:#e6edf3;font-weight:500;">2 trozos (físico)</td></tr>
+        <tr><td style="color:#8b949e;padding:5px 0;width:45%;">Cantidad</td><td style="color:#e6edf3;font-weight:500;">2 trozos · ~40 oz · ~1.24 kg (estimado)</td></tr>
         <tr><td style="color:#8b949e;padding:5px 0;">Ubicación</td><td style="color:#e6edf3;">Apartamento Bogotá</td></tr>
         <tr><td style="color:#8b949e;padding:5px 0;">Fecha compra</td><td style="color:#e6edf3;">Marzo 2022</td></tr>
-        <tr><td style="color:#8b949e;padding:5px 0;">Soporte</td><td style="color:#3fb950;font-weight:500;">✅ Recibos manuales disponibles</td></tr>
-        <tr><td style="color:#8b949e;padding:5px 0;">Valor estimado</td><td style="color:#d29922;font-weight:700;">— Por definir (cotizar)</td></tr>
+        <tr><td style="color:#8b949e;padding:5px 0;">Soporte</td><td style="color:#3fb950;font-weight:500;">✅ Recibos manuales en el apartamento</td></tr>
+        <tr><td style="color:#8b949e;padding:5px 0;">Precio compra</td><td style="color:#e6edf3;">~$1,950 USD/oz · TRM $3,850 · ~$300M COP</td></tr>
+        <tr><td style="color:#8b949e;padding:5px 0;">Precio hoy</td><td style="color:#d29922;font-weight:700;">$4,558 USD/oz (may-2026)</td></tr>
+        <tr><td style="color:#8b949e;padding:5px 0;">Valor estimado hoy</td><td style="color:#3fb950;font-weight:700;">~$764M COP · ~$182K USD (+155%)</td></tr>
       </table>
-      <textarea placeholder="Notas: peso en gramos, valor actual, recibos, ubicación exacta..."
-        style="width:100%;margin-top:12px;background:#161b22;border:1px solid #30363d;border-radius:6px;color:#c9d1d9;padding:8px;font-size:12px;resize:vertical;min-height:60px;box-sizing:border-box;"
+      <div style="background:#1c1600;border:1px solid #d29922;border-radius:6px;padding:8px 10px;margin-top:10px;font-size:11px;color:#d29922;line-height:1.6;">
+        ⚠️ <strong>Estimado — requiere verificación.</strong> El recibo manual en el apartamento tiene el peso exacto en gramos y el precio pagado. Con ese dato el cálculo es exacto. Sin él, se asume que el cheque de gerencia de $300M COP (mar-2022) fue íntegramente para oro.
+      </div>
+      <textarea placeholder="Notas: peso exacto en gramos (del recibo), fecha recibo, ubicación dentro del apartamento..."
+        style="width:100%;margin-top:10px;background:#161b22;border:1px solid #30363d;border-radius:6px;color:#c9d1d9;padding:8px;font-size:12px;resize:vertical;min-height:60px;box-sizing:border-box;"
         oninput="saveActNote('oro',this.value)"
         id="note-oro"></textarea>
     </div>
