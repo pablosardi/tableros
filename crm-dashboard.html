@@ -3,122 +3,125 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CRM Intelligence · Ashley Furniture Colombia</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,5 93,27.5 93,72.5 50,95 7,72.5 7,27.5' fill='%23E8650A'/%3E%3C/svg%3E">
+<title>CRM Intelligence — Ashley Furniture Colombia</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 93,27.5 93,72.5 50,95 7,72.5 7,27.5' fill='%23B8860B'/></svg>">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#0f1117;--card:#1a1d24;--card2:#12151c;
-  --accent:#E8650A;--green:#22c55e;--yellow:#f59e0b;
-  --red:#ef4444;--blue-muted:#64748b;
-  --text:#f1f5f9;--text2:#94a3b8;--border:#2d3748;
-}
-body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif;font-size:14px;line-height:1.5}
-a{color:var(--accent);text-decoration:none}
+  :root {
+    --bg:      #0f1117;
+    --card:    #1a1d24;
+    --card2:   #12151c;
+    --accent:  #B8860B;
+    --green:   #22c55e;
+    --yellow:  #f59e0b;
+    --red:     #ef4444;
+    --text:    #f1f5f9;
+    --text2:   #94a3b8;
+    --border:  #2d3748;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; font-size: 13px; }
+  a { color: var(--accent); text-decoration: none; }
 
-/* HEADER */
-.header{display:flex;align-items:center;gap:12px;padding:16px 24px;border-bottom:1px solid var(--border);background:var(--card2)}
-.logo-hex{width:36px;height:36px;flex-shrink:0}
-.header-title{font-size:18px;font-weight:700;color:var(--text)}
-.header-sub{font-size:12px;color:var(--text2);margin-top:1px}
-.header-date{margin-left:auto;font-size:12px;color:var(--text2);background:var(--card);padding:4px 10px;border-radius:6px;border:1px solid var(--border)}
+  /* HEADER */
+  .header { background: var(--card2); border-bottom: 1px solid var(--border); padding: 14px 24px; display: flex; align-items: center; gap: 14px; }
+  .logo-hex { width: 36px; height: 36px; }
+  .header-titles h1 { font-size: 18px; font-weight: 700; color: var(--text); }
+  .header-titles p  { font-size: 11px; color: var(--text2); margin-top: 1px; }
+  .header-right { margin-left: auto; display: flex; align-items: center; gap: 16px; }
+  .live-chip { background: #1e0a0a; border: 1px solid var(--red); color: var(--red); padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; display: flex; align-items: center; gap: 5px; }
+  .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--red); animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+  .header-date { color: var(--text2); font-size: 12px; }
 
-/* KPI CARDS */
-.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:16px 24px}
-.kpi{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px}
-.kpi-label{font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
-.kpi-value{font-size:26px;font-weight:700;color:var(--text);line-height:1}
-.kpi-sub{font-size:12px;color:var(--text2);margin-top:5px}
-.kpi-accent{color:var(--accent)}
-.temp-badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+  /* KPI CARDS */
+  .kpi-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; padding: 16px 24px; }
+  .kpi-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+  .kpi-label { font-size: 11px; color: var(--text2); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+  .kpi-value { font-size: 26px; font-weight: 700; color: var(--accent); line-height: 1; }
+  .kpi-sub   { font-size: 11px; color: var(--text2); margin-top: 5px; }
 
-/* TABS */
-.tabs{display:flex;gap:0;padding:0 24px;border-bottom:1px solid var(--border);background:var(--card2)}
-.tab-btn{padding:11px 18px;font-size:13px;font-weight:600;color:var(--text2);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap}
-.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
-.tab-btn:hover:not(.active){color:var(--text)}
-.tab-content{display:none;padding:20px 24px}
-.tab-content.active{display:block}
+  /* TABS */
+  .tabs { padding: 0 24px; border-bottom: 1px solid var(--border); display: flex; gap: 0; }
+  .tab { padding: 10px 20px; cursor: pointer; color: var(--text2); border-bottom: 2px solid transparent; font-size: 13px; font-weight: 500; transition: all .2s; white-space: nowrap; }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
 
-/* SECTIONS */
-.section{margin-bottom:28px}
-.section-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.section-title .badge-count{background:var(--border);color:var(--text2);font-size:11px;padding:2px 7px;border-radius:10px}
+  /* TAB CONTENT */
+  .tab-content { display: none; padding: 20px 24px; }
+  .tab-content.active { display: block; }
 
-/* TABLES */
-.tbl-wrap{overflow-x:auto;border-radius:8px;border:1px solid var(--border)}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{background:var(--card2);color:var(--text2);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.4px;padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap;cursor:pointer;user-select:none}
-th:hover{color:var(--text)}
-th .sort-icon{margin-left:4px;opacity:.4}
-th.sorted .sort-icon{opacity:1;color:var(--accent)}
-td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
-tr:last-child td{border-bottom:none}
-tr:hover td{background:rgba(255,255,255,.02)}
-.tr-riesgo-vencida{border-left:3px solid var(--red)}
-.tr-riesgo-urgente{border-left:3px solid var(--yellow)}
+  /* SECTION */
+  .section-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
 
-/* PROGRESS BAR */
-.prog-wrap{display:flex;align-items:center;gap:8px}
-.prog-bar{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden;min-width:60px}
-.prog-fill{height:100%;border-radius:3px;transition:width .3s}
-.prog-label{font-size:11px;font-weight:600;min-width:30px}
+  /* TABLES */
+  .table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--border); margin-bottom: 24px; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); }
+  th { background: var(--card2); color: var(--text2); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .4px; padding: 10px 12px; text-align: left; cursor: pointer; white-space: nowrap; user-select: none; }
+  th:hover { color: var(--text); }
+  td { padding: 9px 12px; border-top: 1px solid var(--border); color: var(--text); vertical-align: middle; }
+  tr:hover td { background: rgba(184,134,11,.05); }
 
-/* BADGES */
-.badge{display:inline-block;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600;white-space:nowrap}
-.badge-caliente{background:#7f1d1d;color:#fca5a5}
-.badge-tibio{background:#78350f;color:#fcd34d}
-.badge-frio{background:#1e293b;color:#94a3b8}
-.badge-verde{background:#14532d;color:#86efac}
-.badge-rojo{background:#450a0a;color:#fca5a5}
-.badge-amarillo{background:#451a03;color:#fcd34d}
-.badge-gray{background:#1e293b;color:#94a3b8}
-.badge-acento{background:#7c2d12;color:#fdba74}
+  /* BADGES */
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+  .badge-hot   { background: #3d1515; color: var(--red); }
+  .badge-warm  { background: #3d2e0a; color: var(--yellow); }
+  .badge-cold  { background: #0f1e3d; color: #60a5fa; }
+  .badge-green { background: #0f2d1a; color: var(--green); }
+  .badge-red   { background: #3d1515; color: var(--red); }
+  .badge-yellow{ background: #3d2e0a; color: var(--yellow); }
 
-/* SEMAFORO */
-.sem-verde{color:var(--green);font-weight:600}
-.sem-amarillo{color:var(--yellow);font-weight:600}
-.sem-rojo{color:var(--red);font-weight:600}
+  /* PROGRESS BAR */
+  .prog-wrap { background: #1f2530; border-radius: 4px; height: 6px; width: 80px; overflow: hidden; display: inline-block; vertical-align: middle; margin-left: 6px; }
+  .prog-fill  { height: 100%; border-radius: 4px; }
 
-/* TIENDA SELECTOR */
-.tienda-select{background:var(--card);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:6px;font-size:13px;outline:none;cursor:pointer}
-.tienda-select:focus{border-color:var(--accent)}
+  /* DROPDOWN */
+  .ctrl-row { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; flex-wrap: wrap; }
+  select { background: var(--card); color: var(--text); border: 1px solid var(--border); padding: 7px 12px; border-radius: 7px; font-size: 13px; cursor: pointer; min-width: 200px; }
+  select:focus { outline: none; border-color: var(--accent); }
 
-/* MINI KPIS */
-.mini-kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
-.mini-kpi{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:12px 14px}
-.mini-kpi-label{font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px}
-.mini-kpi-val{font-size:20px;font-weight:700}
+  /* MINI KPI */
+  .mini-kpi-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-bottom: 16px; }
+  .mini-kpi { background: var(--card2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; }
+  .mini-kpi .val { font-size: 20px; font-weight: 700; color: var(--accent); }
+  .mini-kpi .lbl { font-size: 10px; color: var(--text2); text-transform: uppercase; margin-top: 3px; }
 
-/* INFO CARD */
-.info-card{background:#1c1208;border:1px solid #7c2d12;border-radius:10px;padding:16px 20px;margin-bottom:20px}
-.info-card-title{font-size:13px;font-weight:700;color:#fdba74;margin-bottom:6px}
-.info-card p{font-size:13px;color:#fde68a;line-height:1.6}
+  /* EXPANDABLE ROW */
+  .expand-row td { padding: 0; }
+  .expand-inner { background: var(--card2); padding: 14px 16px; border-top: 1px solid var(--border); }
+  .expand-title  { font-size: 12px; font-weight: 600; color: var(--text2); margin-bottom: 10px; text-transform: uppercase; }
+  .opp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+  .opp-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 12px; }
+  .opp-card .opp-cliente { font-weight: 600; color: var(--text); font-size: 13px; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .opp-card .opp-revenue { font-size: 18px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+  .opp-card .opp-meta { font-size: 11px; color: var(--text2); display: flex; flex-wrap: wrap; gap: 6px; }
 
-/* TIENDA SECTION */
-.tienda-section{margin-bottom:24px}
-.tienda-section-title{font-size:13px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.6px;padding:6px 0;margin-bottom:10px;border-bottom:1px solid var(--border)}
+  /* PRIORIDADES */
+  .tienda-block { margin-bottom: 28px; }
+  .tienda-block-title { font-size: 15px; font-weight: 700; color: var(--accent); margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+  .asesor-block { margin-bottom: 18px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .asesor-block-title { padding: 10px 14px; font-size: 13px; font-weight: 600; background: var(--card2); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+  .asesor-opps { padding: 12px 14px; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
 
-/* FOOTER */
-.footer{text-align:center;padding:16px 24px;color:var(--text2);font-size:11px;border-top:1px solid var(--border);margin-top:8px}
+  /* RIESGO/VALOR */
+  .risk-info { background: var(--card2); border: 1px solid var(--border); border-left: 3px solid var(--yellow); border-radius: 8px; padding: 14px 16px; margin-bottom: 16px; font-size: 12px; color: var(--text2); line-height: 1.6; }
+  .risk-info strong { color: var(--text); }
 
-/* ASESOR ACCORDION */
-.asesor-group{margin-bottom:8px}
-.asesor-acc-header{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:6px;cursor:pointer;font-size:13px;font-weight:600}
-.asesor-acc-header:hover{border-color:var(--accent)}
-.asesor-acc-header.open{border-color:var(--accent);border-radius:6px 6px 0 0}
-.asesor-acc-body{display:none;background:var(--card2);border:1px solid var(--accent);border-top:none;border-radius:0 0 6px 6px;margin-bottom:4px}
-.asesor-acc-body.open{display:block}
+  /* SEMÁFORO TABLE */
+  .sem-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+  .sem-verde   { background: var(--green); }
+  .sem-amarillo{ background: var(--yellow); }
+  .sem-rojo    { background: var(--red); }
 
-/* PRIORITY ITEM */
-.priority-item{padding:10px 14px;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr auto auto auto;gap:10px;align-items:center;font-size:12px}
-.priority-item:last-child{border-bottom:none}
-.priority-item.alert-vencida{border-left:3px solid var(--red)}
-.priority-item.alert-urgente{border-left:3px solid var(--yellow)}
+  /* FOOTER */
+  .footer { text-align: center; padding: 16px; color: var(--text2); font-size: 11px; border-top: 1px solid var(--border); margin-top: 20px; }
 
-/* TABLE EXPAND */
-.expand-tr{display:none}
-.expand-tr.open{display:table-row}
+  /* SORT ARROW */
+  .sort-arrow { font-size: 9px; margin-left: 3px; opacity: .6; }
+
+  @media (max-width: 768px) {
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .header-right { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -126,527 +129,427 @@ tr:hover td{background:rgba(255,255,255,.02)}
 <!-- HEADER -->
 <div class="header">
   <svg class="logo-hex" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="50,5 93,27.5 93,72.5 50,95 7,72.5 7,27.5" fill="#E8650A"/>
-    <text x="50" y="58" text-anchor="middle" font-size="28" font-weight="800" fill="white" font-family="system-ui">A</text>
+    <polygon points="50,5 93,27.5 93,72.5 50,95 7,72.5 7,27.5" fill="#B8860B"/>
+    <text x="50" y="62" text-anchor="middle" fill="#0f1117" font-size="28" font-weight="700" font-family="sans-serif">A</text>
   </svg>
-  <div>
-    <div class="header-title">CRM Intelligence</div>
-    <div class="header-sub">Ashley Furniture Colombia</div>
+  <div class="header-titles">
+    <h1>CRM Intelligence</h1>
+    <p>Ashley Furniture Colombia</p>
   </div>
-  <div class="header-date">25 Mayo 2026</div>
-</div>
-
-<!-- KPI ROW -->
-<div class="kpi-row">
-  <div class="kpi">
-    <div class="kpi-label">Pipeline Activo</div>
-    <div class="kpi-value kpi-accent">$3.645B</div>
-    <div class="kpi-sub">COP · oportunidades pending</div>
-  </div>
-  <div class="kpi">
-    <div class="kpi-label">Oportunidades</div>
-    <div class="kpi-value">527</div>
-    <div class="kpi-sub">activas en pipeline</div>
-  </div>
-  <div class="kpi">
-    <div class="kpi-label">Gestión Activa</div>
-    <div class="kpi-value"><span class="kpi-accent">507</span> <span style="font-size:16px;color:var(--text2)">/ 527</span></div>
-    <div class="kpi-sub">96% con actividad asignada</div>
-  </div>
-  <div class="kpi">
-    <div class="kpi-label">Temperatura Pipeline</div>
-    <div class="temp-badges">
-      <span class="badge badge-caliente">&#128308; 275 Caliente</span>
-      <span class="badge badge-tibio">&#128993; 135 Tibio</span>
-      <span class="badge badge-frio">&#128309; 117 Frío</span>
-    </div>
+  <div class="header-right">
+    <div class="live-chip"><span class="live-dot"></span>En vivo · BigQuery</div>
+    <span class="header-date" id="header-date"></span>
   </div>
 </div>
 
-<!-- TABS NAV -->
+<!-- KPI CARDS -->
+<div class="kpi-row" id="kpi-row"></div>
+
+<!-- TABS -->
 <div class="tabs">
-  <button class="tab-btn active" onclick="switchTab('global',this)">Vista Global</button>
-  <button class="tab-btn" onclick="switchTab('tienda',this)">Por Tienda</button>
-  <button class="tab-btn" onclick="switchTab('prioridades',this)">Prioridades del Día</button>
-  <button class="tab-btn" onclick="switchTab('riesgo',this)">Gestión &amp; Riesgo</button>
+  <div class="tab active" onclick="showTab(0)">Vista Global</div>
+  <div class="tab" onclick="showTab(1)">Por Tienda</div>
+  <div class="tab" onclick="showTab(2)">Prioridades del Día</div>
+  <div class="tab" onclick="showTab(3)">Gestión & Riesgo</div>
 </div>
 
-<!-- TAB 1: VISTA GLOBAL -->
-<div id="tab-global" class="tab-content active">
-
-  <div class="section">
-    <div class="section-title">Por Tienda <span class="badge-count badge">5 tiendas</span></div>
-    <div class="tbl-wrap">
-      <table id="tbl-tiendas">
-        <thead><tr>
-          <th onclick="sortTable('tbl-tiendas',0)">Tienda <span class="sort-icon">&#8597;</span></th>
-          <th onclick="sortTable('tbl-tiendas',1)">Opps <span class="sort-icon">&#8597;</span></th>
-          <th onclick="sortTable('tbl-tiendas',2)">Pipeline <span class="sort-icon">&#8597;</span></th>
-          <th onclick="sortTable('tbl-tiendas',3)">Calientes <span class="sort-icon">&#8597;</span></th>
-          <th onclick="sortTable('tbl-tiendas',4)">Tibias <span class="sort-icon">&#8597;</span></th>
-          <th onclick="sortTable('tbl-tiendas',5)">Frías <span class="sort-icon">&#8597;</span></th>
-          <th onclick="sortTable('tbl-tiendas',6)">Con Actividad % <span class="sort-icon">&#8597;</span></th>
-          <th onclick="sortTable('tbl-tiendas',7)">Act. Vencidas <span class="sort-icon">&#8597;</span></th>
-          <th onclick="sortTable('tbl-tiendas',8)">Deadline Vencidas <span class="sort-icon">&#8597;</span></th>
-        </tr></thead>
-        <tbody id="tbody-tiendas"></tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-title">Por Asesor <span class="badge-count badge">18 asesores</span></div>
-    <div class="tbl-wrap">
-      <table id="tbl-asesores-global">
-        <thead><tr>
-          <th onclick="sortTable('tbl-asesores-global',0)">Asesor <span class="sort-icon">&#8597;</span></th>
-          <th onclick="sortTable('tbl-asesores-global',1)">Tienda <span class="sort-icon">&#8597;</span></th>
-          <th onclick="sortTable('tbl-asesores-global',2)">Opps <span class="sort-icon">&#8597;</span></th>
-          <th onclick="sortTable('tbl-asesores-global',3)">Pipeline <span class="sort-icon">&#8597;</span></th>
-          <th onclick="sortTable('tbl-asesores-global',4)">Calientes <span class="sort-icon">&#8597;</span></th>
-          <th onclick="sortTable('tbl-asesores-global',5)">Días Prom. <span class="sort-icon">&#8597;</span></th>
-          <th onclick="sortTable('tbl-asesores-global',6)">Conversión % <span class="sort-icon">&#8597;</span></th>
-          <th onclick="sortTable('tbl-asesores-global',7)">% Con Actividad <span class="sort-icon">&#8597;</span></th>
-          <th onclick="sortTable('tbl-asesores-global',8)">Act. Vencidas <span class="sort-icon">&#8597;</span></th>
-          <th onclick="sortTable('tbl-asesores-global',9)">Alto Valor <span class="sort-icon">&#8597;</span></th>
-        </tr></thead>
-        <tbody id="tbody-asesores-global"></tbody>
-      </table>
-    </div>
-  </div>
+<!-- TAB 0: VISTA GLOBAL -->
+<div class="tab-content active" id="tab-0">
+  <div class="section-title">Resumen por Tienda</div>
+  <div class="table-wrap"><table id="tbl-tiendas"><thead></thead><tbody></tbody></table></div>
+  <div class="section-title">Detalle por Asesor <span style="color:var(--text2);font-size:11px;font-weight:400;margin-left:8px;">Haz clic en encabezado para ordenar</span></div>
+  <div class="table-wrap"><table id="tbl-asesores"><thead></thead><tbody></tbody></table></div>
 </div>
 
-<!-- TAB 2: POR TIENDA -->
-<div id="tab-tienda" class="tab-content">
-  <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px">
-    <label style="font-size:13px;color:var(--text2)">Tienda:</label>
-    <select class="tienda-select" id="tienda-selector" onchange="renderTiendaTab()">
-      <option value="AHS1-AV19-BOCOL">Av. 19 Bogotá</option>
-      <option value="AHS2-MP-BOCOL">M&amp;P Bogotá</option>
-      <option value="AHS3-AP-BQCOL">Barranquilla</option>
-      <option value="B2B">B2B</option>
-      <option value="ECOMMERCE-01COL">Ecommerce</option>
-    </select>
+<!-- TAB 1: POR TIENDA -->
+<div class="tab-content" id="tab-1">
+  <div class="ctrl-row">
+    <label style="color:var(--text2);font-size:12px;">Tienda:</label>
+    <select id="tienda-select" onchange="renderTiendaDetail()"></select>
   </div>
-  <div id="tienda-content"></div>
+  <div id="tienda-detail"></div>
 </div>
 
-<!-- TAB 3: PRIORIDADES DEL DÍA -->
-<div id="tab-prioridades" class="tab-content">
+<!-- TAB 2: PRIORIDADES DEL DÍA -->
+<div class="tab-content" id="tab-2">
   <div id="prioridades-content"></div>
 </div>
 
-<!-- TAB 4: GESTIÓN & RIESGO -->
-<div id="tab-riesgo" class="tab-content">
-
-  <div class="info-card">
-    <div class="info-card-title">&#128161; Filosofía de Gestión del Pipeline</div>
-    <p>Las oportunidades de alto valor que llevan tiempo abiertas son activos valiosos — no cargas. Un deal de $40M que lleva 60 días abierto con actividad semanal ES buena gestión. El objetivo no es tener el pipeline vacío, sino tener cada oportunidad activamente trabajada.</p>
+<!-- TAB 3: GESTIÓN & RIESGO -->
+<div class="tab-content" id="tab-3">
+  <div class="risk-info">
+    <strong>Las oportunidades de alto valor que llevan tiempo abiertas son activos, no cargas.</strong><br>
+    El objetivo es asegurar que cada una tenga una próxima acción clara y no estén vencidas sin seguimiento.
   </div>
-
-  <div class="section">
-    <div class="section-title">&#9888;&#65039; Requieren Atención Inmediata <span class="badge-count badge" id="riesgo-count"></span></div>
-    <p style="font-size:12px;color:var(--text2);margin-bottom:10px">Oportunidades &gt;$10M, &gt;30 días abiertas, con deadline vencida o urgente (&#8804;7 días)</p>
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr>
-          <th>Asesor</th><th>Cliente</th><th>Monto</th><th>Etiqueta</th>
-          <th>Días Abierto</th><th>Estado Deadline</th><th>Actividad</th>
-        </tr></thead>
-        <tbody id="tbody-riesgo"></tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-title">&#128142; Oportunidades de Alto Valor en Gestión <span class="badge-count badge" id="valor-count"></span></div>
-    <p style="font-size:12px;color:var(--text2);margin-bottom:10px">Estas oportunidades llevan tiempo pero están siendo gestionadas activamente. Mantener el foco aquí.</p>
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr>
-          <th>Asesor</th><th>Cliente</th><th>Monto</th><th>Etiqueta</th>
-          <th>Días Abierto</th><th>Días p/ Cierre</th><th>Temp.</th>
-        </tr></thead>
-        <tbody id="tbody-valor"></tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-title">Asesores — Índice de Gestión</div>
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr>
-          <th>Asesor</th><th>Tienda</th><th>Opps</th><th>% Con Actividad</th>
-          <th>Act. Vencidas</th><th>Deadline Vencidas</th><th>Estado</th>
-        </tr></thead>
-        <tbody id="tbody-gestion"></tbody>
-      </table>
-    </div>
-  </div>
+  <div class="section-title">⚠️ Requieren Atención <span style="color:var(--text2);font-size:11px;font-weight:400;margin-left:8px;">Alto valor · +30 días · Deadline vencida o urgente</span></div>
+  <div class="table-wrap"><table id="tbl-riesgo"><thead></thead><tbody></tbody></table></div>
+  <div class="section-title">💎 En Gestión Activa <span style="color:var(--text2);font-size:11px;font-weight:400;margin-left:8px;">Alto valor · +30 días · Con actividad · Sin vencer</span></div>
+  <div class="table-wrap"><table id="tbl-valor"><thead></thead><tbody></tbody></table></div>
+  <div class="section-title">Semáforo por Asesor</div>
+  <div class="table-wrap"><table id="tbl-semaforo"><thead></thead><tbody></tbody></table></div>
 </div>
 
-<!-- FOOTER -->
-<div class="footer">
-  Fuente: Odoo CRM &middot; Oportunidades activas (won_status = pending) &middot; Actualizado: 25 Mayo 2026 &middot; Rev_* campos excluidos por baja cobertura (&lt;4%)
-</div>
+<div class="footer">Fuente: BigQuery · nitro-bigquery.odoo_data_prod · Actualizado: <span id="footer-fecha"></span></div>
 
 <script>
-// ============================================================
-// DATA
-// ============================================================
-const DATA = {"fecha":"25 Mayo 2026","total_pipeline":3645074322,"total_opps":527,"total_con_actividad":507,"total_sin_actividad":20,"total_act_vencidas":7,"total_deadline_vencidas":68,"calientes":275,"tibias":135,"frias":117,"tiendas":[{"team_id":"AHS1-AV19-BOCOL","total_opps":368,"revenue":2407024222.0,"calientes":188,"tibias":96,"frias":84,"con_actividad":367,"act_vencidas":0,"deadline_vencidas":35,"pct_actividad":100},{"team_id":"AHS2-MP-BOCOL","total_opps":108,"revenue":1068900000.0,"calientes":61,"tibias":22,"frias":25,"con_actividad":99,"act_vencidas":3,"deadline_vencidas":6,"pct_actividad":92},{"team_id":"AHS3-AP-BQCOL","total_opps":38,"revenue":169150100.0,"calientes":19,"tibias":14,"frias":5,"con_actividad":37,"act_vencidas":1,"deadline_vencidas":21,"pct_actividad":97},{"team_id":"B2B","total_opps":6,"revenue":0.0,"calientes":1,"tibias":2,"frias":3,"con_actividad":1,"act_vencidas":1,"deadline_vencidas":2,"pct_actividad":17},{"team_id":"ECOMMERCE-01COL","total_opps":7,"revenue":0.0,"calientes":6,"tibias":1,"frias":0,"con_actividad":3,"act_vencidas":2,"deadline_vencidas":4,"pct_actividad":43}],"asesores":[{"user_id":"Andres Becerra","team_id":"AHS1-AV19-BOCOL","total_opps":77,"revenue":416604000.0,"calientes":48,"tibias":22,"frias":7,"con_actividad":77,"act_vencidas":0,"deadline_vencidas":0,"deadline_urgentes":6,"dias_abierto_avg":22.9,"alto_valor_count":5,"pct_actividad":100,"conversion_rate":25.8,"dias_ciclo_prom":10},{"user_id":"Andres Mayo","team_id":"AHS1-AV19-BOCOL","total_opps":32,"revenue":379500000.0,"calientes":24,"tibias":7,"frias":1,"con_actividad":32,"act_vencidas":0,"deadline_vencidas":0,"deadline_urgentes":23,"dias_abierto_avg":17.2,"alto_valor_count":16,"pct_actividad":100,"conversion_rate":52.5,"dias_ciclo_prom":6},{"user_id":"Camilo Reyes","team_id":"AHS2-MP-BOCOL","total_opps":10,"revenue":125000000.0,"calientes":7,"tibias":3,"frias":0,"con_actividad":9,"act_vencidas":0,"deadline_vencidas":0,"deadline_urgentes":0,"dias_abierto_avg":17.2,"alto_valor_count":6,"pct_actividad":90,"conversion_rate":62.5,"dias_ciclo_prom":13},{"user_id":"Carla Pedrozo","team_id":"AHS1-AV19-BOCOL","total_opps":39,"revenue":369400000.0,"calientes":29,"tibias":5,"frias":5,"con_actividad":39,"act_vencidas":0,"deadline_vencidas":3,"deadline_urgentes":14,"dias_abierto_avg":23.3,"alto_valor_count":18,"pct_actividad":100,"conversion_rate":39.7,"dias_ciclo_prom":19},{"user_id":"Carlos Castro","team_id":"AHS3-AP-BQCOL","total_opps":14,"revenue":4660100.0,"calientes":6,"tibias":7,"frias":1,"con_actividad":13,"act_vencidas":0,"deadline_vencidas":9,"deadline_urgentes":1,"dias_abierto_avg":27.4,"alto_valor_count":0,"pct_actividad":93,"conversion_rate":64.9,"dias_ciclo_prom":13},{"user_id":"Cristian Alvarado","team_id":"AHS1-AV19-BOCOL","total_opps":137,"revenue":813600000.0,"calientes":56,"tibias":45,"frias":36,"con_actividad":137,"act_vencidas":0,"deadline_vencidas":20,"deadline_urgentes":92,"dias_abierto_avg":35.2,"alto_valor_count":35,"pct_actividad":100,"conversion_rate":85.0,"dias_ciclo_prom":9},{"user_id":"Edwin Rodriguez","team_id":"AHS1-AV19-BOCOL","total_opps":49,"revenue":261300222.0,"calientes":18,"tibias":9,"frias":22,"con_actividad":49,"act_vencidas":0,"deadline_vencidas":11,"deadline_urgentes":36,"dias_abierto_avg":48.1,"alto_valor_count":9,"pct_actividad":100,"conversion_rate":74.3,"dias_ciclo_prom":3},{"user_id":"Ellen Cuitiva","team_id":"AHS2-MP-BOCOL","total_opps":11,"revenue":89500000.0,"calientes":9,"tibias":0,"frias":2,"con_actividad":11,"act_vencidas":0,"deadline_vencidas":0,"deadline_urgentes":0,"dias_abierto_avg":25.6,"alto_valor_count":4,"pct_actividad":100,"conversion_rate":47.4,"dias_ciclo_prom":15},{"user_id":"Fredy Arias","team_id":"AHS2-MP-BOCOL","total_opps":13,"revenue":148000000.0,"calientes":4,"tibias":4,"frias":5,"con_actividad":12,"act_vencidas":1,"deadline_vencidas":0,"deadline_urgentes":3,"dias_abierto_avg":48.8,"alto_valor_count":7,"pct_actividad":92,"conversion_rate":53.7,"dias_ciclo_prom":3},{"user_id":"Javier Carrillo","team_id":"AHS2-MP-BOCOL","total_opps":3,"revenue":8000000.0,"calientes":3,"tibias":0,"frias":0,"con_actividad":2,"act_vencidas":0,"deadline_vencidas":0,"deadline_urgentes":1,"dias_abierto_avg":2.7,"alto_valor_count":0,"pct_actividad":67,"conversion_rate":31.2,"dias_ciclo_prom":4},{"user_id":"Johan Vargas","team_id":"AHS2-MP-BOCOL","total_opps":13,"revenue":162900000.0,"calientes":13,"tibias":0,"frias":0,"con_actividad":12,"act_vencidas":2,"deadline_vencidas":3,"deadline_urgentes":3,"dias_abierto_avg":5.8,"alto_valor_count":7,"pct_actividad":92,"conversion_rate":55.6,"dias_ciclo_prom":0},{"user_id":"Julián Piñeros","team_id":"B2B","total_opps":2,"revenue":0.0,"calientes":0,"tibias":0,"frias":2,"con_actividad":0,"act_vencidas":0,"deadline_vencidas":1,"deadline_urgentes":0,"dias_abierto_avg":130.0,"alto_valor_count":0,"pct_actividad":0,"conversion_rate":0.0,"dias_ciclo_prom":0},{"user_id":"Laura Cardona","team_id":"AHS3-AP-BQCOL","total_opps":6,"revenue":54000000.0,"calientes":5,"tibias":1,"frias":0,"con_actividad":6,"act_vencidas":1,"deadline_vencidas":4,"deadline_urgentes":2,"dias_abierto_avg":11.5,"alto_valor_count":1,"pct_actividad":100,"conversion_rate":67.7,"dias_ciclo_prom":1},{"user_id":"Monica Rodriguez","team_id":"AHS1-AV19-BOCOL","total_opps":36,"revenue":198620000.0,"calientes":13,"tibias":9,"frias":14,"con_actividad":35,"act_vencidas":0,"deadline_vencidas":1,"deadline_urgentes":14,"dias_abierto_avg":45.1,"alto_valor_count":7,"pct_actividad":97,"conversion_rate":45.0,"dias_ciclo_prom":9},{"user_id":"Nadia Saavedra","team_id":"B2B","total_opps":4,"revenue":0.0,"calientes":1,"tibias":2,"frias":1,"con_actividad":1,"act_vencidas":1,"deadline_vencidas":1,"deadline_urgentes":0,"dias_abierto_avg":55.5,"alto_valor_count":0,"pct_actividad":25,"conversion_rate":42.9,"dias_ciclo_prom":2},{"user_id":"Nicolas Quintero","team_id":"AHS2-MP-BOCOL","total_opps":56,"revenue":503500000.0,"calientes":25,"tibias":14,"frias":17,"con_actividad":51,"act_vencidas":0,"deadline_vencidas":3,"deadline_urgentes":0,"dias_abierto_avg":46.9,"alto_valor_count":23,"pct_actividad":91,"conversion_rate":46.2,"dias_ciclo_prom":2},{"user_id":"Ricardo Acosta","team_id":"AHS3-AP-BQCOL","total_opps":18,"revenue":110490000.0,"calientes":8,"tibias":6,"frias":4,"con_actividad":18,"act_vencidas":0,"deadline_vencidas":8,"deadline_urgentes":4,"dias_abierto_avg":33.3,"alto_valor_count":3,"pct_actividad":100,"conversion_rate":69.3,"dias_ciclo_prom":0},{"user_id":"Yuli Castelblanco","team_id":"ECOMMERCE-01COL","total_opps":7,"revenue":0.0,"calientes":6,"tibias":1,"frias":0,"con_actividad":3,"act_vencidas":2,"deadline_vencidas":4,"deadline_urgentes":0,"dias_abierto_avg":14.3,"alto_valor_count":0,"pct_actividad":43,"conversion_rate":85.7,"dias_ciclo_prom":1}],"top_opps":{"Nicolas Quintero":[{"name":"Jesus Forero","revenue":8000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-06-20","dias_abierto":9,"dias_hasta_cierre":26,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"Juan Mendoza","revenue":4000000,"stage":"2. Objeción x Resolver","tag":"Decisión Conjunta","temperatura":"Caliente","priority_score":6.0,"deadline":"2026-07-04","dias_abierto":21,"dias_hasta_cierre":40,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"Nicolas David Valencia Gonzalez","revenue":10000000,"stage":"2. Objeción x Resolver","tag":"Decisión Conjunta","temperatura":"Caliente","priority_score":6.0,"deadline":"2026-06-20","dias_abierto":13,"dias_hasta_cierre":26,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"Isabel Jaraba","revenue":10000000,"stage":"2. Objeción x Resolver","tag":"Decisión Conjunta","temperatura":"Caliente","priority_score":6.0,"deadline":"2026-06-27","dias_abierto":9,"dias_hasta_cierre":33,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"Janeth Manzano","revenue":20000000,"stage":"2. Objeción x Resolver","tag":"Decisión Conjunta","temperatura":"Tibio","priority_score":4.0,"deadline":"2026-07-17","dias_abierto":33,"dias_hasta_cierre":53,"tiene_actividad":true,"actividad_vencida":false,"alert":""}],"Andres Becerra":[{"name":"Gina cesareo","revenue":2000000,"stage":"3. Pedir Pedido","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-29","dias_abierto":12,"dias_hasta_cierre":4,"tiene_actividad":true,"actividad_vencida":false,"alert":"urgente"},{"name":"Olga leal castellanos","revenue":5000000,"stage":"3. Pedir Pedido","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-06-17","dias_abierto":1,"dias_hasta_cierre":23,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"RICHARD PINEDA","revenue":5000000,"stage":"3. Pedir Pedido","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-28","dias_abierto":17,"dias_hasta_cierre":3,"tiene_actividad":true,"actividad_vencida":false,"alert":"urgente"},{"name":"Nicolás Ramos","revenue":6000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-06-08","dias_abierto":11,"dias_hasta_cierre":14,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"Pablo Hernández","revenue":2000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-06-10","dias_abierto":8,"dias_hasta_cierre":16,"tiene_actividad":true,"actividad_vencida":false,"alert":""}],"Fredy Arias":[{"name":"Juan Pablo García","revenue":15000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-26","dias_abierto":0,"dias_hasta_cierre":1,"tiene_actividad":true,"actividad_vencida":true,"alert":"urgente"},{"name":"Yolanda Sierra","revenue":4000000,"stage":"2. Objeción x Resolver","tag":"Decisión Conjunta","temperatura":"Caliente","priority_score":6.0,"deadline":"2026-06-10","dias_abierto":0,"dias_hasta_cierre":16,"tiene_actividad":false,"actividad_vencida":false,"alert":""},{"name":"Aura Parraga","revenue":15000000,"stage":"2. Objeción x Resolver","tag":"Decisión Conjunta","temperatura":"Caliente","priority_score":6.0,"deadline":"2026-06-05","dias_abierto":10,"dias_hasta_cierre":11,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"Hector Hernandez","revenue":5000000,"stage":"2. Objeción x Resolver","tag":"Decisión Conjunta","temperatura":"Caliente","priority_score":6.0,"deadline":"2026-06-15","dias_abierto":11,"dias_hasta_cierre":21,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"Leonardo Silva","revenue":20000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Tibio","priority_score":6.0,"deadline":"2026-05-30","dias_abierto":52,"dias_hasta_cierre":5,"tiene_actividad":true,"actividad_vencida":false,"alert":"urgente"}],"Laura Cardona":[{"name":"Adolfo Barros","revenue":5000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-22","dias_abierto":10,"dias_hasta_cierre":-3,"tiene_actividad":true,"actividad_vencida":false,"alert":"vencida"},{"name":"Angélica León Bustos","revenue":9000000,"stage":"2. Objeción x Resolver","tag":"Decisión Conjunta","temperatura":"Caliente","priority_score":6.0,"deadline":"2026-05-27","dias_abierto":0,"dias_hasta_cierre":2,"tiene_actividad":true,"actividad_vencida":false,"alert":"urgente"},{"name":"Pareja Colchon","revenue":2000000,"stage":"2. Objeción x Resolver","tag":"Decisión Conjunta","temperatura":"Caliente","priority_score":6.0,"deadline":"2026-05-23","dias_abierto":7,"dias_hasta_cierre":-2,"tiene_actividad":true,"actividad_vencida":false,"alert":"vencida"},{"name":"María Camila Amado","revenue":30000000,"stage":"2. Objeción x Resolver","tag":"Decisión Conjunta","temperatura":"Caliente","priority_score":6.0,"deadline":"2026-05-08","dias_abierto":21,"dias_hasta_cierre":-17,"tiene_actividad":true,"actividad_vencida":false,"alert":"vencida"},{"name":"Jerico Ingeniería Y Proyectos Sas","revenue":3000000,"stage":"2. Objeción x Resolver","tag":"Dinero","temperatura":"Caliente","priority_score":3.0,"deadline":"2026-05-24","dias_abierto":0,"dias_hasta_cierre":-1,"tiene_actividad":true,"actividad_vencida":true,"alert":"vencida"}],"Carla Pedrozo":[{"name":"Marcela Cristina Rueda Varvo","revenue":4000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-06-25","dias_abierto":0,"dias_hasta_cierre":31,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"Juanita Gonzalez","revenue":12000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-30","dias_abierto":19,"dias_hasta_cierre":5,"tiene_actividad":true,"actividad_vencida":false,"alert":"urgente"},{"name":"Sandra Valderrama","revenue":6000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-31","dias_abierto":11,"dias_hasta_cierre":6,"tiene_actividad":true,"actividad_vencida":false,"alert":"urgente"},{"name":"Amanda Garcia","revenue":10000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-31","dias_abierto":12,"dias_hasta_cierre":6,"tiene_actividad":true,"actividad_vencida":false,"alert":"urgente"},{"name":"Eileen gomez","revenue":6000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-06-07","dias_abierto":13,"dias_hasta_cierre":13,"tiene_actividad":true,"actividad_vencida":false,"alert":""}],"Andres Mayo":[{"name":"Ingrid febres","revenue":15000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-06-07","dias_abierto":9,"dias_hasta_cierre":13,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"Isabel botero","revenue":10000000,"stage":"3. Pedir Pedido","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-31","dias_abierto":21,"dias_hasta_cierre":6,"tiene_actividad":true,"actividad_vencida":false,"alert":"urgente"},{"name":"Carlos fernando bejarano mora","revenue":5000000,"stage":"3. Pedir Pedido","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-31","dias_abierto":23,"dias_hasta_cierre":6,"tiene_actividad":true,"actividad_vencida":false,"alert":"urgente"},{"name":"Ricardo realpe","revenue":14000000,"stage":"3. Pedir Pedido","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-31","dias_abierto":14,"dias_hasta_cierre":6,"tiene_actividad":true,"actividad_vencida":false,"alert":"urgente"},{"name":"Samuel sarmiento","revenue":15000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-06-12","dias_abierto":5,"dias_hasta_cierre":18,"tiene_actividad":true,"actividad_vencida":false,"alert":""}],"Camilo Reyes":[{"name":"emerson acuña","revenue":1000000,"stage":"1. New","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"","dias_abierto":0,"dias_hasta_cierre":null,"tiene_actividad":false,"actividad_vencida":false,"alert":""},{"name":"Nicolás galeano","revenue":7000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-06-02","dias_abierto":7,"dias_hasta_cierre":8,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"Natalia llano","revenue":5000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-06-05","dias_abierto":7,"dias_hasta_cierre":11,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"Mateo mora","revenue":10000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-06-18","dias_abierto":8,"dias_hasta_cierre":24,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"Andrea Suarez","revenue":10000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-06-04","dias_abierto":8,"dias_hasta_cierre":10,"tiene_actividad":true,"actividad_vencida":false,"alert":""}],"Cristian Alvarado":[{"name":"Maria Eugenia Ramirez Baena","revenue":2000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-25","dias_abierto":3,"dias_hasta_cierre":0,"tiene_actividad":true,"actividad_vencida":false,"alert":"urgente"},{"name":"LUIS VELANDIA","revenue":1000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-31","dias_abierto":22,"dias_hasta_cierre":6,"tiene_actividad":true,"actividad_vencida":false,"alert":"urgente"},{"name":"Javier Perez De Los Rios","revenue":2000000,"stage":"3. Pedir Pedido","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-06-07","dias_abierto":8,"dias_hasta_cierre":13,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"LORENA GALVIS","revenue":5000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-06-02","dias_abierto":7,"dias_hasta_cierre":8,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"BIBIANA VASQUEZ","revenue":4000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-06-10","dias_abierto":21,"dias_hasta_cierre":16,"tiene_actividad":true,"actividad_vencida":false,"alert":""}],"Javier Carrillo":[{"name":"isabel pereira","revenue":4500000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-25","dias_abierto":1,"dias_hasta_cierre":0,"tiene_actividad":true,"actividad_vencida":false,"alert":"urgente"},{"name":"Diana Carolina Ortiz","revenue":3500000,"stage":"2. Objeción x Resolver","tag":"Decisión Conjunta","temperatura":"Caliente","priority_score":6.0,"deadline":"2026-06-04","dias_abierto":7,"dias_hasta_cierre":10,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"Jorge Enrique Sanchez Rojas","revenue":0,"stage":"1. New","tag":"","temperatura":"Caliente","priority_score":3.0,"deadline":"","dias_abierto":0,"dias_hasta_cierre":null,"tiene_actividad":false,"actividad_vencida":false,"alert":""}],"Monica Rodriguez":[{"name":"Luis fandiño","revenue":2200000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-29","dias_abierto":21,"dias_hasta_cierre":4,"tiene_actividad":true,"actividad_vencida":false,"alert":"urgente"},{"name":"Angela luna escobar","revenue":5000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-30","dias_abierto":0,"dias_hasta_cierre":5,"tiene_actividad":true,"actividad_vencida":false,"alert":"urgente"},{"name":"Luz Edith Giraldo","revenue":1000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-28","dias_abierto":1,"dias_hasta_cierre":3,"tiene_actividad":true,"actividad_vencida":false,"alert":"urgente"},{"name":"Natalia borge","revenue":5000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-06-08","dias_abierto":21,"dias_hasta_cierre":14,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"Luz Angelica Rojas","revenue":2000000,"stage":"3. Pedir Pedido","tag":"Medidas","temperatura":"Tibio","priority_score":6.0,"deadline":"2026-05-31","dias_abierto":31,"dias_hasta_cierre":6,"tiene_actividad":true,"actividad_vencida":false,"alert":"urgente"}],"Edwin Rodriguez":[{"name":"Fernando Martinez","revenue":600000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-29","dias_abierto":0,"dias_hasta_cierre":4,"tiene_actividad":true,"actividad_vencida":false,"alert":"urgente"},{"name":"Angela Molano","revenue":500000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-30","dias_abierto":1,"dias_hasta_cierre":5,"tiene_actividad":true,"actividad_vencida":false,"alert":"urgente"},{"name":"Edgar Espinosa","revenue":9000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-28","dias_abierto":13,"dias_hasta_cierre":3,"tiene_actividad":true,"actividad_vencida":false,"alert":"urgente"},{"name":"margarita","revenue":1500000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-30","dias_abierto":10,"dias_hasta_cierre":5,"tiene_actividad":true,"actividad_vencida":false,"alert":"urgente"},{"name":"paola zuluaga","revenue":650000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-20","dias_abierto":10,"dias_hasta_cierre":-5,"tiene_actividad":true,"actividad_vencida":false,"alert":"vencida"}],"Johan Vargas":[{"name":"XIMENA MATEUS","revenue":0,"stage":"1. New","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"","dias_abierto":1,"dias_hasta_cierre":null,"tiene_actividad":false,"actividad_vencida":false,"alert":""},{"name":"Beatris Amaris","revenue":4000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-22","dias_abierto":9,"dias_hasta_cierre":-3,"tiene_actividad":true,"actividad_vencida":false,"alert":"vencida"},{"name":"Fabio Gaviria","revenue":7000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-21","dias_abierto":11,"dias_hasta_cierre":-4,"tiene_actividad":true,"actividad_vencida":true,"alert":"vencida"},{"name":"Maria Lozada","revenue":0,"stage":"2. Objeción x Resolver","tag":"Decisión Conjunta","temperatura":"Caliente","priority_score":6.0,"deadline":"2026-06-06","dias_abierto":1,"dias_hasta_cierre":12,"tiene_actividad":true,"actividad_vencida":true,"alert":""},{"name":"Señora Erica","revenue":4000000,"stage":"2. Objeción x Resolver","tag":"Decisión Conjunta","temperatura":"Caliente","priority_score":6.0,"deadline":"2026-06-29","dias_abierto":1,"dias_hasta_cierre":35,"tiene_actividad":true,"actividad_vencida":false,"alert":""}],"Carlos Castro":[{"name":"Yesenia Del Carmen Betancourt Pareja","revenue":100000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-09-30","dias_abierto":3,"dias_hasta_cierre":128,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"Aura Isabel Moncayo Florez","revenue":150000,"stage":"1. New","tag":"Decisión Conjunta","temperatura":"Caliente","priority_score":6.0,"deadline":"2026-05-23","dias_abierto":1,"dias_hasta_cierre":-2,"tiene_actividad":false,"actividad_vencida":false,"alert":"vencida"},{"name":"Jennifer Yepez","revenue":100000,"stage":"2. Objeción x Resolver","tag":"Decisión Conjunta","temperatura":"Tibio","priority_score":4.0,"deadline":"2026-05-07","dias_abierto":25,"dias_hasta_cierre":-18,"tiene_actividad":true,"actividad_vencida":false,"alert":"vencida"},{"name":"Adriana Plata","revenue":110000,"stage":"2. Objeción x Resolver","tag":"Decisión Conjunta","temperatura":"Tibio","priority_score":4.0,"deadline":"2026-05-28","dias_abierto":34,"dias_hasta_cierre":3,"tiene_actividad":true,"actividad_vencida":false,"alert":"urgente"},{"name":"Maria Angel Hollmann Jaramillo","revenue":100000,"stage":"2. Objeción x Resolver","tag":"Decisión Conjunta","temperatura":"Tibio","priority_score":4.0,"deadline":"2026-05-10","dias_abierto":43,"dias_hasta_cierre":-15,"tiene_actividad":true,"actividad_vencida":false,"alert":"vencida"}],"Ricardo Acosta":[{"name":"Yeiny paola perez","revenue":4000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-06-25","dias_abierto":8,"dias_hasta_cierre":31,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"Sandra jimenez","revenue":3000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-07-30","dias_abierto":11,"dias_hasta_cierre":66,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"Nazly garcia","revenue":7500000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-06-30","dias_abierto":11,"dias_hasta_cierre":36,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"Cesar Caballero Sierra Acero","revenue":1000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-30","dias_abierto":16,"dias_hasta_cierre":5,"tiene_actividad":true,"actividad_vencida":false,"alert":"urgente"},{"name":"Carlos","revenue":12000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-05-30","dias_abierto":4,"dias_hasta_cierre":5,"tiene_actividad":true,"actividad_vencida":false,"alert":"urgente"}],"Ellen Cuitiva":[{"name":"Maria Vega","revenue":10000000,"stage":"2. Objeción x Resolver","tag":"Medidas","temperatura":"Caliente","priority_score":9.0,"deadline":"2026-07-05","dias_abierto":1,"dias_hasta_cierre":41,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"Ana Maria Restrepo","revenue":1500000,"stage":"2. Objeción x Resolver","tag":"Decisión Conjunta","temperatura":"Caliente","priority_score":6.0,"deadline":"2026-07-05","dias_abierto":1,"dias_hasta_cierre":41,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"Alexandra Sanches Chaves","revenue":4000000,"stage":"2. Objeción x Resolver","tag":"Dinero","temperatura":"Caliente","priority_score":3.0,"deadline":"2026-07-12","dias_abierto":2,"dias_hasta_cierre":48,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"Paula Zapata","revenue":3000000,"stage":"2. Objeción x Resolver","tag":"Dinero","temperatura":"Caliente","priority_score":3.0,"deadline":"2026-07-26","dias_abierto":6,"dias_hasta_cierre":62,"tiene_actividad":true,"actividad_vencida":false,"alert":""},{"name":"Juliana Ortega","revenue":8000000,"stage":"2. Objeción x Resolver","tag":"Dinero","temperatura":"Caliente","priority_score":3.0,"deadline":"2026-06-05","dias_abierto":6,"dias_hasta_cierre":11,"tiene_actividad":true,"actividad_vencida":false,"alert":""}],"Yuli Castelblanco":[{"name":"Eduardo Papazian","revenue":0,"stage":"2. Objeción x Resolver","tag":"","temperatura":"Caliente","priority_score":3.0,"deadline":"","dias_abierto":3,"dias_hasta_cierre":null,"tiene_actividad":false,"actividad_vencida":false,"alert":""},{"name":"Karenn Pagina","revenue":0,"stage":"1. New","tag":"","temperatura":"Caliente","priority_score":3.0,"deadline":"","dias_abierto":6,"dias_hasta_cierre":null,"tiene_actividad":false,"actividad_vencida":false,"alert":""},{"name":"Sebastian Valencia Ramírez","revenue":0,"stage":"2. Objeción x Resolver","tag":"","temperatura":"Caliente","priority_score":3.0,"deadline":"2026-05-20","dias_abierto":10,"dias_hasta_cierre":-5,"tiene_actividad":true,"actividad_vencida":true,"alert":"vencida"},{"name":"MONICA CERTAIN PALMA","revenue":0,"stage":"2. Objeción x Resolver","tag":"","temperatura":"Caliente","priority_score":3.0,"deadline":"2026-05-22","dias_abierto":11,"dias_hasta_cierre":-3,"tiene_actividad":true,"actividad_vencida":true,"alert":"vencida"},{"name":"FRANZ BERGEN PETERS","revenue":0,"stage":"2. Objeción x Resolver","tag":"","temperatura":"Caliente","priority_score":3.0,"deadline":"2026-05-14","dias_abierto":18,"dias_hasta_cierre":-11,"tiene_actividad":false,"actividad_vencida":false,"alert":"vencida"}],"Nadia Saavedra":[{"name":"Estela Diaz","revenue":0,"stage":"2. Objeción x Resolver","tag":"Decisión Conjunta","temperatura":"Caliente","priority_score":6.0,"deadline":"2026-06-15","dias_abierto":9,"dias_hasta_cierre":21,"tiene_actividad":true,"actividad_vencida":true,"alert":""},{"name":"MAS DEVELOPERES SAS","revenue":0,"stage":"1. New","tag":"","temperatura":"Tibio","priority_score":2.0,"deadline":"","dias_abierto":31,"dias_hasta_cierre":null,"tiene_actividad":false,"actividad_vencida":false,"alert":""},{"name":"Jacqueline Saavedra","revenue":0,"stage":"1. New","tag":"","temperatura":"Tibio","priority_score":2.0,"deadline":"","dias_abierto":44,"dias_hasta_cierre":null,"tiene_actividad":false,"actividad_vencida":false,"alert":""},{"name":"Vertical Park S.A.S","revenue":0,"stage":"4. X Finalizar Pago","tag":"","temperatura":"Frío","priority_score":1.0,"deadline":"2026-04-10","dias_abierto":138,"dias_hasta_cierre":-45,"tiene_actividad":false,"actividad_vencida":false,"alert":"vencida"}],"Julián Piñeros":[{"name":"Laura Juliana Alba Lazaro","revenue":0,"stage":"1. New","tag":"","temperatura":"Frío","priority_score":1.0,"deadline":"2026-01-30","dias_abierto":129,"dias_hasta_cierre":-115,"tiene_actividad":false,"actividad_vencida":false,"alert":"vencida"},{"name":"Yuly Alejandra Vargas Romero","revenue":0,"stage":"1. New","tag":"","temperatura":"Frío","priority_score":1.0,"deadline":"","dias_abierto":131,"dias_hasta_cierre":null,"tiene_actividad":false,"actividad_vencida":false,"alert":""}]},"en_riesgo":[{"user_id":"Cristian Alvarado","team_id":"AHS1-AV19-BOCOL","partner_id":"Luz Mery Valencia","expected_revenue":40000000.0,"dias_abierto":71,"dias_hasta_cierre":1.0,"tag_ids":"En Obra","temperatura":"Frío","tiene_actividad":true},{"user_id":"Cristian Alvarado","team_id":"AHS1-AV19-BOCOL","partner_id":"ISABELLA GONZALEZ","expected_revenue":35000000.0,"dias_abierto":50,"dias_hasta_cierre":-10.0,"tag_ids":"Dinero","temperatura":"Tibio","tiene_actividad":true},{"user_id":"Cristian Alvarado","team_id":"AHS1-AV19-BOCOL","partner_id":"ISABELLA GONZALEZ","expected_revenue":35000000.0,"dias_abierto":50,"dias_hasta_cierre":-10.0,"tag_ids":"Medidas","temperatura":"Tibio","tiene_actividad":true},{"user_id":"Monica Rodriguez","team_id":"AHS1-AV19-BOCOL","partner_id":"Hector vallejo coral","expected_revenue":28000000.0,"dias_abierto":67,"dias_hasta_cierre":3.0,"tag_ids":"Viaje","temperatura":"Frío","tiene_actividad":true},{"user_id":"Andres Mayo","team_id":"AHS2-MP-BOCOL","partner_id":"judith soto","expected_revenue":22000000.0,"dias_abierto":59,"dias_hasta_cierre":5.0,"tag_ids":"Dinero","temperatura":"Frío","tiene_actividad":true},{"user_id":"Edwin Rodriguez","team_id":"AHS1-AV19-BOCOL","partner_id":"Jaime Ochoa","expected_revenue":21000000.0,"dias_abierto":89,"dias_hasta_cierre":5.0,"tag_ids":"Dinero","temperatura":"Frío","tiene_actividad":true},{"user_id":"Fredy Arias","team_id":"AHS2-MP-BOCOL","partner_id":"Leonardo Silva","expected_revenue":20000000.0,"dias_abierto":52,"dias_hasta_cierre":5.0,"tag_ids":"Medidas","temperatura":"Tibio","tiene_actividad":true},{"user_id":"Andres Mayo","team_id":"AHS1-AV19-BOCOL","partner_id":"Rp logistics sas","expected_revenue":18000000.0,"dias_abierto":34,"dias_hasta_cierre":5.0,"tag_ids":"Decisión Conjunta","temperatura":"Tibio","tiene_actividad":true},{"user_id":"Ricardo Acosta","team_id":"AHS3-AP-BQCOL","partner_id":"Edificio destinity","expected_revenue":17000000.0,"dias_abierto":92,"dias_hasta_cierre":-58.0,"tag_ids":"Decisión Conjunta","temperatura":"Frío","tiene_actividad":true},{"user_id":"Edwin Rodriguez","team_id":"AHS1-AV19-BOCOL","partner_id":"Juan Carlos Pedraza","expected_revenue":16000000.0,"dias_abierto":31,"dias_hasta_cierre":5.0,"tag_ids":"Medidas","temperatura":"Tibio","tiene_actividad":true},{"user_id":"Cristian Alvarado","team_id":"AHS1-AV19-BOCOL","partner_id":"DIANA FONSECA","expected_revenue":15000000.0,"dias_abierto":62,"dias_hasta_cierre":1.0,"tag_ids":"Medidas","temperatura":"Frío","tiene_actividad":true},{"user_id":"Edwin Rodriguez","team_id":"AHS1-AV19-BOCOL","partner_id":"Oscar Ballesteros","expected_revenue":15000000.0,"dias_abierto":59,"dias_hasta_cierre":3.0,"tag_ids":"Decisión Conjunta","temperatura":"Frío","tiene_actividad":true},{"user_id":"Cristian Alvarado","team_id":"AHS1-AV19-BOCOL","partner_id":"HEIDY MORA","expected_revenue":15000000.0,"dias_abierto":53,"dias_hasta_cierre":1.0,"tag_ids":"Dinero","temperatura":"Tibio","tiene_actividad":true},{"user_id":"Edwin Rodriguez","team_id":"AHS1-AV19-BOCOL","partner_id":"Manuel Garzon","expected_revenue":14000000.0,"dias_abierto":141,"dias_hasta_cierre":4.0,"tag_ids":"Medidas","temperatura":"Frío","tiene_actividad":true},{"user_id":"Edwin Rodriguez","team_id":"AHS1-AV19-BOCOL","partner_id":"Carlos Vargas","expected_revenue":13000000.0,"dias_abierto":32,"dias_hasta_cierre":2.0,"tag_ids":"En Obra","temperatura":"Tibio","tiene_actividad":true},{"user_id":"Cristian Alvarado","team_id":"AHS1-AV19-BOCOL","partner_id":"JORGE FERRO","expected_revenue":13000000.0,"dias_abierto":56,"dias_hasta_cierre":1.0,"tag_ids":"Dinero","temperatura":"Frío","tiene_actividad":true},{"user_id":"Ricardo Acosta","team_id":"AHS3-AP-BQCOL","partner_id":"Juan diego cotes","expected_revenue":13000000.0,"dias_abierto":50,"dias_hasta_cierre":-25.0,"tag_ids":"Decisión Conjunta","temperatura":"Tibio","tiene_actividad":true},{"user_id":"Cristian Alvarado","team_id":"AHS1-AV19-BOCOL","partner_id":"Nathaly Puerto","expected_revenue":10000000.0,"dias_abierto":56,"dias_hasta_cierre":1.0,"tag_ids":"Medidas","temperatura":"Frío","tiene_actividad":true},{"user_id":"Cristian Alvarado","team_id":"AHS1-AV19-BOCOL","partner_id":"Nathaly Puerto","expected_revenue":10000000.0,"dias_abierto":56,"dias_hasta_cierre":1.0,"tag_ids":"Decisión Conjunta","temperatura":"Frío","tiene_actividad":true},{"user_id":"Cristian Alvarado","team_id":"AHS1-AV19-BOCOL","partner_id":"RAFAEL NIÑO","expected_revenue":10000000.0,"dias_abierto":50,"dias_hasta_cierre":1.0,"tag_ids":"Medidas","temperatura":"Tibio","tiene_actividad":true},{"user_id":"Andres Mayo","team_id":"AHS2-MP-BOCOL","partner_id":"diana toscano","expected_revenue":10000000.0,"dias_abierto":49,"dias_hasta_cierre":4.0,"tag_ids":"Decisión Conjunta","temperatura":"Tibio","tiene_actividad":true},{"user_id":"Cristian Alvarado","team_id":"AHS1-AV19-BOCOL","partner_id":"ALEJANDRO BLANCO","expected_revenue":10000000.0,"dias_abierto":64,"dias_hasta_cierre":1.0,"tag_ids":"Medidas","temperatura":"Frío","tiene_actividad":true},{"user_id":"Cristian Alvarado","team_id":"AHS1-AV19-BOCOL","partner_id":"FERNANDO AYALA","expected_revenue":10000000.0,"dias_abierto":65,"dias_hasta_cierre":1.0,"tag_ids":"Medidas","temperatura":"Frío","tiene_actividad":true},{"user_id":"Cristian Alvarado","team_id":"AHS1-AV19-BOCOL","partner_id":"FERNANDO AYALA","expected_revenue":10000000.0,"dias_abierto":65,"dias_hasta_cierre":1.0,"tag_ids":"Decisión Conjunta","temperatura":"Frío","tiene_actividad":true},{"user_id":"Cristian Alvarado","team_id":"AHS1-AV19-BOCOL","partner_id":"Said Mohamed Rubi","expected_revenue":10000000.0,"dias_abierto":43,"dias_hasta_cierre":1.0,"tag_ids":"Dinero","temperatura":"Tibio","tiene_actividad":true},{"user_id":"Edwin Rodriguez","team_id":"AHS1-AV19-BOCOL","partner_id":"Milena Bermudez","expected_revenue":10000000.0,"dias_abierto":68,"dias_hasta_cierre":-4.0,"tag_ids":"Medidas","temperatura":"Frío","tiene_actividad":true},{"user_id":"Cristian Alvarado","team_id":"AHS1-AV19-BOCOL","partner_id":"NATALY MONTAÑO","expected_revenue":10000000.0,"dias_abierto":40,"dias_hasta_cierre":1.0,"tag_ids":"Medidas","temperatura":"Tibio","tiene_actividad":true},{"user_id":"Cristian Alvarado","team_id":"AHS1-AV19-BOCOL","partner_id":"Maria Laura Peñaranda","expected_revenue":10000000.0,"dias_abierto":36,"dias_hasta_cierre":-1.0,"tag_ids":"Medidas","temperatura":"Tibio","tiene_actividad":true},{"user_id":"Cristian Alvarado","team_id":"AHS1-AV19-BOCOL","partner_id":"Venas Y Piel Unidad Vascular Y Dermatólogica S.A.S.","expected_revenue":10000000.0,"dias_abierto":33,"dias_hasta_cierre":1.0,"tag_ids":"En Obra","temperatura":"Tibio","tiene_actividad":true},{"user_id":"Cristian Alvarado","team_id":"AHS1-AV19-BOCOL","partner_id":"Victor Rene Acevedo Manchola","expected_revenue":10000000.0,"dias_abierto":32,"dias_hasta_cierre":1.0,"tag_ids":"Dinero","temperatura":"Tibio","tiene_actividad":true},{"user_id":"Nicolas Quintero","team_id":"AHS2-MP-BOCOL","partner_id":"Andrea Osorio","expected_revenue":10000000.0,"dias_abierto":141,"dias_hasta_cierre":-10.0,"tag_ids":"Dinero","temperatura":"Frío","tiene_actividad":true}],"en_valor":[{"user_id":"Andres Mayo","team_id":"AHS1-AV19-BOCOL","partner_id":"Tatiana sarmiento","expected_revenue":68000000.0,"dias_abierto":33,"dias_hasta_cierre":11.0,"tag_ids":"Decisión Conjunta","temperatura":"Tibio"},{"user_id":"Cristian Alvarado","team_id":"AHS1-AV19-BOCOL","partner_id":"Luz Mery Valencia","expected_revenue":40000000.0,"dias_abierto":71,"dias_hasta_cierre":1.0,"tag_ids":"En Obra","temperatura":"Frío"},{"user_id":"Nicolas Quintero","team_id":"AHS2-MP-BOCOL","partner_id":"Andrés Forero","expected_revenue":30000000.0,"dias_abierto":35,"dias_hasta_cierre":25.0,"tag_ids":"Decisión Conjunta","temperatura":"Tibio"},{"user_id":"Monica Rodriguez","team_id":"AHS1-AV19-BOCOL","partner_id":"Hector vallejo coral","expected_revenue":28000000.0,"dias_abierto":67,"dias_hasta_cierre":3.0,"tag_ids":"Viaje","temperatura":"Frío"},{"user_id":"Andres Mayo","team_id":"AHS2-MP-BOCOL","partner_id":"judith soto","expected_revenue":22000000.0,"dias_abierto":59,"dias_hasta_cierre":5.0,"tag_ids":"Dinero","temperatura":"Frío"},{"user_id":"Edwin Rodriguez","team_id":"AHS1-AV19-BOCOL","partner_id":"Jaime Ochoa","expected_revenue":21000000.0,"dias_abierto":89,"dias_hasta_cierre":5.0,"tag_ids":"Dinero","temperatura":"Frío"},{"user_id":"Fredy Arias","team_id":"AHS2-MP-BOCOL","partner_id":"Leonardo Silva","expected_revenue":20000000.0,"dias_abierto":52,"dias_hasta_cierre":5.0,"tag_ids":"Medidas","temperatura":"Tibio"},{"user_id":"Nicolas Quintero","team_id":"AHS2-MP-BOCOL","partner_id":"Grupo Blum Sas","expected_revenue":20000000.0,"dias_abierto":94,"dias_hasta_cierre":25.0,"tag_ids":"Dinero","temperatura":"Frío"},{"user_id":"Nicolas Quintero","team_id":"AHS2-MP-BOCOL","partner_id":"Julio Bohorquez","expected_revenue":20000000.0,"dias_abierto":99,"dias_hasta_cierre":18.0,"tag_ids":"En Obra","temperatura":"Frío"},{"user_id":"Nicolas Quintero","team_id":"AHS2-MP-BOCOL","partner_id":"Felipe Gomez","expected_revenue":20000000.0,"dias_abierto":34,"dias_hasta_cierre":65.0,"tag_ids":"Dinero","temperatura":"Tibio"},{"user_id":"Nicolas Quintero","team_id":"AHS2-MP-BOCOL","partner_id":"Janeth Manzano","expected_revenue":20000000.0,"dias_abierto":33,"dias_hasta_cierre":53.0,"tag_ids":"Decisión Conjunta","temperatura":"Tibio"},{"user_id":"Nicolas Quintero","team_id":"AHS2-MP-BOCOL","partner_id":"Liliana sicard","expected_revenue":20000000.0,"dias_abierto":32,"dias_hasta_cierre":32.0,"tag_ids":"Dinero","temperatura":"Tibio"},{"user_id":"Nicolas Quintero","team_id":"AHS2-MP-BOCOL","partner_id":"Javier Montolla","expected_revenue":20000000.0,"dias_abierto":141,"dias_hasta_cierre":59.0,"tag_ids":"En Obra","temperatura":"Frío"},{"user_id":"Andres Mayo","team_id":"AHS1-AV19-BOCOL","partner_id":"Rp logistics sas","expected_revenue":18000000.0,"dias_abierto":34,"dias_hasta_cierre":5.0,"tag_ids":"Decisión Conjunta","temperatura":"Tibio"},{"user_id":"Nicolas Quintero","team_id":"AHS2-MP-BOCOL","partner_id":"Milena Bermúdez","expected_revenue":18000000.0,"dias_abierto":111,"dias_hasta_cierre":94.0,"tag_ids":"Dinero","temperatura":"Frío"},{"user_id":"Ellen Cuitiva","team_id":"AHS2-MP-BOCOL","partner_id":"Claudia San Miguel","expected_revenue":17000000.0,"dias_abierto":106,"dias_hasta_cierre":15.0,"tag_ids":"En Obra","temperatura":"Frío"},{"user_id":"Carla Pedrozo","team_id":"AHS1-AV19-BOCOL","partner_id":"Ricardo Ferreira","expected_revenue":16000000.0,"dias_abierto":82,"dias_hasta_cierre":12.0,"tag_ids":"En Obra","temperatura":"Frío"},{"user_id":"Monica Rodriguez","team_id":"AHS1-AV19-BOCOL","partner_id":"Maria teresa Becerra","expected_revenue":16000000.0,"dias_abierto":65,"dias_hasta_cierre":36.0,"tag_ids":"Medidas","temperatura":"Frío"},{"user_id":"Edwin Rodriguez","team_id":"AHS1-AV19-BOCOL","partner_id":"Juan Carlos Pedraza","expected_revenue":16000000.0,"dias_abierto":31,"dias_hasta_cierre":5.0,"tag_ids":"Medidas","temperatura":"Tibio"},{"user_id":"Cristian Alvarado","team_id":"AHS1-AV19-BOCOL","partner_id":"HEIDY MORA","expected_revenue":15000000.0,"dias_abierto":53,"dias_hasta_cierre":1.0,"tag_ids":"Dinero","temperatura":"Tibio"}]};
+const DATA = {"fecha": "25 May 2026", "fuente": "BigQuery · nitro-bigquery.odoo_data_prod · Tiempo real", "total_pipeline": 3824185422, "total_opps": 595, "total_con_actividad": 504, "total_sin_actividad": 91, "total_act_vencidas": 6, "total_deadline_vencidas": 67, "calientes": 262, "tibias": 131, "frias": 202, "conversion_global": 100.0, "dias_cierre_prom_global": 4.4, "tiendas": [{"tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "total_opps": 359, "revenue": 2401662222.0, "calientes": 176, "tibias": 92, "frias": 91, "con_actividad": 357, "act_vencidas": 0, "deadline_vencidas": 35, "deadline_urgentes": 177, "pct_actividad": 99.0, "dias_abierto_avg": 41.0, "alto_valor_count": 87}, {"tienda": "{\"en_US\": \"AHS2-MP-BOCOL\"}", "total_opps": 115, "revenue": 1128900000.0, "calientes": 61, "tibias": 22, "frias": 32, "con_actividad": 106, "act_vencidas": 3, "deadline_vencidas": 6, "deadline_urgentes": 9, "pct_actividad": 92.0, "dias_abierto_avg": 47.0, "alto_valor_count": 52}, {"tienda": "{\"en_US\": \"AHS3-AP-BQCOL\", \"es_CO\": \"AHS3-AP-BQCOL\"}", "total_opps": 37, "revenue": 166150100.0, "calientes": 18, "tibias": 14, "frias": 5, "con_actividad": 37, "act_vencidas": 0, "deadline_vencidas": 20, "deadline_urgentes": 7, "pct_actividad": 100.0, "dias_abierto_avg": 28.0, "alto_valor_count": 4}, {"tienda": "{\"en_US\": \"B2B\", \"es_CO\": \"B2B\"}", "total_opps": 6, "revenue": 0.0, "calientes": 1, "tibias": 2, "frias": 3, "con_actividad": 1, "act_vencidas": 1, "deadline_vencidas": 2, "deadline_urgentes": 0, "pct_actividad": 17.0, "dias_abierto_avg": 80.0, "alto_valor_count": 0}, {"tienda": "{\"en_US\": \"ECOMMERCE-01COL\", \"es_CO\": \"ECOM-01COL\"}", "total_opps": 7, "revenue": 0.0, "calientes": 6, "tibias": 1, "frias": 0, "con_actividad": 3, "act_vencidas": 2, "deadline_vencidas": 4, "deadline_urgentes": 0, "pct_actividad": 43.0, "dias_abierto_avg": 14.0, "alto_valor_count": 0}, {"tienda": "{\"en_US\": \"FDH-BOCOL\", \"es_CO\": \"FERIA-FDH-BOCOL\"}", "total_opps": 71, "revenue": 127473100.0, "calientes": 0, "tibias": 0, "frias": 71, "con_actividad": 0, "act_vencidas": 0, "deadline_vencidas": 0, "deadline_urgentes": 0, "pct_actividad": 0.0, "dias_abierto_avg": 252.0, "alto_valor_count": 6}], "asesores": [{"asesor": "Andres Becerra", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "total_opps": 74, "revenue": 404604000.0, "calientes": 45, "tibias": 22, "frias": 7, "con_actividad": 74, "act_vencidas": 0, "deadline_vencidas": 0, "deadline_urgentes": 6, "pct_actividad": 100.0, "dias_abierto_avg": 23.0, "conversion_rate": 100.0, "dias_cierre_prom": 7.6, "alto_valor_count": 5, "semaforo": "verde"}, {"asesor": "Andres Mayo", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "total_opps": 32, "revenue": 379500000.0, "calientes": 24, "tibias": 7, "frias": 1, "con_actividad": 32, "act_vencidas": 0, "deadline_vencidas": 0, "deadline_urgentes": 23, "pct_actividad": 100.0, "dias_abierto_avg": 17.0, "conversion_rate": 100.0, "dias_cierre_prom": 0.7, "alto_valor_count": 16, "semaforo": "verde"}, {"asesor": "Camilo Reyes", "tienda": "{\"en_US\": \"AHS2-MP-BOCOL\"}", "total_opps": 10, "revenue": 125000000.0, "calientes": 7, "tibias": 3, "frias": 0, "con_actividad": 9, "act_vencidas": 0, "deadline_vencidas": 0, "deadline_urgentes": 0, "pct_actividad": 90.0, "dias_abierto_avg": 17.0, "conversion_rate": 100.0, "dias_cierre_prom": 1.8, "alto_valor_count": 6, "semaforo": "verde"}, {"asesor": "Carla Pedrozo", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "total_opps": 40, "revenue": 369400000.0, "calientes": 30, "tibias": 5, "frias": 5, "con_actividad": 39, "act_vencidas": 0, "deadline_vencidas": 3, "deadline_urgentes": 14, "pct_actividad": 98.0, "dias_abierto_avg": 23.0, "conversion_rate": 100.0, "dias_cierre_prom": 2.7, "alto_valor_count": 18, "semaforo": "verde"}, {"asesor": "Carlos Castro", "tienda": "{\"en_US\": \"AHS3-AP-BQCOL\", \"es_CO\": \"AHS3-AP-BQCOL\"}", "total_opps": 14, "revenue": 4660100.0, "calientes": 6, "tibias": 7, "frias": 1, "con_actividad": 14, "act_vencidas": 0, "deadline_vencidas": 9, "deadline_urgentes": 1, "pct_actividad": 100.0, "dias_abierto_avg": 27.0, "conversion_rate": 100.0, "dias_cierre_prom": 3.0, "alto_valor_count": 0, "semaforo": "verde"}, {"asesor": "Cristian Alvarado", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "total_opps": 118, "revenue": 661600000.0, "calientes": 46, "tibias": 41, "frias": 31, "con_actividad": 117, "act_vencidas": 0, "deadline_vencidas": 17, "deadline_urgentes": 80, "pct_actividad": 99.0, "dias_abierto_avg": 36.0, "conversion_rate": 100.0, "dias_cierre_prom": 13.8, "alto_valor_count": 27, "semaforo": "verde"}, {"asesor": "Edwin Rodriguez", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "total_opps": 60, "revenue": 369938222.0, "calientes": 18, "tibias": 9, "frias": 33, "con_actividad": 60, "act_vencidas": 0, "deadline_vencidas": 14, "deadline_urgentes": 41, "pct_actividad": 100.0, "dias_abierto_avg": 93.0, "conversion_rate": 100.0, "dias_cierre_prom": 1.7, "alto_valor_count": 15, "semaforo": "verde"}, {"asesor": "Elizabeth Ramirez", "tienda": "{\"en_US\": \"FDH-BOCOL\", \"es_CO\": \"FERIA-FDH-BOCOL\"}", "total_opps": 30, "revenue": 127473100.0, "calientes": 0, "tibias": 0, "frias": 30, "con_actividad": 0, "act_vencidas": 0, "deadline_vencidas": 0, "deadline_urgentes": 0, "pct_actividad": 0.0, "dias_abierto_avg": 253.0, "conversion_rate": 0.0, "dias_cierre_prom": 0.0, "alto_valor_count": 6, "semaforo": "amarillo"}, {"asesor": "Ellen Cuitiva", "tienda": "{\"en_US\": \"AHS2-MP-BOCOL\"}", "total_opps": 11, "revenue": 89500000.0, "calientes": 9, "tibias": 0, "frias": 2, "con_actividad": 11, "act_vencidas": 0, "deadline_vencidas": 0, "deadline_urgentes": 0, "pct_actividad": 100.0, "dias_abierto_avg": 26.0, "conversion_rate": 100.0, "dias_cierre_prom": 4.7, "alto_valor_count": 4, "semaforo": "verde"}, {"asesor": "Fredy Arias", "tienda": "{\"en_US\": \"AHS2-MP-BOCOL\"}", "total_opps": 14, "revenue": 156000000.0, "calientes": 4, "tibias": 4, "frias": 6, "con_actividad": 13, "act_vencidas": 1, "deadline_vencidas": 0, "deadline_urgentes": 3, "pct_actividad": 93.0, "dias_abierto_avg": 57.0, "conversion_rate": 100.0, "dias_cierre_prom": 1.5, "alto_valor_count": 7, "semaforo": "amarillo"}, {"asesor": "Gabriela Guzmán", "tienda": "{\"en_US\": \"FDH-BOCOL\", \"es_CO\": \"FERIA-FDH-BOCOL\"}", "total_opps": 41, "revenue": 0.0, "calientes": 0, "tibias": 0, "frias": 41, "con_actividad": 0, "act_vencidas": 0, "deadline_vencidas": 0, "deadline_urgentes": 0, "pct_actividad": 0.0, "dias_abierto_avg": 252.0, "conversion_rate": 0.0, "dias_cierre_prom": 0.0, "alto_valor_count": 0, "semaforo": "amarillo"}, {"asesor": "Javier Carrillo", "tienda": "{\"en_US\": \"AHS2-MP-BOCOL\"}", "total_opps": 3, "revenue": 8000000.0, "calientes": 3, "tibias": 0, "frias": 0, "con_actividad": 2, "act_vencidas": 0, "deadline_vencidas": 0, "deadline_urgentes": 1, "pct_actividad": 67.0, "dias_abierto_avg": 3.0, "conversion_rate": 100.0, "dias_cierre_prom": 1.4, "alto_valor_count": 0, "semaforo": "amarillo"}, {"asesor": "Johan Vargas", "tienda": "{\"en_US\": \"AHS2-MP-BOCOL\"}", "total_opps": 13, "revenue": 162900000.0, "calientes": 13, "tibias": 0, "frias": 0, "con_actividad": 12, "act_vencidas": 2, "deadline_vencidas": 3, "deadline_urgentes": 3, "pct_actividad": 92.0, "dias_abierto_avg": 6.0, "conversion_rate": 100.0, "dias_cierre_prom": 1.4, "alto_valor_count": 7, "semaforo": "amarillo"}, {"asesor": "Julián Piñeros", "tienda": "{\"en_US\": \"B2B\", \"es_CO\": \"B2B\"}", "total_opps": 2, "revenue": 0.0, "calientes": 0, "tibias": 0, "frias": 2, "con_actividad": 0, "act_vencidas": 0, "deadline_vencidas": 1, "deadline_urgentes": 0, "pct_actividad": 0.0, "dias_abierto_avg": 130.0, "conversion_rate": 0.0, "dias_cierre_prom": 0.0, "alto_valor_count": 0, "semaforo": "amarillo"}, {"asesor": "Laura Cardona", "tienda": "{\"en_US\": \"AHS3-AP-BQCOL\", \"es_CO\": \"AHS3-AP-BQCOL\"}", "total_opps": 5, "revenue": 51000000.0, "calientes": 4, "tibias": 1, "frias": 0, "con_actividad": 5, "act_vencidas": 0, "deadline_vencidas": 3, "deadline_urgentes": 2, "pct_actividad": 100.0, "dias_abierto_avg": 14.0, "conversion_rate": 100.0, "dias_cierre_prom": 1.0, "alto_valor_count": 1, "semaforo": "verde"}, {"asesor": "Monica Rodriguez", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "total_opps": 37, "revenue": 248620000.0, "calientes": 13, "tibias": 9, "frias": 15, "con_actividad": 37, "act_vencidas": 0, "deadline_vencidas": 1, "deadline_urgentes": 15, "pct_actividad": 100.0, "dias_abierto_avg": 54.0, "conversion_rate": 100.0, "dias_cierre_prom": 3.3, "alto_valor_count": 8, "semaforo": "verde"}, {"asesor": "Nadia Saavedra", "tienda": "{\"en_US\": \"B2B\", \"es_CO\": \"B2B\"}", "total_opps": 4, "revenue": 0.0, "calientes": 1, "tibias": 2, "frias": 1, "con_actividad": 1, "act_vencidas": 1, "deadline_vencidas": 1, "deadline_urgentes": 0, "pct_actividad": 25.0, "dias_abierto_avg": 56.0, "conversion_rate": 100.0, "dias_cierre_prom": 32.1, "alto_valor_count": 0, "semaforo": "amarillo"}, {"asesor": "Nicolas Quintero", "tienda": "{\"en_US\": \"AHS2-MP-BOCOL\"}", "total_opps": 62, "revenue": 555500000.0, "calientes": 25, "tibias": 14, "frias": 23, "con_actividad": 57, "act_vencidas": 0, "deadline_vencidas": 3, "deadline_urgentes": 0, "pct_actividad": 92.0, "dias_abierto_avg": 65.0, "conversion_rate": 100.0, "dias_cierre_prom": 1.5, "alto_valor_count": 26, "semaforo": "verde"}, {"asesor": "Ricardo Acosta", "tienda": "{\"en_US\": \"AHS3-AP-BQCOL\", \"es_CO\": \"AHS3-AP-BQCOL\"}", "total_opps": 18, "revenue": 110490000.0, "calientes": 8, "tibias": 6, "frias": 4, "con_actividad": 18, "act_vencidas": 0, "deadline_vencidas": 8, "deadline_urgentes": 4, "pct_actividad": 100.0, "dias_abierto_avg": 33.0, "conversion_rate": 100.0, "dias_cierre_prom": 1.0, "alto_valor_count": 3, "semaforo": "verde"}, {"asesor": "Yuli Castelblanco", "tienda": "{\"en_US\": \"ECOMMERCE-01COL\", \"es_CO\": \"ECOM-01COL\"}", "total_opps": 7, "revenue": 0.0, "calientes": 6, "tibias": 1, "frias": 0, "con_actividad": 3, "act_vencidas": 2, "deadline_vencidas": 4, "deadline_urgentes": 0, "pct_actividad": 43.0, "dias_abierto_avg": 14.0, "conversion_rate": 100.0, "dias_cierre_prom": 39.2, "alto_valor_count": 0, "semaforo": "amarillo"}], "top_opps": {"Gabriela Guzmán": [{"cliente": "Felipe Mejia", "expected_revenue": 0.0, "stage_name": "{\"en_US\": \"1. New\", \"es_CO\": \"1. Nuevo\"}", "tags": "", "temperatura": "Frío", "priority_score": 1.0, "date_deadline": "", "dias_abierto": 251, "dias_hasta_cierre": 0, "tiene_actividad": false, "actividad_vencida": false, "opp_name": "Felipe Mejia"}, {"cliente": "Olga Alfaro", "expected_revenue": 0.0, "stage_name": "{\"en_US\": \"1. New\", \"es_CO\": \"1. Nuevo\"}", "tags": "", "temperatura": "Frío", "priority_score": 1.0, "date_deadline": "", "dias_abierto": 253, "dias_hasta_cierre": 0, "tiene_actividad": false, "actividad_vencida": false, "opp_name": "Oportunidad de Olga Alfaro"}, {"cliente": "Eddy Monrroi", "expected_revenue": 0.0, "stage_name": "{\"en_US\": \"1. New\", \"es_CO\": \"1. Nuevo\"}", "tags": "", "temperatura": "Frío", "priority_score": 1.0, "date_deadline": "", "dias_abierto": 253, "dias_hasta_cierre": 0, "tiene_actividad": false, "actividad_vencida": false, "opp_name": "Oportunidad de Eddy Monrroi"}, {"cliente": "Cliente desconocido", "expected_revenue": 0.0, "stage_name": "{\"en_US\": \"1. New\", \"es_CO\": \"1. Nuevo\"}", "tags": "", "temperatura": "Frío", "priority_score": 1.0, "date_deadline": "", "dias_abierto": 253, "dias_hasta_cierre": 0, "tiene_actividad": false, "actividad_vencida": false, "opp_name": "Juan Carlos Vergara"}, {"cliente": "Juan Carlos Vergara", "expected_revenue": 0.0, "stage_name": "{\"en_US\": \"1. New\", \"es_CO\": \"1. Nuevo\"}", "tags": "", "temperatura": "Frío", "priority_score": 1.0, "date_deadline": "", "dias_abierto": 253, "dias_hasta_cierre": 0, "tiene_actividad": false, "actividad_vencida": false, "opp_name": "Oportunidad de Juan Carlos Vergara"}], "Edwin Rodriguez": [{"cliente": "Fernando Martinez", "expected_revenue": 600000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "29/05/2026", "dias_abierto": 0, "dias_hasta_cierre": 4, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Fernando Martinez"}, {"cliente": "paola zuluaga", "expected_revenue": 650000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "20/05/2026", "dias_abierto": 10, "dias_hasta_cierre": -5, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de paola zuluaga"}, {"cliente": "Clara Hernandez", "expected_revenue": 12000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "29/05/2026", "dias_abierto": 3, "dias_hasta_cierre": 4, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Clara Hernandez"}, {"cliente": "margarita", "expected_revenue": 1500000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "30/05/2026", "dias_abierto": 10, "dias_hasta_cierre": 5, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de margarita"}, {"cliente": "Edgar Espinosa", "expected_revenue": 9000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "28/05/2026", "dias_abierto": 13, "dias_hasta_cierre": 3, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Edgar Espinosa"}], "Elizabeth Ramirez": [{"cliente": "Alejandro Rodriguez", "expected_revenue": 21000000.0, "stage_name": "{\"en_US\": \"1. New\", \"es_CO\": \"1. Nuevo\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Frío", "priority_score": 3.0, "date_deadline": "", "dias_abierto": 257, "dias_hasta_cierre": 0, "tiene_actividad": false, "actividad_vencida": false, "opp_name": "Oportunidad de Alejandro Rodriguez"}, {"cliente": "Luis Fernando Ariza", "expected_revenue": 300000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "", "temperatura": "Frío", "priority_score": 1.0, "date_deadline": "", "dias_abierto": 252, "dias_hasta_cierre": 0, "tiene_actividad": false, "actividad_vencida": false, "opp_name": "Oportunidad de Luis Fernando Ariza"}, {"cliente": "Sandra Chavez", "expected_revenue": 0.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "", "temperatura": "Frío", "priority_score": 1.0, "date_deadline": "", "dias_abierto": 240, "dias_hasta_cierre": 0, "tiene_actividad": false, "actividad_vencida": false, "opp_name": "Oportunidad de Sandra chavez"}, {"cliente": "María Salazar", "expected_revenue": 4800000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "", "temperatura": "Frío", "priority_score": 1.0, "date_deadline": "", "dias_abierto": 261, "dias_hasta_cierre": 0, "tiene_actividad": false, "actividad_vencida": false, "opp_name": "Oportunidad de María Salazar"}, {"cliente": "Johan Escamilla", "expected_revenue": 4000000.0, "stage_name": "{\"en_US\": \"1. New\", \"es_CO\": \"1. Nuevo\"}", "tags": "", "temperatura": "Frío", "priority_score": 1.0, "date_deadline": "", "dias_abierto": 258, "dias_hasta_cierre": 0, "tiene_actividad": false, "actividad_vencida": false, "opp_name": "Oportunidad de Johan Escamilla"}], "Javier Carrillo": [{"cliente": "isabel pereira", "expected_revenue": 4500000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "25/05/2026", "dias_abierto": 1, "dias_hasta_cierre": 0, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de isabel pereira"}, {"cliente": "Jorge Enrique Sanchez Rojas", "expected_revenue": 0.0, "stage_name": "{\"en_US\": \"1. New\", \"es_CO\": \"1. Nuevo\"}", "tags": "", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "", "dias_abierto": 0, "dias_hasta_cierre": 0, "tiene_actividad": false, "actividad_vencida": false, "opp_name": "Oportunidad de Jorge Enrique Sanchez Rojas"}, {"cliente": "Diana Carolina Ortiz", "expected_revenue": 3500000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "04/06/2026", "dias_abierto": 7, "dias_hasta_cierre": 10, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Diana Carolina Ortiz"}], "Cristian Alvarado": [{"cliente": "ERIKA RODRIGUEZ ZULETA", "expected_revenue": 10000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "10/05/2026", "dias_abierto": 19, "dias_hasta_cierre": -15, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de ERIKA RODRIGUEZ ZULETA"}, {"cliente": "LORENA GALVIS", "expected_revenue": 5000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "02/06/2026", "dias_abierto": 7, "dias_hasta_cierre": 8, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de LORENA GALVIS"}, {"cliente": "CAROLINA GUERRERO.", "expected_revenue": 10000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}, {\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "05/05/2026", "dias_abierto": 21, "dias_hasta_cierre": -20, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de CAROLINA GUERRERO."}, {"cliente": "MARIA DEL ROSARIO GÓMEZ", "expected_revenue": 4000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "18/05/2026", "dias_abierto": 8, "dias_hasta_cierre": -7, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de MARIA DEL ROSARIO GÓMEZ"}, {"cliente": "Jaime Escruceria", "expected_revenue": 1000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "23/05/2026", "dias_abierto": 15, "dias_hasta_cierre": -2, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Jaime Escruceria"}], "Carla Pedrozo": [{"cliente": "Roland Rojas", "expected_revenue": 13000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "31/05/2026", "dias_abierto": 0, "dias_hasta_cierre": 6, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Roland Rojas"}, {"cliente": "Amanda Garcia", "expected_revenue": 10000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "31/05/2026", "dias_abierto": 12, "dias_hasta_cierre": 6, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Amanda Garcia"}, {"cliente": "Gloria Contreras", "expected_revenue": 6000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "31/05/2026", "dias_abierto": 7, "dias_hasta_cierre": 6, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Gloria Contreras"}, {"cliente": "Juan Sebastian Galeano Rodríguez", "expected_revenue": 7000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "31/05/2026", "dias_abierto": 7, "dias_hasta_cierre": 6, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Juan Sebastian Galeano Rodríguez"}, {"cliente": "Sandra Valderrama", "expected_revenue": 6000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "31/05/2026", "dias_abierto": 11, "dias_hasta_cierre": 6, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Sandra Valderrama"}], "Nicolas Quintero": [{"cliente": "Jesus Forero", "expected_revenue": 8000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "20/06/2026", "dias_abierto": 9, "dias_hasta_cierre": 26, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Jesús Forero"}, {"cliente": "Juan Mendoza", "expected_revenue": 4000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "04/07/2026", "dias_abierto": 21, "dias_hasta_cierre": 40, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Juan Mendoza"}, {"cliente": "Oscar Lesmes", "expected_revenue": 10000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Viaje\", \"es_CO\": \"Viaje\"}", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "17/07/2026", "dias_abierto": 14, "dias_hasta_cierre": 53, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Oscar Lesmes"}, {"cliente": "Milena Prieto", "expected_revenue": 15000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Dinero\"}", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "13/06/2026", "dias_abierto": 9, "dias_hasta_cierre": 19, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Milena Prieto"}, {"cliente": "Maia Borja", "expected_revenue": 3000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Dinero\"}", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "15/08/2026", "dias_abierto": 7, "dias_hasta_cierre": 82, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Maia Borja"}], "Andres Becerra": [{"cliente": "Pablo Hernández", "expected_revenue": 2000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}, {\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "10/06/2026", "dias_abierto": 8, "dias_hasta_cierre": 16, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Pablo Hernández"}, {"cliente": "Miguel castillo", "expected_revenue": 5000000.0, "stage_name": "{\"en_US\": \"4. X Finalizar Pago\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}, {\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "21/09/2026", "dias_abierto": 8, "dias_hasta_cierre": 119, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Miguel castillo"}, {"cliente": "Gina cesareo", "expected_revenue": 2000000.0, "stage_name": "{\"en_US\": \"3. Pedir Pedido\", \"es_CO\": \"3. Pedir Pedido\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "29/05/2026", "dias_abierto": 12, "dias_hasta_cierre": 4, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Gina cesareo"}, {"cliente": "Liliana Fernández", "expected_revenue": 7000000.0, "stage_name": "{\"en_US\": \"3. Pedir Pedido\", \"es_CO\": \"3. Pedir Pedido\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "15/06/2026", "dias_abierto": 4, "dias_hasta_cierre": 21, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Liliana Fernández"}, {"cliente": "Alberto Blanco Gómez", "expected_revenue": 5000000.0, "stage_name": "{\"en_US\": \"4. X Finalizar Pago\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}, {\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "09/06/2026", "dias_abierto": 7, "dias_hasta_cierre": 15, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Alberto Blanco Gómez"}], "Ricardo Acosta": [{"cliente": "Nazly garcia", "expected_revenue": 7500000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "30/06/2026", "dias_abierto": 11, "dias_hasta_cierre": 36, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Nazly García"}, {"cliente": "Yeiny paola perez", "expected_revenue": 4000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "25/06/2026", "dias_abierto": 8, "dias_hasta_cierre": 31, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Yeiny paola perez"}, {"cliente": "Carlos", "expected_revenue": 12000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "30/05/2026", "dias_abierto": 4, "dias_hasta_cierre": 5, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Carlos"}, {"cliente": "Sandra jimenez", "expected_revenue": 3000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "30/07/2026", "dias_abierto": 11, "dias_hasta_cierre": 66, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Sandra jimenez"}, {"cliente": "Cesar Caballero Sierra Acero", "expected_revenue": 1000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "30/05/2026", "dias_abierto": 16, "dias_hasta_cierre": 5, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Cesar Caballero"}], "Andres Mayo": [{"cliente": "Isabel botero", "expected_revenue": 10000000.0, "stage_name": "{\"en_US\": \"3. Pedir Pedido\", \"es_CO\": \"3. Pedir Pedido\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "31/05/2026", "dias_abierto": 21, "dias_hasta_cierre": 6, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Isabel botero"}, {"cliente": "Samuel sarmiento", "expected_revenue": 15000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "12/06/2026", "dias_abierto": 5, "dias_hasta_cierre": 18, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Samuel sarmiento"}, {"cliente": "Ingrid febres", "expected_revenue": 15000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "07/06/2026", "dias_abierto": 9, "dias_hasta_cierre": 13, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Ingrid febres"}, {"cliente": "Ricardo realpe", "expected_revenue": 14000000.0, "stage_name": "{\"en_US\": \"3. Pedir Pedido\", \"es_CO\": \"3. Pedir Pedido\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "31/05/2026", "dias_abierto": 14, "dias_hasta_cierre": 6, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Ricardo realpe"}, {"cliente": "Carlos fernando bejarano mora", "expected_revenue": 5000000.0, "stage_name": "{\"en_US\": \"3. Pedir Pedido\", \"es_CO\": \"3. Pedir Pedido\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "31/05/2026", "dias_abierto": 23, "dias_hasta_cierre": 6, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Carlos fernando bejarano mora"}], "Nadia Saavedra": [{"cliente": "Estela Diaz", "expected_revenue": 0.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "15/06/2026", "dias_abierto": 9, "dias_hasta_cierre": 21, "tiene_actividad": true, "actividad_vencida": true, "opp_name": "Oportunidad de Estela"}, {"cliente": "Jacqueline Saavedra", "expected_revenue": 0.0, "stage_name": "{\"en_US\": \"1. New\", \"es_CO\": \"1. Nuevo\"}", "tags": "", "temperatura": "Tibio", "priority_score": 2.0, "date_deadline": "", "dias_abierto": 44, "dias_hasta_cierre": 0, "tiene_actividad": false, "actividad_vencida": false, "opp_name": "Oportunidad de Jacqueline"}, {"cliente": "MAS DEVELOPERES SAS", "expected_revenue": 0.0, "stage_name": "{\"en_US\": \"1. New\", \"es_CO\": \"1. Nuevo\"}", "tags": "", "temperatura": "Tibio", "priority_score": 2.0, "date_deadline": "", "dias_abierto": 31, "dias_hasta_cierre": 0, "tiene_actividad": false, "actividad_vencida": false, "opp_name": "Oportunidad de MAS DEVELOPERES SAS"}, {"cliente": "Vertical Park S.A.S", "expected_revenue": 0.0, "stage_name": "{\"en_US\": \"4. X Finalizar Pago\"}", "tags": "", "temperatura": "Frío", "priority_score": 1.0, "date_deadline": "10/04/2026", "dias_abierto": 138, "dias_hasta_cierre": -45, "tiene_actividad": false, "actividad_vencida": false, "opp_name": "Oportunidad de Vertical Park S.A.S"}], "Yuli Castelblanco": [{"cliente": "MONICA CERTAIN PALMA", "expected_revenue": 0.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "22/05/2026", "dias_abierto": 11, "dias_hasta_cierre": -3, "tiene_actividad": true, "actividad_vencida": true, "opp_name": "Oportunidad de MONICA CERTAIN PALMA"}, {"cliente": "Karenn Pagina", "expected_revenue": 0.0, "stage_name": "{\"en_US\": \"1. New\", \"es_CO\": \"1. Nuevo\"}", "tags": "", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "", "dias_abierto": 6, "dias_hasta_cierre": 0, "tiene_actividad": false, "actividad_vencida": false, "opp_name": "Oportunidad de Karenn Pagina"}, {"cliente": "Sebastian Valencia Ramírez", "expected_revenue": 0.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "20/05/2026", "dias_abierto": 10, "dias_hasta_cierre": -5, "tiene_actividad": true, "actividad_vencida": true, "opp_name": "Oportunidad de Sebastian Valencia Ramírez"}, {"cliente": "Dicepilo", "expected_revenue": 0.0, "stage_name": "{\"en_US\": \"4. X Finalizar Pago\"}", "tags": "", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "08/05/2026", "dias_abierto": 20, "dias_hasta_cierre": -17, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Diana Piedrahita "}, {"cliente": "FRANZ BERGEN PETERS", "expected_revenue": 0.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "14/05/2026", "dias_abierto": 18, "dias_hasta_cierre": -11, "tiene_actividad": false, "actividad_vencida": false, "opp_name": "Oportunidad de FRANZ BERGEN PETERS"}], "Johan Vargas": [{"cliente": "Beatris Amaris", "expected_revenue": 4000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "22/05/2026", "dias_abierto": 9, "dias_hasta_cierre": -3, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Beatris Amaris"}, {"cliente": "Fabio Gaviria", "expected_revenue": 7000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "21/05/2026", "dias_abierto": 11, "dias_hasta_cierre": -4, "tiene_actividad": true, "actividad_vencida": true, "opp_name": "Oportunidad de Fabio Gaviria"}, {"cliente": "XIMENA MATEUS", "expected_revenue": 0.0, "stage_name": "{\"en_US\": \"1. New\", \"es_CO\": \"1. Nuevo\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "", "dias_abierto": 1, "dias_hasta_cierre": 0, "tiene_actividad": false, "actividad_vencida": false, "opp_name": "Oportunidad de XIMENA MATEUS"}, {"cliente": "paula moreno", "expected_revenue": 14000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "23/05/2026", "dias_abierto": 8, "dias_hasta_cierre": -2, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de paula moreno"}, {"cliente": "Cristian Padilla", "expected_revenue": 17000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "26/06/2026", "dias_abierto": 6, "dias_hasta_cierre": 32, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Cristian Padilla"}], "Ellen Cuitiva": [{"cliente": "Maria Vega", "expected_revenue": 10000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "05/07/2026", "dias_abierto": 1, "dias_hasta_cierre": 41, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Maria Vega"}, {"cliente": "Paula Zapata", "expected_revenue": 3000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Dinero\"}", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "26/07/2026", "dias_abierto": 6, "dias_hasta_cierre": 62, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Paula Zapata"}, {"cliente": "Alexandra Sanches Chaves", "expected_revenue": 4000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Dinero\"}", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "12/07/2026", "dias_abierto": 2, "dias_hasta_cierre": 48, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Alexandra Sanches Chaves"}, {"cliente": "Rodrigo cerquera", "expected_revenue": 6000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Dinero\"}", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "07/08/2026", "dias_abierto": 6, "dias_hasta_cierre": 74, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Rodrigo Cerquera"}, {"cliente": "Juliana Ortega", "expected_revenue": 8000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Dinero\"}", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "05/06/2026", "dias_abierto": 6, "dias_hasta_cierre": 11, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Juliana Ortega"}], "Fredy Arias": [{"cliente": "Juan Pablo García", "expected_revenue": 15000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "26/05/2026", "dias_abierto": 0, "dias_hasta_cierre": 1, "tiene_actividad": true, "actividad_vencida": true, "opp_name": "Oportunidad de Juan Pablo García"}, {"cliente": "Leonardo Silva", "expected_revenue": 20000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Tibio", "priority_score": 6.0, "date_deadline": "30/05/2026", "dias_abierto": 52, "dias_hasta_cierre": 5, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Leonardo Silva"}, {"cliente": "Yolanda Sierra", "expected_revenue": 4000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "10/06/2026", "dias_abierto": 0, "dias_hasta_cierre": 16, "tiene_actividad": false, "actividad_vencida": false, "opp_name": "Oportunidad de Yolanda Sierra"}, {"cliente": "Aura Parraga", "expected_revenue": 15000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "05/06/2026", "dias_abierto": 10, "dias_hasta_cierre": 11, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Aura Parraga"}, {"cliente": "Hector Hernandez", "expected_revenue": 5000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "15/06/2026", "dias_abierto": 11, "dias_hasta_cierre": 21, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Hector Hernandez"}], "Julián Piñeros": [{"cliente": "Laura Juliana Alba Lazaro", "expected_revenue": 0.0, "stage_name": "{\"en_US\": \"1. New\", \"es_CO\": \"1. Nuevo\"}", "tags": "", "temperatura": "Frío", "priority_score": 1.0, "date_deadline": "30/01/2026", "dias_abierto": 129, "dias_hasta_cierre": -115, "tiene_actividad": false, "actividad_vencida": false, "opp_name": "Laura Juliana Alba Lazaro's opportunity"}, {"cliente": "Yuly Alejandra Vargas Romero", "expected_revenue": 0.0, "stage_name": "{\"en_US\": \"1. New\", \"es_CO\": \"1. Nuevo\"}", "tags": "", "temperatura": "Frío", "priority_score": 1.0, "date_deadline": "", "dias_abierto": 131, "dias_hasta_cierre": 0, "tiene_actividad": false, "actividad_vencida": false, "opp_name": "Oportunidad de Yuly Alejandra Vargas Romero"}], "Monica Rodriguez": [{"cliente": "Luz Edith Giraldo", "expected_revenue": 1000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "28/05/2026", "dias_abierto": 1, "dias_hasta_cierre": 3, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Luz Edith Giraldo"}, {"cliente": "Luis fandiño", "expected_revenue": 2200000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "29/05/2026", "dias_abierto": 21, "dias_hasta_cierre": 4, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Luis fandiño"}, {"cliente": "Natalia borge", "expected_revenue": 5000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "08/06/2026", "dias_abierto": 21, "dias_hasta_cierre": 14, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Natalia borge"}, {"cliente": "Angela luna escobar", "expected_revenue": 5000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "30/05/2026", "dias_abierto": 0, "dias_hasta_cierre": 5, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Angela luna escobar"}, {"cliente": "Luz Miryam Velasquez", "expected_revenue": 4000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Tibio", "priority_score": 6.0, "date_deadline": "20/06/2026", "dias_abierto": 27, "dias_hasta_cierre": 26, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Luz Miryam Velasquez"}], "Carlos Castro": [{"cliente": "Yesenia Del Carmen Betancourt Pareja", "expected_revenue": 100000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "30/09/2026", "dias_abierto": 3, "dias_hasta_cierre": 128, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Yesenia Del Carmen Betancourt Pareja"}, {"cliente": "Nestor Patiño", "expected_revenue": 100000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Dinero\"}", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "05/05/2026", "dias_abierto": 19, "dias_hasta_cierre": -20, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Nestor Patiño"}, {"cliente": "Aura Isabel Moncayo Florez", "expected_revenue": 150000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "23/05/2026", "dias_abierto": 1, "dias_hasta_cierre": -2, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Aura Isabel Moncayo Florez"}, {"cliente": "Jennifer Yepez", "expected_revenue": 100000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}", "temperatura": "Tibio", "priority_score": 2.0, "date_deadline": "07/05/2026", "dias_abierto": 25, "dias_hasta_cierre": -18, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Jennifer Yepez"}, {"cliente": "Wincy Ruiz", "expected_revenue": 100000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}", "temperatura": "Tibio", "priority_score": 2.0, "date_deadline": "11/04/2026", "dias_abierto": 46, "dias_hasta_cierre": -44, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Wincy Ruiz"}], "Camilo Reyes": [{"cliente": "Andrea Suarez", "expected_revenue": 10000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "04/06/2026", "dias_abierto": 8, "dias_hasta_cierre": 10, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Andrea Suarez"}, {"cliente": "emerson acuña", "expected_revenue": 1000000.0, "stage_name": "{\"en_US\": \"1. New\", \"es_CO\": \"1. Nuevo\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "", "dias_abierto": 0, "dias_hasta_cierre": 0, "tiene_actividad": false, "actividad_vencida": false, "opp_name": "Oportunidad de emerson acuña"}, {"cliente": "Mateo mora", "expected_revenue": 10000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "18/06/2026", "dias_abierto": 8, "dias_hasta_cierre": 24, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Mateo mora"}, {"cliente": "fredy garcia", "expected_revenue": 11000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "17/06/2026", "dias_abierto": 23, "dias_hasta_cierre": 23, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de fredy garcia"}, {"cliente": "Natalia llano", "expected_revenue": 5000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "05/06/2026", "dias_abierto": 7, "dias_hasta_cierre": 11, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Natalia llano"}], "Laura Cardona": [{"cliente": "Adolfo Barros", "expected_revenue": 5000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Caliente", "priority_score": 9.0, "date_deadline": "22/05/2026", "dias_abierto": 10, "dias_hasta_cierre": -3, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Adolfo Barros"}, {"cliente": "María Camila Amado", "expected_revenue": 30000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "08/05/2026", "dias_abierto": 21, "dias_hasta_cierre": -17, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de María Camila"}, {"cliente": "Angélica León Bustos", "expected_revenue": 9000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "27/05/2026", "dias_abierto": 0, "dias_hasta_cierre": 2, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Angélica León Bustos"}, {"cliente": "Pareja Colchon", "expected_revenue": 2000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}", "temperatura": "Caliente", "priority_score": 3.0, "date_deadline": "23/05/2026", "dias_abierto": 7, "dias_hasta_cierre": -2, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Miguel Abadía"}, {"cliente": "Janilet Arango", "expected_revenue": 5000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"En Obra\"}", "temperatura": "Tibio", "priority_score": 1.0, "date_deadline": "25/05/2026", "dias_abierto": 31, "dias_hasta_cierre": 0, "tiene_actividad": true, "actividad_vencida": false, "opp_name": "Oportunidad de Yanilet Arango"}]}, "en_riesgo": [{"opp_name": "Oportunidad de Hernan jaramillo", "cliente": "Hernan Jaramillo", "asesor": "Monica Rodriguez", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "expected_revenue": 50000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"En Obra\"}", "temperatura": "Frío", "dias_abierto": 370, "dias_hasta_cierre": 4.0, "deadline_vencida": false, "deadline_urgente": true, "tiene_actividad": true}, {"opp_name": "Oportunidad de LUZ MERY VALENCIA", "cliente": "Luz Mery Valencia", "asesor": "Cristian Alvarado", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "expected_revenue": 40000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"En Obra\"}", "temperatura": "Frío", "dias_abierto": 71, "dias_hasta_cierre": 1.0, "deadline_vencida": false, "deadline_urgente": true, "tiene_actividad": true}, {"opp_name": "Oportunidad de ISABELLA GONZALEZ", "cliente": "ISABELLA GONZALEZ", "asesor": "Cristian Alvarado", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "expected_revenue": 35000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Dinero\"}, {\"en_US\": \"Medidas\"}", "temperatura": "Tibio", "dias_abierto": 50, "dias_hasta_cierre": -10.0, "deadline_vencida": true, "deadline_urgente": false, "tiene_actividad": true}, {"opp_name": "Oportunidad de Hector vallejo coral", "cliente": "Hector vallejo coral", "asesor": "Monica Rodriguez", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "expected_revenue": 28000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Viaje\", \"es_CO\": \"Viaje\"}", "temperatura": "Frío", "dias_abierto": 67, "dias_hasta_cierre": 3.0, "deadline_vencida": false, "deadline_urgente": true, "tiene_actividad": true}, {"opp_name": "Oportunidad de judith soto", "cliente": "judith soto", "asesor": "Andres Mayo", "tienda": "{\"en_US\": \"AHS2-MP-BOCOL\"}", "expected_revenue": 22000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Dinero\"}", "temperatura": "Frío", "dias_abierto": 59, "dias_hasta_cierre": 5.0, "deadline_vencida": false, "deadline_urgente": true, "tiene_actividad": true}, {"opp_name": "Oportunidad de Jaime Ochoa", "cliente": "Jaime Ochoa", "asesor": "Edwin Rodriguez", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "expected_revenue": 21000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Dinero\"}", "temperatura": "Frío", "dias_abierto": 89, "dias_hasta_cierre": 5.0, "deadline_vencida": false, "deadline_urgente": true, "tiene_actividad": true}, {"opp_name": "Oportunidad de Leonardo Silva", "cliente": "Leonardo Silva", "asesor": "Fredy Arias", "tienda": "{\"en_US\": \"AHS2-MP-BOCOL\"}", "expected_revenue": 20000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Tibio", "dias_abierto": 52, "dias_hasta_cierre": 5.0, "deadline_vencida": false, "deadline_urgente": true, "tiene_actividad": true}, {"opp_name": "Oportunidad Alejandro Alba Peñaloza", "cliente": "Alejandro Alba Peñaloza", "asesor": "Edwin Rodriguez", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "expected_revenue": 20000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"En Obra\"}", "temperatura": "Frío", "dias_abierto": 330, "dias_hasta_cierre": -4.0, "deadline_vencida": true, "deadline_urgente": false, "tiene_actividad": true}, {"opp_name": "Oportunidad de Rp logistics sas", "cliente": "Rp logistics sas", "asesor": "Andres Mayo", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "expected_revenue": 18000000.0, "stage_name": "{\"en_US\": \"3. Pedir Pedido\", \"es_CO\": \"3. Pedir Pedido\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}", "temperatura": "Tibio", "dias_abierto": 34, "dias_hasta_cierre": 5.0, "deadline_vencida": false, "deadline_urgente": true, "tiene_actividad": true}, {"opp_name": "Oportunidad de Edificio destinity", "cliente": "Edificio destinity", "asesor": "Ricardo Acosta", "tienda": "{\"en_US\": \"AHS3-AP-BQCOL\", \"es_CO\": \"AHS3-AP-BQCOL\"}", "expected_revenue": 17000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}", "temperatura": "Frío", "dias_abierto": 92, "dias_hasta_cierre": -58.0, "deadline_vencida": true, "deadline_urgente": false, "tiene_actividad": true}, {"opp_name": "Oportunidad de Juan Carlos Pedraza", "cliente": "Juan Carlos Pedraza", "asesor": "Edwin Rodriguez", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "expected_revenue": 16000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Tibio", "dias_abierto": 31, "dias_hasta_cierre": 5.0, "deadline_vencida": false, "deadline_urgente": true, "tiene_actividad": true}, {"opp_name": "Oportunidad de Oscar Ballesteros", "cliente": "Oscar Ballesteros", "asesor": "Edwin Rodriguez", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "expected_revenue": 15000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}", "temperatura": "Frío", "dias_abierto": 59, "dias_hasta_cierre": 3.0, "deadline_vencida": false, "deadline_urgente": true, "tiene_actividad": true}, {"opp_name": "Oportunidad de Ana Diaz", "cliente": "Ana Diaz", "asesor": "Edwin Rodriguez", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "expected_revenue": 15000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}, {\"en_US\": \"En Obra\"}, {\"en_US\": \"Medidas\"}", "temperatura": "Frío", "dias_abierto": 264, "dias_hasta_cierre": 5.0, "deadline_vencida": false, "deadline_urgente": true, "tiene_actividad": true}, {"opp_name": "Oportunidad de HEIDY MORA", "cliente": "HEIDY MORA", "asesor": "Cristian Alvarado", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "expected_revenue": 15000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Dinero\"}", "temperatura": "Tibio", "dias_abierto": 53, "dias_hasta_cierre": 1.0, "deadline_vencida": false, "deadline_urgente": true, "tiene_actividad": true}, {"opp_name": "Oportunidad de DIANA FONSECA", "cliente": "DIANA FONSECA", "asesor": "Cristian Alvarado", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "expected_revenue": 15000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Frío", "dias_abierto": 62, "dias_hasta_cierre": 1.0, "deadline_vencida": false, "deadline_urgente": true, "tiene_actividad": true}, {"opp_name": "Oportunidad de Manuel Garzon", "cliente": "Manuel Garzon", "asesor": "Edwin Rodriguez", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "expected_revenue": 14000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Frío", "dias_abierto": 141, "dias_hasta_cierre": 4.0, "deadline_vencida": false, "deadline_urgente": true, "tiene_actividad": true}, {"opp_name": "Oportunidad de JORGE FERRO", "cliente": "JORGE FERRO", "asesor": "Cristian Alvarado", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "expected_revenue": 13000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Dinero\"}", "temperatura": "Frío", "dias_abierto": 56, "dias_hasta_cierre": 1.0, "deadline_vencida": false, "deadline_urgente": true, "tiene_actividad": true}, {"opp_name": "Oportunidad de Juan diego cotes", "cliente": "Juan diego cotes", "asesor": "Ricardo Acosta", "tienda": "{\"en_US\": \"AHS3-AP-BQCOL\", \"es_CO\": \"AHS3-AP-BQCOL\"}", "expected_revenue": 13000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}", "temperatura": "Tibio", "dias_abierto": 50, "dias_hasta_cierre": -25.0, "deadline_vencida": true, "deadline_urgente": false, "tiene_actividad": true}, {"opp_name": "Oportunidad de Carlos Vargas", "cliente": "Carlos Vargas", "asesor": "Edwin Rodriguez", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "expected_revenue": 13000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"En Obra\"}", "temperatura": "Tibio", "dias_abierto": 32, "dias_hasta_cierre": 2.0, "deadline_vencida": false, "deadline_urgente": true, "tiene_actividad": true}, {"opp_name": "Oportunidad de Terena barajas", "cliente": "Terena barajas", "asesor": "Edwin Rodriguez", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "expected_revenue": 12000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}, {\"en_US\": \"En Obra\"}, {\"en_US\": \"Medidas\"}", "temperatura": "Frío", "dias_abierto": 221, "dias_hasta_cierre": 5.0, "deadline_vencida": false, "deadline_urgente": true, "tiene_actividad": true}], "en_valor": [{"opp_name": "Oportunidad de Tatiana sarmiento", "cliente": "Tatiana sarmiento", "asesor": "Andres Mayo", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "expected_revenue": 68000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}", "temperatura": "Tibio", "dias_abierto": 33, "dias_hasta_cierre": 11.0, "tiene_actividad": true}, {"opp_name": "Oportunidad de Hernan jaramillo", "cliente": "Hernan Jaramillo", "asesor": "Monica Rodriguez", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "expected_revenue": 50000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"En Obra\"}", "temperatura": "Frío", "dias_abierto": 370, "dias_hasta_cierre": 4.0, "tiene_actividad": true}, {"opp_name": "Oportunidad de LUZ MERY VALENCIA", "cliente": "Luz Mery Valencia", "asesor": "Cristian Alvarado", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "expected_revenue": 40000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"En Obra\"}", "temperatura": "Frío", "dias_abierto": 71, "dias_hasta_cierre": 1.0, "tiene_actividad": true}, {"opp_name": "Oportunidad de Andrés Forero", "cliente": "Andrés Forero", "asesor": "Nicolas Quintero", "tienda": "{\"en_US\": \"AHS2-MP-BOCOL\"}", "expected_revenue": 30000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}", "temperatura": "Tibio", "dias_abierto": 35, "dias_hasta_cierre": 25.0, "tiene_actividad": true}, {"opp_name": "Oportunidad de Hector vallejo coral", "cliente": "Hector vallejo coral", "asesor": "Monica Rodriguez", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "expected_revenue": 28000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Viaje\", \"es_CO\": \"Viaje\"}", "temperatura": "Frío", "dias_abierto": 67, "dias_hasta_cierre": 3.0, "tiene_actividad": true}, {"opp_name": "Oportunidad de judith soto", "cliente": "judith soto", "asesor": "Andres Mayo", "tienda": "{\"en_US\": \"AHS2-MP-BOCOL\"}", "expected_revenue": 22000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Dinero\"}", "temperatura": "Frío", "dias_abierto": 59, "dias_hasta_cierre": 5.0, "tiene_actividad": true}, {"opp_name": "Oportunidad de Jaime Ochoa", "cliente": "Jaime Ochoa", "asesor": "Edwin Rodriguez", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "expected_revenue": 21000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Dinero\"}", "temperatura": "Frío", "dias_abierto": 89, "dias_hasta_cierre": 5.0, "tiene_actividad": true}, {"opp_name": "Oportunidad de Leonardo cleves", "cliente": "Grupo Blum Sas", "asesor": "Nicolas Quintero", "tienda": "{\"en_US\": \"AHS2-MP-BOCOL\"}", "expected_revenue": 20000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Dinero\"}", "temperatura": "Frío", "dias_abierto": 94, "dias_hasta_cierre": 25.0, "tiene_actividad": true}, {"opp_name": "Oportunidad de Felipe Gomez", "cliente": "Felipe Gomez", "asesor": "Nicolas Quintero", "tienda": "{\"en_US\": \"AHS2-MP-BOCOL\"}", "expected_revenue": 20000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Dinero\"}", "temperatura": "Tibio", "dias_abierto": 34, "dias_hasta_cierre": 65.0, "tiene_actividad": true}, {"opp_name": "Oportunidad de Liliana sicard", "cliente": "Liliana sicard", "asesor": "Nicolas Quintero", "tienda": "{\"en_US\": \"AHS2-MP-BOCOL\"}", "expected_revenue": 20000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Dinero\"}", "temperatura": "Tibio", "dias_abierto": 32, "dias_hasta_cierre": 32.0, "tiene_actividad": true}, {"opp_name": "Oportunidad de Javier Montolla", "cliente": "Javier Montolla", "asesor": "Nicolas Quintero", "tienda": "{\"en_US\": \"AHS2-MP-BOCOL\"}", "expected_revenue": 20000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"En Obra\"}", "temperatura": "Frío", "dias_abierto": 141, "dias_hasta_cierre": 59.0, "tiene_actividad": true}, {"opp_name": "Oportunidad de Julio Bohorquez", "cliente": "Julio Bohorquez", "asesor": "Nicolas Quintero", "tienda": "{\"en_US\": \"AHS2-MP-BOCOL\"}", "expected_revenue": 20000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"En Obra\"}", "temperatura": "Frío", "dias_abierto": 99, "dias_hasta_cierre": 18.0, "tiene_actividad": true}, {"opp_name": "Oportunidad de Leonardo Silva", "cliente": "Leonardo Silva", "asesor": "Fredy Arias", "tienda": "{\"en_US\": \"AHS2-MP-BOCOL\"}", "expected_revenue": 20000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Tibio", "dias_abierto": 52, "dias_hasta_cierre": 5.0, "tiene_actividad": true}, {"opp_name": "Oportunidad de Janeth Manzano", "cliente": "Janeth Manzano", "asesor": "Nicolas Quintero", "tienda": "{\"en_US\": \"AHS2-MP-BOCOL\"}", "expected_revenue": 20000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}", "temperatura": "Tibio", "dias_abierto": 33, "dias_hasta_cierre": 53.0, "tiene_actividad": true}, {"opp_name": "Oportunidad de Lína parra", "cliente": "Lína parra", "asesor": "Nicolas Quintero", "tienda": "{\"en_US\": \"AHS2-MP-BOCOL\"}", "expected_revenue": 20000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"En Obra\"}", "temperatura": "Frío", "dias_abierto": 196, "dias_hasta_cierre": 88.0, "tiene_actividad": true}, {"opp_name": "Oportunidad de Milena Bermúdez", "cliente": "Milena Bermúdez", "asesor": "Nicolas Quintero", "tienda": "{\"en_US\": \"AHS2-MP-BOCOL\"}", "expected_revenue": 18000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Dinero\"}", "temperatura": "Frío", "dias_abierto": 111, "dias_hasta_cierre": 94.0, "tiene_actividad": true}, {"opp_name": "Oportunidad de Rp logistics sas", "cliente": "Rp logistics sas", "asesor": "Andres Mayo", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "expected_revenue": 18000000.0, "stage_name": "{\"en_US\": \"3. Pedir Pedido\", \"es_CO\": \"3. Pedir Pedido\"}", "tags": "{\"en_US\": \"Decisi\\u00f3n Conjunta\"}", "temperatura": "Tibio", "dias_abierto": 34, "dias_hasta_cierre": 5.0, "tiene_actividad": true}, {"opp_name": "Oportunidad de Claudia San Miguel", "cliente": "Claudia San Miguel", "asesor": "Ellen Cuitiva", "tienda": "{\"en_US\": \"AHS2-MP-BOCOL\"}", "expected_revenue": 17000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"En Obra\"}", "temperatura": "Frío", "dias_abierto": 106, "dias_hasta_cierre": 15.0, "tiene_actividad": true}, {"opp_name": "Oportunidad de Maria teresa Becerra", "cliente": "Maria teresa Becerra", "asesor": "Monica Rodriguez", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "expected_revenue": 16000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Frío", "dias_abierto": 65, "dias_hasta_cierre": 36.0, "tiene_actividad": true}, {"opp_name": "Oportunidad de Juan Carlos Pedraza", "cliente": "Juan Carlos Pedraza", "asesor": "Edwin Rodriguez", "tienda": "{\"en_US\": \"AHS1-AV19-BOCOL\", \"es_CO\": \"AHS1-AV19BOCOL\"}", "expected_revenue": 16000000.0, "stage_name": "{\"en_US\": \"2. Objeci\\u00f3n x Resolver\", \"es_CO\": \"2. Objeci\\u00f3n x Resolver\"}", "tags": "{\"en_US\": \"Medidas\"}", "temperatura": "Tibio", "dias_abierto": 31, "dias_hasta_cierre": 5.0, "tiene_actividad": true}]};
 
-// ============================================================
-// HELPERS
-// ============================================================
-const TIENDA = {
-  'AHS1-AV19-BOCOL': 'Av. 19 Bogotá',
-  'AHS2-MP-BOCOL': 'M&P Bogotá',
-  'AHS3-AP-BQCOL': 'Barranquilla',
-  'B2B': 'B2B',
-  'ECOMMERCE-01COL': 'Ecommerce'
-};
-
+// ─── HELPERS ───
 function fmtCOP(v) {
-  if (!v || v === 0) return '$0';
+  if (!v && v !== 0) return '$0';
+  v = Number(v);
   if (v >= 1e9) return '$' + (v/1e9).toFixed(1) + 'B';
   if (v >= 1e6) return '$' + Math.round(v/1e6) + 'M';
   if (v >= 1e3) return '$' + Math.round(v/1e3) + 'K';
   return '$' + v;
 }
 
-function tempBadge(t) {
-  const map = {
-    'Caliente': 'badge-caliente',
-    'Tibio': 'badge-tibio',
-    'Frío': 'badge-frio'
-  };
-  const icons = { 'Caliente': '&#128308;', 'Tibio': '&#128993;', 'Frío': '&#128309;' };
-  const cls = map[t] || 'badge-frio';
-  return '<span class="badge ' + cls + '">' + (icons[t]||'') + ' ' + (t||'') + '</span>';
-}
+const TIENDA_MAP = {
+  'Av 19 Bogotá': 'Av. 19',
+  'AHS1-AV19-BOCOL': 'Av. 19',
+  'AHS2-MP-BOCOL': 'M&P',
+  'AHS3-AP-BQCOL': 'Barranquilla',
+  'B2B': 'B2B',
+  'ECOMMERCE-01COL': 'Ecommerce'
+};
+function tiendaLabel(t) { return TIENDA_MAP[t] || t || '—'; }
 
-function tagBadge(tag) {
-  if (!tag || tag === 'nan' || tag === '') return '<span style="color:var(--text2);font-size:11px">—</span>';
-  return '<span class="badge badge-acento">' + tag + '</span>';
+function tempBadge(t) {
+  if (t === 'Caliente') return '<span class="badge badge-hot">🔴 Caliente</span>';
+  if (t === 'Tibio')    return '<span class="badge badge-warm">🟡 Tibio</span>';
+  return '<span class="badge badge-cold">🔵 Frío</span>';
 }
 
 function progBar(pct) {
-  const color = pct >= 90 ? 'var(--green)' : pct >= 70 ? 'var(--yellow)' : 'var(--red)';
-  return '<div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:' + pct + '%;background:' + color + '"></div></div><span class="prog-label" style="color:' + color + '">' + pct + '%</span></div>';
+  const c = pct >= 90 ? 'var(--green)' : pct >= 70 ? 'var(--yellow)' : 'var(--red)';
+  return `<span>${Math.round(pct)}%</span><span class="prog-wrap"><span class="prog-fill" style="width:${Math.min(pct,100)}%;background:${c}"></span></span>`;
 }
 
-function deadlineBadge(dhc) {
-  if (dhc === null || dhc === undefined) return '<span style="color:var(--text2);font-size:11px">—</span>';
-  if (dhc < 0) return '<span class="badge badge-rojo">&#9940; Vencida ' + Math.abs(dhc) + 'd</span>';
-  if (dhc <= 7) return '<span class="badge badge-amarillo">&#9200; Urgente ' + dhc + 'd</span>';
-  return '<span style="color:var(--text2);font-size:12px">' + dhc + 'd</span>';
+function actBadge(tiene) {
+  return tiene
+    ? '<span class="badge badge-green">✓ Activa</span>'
+    : '<span class="badge badge-red">✗ Sin actividad</span>';
 }
 
-function semaforo(a) {
-  const pct = a.pct_actividad;
-  const venc = a.act_vencidas;
-  if (pct >= 90 && venc === 0) return '<span class="sem-verde">&#128994; En Gestión</span>';
-  if ((pct >= 70 && pct < 90) || (venc >= 1 && venc <= 2)) return '<span class="sem-amarillo">&#128993; Atención</span>';
-  return '<span class="sem-rojo">&#128308; Refuerzo</span>';
+function dlBadge(vencida, urgente) {
+  if (vencida)  return '<span class="badge badge-red">⛔ Vencida</span>';
+  if (urgente)  return '<span class="badge badge-yellow">⏰ Urgente</span>';
+  return '';
 }
 
-// ============================================================
-// TAB SWITCHING
-// ============================================================
-function switchTab(id, btn) {
-  document.querySelectorAll('.tab-content').forEach(function(el) { el.classList.remove('active'); });
-  document.querySelectorAll('.tab-btn').forEach(function(el) { el.classList.remove('active'); });
-  document.getElementById('tab-' + id).classList.add('active');
-  btn.classList.add('active');
-  if (id === 'tienda') renderTiendaTab();
-  if (id === 'prioridades') renderPrioridades();
-  if (id === 'riesgo') renderRiesgo();
+function semDot(s) {
+  const labels = { verde: '🟢 En gestión', amarillo: '🟡 Atención', rojo: '🔴 Refuerzo' };
+  return labels[s] || s;
 }
 
-// ============================================================
-// TABLE SORT
-// ============================================================
-var sortState = {};
-function sortTable(tableId, colIdx) {
-  var table = document.getElementById(tableId);
-  var tbody = table.querySelector('tbody');
-  var rows = Array.from(tbody.querySelectorAll('tr'));
-  var key = tableId + '_' + colIdx;
-  var asc = sortState[key] !== true;
-  sortState[key] = asc;
-
-  rows.sort(function(a, b) {
-    var ta = a.cells[colIdx] ? (a.cells[colIdx].dataset.val || a.cells[colIdx].textContent.trim()) : '';
-    var tb = b.cells[colIdx] ? (b.cells[colIdx].dataset.val || b.cells[colIdx].textContent.trim()) : '';
-    var na = parseFloat(ta), nb = parseFloat(tb);
-    if (!isNaN(na) && !isNaN(nb)) return asc ? na - nb : nb - na;
-    return asc ? ta.localeCompare(tb, 'es') : tb.localeCompare(ta, 'es');
+// ─── SORT STATE ───
+let sortState = {};
+function makeSortable(tableId, rows, renderFn) {
+  const tbl = document.getElementById(tableId);
+  tbl.querySelectorAll('th').forEach((th, i) => {
+    th.addEventListener('click', () => {
+      const cur = sortState[tableId];
+      const asc = (cur && cur.col === i) ? !cur.asc : true;
+      sortState[tableId] = { col: i, asc };
+      renderFn(tableId, rows, i, asc);
+    });
   });
+}
 
-  rows.forEach(function(r) { tbody.appendChild(r); });
+// ─── HEADER / KPI ───
+document.getElementById('header-date').textContent = DATA.fecha;
+document.getElementById('footer-fecha').textContent = DATA.fecha;
 
-  table.querySelectorAll('th').forEach(function(th, i) {
-    th.classList.remove('sorted');
-    var si = th.querySelector('.sort-icon');
-    if (si) si.textContent = String.fromCharCode(8597);
-  });
-  var th = table.querySelectorAll('th')[colIdx];
-  if (th) {
-    th.classList.add('sorted');
-    var si = th.querySelector('.sort-icon');
-    if (si) si.textContent = asc ? String.fromCharCode(8593) : String.fromCharCode(8595);
+const kpiDefs = [
+  { lbl: 'Pipeline Activo', val: fmtCOP(DATA.total_pipeline), sub: 'Oportunidades pendientes' },
+  { lbl: 'Oportunidades',   val: DATA.total_opps,             sub: 'activas en pipeline' },
+  { lbl: 'Gestión Activa',  val: `${DATA.total_con_actividad} / ${DATA.total_opps}`,
+     sub: `${Math.round(DATA.total_con_actividad/DATA.total_opps*100)}% con actividad` },
+  { lbl: 'Conversión',      val: DATA.conversion_global + '%', sub: 'histórico won/(won+lost)' },
+  { lbl: 'Tiempo Prom. Cierre', val: DATA.dias_cierre_prom_global + 'd', sub: 'días promedio' },
+];
+document.getElementById('kpi-row').innerHTML = kpiDefs.map(k =>
+  `<div class="kpi-card"><div class="kpi-label">${k.lbl}</div><div class="kpi-value">${k.val}</div><div class="kpi-sub">${k.sub}</div></div>`
+).join('');
+
+// ─── TAB TIENDAS ───
+function renderTiendas() {
+  const t = document.getElementById('tbl-tiendas');
+  t.querySelector('thead').innerHTML = `<tr>
+    <th>Tienda <span class="sort-arrow">↕</span></th>
+    <th>Opps <span class="sort-arrow">↕</span></th>
+    <th>Pipeline <span class="sort-arrow">↕</span></th>
+    <th>🔴 Calientes <span class="sort-arrow">↕</span></th>
+    <th>🟡 Tibias <span class="sort-arrow">↕</span></th>
+    <th>🔵 Frías <span class="sort-arrow">↕</span></th>
+    <th>% Actividad <span class="sort-arrow">↕</span></th>
+    <th>Act. Vencidas <span class="sort-arrow">↕</span></th>
+  </tr>`;
+  renderTiendasBody('tbl-tiendas', DATA.tiendas, -1, true);
+  makeSortable('tbl-tiendas', DATA.tiendas, renderTiendasBody);
+}
+
+function renderTiendasBody(tableId, rows, sortCol, asc) {
+  const keys = ['tienda','total_opps','revenue','calientes','tibias','frias','pct_actividad','act_vencidas'];
+  let sorted = [...rows];
+  if (sortCol >= 0) {
+    sorted.sort((a,b) => {
+      const va = a[keys[sortCol]], vb = b[keys[sortCol]];
+      return asc ? (va > vb ? 1 : -1) : (va < vb ? 1 : -1);
+    });
+  }
+  document.getElementById(tableId).querySelector('tbody').innerHTML = sorted.map(r => `
+    <tr>
+      <td style="font-weight:600">${tiendaLabel(r.tienda)}</td>
+      <td>${r.total_opps}</td>
+      <td style="color:var(--accent);font-weight:600">${fmtCOP(r.revenue)}</td>
+      <td><span class="badge badge-hot">${r.calientes}</span></td>
+      <td><span class="badge badge-warm">${r.tibias}</span></td>
+      <td><span class="badge badge-cold">${r.frias}</span></td>
+      <td>${progBar(r.pct_actividad)}</td>
+      <td style="color:${r.act_vencidas>0?'var(--red)':'var(--text2)'}">${r.act_vencidas}</td>
+    </tr>`).join('');
+}
+
+// ─── TAB ASESORES ───
+function renderAsesores() {
+  const t = document.getElementById('tbl-asesores');
+  t.querySelector('thead').innerHTML = `<tr>
+    <th>Asesor <span class="sort-arrow">↕</span></th>
+    <th>Tienda <span class="sort-arrow">↕</span></th>
+    <th>Opps <span class="sort-arrow">↕</span></th>
+    <th>Pipeline <span class="sort-arrow">↕</span></th>
+    <th>🔴 Cal. <span class="sort-arrow">↕</span></th>
+    <th>Días Prom. <span class="sort-arrow">↕</span></th>
+    <th>Conversión % <span class="sort-arrow">↕</span></th>
+    <th>% Actividad <span class="sort-arrow">↕</span></th>
+    <th>Act. Vencidas <span class="sort-arrow">↕</span></th>
+    <th>Alto Valor ($10M+) <span class="sort-arrow">↕</span></th>
+  </tr>`;
+  renderAsesoresBody('tbl-asesores', DATA.asesores, 3, false);
+  makeSortable('tbl-asesores', DATA.asesores, renderAsesoresBody);
+}
+
+function renderAsesoresBody(tableId, rows, sortCol, asc) {
+  const keys = ['asesor','tienda','total_opps','revenue','calientes','dias_abierto_avg','conversion_rate','pct_actividad','act_vencidas','alto_valor_count'];
+  let sorted = [...rows];
+  if (sortCol >= 0) {
+    sorted.sort((a,b) => {
+      const va = a[keys[sortCol]], vb = b[keys[sortCol]];
+      return asc ? (va > vb ? 1 : -1) : (va < vb ? 1 : -1);
+    });
+  }
+  document.getElementById(tableId).querySelector('tbody').innerHTML = sorted.map(r => `
+    <tr>
+      <td style="font-weight:600">${r.asesor || '—'}</td>
+      <td style="color:var(--text2)">${tiendaLabel(r.tienda)}</td>
+      <td>${r.total_opps}</td>
+      <td style="color:var(--accent);font-weight:600">${fmtCOP(r.revenue)}</td>
+      <td><span class="badge badge-hot">${r.calientes}</span></td>
+      <td style="color:var(--text2)">${Math.round(r.dias_abierto_avg)}d</td>
+      <td style="color:${r.conversion_rate>=50?'var(--green)':r.conversion_rate>=30?'var(--yellow)':'var(--red)'}">${r.conversion_rate}%</td>
+      <td>${progBar(r.pct_actividad)}</td>
+      <td style="color:${r.act_vencidas>0?'var(--red)':'var(--text2)'}">${r.act_vencidas}</td>
+      <td style="color:${r.alto_valor_count>0?'var(--accent)':'var(--text2)'}">${r.alto_valor_count}</td>
+    </tr>`).join('');
+}
+
+// ─── TAB POR TIENDA ───
+function initTiendaSelect() {
+  const sel = document.getElementById('tienda-select');
+  const tiendas = [...new Set(DATA.tiendas.map(t => t.tienda))];
+  sel.innerHTML = tiendas.map(t => `<option value="${t}">${tiendaLabel(t)}</option>`).join('');
+  renderTiendaDetail();
+}
+
+function renderTiendaDetail() {
+  const tienda = document.getElementById('tienda-select').value;
+  const tData  = DATA.tiendas.find(t => t.tienda === tienda) || {};
+  const asesores = DATA.asesores.filter(a => a.tienda === tienda);
+
+  const mini = [
+    { lbl: 'Oportunidades', val: tData.total_opps || 0 },
+    { lbl: 'Pipeline',      val: fmtCOP(tData.revenue || 0) },
+    { lbl: 'Calientes',     val: tData.calientes || 0 },
+    { lbl: '% Actividad',   val: Math.round(tData.pct_actividad || 0) + '%' },
+    { lbl: 'Act. Vencidas', val: tData.act_vencidas || 0 },
+    { lbl: 'Alto Valor',    val: tData.alto_valor_count || 0 },
+  ];
+
+  let html = `<div class="mini-kpi-row">${mini.map(m =>
+    `<div class="mini-kpi"><div class="val">${m.val}</div><div class="lbl">${m.lbl}</div></div>`
+  ).join('')}</div>`;
+
+  html += `<div class="section-title">Asesores — ${tiendaLabel(tienda)}</div>
+  <div class="table-wrap"><table id="tbl-tienda-asesores">
+    <thead><tr>
+      <th>Asesor</th><th>Opps</th><th>Pipeline</th><th>🔴 Cal.</th><th>Conversión %</th><th>% Actividad</th><th>Actvidad. Vencidas</th>
+    </tr></thead>
+    <tbody>
+      ${asesores.map(a => `
+        <tr class="asesor-expandable" data-asesor="${encodeURIComponent(a.asesor)}" onclick="toggleAsesorRow(this)" style="cursor:pointer">
+          <td style="font-weight:600">${a.asesor || '—'} <span style="color:var(--text2);font-size:11px;">▶</span></td>
+          <td>${a.total_opps}</td>
+          <td style="color:var(--accent);font-weight:600">${fmtCOP(a.revenue)}</td>
+          <td><span class="badge badge-hot">${a.calientes}</span></td>
+          <td style="color:${a.conversion_rate>=50?'var(--green)':a.conversion_rate>=30?'var(--yellow)':'var(--red)'}">${a.conversion_rate}%</td>
+          <td>${progBar(a.pct_actividad)}</td>
+          <td style="color:${a.act_vencidas>0?'var(--red)':'var(--text2)'}">${a.act_vencidas}</td>
+        </tr>
+        <tr class="expand-row" id="expand-${encodeURIComponent(a.asesor)}" style="display:none">
+          <td colspan="7">${renderTopOpps(a.asesor)}</td>
+        </tr>`).join('')}
+    </tbody>
+  </table></div>`;
+
+  document.getElementById('tienda-detail').innerHTML = html;
+}
+
+function toggleAsesorRow(tr) {
+  const key   = tr.getAttribute('data-asesor');
+  const expRow = document.getElementById('expand-' + key);
+  const arrow  = tr.querySelector('span[style]');
+  if (expRow) {
+    expRow.style.display = expRow.style.display === 'none' ? '' : 'none';
+    if (arrow) arrow.textContent = expRow.style.display === 'none' ? '▶' : '▼';
   }
 }
 
-// ============================================================
-// TAB 1: VISTA GLOBAL
-// ============================================================
-function renderGlobal() {
-  var tbody = document.getElementById('tbody-tiendas');
-  tbody.innerHTML = DATA.tiendas.map(function(t) {
-    return '<tr>' +
-      '<td data-val="' + (TIENDA[t.team_id]||t.team_id) + '"><strong>' + (TIENDA[t.team_id]||t.team_id) + '</strong></td>' +
-      '<td data-val="' + t.total_opps + '">' + t.total_opps + '</td>' +
-      '<td data-val="' + t.revenue + '">' + fmtCOP(t.revenue) + '</td>' +
-      '<td data-val="' + t.calientes + '"><span class="badge badge-caliente">&#128308; ' + t.calientes + '</span></td>' +
-      '<td data-val="' + t.tibias + '"><span class="badge badge-tibio">&#128993; ' + t.tibias + '</span></td>' +
-      '<td data-val="' + t.frias + '"><span class="badge badge-frio">&#128309; ' + t.frias + '</span></td>' +
-      '<td data-val="' + t.pct_actividad + '">' + progBar(t.pct_actividad) + '</td>' +
-      '<td data-val="' + t.act_vencidas + '">' + (t.act_vencidas > 0 ? '<span class="badge badge-rojo">' + t.act_vencidas + '</span>' : '<span style="color:var(--green)">0</span>') + '</td>' +
-      '<td data-val="' + t.deadline_vencidas + '">' + (t.deadline_vencidas > 0 ? '<span class="badge badge-rojo">' + t.deadline_vencidas + '</span>' : '<span style="color:var(--green)">0</span>') + '</td>' +
-    '</tr>';
-  }).join('');
-
-  var tbodyA = document.getElementById('tbody-asesores-global');
-  tbodyA.innerHTML = DATA.asesores.map(function(a) {
-    return '<tr>' +
-      '<td data-val="' + a.user_id + '"><strong>' + a.user_id + '</strong></td>' +
-      '<td data-val="' + (TIENDA[a.team_id]||a.team_id) + '" style="font-size:11px;color:var(--text2)">' + (TIENDA[a.team_id]||a.team_id) + '</td>' +
-      '<td data-val="' + a.total_opps + '">' + a.total_opps + '</td>' +
-      '<td data-val="' + a.revenue + '">' + fmtCOP(a.revenue) + '</td>' +
-      '<td data-val="' + a.calientes + '"><span class="badge badge-caliente">&#128308; ' + a.calientes + '</span></td>' +
-      '<td data-val="' + a.dias_abierto_avg + '">' + Math.round(a.dias_abierto_avg) + 'd</td>' +
-      '<td data-val="' + a.conversion_rate + '">' + a.conversion_rate + '%</td>' +
-      '<td data-val="' + a.pct_actividad + '">' + progBar(a.pct_actividad) + '</td>' +
-      '<td data-val="' + a.act_vencidas + '">' + (a.act_vencidas > 0 ? '<span class="badge badge-rojo">' + a.act_vencidas + '</span>' : '<span style="color:var(--green)">0</span>') + '</td>' +
-      '<td data-val="' + a.alto_valor_count + '">' + (a.alto_valor_count > 0 ? '<span class="badge badge-acento">&#128142; ' + a.alto_valor_count + '</span>' : '—') + '</td>' +
-    '</tr>';
-  }).join('');
+function renderTopOpps(asesor) {
+  const opps = DATA.top_opps[asesor] || [];
+  if (!opps.length) return '<div class="expand-inner"><p style="color:var(--text2);font-size:12px;">Sin oportunidades registradas.</p></div>';
+  return `<div class="expand-inner">
+    <div class="expand-title">Top 5 Oportunidades — ${asesor}</div>
+    <div class="opp-grid">
+      ${opps.map(o => `
+        <div class="opp-card">
+          <div class="opp-cliente">${o.cliente}</div>
+          <div class="opp-revenue">${fmtCOP(o.expected_revenue)}</div>
+          <div class="opp-meta">
+            ${tempBadge(o.temperatura)}
+            ${actBadge(o.tiene_actividad)}
+            ${dlBadge(o.actividad_vencida, false)}
+            <span style="color:var(--text2)">${o.stage_name}</span>
+            <span style="color:var(--text2)">${o.dias_abierto}d abierta</span>
+            ${o.date_deadline ? `<span style="color:var(--text2)">Cierre: ${o.date_deadline}</span>` : ''}
+            ${o.tags ? `<span style="color:var(--text2)">${o.tags}</span>` : ''}
+          </div>
+        </div>`).join('')}
+    </div>
+  </div>`;
 }
 
-// ============================================================
-// TAB 2: POR TIENDA
-// ============================================================
-function renderTiendaTab() {
-  var tiendaId = document.getElementById('tienda-selector').value;
-  var tiendaData = DATA.tiendas.find(function(t) { return t.team_id === tiendaId; }) || {};
-  var asesoresTienda = DATA.asesores.filter(function(a) { return a.team_id === tiendaId; });
-  var content = document.getElementById('tienda-content');
-
-  var pct = tiendaData.pct_actividad || 0;
-  var dv = tiendaData.deadline_vencidas || 0;
-
-  var html = '<div class="mini-kpi-row">' +
-    '<div class="mini-kpi"><div class="mini-kpi-label">Oportunidades</div><div class="mini-kpi-val" style="color:var(--text)">' + (tiendaData.total_opps||0) + '</div></div>' +
-    '<div class="mini-kpi"><div class="mini-kpi-label">Pipeline</div><div class="mini-kpi-val" style="color:var(--accent)">' + fmtCOP(tiendaData.revenue||0) + '</div></div>' +
-    '<div class="mini-kpi"><div class="mini-kpi-label">% Con Actividad</div><div class="mini-kpi-val" style="color:' + (pct>=90?'var(--green)':'var(--yellow)') + '">' + pct + '%</div></div>' +
-    '<div class="mini-kpi"><div class="mini-kpi-label">Deadline Vencidas</div><div class="mini-kpi-val" style="color:' + (dv>0?'var(--red)':'var(--green)') + '">' + dv + '</div></div>' +
-    '</div>' +
-    '<div class="section-title">Asesores — ' + (TIENDA[tiendaId]||tiendaId) + '</div>' +
-    '<div class="tbl-wrap"><table id="tbl-tienda-asesores">' +
-    '<thead><tr>' +
-    '<th onclick="sortTable(\'tbl-tienda-asesores\',0)">Asesor <span class="sort-icon">&#8597;</span></th>' +
-    '<th onclick="sortTable(\'tbl-tienda-asesores\',1)">Opps <span class="sort-icon">&#8597;</span></th>' +
-    '<th onclick="sortTable(\'tbl-tienda-asesores\',2)">Pipeline <span class="sort-icon">&#8597;</span></th>' +
-    '<th onclick="sortTable(\'tbl-tienda-asesores\',3)">Calientes <span class="sort-icon">&#8597;</span></th>' +
-    '<th onclick="sortTable(\'tbl-tienda-asesores\',4)">Días Prom. <span class="sort-icon">&#8597;</span></th>' +
-    '<th onclick="sortTable(\'tbl-tienda-asesores\',5)">Conversión % <span class="sort-icon">&#8597;</span></th>' +
-    '<th onclick="sortTable(\'tbl-tienda-asesores\',6)">% Con Actividad <span class="sort-icon">&#8597;</span></th>' +
-    '<th onclick="sortTable(\'tbl-tienda-asesores\',7)">Act. Vencidas <span class="sort-icon">&#8597;</span></th>' +
-    '<th onclick="sortTable(\'tbl-tienda-asesores\',8)">Alto Valor <span class="sort-icon">&#8597;</span></th>' +
-    '</tr></thead><tbody>';
-
-  asesoresTienda.forEach(function(a, i) {
-    var tops = (DATA.top_opps[a.user_id]||[]);
-    html += '<tr class="asesor-expandable" onclick="toggleAsesorRow(\'tienda-expand-' + i + '\', this)" style="cursor:pointer">' +
-      '<td data-val="' + a.user_id + '"><strong>' + a.user_id + '</strong> <span style="font-size:10px;color:var(--text2)">&#9660;</span></td>' +
-      '<td data-val="' + a.total_opps + '">' + a.total_opps + '</td>' +
-      '<td data-val="' + a.revenue + '">' + fmtCOP(a.revenue) + '</td>' +
-      '<td data-val="' + a.calientes + '"><span class="badge badge-caliente">&#128308; ' + a.calientes + '</span></td>' +
-      '<td data-val="' + a.dias_abierto_avg + '">' + Math.round(a.dias_abierto_avg) + 'd</td>' +
-      '<td data-val="' + a.conversion_rate + '">' + a.conversion_rate + '%</td>' +
-      '<td data-val="' + a.pct_actividad + '">' + progBar(a.pct_actividad) + '</td>' +
-      '<td data-val="' + a.act_vencidas + '">' + (a.act_vencidas > 0 ? '<span class="badge badge-rojo">' + a.act_vencidas + '</span>' : '<span style="color:var(--green)">0</span>') + '</td>' +
-      '<td data-val="' + a.alto_valor_count + '">' + (a.alto_valor_count > 0 ? '<span class="badge badge-acento">&#128142; ' + a.alto_valor_count + '</span>' : '—') + '</td>' +
-    '</tr>' +
-    '<tr id="tienda-expand-' + i + '" class="expand-tr">' +
-    '<td colspan="9" style="padding:0;background:var(--card2)">' +
-    '<div style="padding:10px 12px;">' +
-    '<p style="font-size:11px;color:var(--text2);margin-bottom:8px">Top oportunidades de ' + a.user_id + '</p>' +
-    '<table style="width:100%;font-size:12px;border-collapse:collapse">' +
-    '<thead><tr style="border-bottom:1px solid var(--border)">' +
-    '<th style="padding:5px 8px;text-align:left;color:var(--text2);font-size:10px;text-transform:uppercase;font-weight:600">Cliente</th>' +
-    '<th style="padding:5px 8px;text-align:left;color:var(--text2);font-size:10px;text-transform:uppercase;font-weight:600">Monto</th>' +
-    '<th style="padding:5px 8px;text-align:left;color:var(--text2);font-size:10px;text-transform:uppercase;font-weight:600">Etapa</th>' +
-    '<th style="padding:5px 8px;text-align:left;color:var(--text2);font-size:10px;text-transform:uppercase;font-weight:600">Etiqueta</th>' +
-    '<th style="padding:5px 8px;text-align:left;color:var(--text2);font-size:10px;text-transform:uppercase;font-weight:600">Temp.</th>' +
-    '<th style="padding:5px 8px;text-align:left;color:var(--text2);font-size:10px;text-transform:uppercase;font-weight:600">Días Abierto</th>' +
-    '<th style="padding:5px 8px;text-align:left;color:var(--text2);font-size:10px;text-transform:uppercase;font-weight:600">Días p/ Cierre</th>' +
-    '<th style="padding:5px 8px;text-align:left;color:var(--text2);font-size:10px;text-transform:uppercase;font-weight:600">Actividad</th>' +
-    '</tr></thead><tbody>' +
-    tops.map(function(opp) {
-      var alertClass = opp.alert === 'vencida' ? 'alert-vencida' : opp.alert === 'urgente' ? 'alert-urgente' : '';
-      return '<tr class="' + alertClass + '" style="border-bottom:1px solid var(--border)">' +
-        '<td style="padding:6px 8px">' + opp.name + '</td>' +
-        '<td style="padding:6px 8px;color:var(--accent);font-weight:600">' + fmtCOP(opp.revenue) + '</td>' +
-        '<td style="padding:6px 8px;color:var(--text2);font-size:11px">' + (opp.stage||'—') + '</td>' +
-        '<td style="padding:6px 8px">' + tagBadge(opp.tag) + '</td>' +
-        '<td style="padding:6px 8px">' + tempBadge(opp.temperatura) + '</td>' +
-        '<td style="padding:6px 8px">' + opp.dias_abierto + 'd</td>' +
-        '<td style="padding:6px 8px">' + deadlineBadge(opp.dias_hasta_cierre) + '</td>' +
-        '<td style="padding:6px 8px">' + (opp.tiene_actividad ? '<span style="color:var(--green);font-size:12px">&#10003; Activa</span>' : '<span class="badge badge-rojo">Sin actividad</span>') + '</td>' +
-      '</tr>';
-    }).join('') +
-    '</tbody></table></div></td></tr>';
+// ─── TAB PRIORIDADES ───
+function renderPrioridades() {
+  const byTienda = {};
+  DATA.asesores.forEach(a => {
+    const t = tiendaLabel(a.tienda);
+    if (!byTienda[t]) byTienda[t] = [];
+    byTienda[t].push(a);
   });
 
-  html += '</tbody></table></div>';
-  content.innerHTML = html;
-}
-
-function toggleAsesorRow(id, triggerRow) {
-  var row = document.getElementById(id);
-  if (!row) return;
-  var isOpen = row.classList.contains('open');
-  row.classList.toggle('open', !isOpen);
-  var arrow = triggerRow.querySelector('span[style*="font-size:10px"]');
-  if (arrow) arrow.innerHTML = isOpen ? '&#9660;' : '&#9650;';
-}
-
-// ============================================================
-// TAB 3: PRIORIDADES DEL DÍA
-// ============================================================
-function renderPrioridades() {
-  var TIENDA_ORDER = ['AHS1-AV19-BOCOL','AHS2-MP-BOCOL','AHS3-AP-BQCOL','B2B','ECOMMERCE-01COL'];
-  var html = '';
-
-  TIENDA_ORDER.forEach(function(tid) {
-    var asesoresTienda = DATA.asesores.filter(function(a) { return a.team_id === tid; });
-    if (asesoresTienda.length === 0) return;
-
-    html += '<div class="tienda-section"><div class="tienda-section-title">' + (TIENDA[tid]||tid) + '</div>';
-
-    asesoresTienda.forEach(function(a, ai) {
-      var tops = (DATA.top_opps[a.user_id]||[]).slice(0, 3);
-      var hasAlerts = tops.some(function(o) { return o.alert === 'vencida' || o.alert === 'urgente'; });
-      var alertBadge = hasAlerts ? '<span class="badge badge-rojo" style="font-size:10px">!</span>' : '';
-      var actColor = a.pct_actividad >= 90 ? '#14532d' : '#451a03';
-      var actTxtColor = a.pct_actividad >= 90 ? '#86efac' : '#fcd34d';
-
-      html += '<div class="asesor-group">' +
-        '<div class="asesor-acc-header" onclick="toggleAsesorAcc(\'prio-acc-' + tid + '-' + ai + '\', this)">' +
-        a.user_id + ' ' + alertBadge +
-        '<span class="badge badge-gray" style="margin-left:4px;font-size:10px">' + a.total_opps + ' opps</span>' +
-        '<span class="badge" style="margin-left:4px;font-size:10px;background:' + actColor + ';color:' + actTxtColor + '">' + a.pct_actividad + '% activas</span>' +
-        '<span class="acc-arrow" style="margin-left:auto;font-size:11px;color:var(--text2);transition:transform .2s">&#9660;</span>' +
-        '</div>' +
-        '<div class="asesor-acc-body" id="prio-acc-' + tid + '-' + ai + '">';
-
-      if (tops.length === 0) {
-        html += '<div style="padding:12px;color:var(--text2);font-size:12px">Sin oportunidades registradas</div>';
+  let html = '';
+  Object.entries(byTienda).sort().forEach(([tienda, asesores]) => {
+    html += `<div class="tienda-block">
+      <div class="tienda-block-title">🏪 ${tienda}</div>`;
+    asesores.forEach(a => {
+      const opps = (DATA.top_opps[a.asesor] || []).slice(0, 3);
+      html += `<div class="asesor-block">
+        <div class="asesor-block-title">
+          ${semDot(a.semaforo)}
+          ${a.asesor || '—'}
+          <span style="color:var(--text2);font-size:11px;font-weight:400;margin-left:8px;">${a.total_opps} opps · ${fmtCOP(a.revenue)}</span>
+        </div>
+        <div class="asesor-opps">`;
+      if (!opps.length) {
+        html += `<p style="color:var(--text2);font-size:12px;grid-column:1/-1;padding:8px 0">Sin oportunidades.</p>`;
       } else {
-        tops.forEach(function(opp) {
-          var alertClass = opp.alert === 'vencida' ? 'alert-vencida' : opp.alert === 'urgente' ? 'alert-urgente' : '';
-          html += '<div class="priority-item ' + alertClass + '">' +
-            '<div>' +
-            '<span style="font-weight:600">' + opp.name + '</span>' +
-            (!opp.tiene_actividad ? '<span class="badge badge-rojo" style="margin-left:6px;font-size:10px">Sin actividad</span>' : '') +
-            (opp.alert === 'vencida' ? '<span class="badge badge-rojo" style="margin-left:6px;font-size:10px">&#9888; Deadline Vencido</span>' : '') +
-            (opp.alert === 'urgente' ? '<span class="badge badge-amarillo" style="margin-left:6px;font-size:10px">&#9200; Urgente</span>' : '') +
-            '<br><span style="font-size:11px;color:var(--text2)">' + opp.dias_abierto + 'd abierto · ' + (opp.deadline ? opp.deadline : 'Sin deadline') + '</span>' +
-            '</div>' +
-            '<div>' + tempBadge(opp.temperatura) + '</div>' +
-            '<div>' + tagBadge(opp.tag) + '</div>' +
-            '<div style="font-weight:700;color:var(--accent)">' + fmtCOP(opp.revenue) + '</div>' +
-            '</div>';
+        opps.forEach(o => {
+          html += `<div class="opp-card">
+            <div class="opp-cliente">${o.cliente}</div>
+            <div class="opp-revenue">${fmtCOP(o.expected_revenue)}</div>
+            <div class="opp-meta">
+              ${tempBadge(o.temperatura)}
+              ${actBadge(o.tiene_actividad)}
+              ${dlBadge(o.actividad_vencida, false)}
+              <span style="color:var(--text2)">${o.stage_name}</span>
+              <span style="color:var(--text2)">${o.dias_abierto}d abierta</span>
+              ${o.date_deadline ? `<span>Cierre: ${o.date_deadline}</span>` : ''}
+            </div>
+          </div>`;
         });
       }
-
-      html += '</div></div>';
+      html += `</div></div>`;
     });
-
-    html += '</div>';
+    html += `</div>`;
   });
-
   document.getElementById('prioridades-content').innerHTML = html;
 }
 
-function toggleAsesorAcc(id, header) {
-  var body = document.getElementById(id);
-  if (!body) return;
-  var isOpen = body.classList.contains('open');
-  body.classList.toggle('open', !isOpen);
-  header.classList.toggle('open', !isOpen);
-  var arrow = header.querySelector('.acc-arrow');
-  if (arrow) { arrow.innerHTML = isOpen ? '&#9660;' : '&#9650;'; arrow.style.transform = isOpen ? '' : 'rotate(180deg)'; }
-}
-
-// ============================================================
-// TAB 4: GESTIÓN & RIESGO
-// ============================================================
+// ─── TAB RIESGO/VALOR ───
 function renderRiesgo() {
-  document.getElementById('riesgo-count').textContent = DATA.en_riesgo.length;
-  var tbodyR = document.getElementById('tbody-riesgo');
-  tbodyR.innerHTML = DATA.en_riesgo.map(function(r) {
-    var dhc = r.dias_hasta_cierre;
-    var isVenc = dhc !== null && dhc < 0;
-    var isUrg = dhc !== null && dhc >= 0 && dhc <= 7;
-    return '<tr class="' + (isVenc ? 'tr-riesgo-vencida' : isUrg ? 'tr-riesgo-urgente' : '') + '">' +
-      '<td>' + r.user_id + '</td>' +
-      '<td><strong>' + r.partner_id + '</strong></td>' +
-      '<td style="color:var(--accent);font-weight:600">' + fmtCOP(r.expected_revenue) + '</td>' +
-      '<td>' + tagBadge(r.tag_ids) + '</td>' +
-      '<td>' + r.dias_abierto + 'd</td>' +
-      '<td>' + (isVenc ? '<span class="badge badge-rojo">&#9940; Vencida ' + Math.abs(dhc) + 'd</span>' : isUrg ? '<span class="badge badge-amarillo">&#9200; Urgente ' + dhc + 'd</span>' : '<span style="color:var(--text2)">' + dhc + 'd</span>') + '</td>' +
-      '<td>' + (r.tiene_actividad ? '<span style="color:var(--green)">&#10003; Activa</span>' : '<span class="badge badge-rojo">&#10007; Sin gestión</span>') + '</td>' +
-    '</tr>';
-  }).join('');
+  const hdrs = ['Oportunidad','Cliente','Asesor','Tienda','Pipeline','Etapa','Temperatura','Días Abierta','Deadline','Gestión'];
+  const rt = document.getElementById('tbl-riesgo');
+  rt.querySelector('thead').innerHTML = `<tr>${hdrs.map(h=>`<th>${h}</th>`).join('')}</tr>`;
+  rt.querySelector('tbody').innerHTML = DATA.en_riesgo.map(r => `<tr>
+    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${r.opp_name}">${r.opp_name||'—'}</td>
+    <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${r.cliente||'—'}</td>
+    <td>${r.asesor||'—'}</td>
+    <td style="color:var(--text2)">${tiendaLabel(r.tienda)}</td>
+    <td style="color:var(--accent);font-weight:600">${fmtCOP(r.expected_revenue)}</td>
+    <td style="color:var(--text2)">${r.stage_name||'—'}</td>
+    <td>${tempBadge(r.temperatura)}</td>
+    <td>${r.dias_abierto}d</td>
+    <td>${dlBadge(r.deadline_vencida, r.deadline_urgente)}</td>
+    <td>${actBadge(r.tiene_actividad)}</td>
+  </tr>`).join('') || `<tr><td colspan="10" style="text-align:center;color:var(--text2);padding:20px">Sin oportunidades en riesgo</td></tr>`;
 
-  document.getElementById('valor-count').textContent = DATA.en_valor.length;
-  var tbodyV = document.getElementById('tbody-valor');
-  tbodyV.innerHTML = DATA.en_valor.map(function(v) {
-    return '<tr>' +
-      '<td>' + v.user_id + '</td>' +
-      '<td><strong>' + v.partner_id + '</strong></td>' +
-      '<td style="color:var(--accent);font-weight:600">' + fmtCOP(v.expected_revenue) + '</td>' +
-      '<td>' + tagBadge(v.tag_ids) + '</td>' +
-      '<td>' + v.dias_abierto + 'd</td>' +
-      '<td>' + (v.dias_hasta_cierre !== null ? v.dias_hasta_cierre + 'd' : '—') + '</td>' +
-      '<td>' + tempBadge(v.temperatura) + '</td>' +
-    '</tr>';
-  }).join('');
+  const vt = document.getElementById('tbl-valor');
+  vt.querySelector('thead').innerHTML = `<tr>${['Oportunidad','Cliente','Asesor','Tienda','Pipeline','Etapa','Temperatura','Días Abierta','Gestión'].map(h=>`<th>${h}</th>`).join('')}</tr>`;
+  vt.querySelector('tbody').innerHTML = DATA.en_valor.map(r => `<tr>
+    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${r.opp_name}">${r.opp_name||'—'}</td>
+    <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${r.cliente||'—'}</td>
+    <td>${r.asesor||'—'}</td>
+    <td style="color:var(--text2)">${tiendaLabel(r.tienda)}</td>
+    <td style="color:var(--accent);font-weight:600">${fmtCOP(r.expected_revenue)}</td>
+    <td style="color:var(--text2)">${r.stage_name||'—'}</td>
+    <td>${tempBadge(r.temperatura)}</td>
+    <td>${r.dias_abierto}d</td>
+    <td>${actBadge(r.tiene_actividad)}</td>
+  </tr>`).join('') || `<tr><td colspan="9" style="text-align:center;color:var(--text2);padding:20px">Sin oportunidades en valor</td></tr>`;
 
-  var tbodyG = document.getElementById('tbody-gestion');
-  tbodyG.innerHTML = DATA.asesores.map(function(a) {
-    return '<tr>' +
-      '<td><strong>' + a.user_id + '</strong></td>' +
-      '<td style="font-size:11px;color:var(--text2)">' + (TIENDA[a.team_id]||a.team_id) + '</td>' +
-      '<td>' + a.total_opps + '</td>' +
-      '<td>' + progBar(a.pct_actividad) + '</td>' +
-      '<td>' + (a.act_vencidas > 0 ? '<span class="badge badge-rojo">' + a.act_vencidas + '</span>' : '<span style="color:var(--green)">0</span>') + '</td>' +
-      '<td>' + (a.deadline_vencidas > 0 ? '<span class="badge badge-amarillo">' + a.deadline_vencidas + '</span>' : '<span style="color:var(--green)">0</span>') + '</td>' +
-      '<td>' + semaforo(a) + '</td>' +
-    '</tr>';
-  }).join('');
+  // Semáforo
+  const st = document.getElementById('tbl-semaforo');
+  st.querySelector('thead').innerHTML = `<tr><th>Asesor</th><th>Tienda</th><th>Estado</th><th>% Actividad</th><th>Act. Vencidas</th><th>Opps</th><th>Pipeline</th></tr>`;
+  const semSorted = [...DATA.asesores].sort((a,b) => {
+    const o = { rojo:0, amarillo:1, verde:2 };
+    return (o[a.semaforo]||0) - (o[b.semaforo]||0);
+  });
+  st.querySelector('tbody').innerHTML = semSorted.map(r => `<tr>
+    <td style="font-weight:600">${r.asesor||'—'}</td>
+    <td style="color:var(--text2)">${tiendaLabel(r.tienda)}</td>
+    <td>${semDot(r.semaforo)}</td>
+    <td>${progBar(r.pct_actividad)}</td>
+    <td style="color:${r.act_vencidas>0?'var(--red)':'var(--text2)'}">${r.act_vencidas}</td>
+    <td>${r.total_opps}</td>
+    <td style="color:var(--accent)">${fmtCOP(r.revenue)}</td>
+  </tr>`).join('');
 }
 
-// ============================================================
-// INIT
-// ============================================================
-renderGlobal();
-renderTiendaTab();
+// ─── TABS ───
+const tabs = document.querySelectorAll('.tab');
+const contents = document.querySelectorAll('.tab-content');
+function showTab(i) {
+  tabs.forEach((t,j) => t.classList.toggle('active', i===j));
+  contents.forEach((c,j) => c.classList.toggle('active', i===j));
+}
+
+// ─── INIT ───
+renderTiendas();
+renderAsesores();
+initTiendaSelect();
+renderPrioridades();
+renderRiesgo();
 </script>
 </body>
 </html>
