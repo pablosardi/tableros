@@ -293,7 +293,7 @@ body{font-family:-apple-system,'Segoe UI',Helvetica,sans-serif;
 <!-- NAV -->
 <nav class="nav">
   <div style="display:flex;align-items:center;gap:8px">
-    <button class="sb-toggle" id="sbToggle" onclick="toggleSidebar()">☰</button>
+    <button class="sb-toggle active" id="sbToggle" onclick="toggleSidebar()">☰</button>
     <span class="ypo-pill">YPO</span>
     <span class="nav-center" id="navCount" style="display:none"></span>
   </div>
@@ -308,9 +308,20 @@ body{font-family:-apple-system,'Segoe UI',Helvetica,sans-serif;
 <div class="layout">
 
 <!-- SIDEBAR -->
-<aside class="sidebar collapsed" id="sidebar">
+<aside class="sidebar" id="sidebar">
   <div class="sb-head">Navegar</div>
   <div id="sidebarTree"></div>
+  <div style="padding:14px;border-top:1px solid rgba(255,255,255,.06);margin-top:8px">
+    <div style="display:flex;align-items:center;gap:6px">
+      <svg width="14" height="14" viewBox="0 0 100 100">
+        <polygon points="50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5" fill="#E8650A"/>
+      </svg>
+      <span style="font-size:10px;color:rgba(232,101,10,.8);font-weight:700;letter-spacing:.5px">NIRVANA AI</span>
+    </div>
+    <div style="font-size:10px;color:var(--muted);margin-top:3px;line-height:1.4">
+      5 años de conocimiento<br>de YPO Colombia
+    </div>
+  </div>
 </aside>
 
 <!-- MAIN -->
@@ -385,6 +396,22 @@ body{font-family:-apple-system,'Segoe UI',Helvetica,sans-serif;
 
   <!-- CHAT HISTORY MODE -->
   <div id="chatMode" style="display:none;max-width:680px;margin:0 auto;padding:18px"></div>
+
+  <!-- FOOTER -->
+  <div style="text-align:center;padding:32px 20px 48px;border-top:1px solid rgba(255,255,255,.05);margin-top:24px">
+    <a href="https://nirvana.com.co" target="_blank" rel="noopener"
+       style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+              background:rgba(232,101,10,.08);border:1px solid rgba(232,101,10,.2);
+              border-radius:20px;padding:8px 18px;transition:all .15s"
+       onmouseover="this.style.background='rgba(232,101,10,.16)'"
+       onmouseout="this.style.background='rgba(232,101,10,.08)'">
+      <svg width="18" height="18" viewBox="0 0 100 100">
+        <polygon points="50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5" fill="#E8650A"/>
+      </svg>
+      <span style="font-size:11px;font-weight:700;letter-spacing:.5px;color:#E8650A">NIRVANA AI</span>
+      <span style="font-size:11px;color:rgba(255,255,255,.35)">· Hecho para YPO Colombia</span>
+    </a>
+  </div>
 
 </div><!-- /main -->
 </div><!-- /layout -->
@@ -471,7 +498,7 @@ const PAGE     = 48;
 let aiMode     = false;
 let chatHistory= [];
 let loading    = false;
-let sbOpen     = false;
+let sbOpen     = true;
 let revStars   = {};  // id → star rating being composed
 
 // ── BOOT ─────────────────────────────────────────────────────────────────────
