@@ -1022,6 +1022,19 @@ function openModalFromResult(r) {
   showModal({...full,...r});
 }
 
+// Filter out system messages and noise from ctx arrays
+function filterCtx(msgs) {
+  if (!msgs) return [];
+  const noise = ['security code','omitted','null','system','sistema'];
+  return msgs.filter(m => {
+    const t = (m.t||'').trim();
+    if (t.length < 5) return false;
+    const tl = t.toLowerCase();
+    if (noise.some(n => tl.includes(n))) return false;
+    return true;
+  });
+}
+
 function showModal(r) {
   const c = CATS_META[r.category]||{icon:'📋'};
   const sub = [r.org||r.title, r.city, r.country].filter(Boolean).join(' · ');
@@ -1031,15 +1044,54 @@ function showModal(r) {
   const contactHtml = [
     ...(r.phones||[]).map(p=>`<div class="m-pill">📞 ${p}</div>`),
     ...(r.emails||[]).map(e=>`<div class="m-pill">✉️ ${e}</div>`),
-  ].join('')||'<span style="color:var(--muted);font-size:11px">Disponible en el chat del grupo</span>';
+  ].join('')||'<span style="color:var(--muted);font-size:11px">Sin datos de contacto — buscar en el chat del grupo</span>';
 
-  const ctxB = (r.ctx_before||[]).map(m=>
-    `<div class="m-row"><div class="m-sender">${esc(m.s)} · ${m.d}</div><div class="m-text">${esc(m.t)}</div></div>`).join('');
-  const ctxA = (r.ctx_after||[]).map(m=>
-    `<div class="m-row"><div class="m-sender">${esc(m.s)} · ${m.d}</div><div class="m-text">${esc(m.t)}</div></div>`).join('');
+  // Filtered context: remove system/noise messages
+  const before = filterCtx(r.ctx_before);
+  const after  = filterCtx(r.ctx_after);
+
+  // Need section: the original question, prominently shown
+  const needHtml = r.need
+    ? `<div style="background:#EBF5FB;border-left:4px solid var(--blue);
+                  border-radius:0 6px 6px 0;padding:12px 14px;margin-bottom:4px">
+        <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+                    color:var(--blue);margin-bottom:5px">¿Qué necesitaban?</div>
+        <div style="font-size:13px;color:var(--text);line-height:1.55">"${esc(r.need)}"</div>
+       </div>`
+    : before.length
+      ? `<div style="background:#EBF5FB;border-left:4px solid var(--blue);
+                    border-radius:0 6px 6px 0;padding:12px 14px;margin-bottom:4px">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+                      color:var(--blue);margin-bottom:5px">¿Qué necesitaban?</div>
+          <div style="font-size:13px;color:var(--text);line-height:1.55">"${esc(before[before.length-1].t)}"</div>
+         </div>`
+      : '';
+
+  // Recommendation: who shared it and why (ctx_after filtered, max 3 messages)
+  const recMsgs = after.slice(0,4).map(m=>
+    `<div class="m-row">
+      <div class="m-sender">${esc(m.s)} · ${m.d}</div>
+      <div class="m-text">${esc(m.t)}</div>
+     </div>`).join('');
+
+  // Earlier context beyond the first question (ctx_before without the last msg if used as need)
+  const moreBefore = (r.need ? before : before.slice(0,-1)).slice(-2);
+  const moreBeforeHtml = moreBefore.length
+    ? moreBefore.map(m=>
+        `<div class="m-row" style="opacity:.75">
+          <div class="m-sender">${esc(m.s)} · ${m.d}</div>
+          <div class="m-text">${esc(m.t)}</div>
+         </div>`).join('')
+    : '';
+
+  // Endorsements
   const endQ = (r.end_quotes||[]).length
-    ? `<div class="m-sec"><div class="m-lbl">El grupo también confirmó</div>
-        ${(r.end_quotes).map(q=>`<div class="m-row"><div class="m-text" style="color:var(--gold)">"${esc(q)}"</div></div>`).join('')}
+    ? `<div class="m-sec">
+        <div class="m-lbl">El grupo también confirmó</div>
+        ${r.end_quotes.map(q=>
+          `<div style="padding:7px 0;border-bottom:1px solid var(--border);font-size:12px;
+                       color:var(--text2);font-style:italic">"${esc(q)}"</div>`
+        ).join('')}
        </div>` : '';
 
   const reviews = getReviews(r.id);
@@ -1053,14 +1105,28 @@ function showModal(r) {
        </div>` : '';
 
   document.getElementById('modalBody').innerHTML = `
-    <div class="m-name">${c.icon} ${esc(r.name)}</div>
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:2px">
+      <div class="m-name">${c.icon} ${esc(r.name)}${r.times_recommended>1?` <span class="badge-gold" style="vertical-align:middle;font-size:11px">${r.times_recommended}x</span>`:''}</div>
+      <span style="font-size:12px;flex-shrink:0">${r.rec_dot||'🟡'} ${r.rec_label||'Verificar'}</span>
+    </div>
     <div class="m-org">${esc(sub||c.label)}</div>
     ${r.description?`<div class="m-desc">${esc(r.description)}</div>`:''}
     ${r.confidence?`<div style="margin-bottom:12px;padding:10px 14px;background:var(--blue-light);border-radius:6px;border:1px solid rgba(27,92,154,.15)">
       <span style="color:var(--blue);font-size:22px;font-weight:800">${r.confidence}%</span>
       <span style="font-size:11px;color:var(--text2);margin-left:8px">relevancia para tu búsqueda</span>
     </div>`:''}
-    ${r.need?`<div class="m-need">💬 "${esc(r.need)}"</div>`:''}
+
+    ${needHtml}
+    ${moreBeforeHtml?`<div class="m-sec" style="margin-top:8px">
+      <div class="m-lbl">Contexto del chat</div>${moreBeforeHtml}</div>`:''}
+
+    <div class="m-sec">
+      <div class="m-lbl">Lo recomendó ${esc(r.recommender||'')} · ${r.date_disp||''}</div>
+      ${recMsgs||'<span style="color:var(--muted);font-size:11px">Compartido directamente sin respuesta registrada</span>'}
+    </div>
+
+    ${endQ}
+
     <div class="m-sec"><div class="m-lbl">Contacto directo</div>
       <div class="m-contacts">${contactHtml}</div>
       ${(r.phones&&r.phones.length)||(r.emails&&r.emails.length)?
@@ -1072,14 +1138,11 @@ function showModal(r) {
           📲 Guardar en contactos (.vcf)
          </button>`:''}
     </div>
-    ${ctxB?`<div class="m-sec"><div class="m-lbl">Lo que se preguntó en el grupo</div>${ctxB}</div>`:''}
-    <div class="m-sec"><div class="m-lbl">Recomendado por ${esc(r.recommender||'')} · ${r.date_disp||''}</div>
-      ${ctxA||'<span style="color:var(--muted);font-size:11px">Compartido directamente</span>'}</div>
-    ${endQ}
+
     ${r.times_recommended>1 && r.rec_history ? `
     <div class="m-sec">
       <div class="m-lbl">Historial de recomendaciones (${r.times_recommended}x)</div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">
         ${(r.rec_history||[]).map(h=>`
           <div style="background:#FFF8E1;border:1px solid #F9A825;
                       border-radius:6px;padding:4px 9px;font-size:10px">
@@ -1088,11 +1151,8 @@ function showModal(r) {
           </div>`).join('')}
       </div>
     </div>` : ''}
+
     ${revHtml}
-    <div class="m-sec">
-      <div class="m-lbl">Vigencia</div>
-      <span style="font-size:12px">${r.rec_dot||'🟡'} ${r.rec_label||'Verificar'}</span>
-    </div>
     <div class="fb-row">
       <button class="fb-btn ${cur==='yes'?'yes':''}" onclick="saveFb(${r.id},'yes',this)">✓ Sigue vigente</button>
       <button class="fb-btn ${cur==='no'?'no':''}" onclick="saveFb(${r.id},'no',this)">⚠ Puede haber cambiado</button>
