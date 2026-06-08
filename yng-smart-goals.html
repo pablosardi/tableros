@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMART Goals · YNG LATAM FY 26-27</title>
+<style>
+  :root {
+    --navy:  #0A1628;
+    --navy2: #132240;
+    --orange:#ED9400;
+    --blue:  #2E74AD;
+    --green: #6EB141;
+    --red:   #F05664;
+    --white: #FFFFFF;
+    --gray:  #8899AA;
+    --light: #F0F4F8;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+         background:var(--navy); color:var(--white); }
+
+  /* ── HERO ─────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0A1628 0%, #132240 60%, #1a2f52 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 2rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content:''; position:absolute; inset:0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(237,148,0,.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display:inline-block; background:var(--orange);
+    color:var(--navy); font-size:.75rem; font-weight:800;
+    letter-spacing:.12em; padding:.35rem 1rem; border-radius:2rem;
+    margin-bottom:1.5rem; text-transform:uppercase;
+  }
+  .hero h1 {
+    font-size: clamp(2.8rem, 8vw, 6rem);
+    font-weight:900; line-height:1.05;
+    letter-spacing:-.02em; margin-bottom:.5rem;
+  }
+  .hero h1 span { color:var(--orange); }
+  .hero-sub {
+    font-size:clamp(1rem, 2.5vw, 1.35rem);
+    color:var(--gray); margin-bottom:2.5rem; max-width:560px;
+  }
+  .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
+  .btn {
+    padding:.8rem 1.8rem; border-radius:.5rem;
+    font-size:1rem; font-weight:700; cursor:pointer;
+    border:none; text-decoration:none; transition: transform .15s, box-shadow .15s;
+    display:inline-flex; align-items:center; gap:.5rem;
+  }
+  .btn:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.3); }
+  .btn-primary { background:var(--orange); color:var(--navy); }
+  .btn-outline  { background:transparent; color:var(--white);
+                  border:2px solid rgba(255,255,255,.25); }
+
+  /* ── STATS ────────────────────────────── */
+  .stats {
+    background:var(--navy2);
+    border-top:3px solid var(--orange);
+    padding:3rem 1.5rem;
+  }
+  .stats-grid {
+    max-width:900px; margin:0 auto;
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:1.5rem; text-align:center;
+  }
+  .stat-val { font-size:2.6rem; font-weight:900; color:var(--orange); }
+  .stat-val.blue  { color:var(--blue); }
+  .stat-val.green { color:var(--green); }
+  .stat-val.red   { color:var(--red); }
+  .stat-lbl { font-size:.85rem; color:var(--gray); margin-top:.2rem; }
+  .stat-note {
+    max-width:900px; margin:1.5rem auto 0;
+    text-align:center; font-size:.9rem;
+    color:var(--gray); font-style:italic;
+    border-top:1px solid rgba(255,255,255,.08); padding-top:1.2rem;
+  }
+
+  /* ── SECTION HEADER ───────────────────── */
+  .section { padding:4rem 1.5rem; }
+  .section-inner { max-width:900px; margin:0 auto; }
+  .section-tag {
+    display:inline-block; font-size:.7rem; font-weight:800;
+    letter-spacing:.15em; text-transform:uppercase;
+    color:var(--orange); margin-bottom:.6rem;
+  }
+  .section h2 {
+    font-size:clamp(1.6rem,4vw,2.4rem);
+    font-weight:900; margin-bottom:.6rem; line-height:1.1;
+  }
+  .section-desc { color:var(--gray); font-size:1rem; margin-bottom:2.5rem; max-width:600px; }
+
+  /* ── CARDS (acordeón) ─────────────────── */
+  .cards { display:flex; flex-direction:column; gap:1rem; }
+  .card {
+    background:var(--navy2); border-radius:.75rem;
+    border:1px solid rgba(255,255,255,.07);
+    overflow:hidden; transition:border-color .2s;
+  }
+  .card.open { border-color:var(--orange); }
+  .card-header {
+    display:flex; align-items:center; gap:1rem;
+    padding:1.2rem 1.5rem; cursor:pointer;
+    user-select:none;
+  }
+  .card-badge {
+    flex-shrink:0; width:2.2rem; height:2.2rem;
+    border-radius:.4rem; display:flex;
+    align-items:center; justify-content:center;
+    font-size:1rem;
+  }
+  .card-badge.bad  { background:rgba(240,86,100,.15); }
+  .card-badge.good { background:rgba(110,177,65,.15); }
+  .card-title { flex:1; }
+  .card-portfolio {
+    font-size:.7rem; font-weight:800; text-transform:uppercase;
+    letter-spacing:.1em; color:var(--orange); margin-bottom:.2rem;
+  }
+  .card-goal { font-size:.95rem; font-weight:600; }
+  .card-goal.bad  { color:rgba(240,86,100,.9); }
+  .card-goal.good { color:rgba(110,177,65,.9); }
+  .card-arrow {
+    flex-shrink:0; font-size:1.1rem; color:var(--gray);
+    transition:transform .25s;
+  }
+  .card.open .card-arrow { transform:rotate(90deg); }
+  .card-body {
+    display:none; padding:0 1.5rem 1.5rem;
+    border-top:1px solid rgba(255,255,255,.07);
+  }
+  .card.open .card-body { display:block; }
+
+  /* diagnóstico tabla */
+  .diag { margin:1.2rem 0; }
+  .diag-title {
+    font-size:.7rem; font-weight:800; text-transform:uppercase;
+    letter-spacing:.12em; color:var(--gray); margin-bottom:.7rem;
+  }
+  .diag-row {
+    display:flex; align-items:flex-start; gap:.8rem;
+    padding:.5rem 0; border-bottom:1px solid rgba(255,255,255,.05);
+    font-size:.9rem;
+  }
+  .diag-row:last-child { border-bottom:none; }
+  .diag-icon { flex-shrink:0; font-size:1rem; margin-top:.05rem; }
+  .diag-key  { flex-shrink:0; width:1.8rem; font-weight:800; color:var(--white); }
+  .diag-why  { color:var(--gray); }
+
+  /* lección */
+  .lesson {
+    background:rgba(237,148,0,.07); border-left:3px solid var(--orange);
+    border-radius:0 .5rem .5rem 0;
+    padding:.9rem 1.1rem; margin:1rem 0;
+    font-size:.9rem; line-height:1.6; color:rgba(255,255,255,.85);
+  }
+  .lesson-tag {
+    font-size:.65rem; font-weight:800; text-transform:uppercase;
+    letter-spacing:.1em; color:var(--orange); margin-bottom:.4rem;
+  }
+
+  /* versión SMART */
+  .smart-version {
+    background:rgba(110,177,65,.1); border:1px solid rgba(110,177,65,.3);
+    border-radius:.6rem; padding:.9rem 1.1rem; margin-top:1rem;
+  }
+  .smart-tag {
+    font-size:.65rem; font-weight:800; text-transform:uppercase;
+    letter-spacing:.1em; color:var(--green); margin-bottom:.4rem;
+  }
+  .smart-text { font-size:.95rem; font-weight:700; color:var(--white); line-height:1.5; }
+
+  /* ── CHECKER ──────────────────────────── */
+  .checker-section { background:var(--navy2); }
+  .prompt-box {
+    background:var(--navy); border:1px solid rgba(237,148,0,.3);
+    border-radius:.75rem; padding:1.5rem;
+    font-family:'Courier New', monospace;
+    font-size:.78rem; line-height:1.7;
+    color:rgba(255,255,255,.75);
+    max-height:260px; overflow-y:auto;
+    white-space:pre-wrap; margin:1.5rem 0 1rem;
+  }
+  .copy-btn {
+    width:100%; padding:1rem;
+    background:var(--orange); color:var(--navy);
+    border:none; border-radius:.6rem;
+    font-size:1.05rem; font-weight:800;
+    cursor:pointer; transition:background .2s, transform .15s;
+    margin-bottom:1.5rem;
+  }
+  .copy-btn:hover { background:#ffaa00; transform:translateY(-1px); }
+  .copy-btn.copied { background:var(--green); }
+
+  .ai-links { display:flex; gap:.8rem; flex-wrap:wrap; margin-bottom:.5rem; }
+  .ai-btn {
+    flex:1; min-width:120px; padding:.75rem 1rem;
+    border-radius:.5rem; text-align:center;
+    text-decoration:none; font-weight:700; font-size:.9rem;
+    transition:transform .15s, box-shadow .15s;
+    border:2px solid transparent;
+  }
+  .ai-btn:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,.3); }
+  .ai-claude  { background:rgba(204,120,92,.15); border-color:rgba(204,120,92,.4); color:#CC785C; }
+  .ai-chatgpt { background:rgba(16,163,127,.15); border-color:rgba(16,163,127,.4); color:#10A37F; }
+  .ai-gemini  { background:rgba(66,133,244,.15); border-color:rgba(66,133,244,.4); color:#4285F4; }
+  .ai-note { font-size:.78rem; color:var(--gray); margin-top:.5rem; }
+
+  /* steps */
+  .steps { display:flex; gap:1.5rem; flex-wrap:wrap; margin-top:2rem; }
+  .step { flex:1; min-width:200px; display:flex; gap:.8rem; align-items:flex-start; }
+  .step-num {
+    flex-shrink:0; width:2rem; height:2rem;
+    background:var(--orange); color:var(--navy);
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:900; font-size:.9rem;
+  }
+  .step-txt strong { display:block; font-size:.9rem; margin-bottom:.2rem; }
+  .step-txt span   { font-size:.82rem; color:var(--gray); }
+
+  /* ── FOOTER ───────────────────────────── */
+  footer {
+    text-align:center; padding:2rem 1rem;
+    border-top:1px solid rgba(255,255,255,.07);
+    color:var(--gray); font-size:.82rem;
+  }
+  footer a { color:var(--orange); text-decoration:none; }
+  .footer-bar {
+    width:3rem; height:3px; background:var(--orange);
+    margin:0 auto 1rem; border-radius:2px;
+  }
+
+
+  /* ── SMART DEF ────────────────────────────── */
+  .smart-def { padding:4rem 1.5rem; background:var(--navy); }
+  .smart-def-inner { max-width:960px; margin:0 auto; }
+  .smart-letters {
+    display:grid;
+    grid-template-columns: repeat(5,1fr);
+    gap:1rem; margin-top:2rem;
+  }
+  @media(max-width:700px){ .smart-letters{ grid-template-columns:1fr 1fr; } }
+  @media(max-width:400px){ .smart-letters{ grid-template-columns:1fr; } }
+  .sl {
+    background:var(--navy2);
+    border-radius:.9rem;
+    padding:1.4rem 1rem 1.2rem;
+    text-align:center;
+    border-top:4px solid transparent;
+    transition:transform .2s, box-shadow .2s;
+    cursor:default;
+  }
+  .sl:hover { transform:translateY(-5px); box-shadow:0 12px 32px rgba(0,0,0,.4); }
+  .sl-letter {
+    font-size:3.2rem; font-weight:900; line-height:1;
+    margin-bottom:.3rem;
+  }
+  .sl-word {
+    font-size:.7rem; font-weight:800; text-transform:uppercase;
+    letter-spacing:.12em; margin-bottom:.8rem;
+  }
+  .sl-joke {
+    font-size:.8rem; line-height:1.55; color:rgba(255,255,255,.72);
+    margin-bottom:.8rem;
+  }
+  .sl-dont {
+    font-size:.72rem; background:rgba(240,86,100,.12);
+    border-radius:.4rem; padding:.4rem .6rem;
+    color:var(--red); margin-bottom:.35rem;
+  }
+  .sl-do {
+    font-size:.72rem; background:rgba(110,177,65,.12);
+    border-radius:.4rem; padding:.4rem .6rem;
+    color:var(--green);
+  }
+  .sl-s { border-color:var(--orange); }
+  .sl-s .sl-letter { color:var(--orange); }
+  .sl-s .sl-word   { color:var(--orange); }
+  .sl-m { border-color:var(--blue); }
+  .sl-m .sl-letter { color:var(--blue); }
+  .sl-m .sl-word   { color:var(--blue); }
+  .sl-a { border-color:#9B59B6; }
+  .sl-a .sl-letter { color:#9B59B6; }
+  .sl-a .sl-word   { color:#9B59B6; }
+  .sl-r { border-color:var(--green); }
+  .sl-r .sl-letter { color:var(--green); }
+  .sl-r .sl-word   { color:var(--green); }
+  .sl-t { border-color:var(--red); }
+  .sl-t .sl-letter { color:var(--red); }
+  .sl-t .sl-word   { color:var(--red); }
+  .smart-tagline {
+    text-align:center; margin-top:2rem;
+    font-size:1rem; color:var(--gray); font-style:italic;
+  }
+  .smart-tagline strong { color:var(--orange); font-style:normal; }
+
+  /* ── SCROLL REVEAL ────────────────────── */
+  .reveal { opacity:0; transform:translateY(24px); transition: opacity .5s, transform .5s; }
+  .reveal.visible { opacity:1; transform:none; }
+
+  /* ── RESPONSIVE ───────────────────────── */
+  @media(max-width:600px) {
+    .ai-links { flex-direction:column; }
+    .steps    { flex-direction:column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-tag">YNG LATAM · FY 26-27</div>
+  <h1>SMART<br><span>Goals</span></h1>
+  <p class="hero-sub">Mini-clase + Validador para el board de YNG LATAM.<br>
+  Aprende con ejemplos reales y valida tus goals con AI — gratis.</p>
+  <div class="hero-btns">
+    <a href="#clase" class="btn btn-primary">📚 Ver la mini-clase</a>
+    <a href="#checker" class="btn btn-outline">🎯 Validar mi goal</a>
+  </div>
+</section>
+
+<!-- ══ STATS ══════════════════════════════════════════════ -->
+<section class="stats">
+  <div class="stats-grid">
+    <div>
+      <div class="stat-val blue">420</div>
+      <div class="stat-lbl">Paying Members</div>
+    </div>
+    <div>
+      <div class="stat-val red">1,777</div>
+      <div class="stat-lbl">Unpaid / Inactivos</div>
+    </div>
+    <div>
+      <div class="stat-val">19%</div>
+      <div class="stat-lbl">Activación Regional</div>
+    </div>
+    <div>
+      <div class="stat-val green">6</div>
+      <div class="stat-lbl">Foros Activos</div>
+    </div>
+    <div>
+      <div class="stat-val blue">22</div>
+      <div class="stat-lbl">Grupos Locales</div>
+    </div>
+  </div>
+  <p class="stat-note">
+    Solo 1 de cada 10 paying members está en un foro · 81% del potencial regional nunca ha activado
+  </p>
+</section>
+
+
+<!-- ══ SMART DEFINITION ══════════════════════════════════ -->
+<section class="smart-def" id="que-es-smart">
+  <div class="smart-def-inner reveal">
+    <div class="section-tag">¿Qué es un SMART goal?</div>
+    <h2>5 letras. Sin excusas.</h2>
+    <p class="section-desc">Un SMART goal no es un deseo con buenas intenciones. Es una promesa que puedes cumplir — o no. Sin ambigüedad.</p>
+
+    <div class="smart-letters">
+
+      <div class="sl sl-s">
+        <div class="sl-letter">S</div>
+        <div class="sl-word">Específico</div>
+        <div class="sl-joke">Si no puedes explicarlo en una frase sin usar las palabras "mejorar", "potenciar" o "fortalecer"... empieza de nuevo.</div>
+        <div class="sl-dont">❌ "Mejorar la comunicación"</div>
+        <div class="sl-do">✅ "Enviar reporte mensual a 22 capítulos"</div>
+      </div>
+
+      <div class="sl sl-m">
+        <div class="sl-letter">M</div>
+        <div class="sl-word">Medible</div>
+        <div class="sl-joke">Sin número no es un goal. Es poesía. Y aunque la poesía es bonita, no sirve para el board de YNG LATAM.</div>
+        <div class="sl-dont">❌ "Crecer la membresía"</div>
+        <div class="sl-do">✅ "De 420 a 520 paying members"</div>
+      </div>
+
+      <div class="sl sl-a">
+        <div class="sl-letter">A</div>
+        <div class="sl-word">Alcanzable</div>
+        <div class="sl-joke">Ambicioso sí. Imposible no. "Triplicar miembros en 3 meses" no es inspirador — es ficción. Súbele el nivel sin perder el piso.</div>
+        <div class="sl-dont">❌ "+300% miembros este año"</div>
+        <div class="sl-do">✅ "+24% paying en FY 26-27"</div>
+      </div>
+
+      <div class="sl sl-r">
+        <div class="sl-letter">R</div>
+        <div class="sl-word">Relevante</div>
+        <div class="sl-joke">Pregúntate: si logro esto, ¿le importa a YNG LATAM o solo a mí? Si la respuesta es "solo a mí"... es un goal personal, no del board.</div>
+        <div class="sl-dont">❌ "Aprender más sobre liderazgo"</div>
+        <div class="sl-do">✅ "Lanzar 3 foros en países sin foro"</div>
+      </div>
+
+      <div class="sl sl-t">
+        <div class="sl-letter">T</div>
+        <div class="sl-word">Tiempo</div>
+        <div class="sl-joke">"Pronto" no existe en el calendario. "Este año" tampoco. Si no puedes marcar el día exacto en que lo logras, no es un deadline — es un sueño.</div>
+        <div class="sl-dont">❌ "Antes de fin de año"</div>
+        <div class="sl-do">✅ "Antes del 31 de marzo de 2027"</div>
+      </div>
+
+    </div>
+    <p class="smart-tagline">
+      Regla de oro: <strong>si no puedes marcar en un calendario el día que lo logras, no es un SMART goal.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- ══ MINI-CLASE ═════════════════════════════════════════ -->
+<section class="section" id="clase">
+  <div class="section-inner reveal">
+    <div class="section-tag">Mini-clase</div>
+    <h2>Goals reales · Buenos y malos</h2>
+    <p class="section-desc">Haz click en cada tarjeta para ver el diagnóstico completo, la lección y la versión corregida.</p>
+
+    <div class="cards">
+
+      <!-- CARD 1: Membership BAD -->
+      <div class="card" onclick="toggle(this)">
+        <div class="card-header">
+          <div class="card-badge bad">❌</div>
+          <div class="card-title">
+            <div class="card-portfolio">Membership Officer</div>
+            <div class="card-goal bad">"Crecer la membresía de YNG LATAM este año"</div>
+          </div>
+          <div class="card-arrow">›</div>
+        </div>
+        <div class="card-body">
+          <div class="diag">
+            <div class="diag-title">📋 Diagnóstico SMART</div>
+            <div class="diag-row"><span class="diag-icon">❌</span><span class="diag-key">S</span><span class="diag-why">No dice quién lo hace, en qué países ni qué tipo de membresía</span></div>
+            <div class="diag-row"><span class="diag-icon">❌</span><span class="diag-key">M</span><span class="diag-why">"Crecer" no es un número — ¿de cuánto a cuánto?</span></div>
+            <div class="diag-row"><span class="diag-icon">❌</span><span class="diag-key">A</span><span class="diag-why">Imposible evaluar sin saber cuánto ni cuándo</span></div>
+            <div class="diag-row"><span class="diag-icon">✅</span><span class="diag-key">R</span><span class="diag-why">Membership es el core del portfolio</span></div>
+            <div class="diag-row"><span class="diag-icon">❌</span><span class="diag-key">T</span><span class="diag-why">"Este año" no es una fecha. ¿Qué día del año?</span></div>
+          </div>
+          <div class="lesson">
+            <div class="lesson-tag">💡 Piénsalo así</div>
+            "Crecer la membresía" es como decirle a tu equipo de ventas: "vendan más". Nadie sabe a dónde ir, cuándo llegar ni si llegaron. Un goal sin número es un deseo. Un deseo sin fecha es un sueño. Tienes 1,777 miembros que ya están en el sistema YNG pero no han pagado — ese no es un problema de ventas, es un problema de activación.
+          </div>
+          <div class="smart-version">
+            <div class="smart-tag">🎯 Versión SMART</div>
+            <div class="smart-text">Convertir 50 miembros unpaid en paying en los 5 países con menor activación (Argentina, Perú, Ecuador, Panamá, El Salvador) antes del 31 de marzo de 2027, con reporte mensual al board.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2: Forum BAD -->
+      <div class="card" onclick="toggle(this)">
+        <div class="card-header">
+          <div class="card-badge bad">❌</div>
+          <div class="card-title">
+            <div class="card-portfolio">Forum Officer</div>
+            <div class="card-goal bad">"Fortalecer los foros y crear nuevos en la región"</div>
+          </div>
+          <div class="card-arrow">›</div>
+        </div>
+        <div class="card-body">
+          <div class="diag">
+            <div class="diag-title">📋 Diagnóstico SMART</div>
+            <div class="diag-row"><span class="diag-icon">❌</span><span class="diag-key">S</span><span class="diag-why">¿Cuántos foros nuevos? ¿En qué países? ¿Quién los lidera?</span></div>
+            <div class="diag-row"><span class="diag-icon">❌</span><span class="diag-key">M</span><span class="diag-why">"Fortalecer" no se puede medir. ¿Cuál es el número de éxito?</span></div>
+            <div class="diag-row"><span class="diag-icon">⚠️</span><span class="diag-key">A</span><span class="diag-why">Puede serlo, pero sin número no sabemos si es trivial o ambicioso</span></div>
+            <div class="diag-row"><span class="diag-icon">✅</span><span class="diag-key">R</span><span class="diag-why">Solo 10% de los paying están en foros — urgente</span></div>
+            <div class="diag-row"><span class="diag-icon">❌</span><span class="diag-key">T</span><span class="diag-why">Sin fecha límite</span></div>
+          </div>
+          <div class="lesson">
+            <div class="lesson-tag">💡 Piénsalo así</div>
+            "Fortalecer" es la palabra favorita de quienes no quieren comprometerse con un número. Es cómoda porque nadie puede decir que fallaste — pero tampoco que tuviste éxito. Los mejores líderes no le temen a los números; le temen a no tenerlos, porque sin números no puedes aprender de tus errores.
+          </div>
+          <div class="smart-version">
+            <div class="smart-tag">🎯 Versión SMART</div>
+            <div class="smart-text">Lanzar 3 nuevos foros con mínimo 6 miembros activos cada uno en Argentina, Panamá y Costa Rica antes del 28 de febrero de 2027, con moderador capacitado asignado antes del lanzamiento.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3: Engagement GOOD -->
+      <div class="card" onclick="toggle(this)">
+        <div class="card-header">
+          <div class="card-badge good">✅</div>
+          <div class="card-title">
+            <div class="card-portfolio">Engagement Officer</div>
+            <div class="card-goal good">"Lograr 70% de asistencia a eventos regionales antes del 30 jun 2027"</div>
+          </div>
+          <div class="card-arrow">›</div>
+        </div>
+        <div class="card-body">
+          <div class="diag">
+            <div class="diag-title">📋 Diagnóstico SMART</div>
+            <div class="diag-row"><span class="diag-icon">✅</span><span class="diag-key">S</span><span class="diag-why">Claro: asistencia de paying members a eventos regionales</span></div>
+            <div class="diag-row"><span class="diag-icon">✅</span><span class="diag-key">M</span><span class="diag-why">70% — número concreto y verificable</span></div>
+            <div class="diag-row"><span class="diag-icon">✅</span><span class="diag-key">A</span><span class="diag-why">El Exchange tuvo alta asistencia — es un precedente realista</span></div>
+            <div class="diag-row"><span class="diag-icon">✅</span><span class="diag-key">R</span><span class="diag-why">El board feedback señaló engagement como prioridad #1</span></div>
+            <div class="diag-row"><span class="diag-icon">✅</span><span class="diag-key">T</span><span class="diag-why">30 de junio de 2027 — fecha exacta</span></div>
+          </div>
+          <div class="lesson">
+            <div class="lesson-tag">💡 Piénsalo así</div>
+            Esto es lo que se siente cuando un goal está bien escrito. El Exchange de Brasil fue el éxito del año porque tenía fecha, lugar y lista de invitados — exactamente lo contrario de "hacer que los miembros participen más". La logística bien ejecutada crea engagement; las campañas de motivación, no.
+          </div>
+          <div class="smart-version">
+            <div class="smart-tag">🎯 Ya es SMART — este es el estándar</div>
+            <div class="smart-text">Lograr que 70% de los paying members de LATAM asistan a al menos 1 evento regional (presencial o virtual) antes del 30 de junio de 2027, con reporte de asistencia después de cada evento.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 4: Learning BAD -->
+      <div class="card" onclick="toggle(this)">
+        <div class="card-header">
+          <div class="card-badge bad">❌</div>
+          <div class="card-title">
+            <div class="card-portfolio">Learning Officer</div>
+            <div class="card-goal bad">"Hacer eventos de aprendizaje más relevantes y de alta calidad"</div>
+          </div>
+          <div class="card-arrow">›</div>
+        </div>
+        <div class="card-body">
+          <div class="diag">
+            <div class="diag-title">📋 Diagnóstico SMART</div>
+            <div class="diag-row"><span class="diag-icon">❌</span><span class="diag-key">S</span><span class="diag-why">¿Cuántos eventos? ¿Sobre qué temas? ¿Quién los organiza?</span></div>
+            <div class="diag-row"><span class="diag-icon">❌</span><span class="diag-key">M</span><span class="diag-why">"Alta calidad" y "relevantes" no se pueden medir</span></div>
+            <div class="diag-row"><span class="diag-icon">❌</span><span class="diag-key">A</span><span class="diag-why">Sin número es imposible evaluar si es viable</span></div>
+            <div class="diag-row"><span class="diag-icon">✅</span><span class="diag-key">R</span><span class="diag-why">El board pidió explícitamente eventos de carrera y desarrollo</span></div>
+            <div class="diag-row"><span class="diag-icon">❌</span><span class="diag-key">T</span><span class="diag-why">No tiene fecha</span></div>
+          </div>
+          <div class="lesson">
+            <div class="lesson-tag">💡 Piénsalo así</div>
+            "Alta calidad" es el lujo de quienes no quieren ser evaluados. Jeff Bezos no dijo "mejoremos la experiencia de compra" — dijo "entrega en 2 días, a cualquier dirección, con devolución gratis". Eso sí se puede medir. ¿Cuál es el equivalente de "entrega en 2 días" para tus eventos de aprendizaje?
+          </div>
+          <div class="smart-version">
+            <div class="smart-tag">🎯 Versión SMART</div>
+            <div class="smart-text">Realizar 4 eventos de aprendizaje regionales en FY 26-27 (mínimo 2 presenciales, 1 enfocado en carrera/negocios), con 50+ asistentes por evento y NPS ≥ 7 medido al finalizar cada uno.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 5: Chair GOOD -->
+      <div class="card" onclick="toggle(this)">
+        <div class="card-header">
+          <div class="card-badge good">✅</div>
+          <div class="card-title">
+            <div class="card-portfolio">LATAM Chair</div>
+            <div class="card-goal good">"Pasar de 420 a 520 paying members antes de junio 2027"</div>
+          </div>
+          <div class="card-arrow">›</div>
+        </div>
+        <div class="card-body">
+          <div class="diag">
+            <div class="diag-title">📋 Diagnóstico SMART</div>
+            <div class="diag-row"><span class="diag-icon">✅</span><span class="diag-key">S</span><span class="diag-why">Crecimiento de paying members — claro y accionable</span></div>
+            <div class="diag-row"><span class="diag-icon">✅</span><span class="diag-key">M</span><span class="diag-why">De 420 a 520. El +24% está calculado. Sin ambigüedad</span></div>
+            <div class="diag-row"><span class="diag-icon">✅</span><span class="diag-key">A</span><span class="diag-why">+100 en 22 países = ~4-5 por país. Desafiante pero real</span></div>
+            <div class="diag-row"><span class="diag-icon">✅</span><span class="diag-key">R</span><span class="diag-why">Es la función del Chair: visión y posicionamiento regional</span></div>
+            <div class="diag-row"><span class="diag-icon">✅</span><span class="diag-key">T</span><span class="diag-why">Junio 2027 — ligada a la reunión global de YNG</span></div>
+          </div>
+          <div class="lesson">
+            <div class="lesson-tag">💡 Piénsalo así</div>
+            Un buen SMART goal siempre tiene punto de partida y punto de llegada. Nota que dice "de 420 a 520" — ese número de salida es tan importante como el de llegada. Es como un GPS: no te lleva a ningún lado si no sabe dónde estás hoy. Comparte este goal como el estándar para tu board.
+          </div>
+          <div class="smart-version">
+            <div class="smart-tag">🎯 Ya es SMART — 5 de 5</div>
+            <div class="smart-text">Pasar de 420 a 520 paying members en YNG LATAM antes de la reunión global de junio 2027, con reporte mensual de avance al board regional.</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /cards -->
+  </div>
+</section>
+
+<!-- ══ CHECKER ════════════════════════════════════════════ -->
+<section class="section checker-section" id="checker">
+  <div class="section-inner reveal">
+    <div class="section-tag">Validador</div>
+    <h2>Ahora valida el tuyo</h2>
+    <p class="section-desc">Copia el prompt, abre cualquier AI gratuito, pega el prompt + tu goal. Eso es todo.</p>
+
+    <div class="prompt-box" id="promptText">Eres un coach de SMART Goals con el estilo de un profesor de business inspirador: directo, cálido, con analogías reales y que hace pensar.
+
+Tu misión: ayudar al board de YNG LATAM a escribir goals que realmente se puedan ejecutar y medir.
+
+Cuando te compartan un goal, responde EXACTAMENTE así:
+
+─────────────────────────────
+📋 DIAGNÓSTICO SMART
+─────────────────────────────
+Evalúa cada criterio con ✅ o ❌ + una línea explicando POR QUÉ:
+
+S — Específico   → ¿Se sabe exactamente QUÉ va a pasar y QUIÉN lo hace?
+M — Medible      → ¿Hay un número concreto para saber si se logró o no?
+A — Alcanzable   → ¿Es realista dado el tiempo y recursos disponibles?
+R — Relevante    → ¿Conecta directamente con las prioridades del portfolio?
+T — Tiempo       → ¿Tiene una fecha límite exacta (día/mes/año)?
+
+─────────────────────────────
+💡 PIÉNSALO ASÍ
+─────────────────────────────
+2-3 líneas como un profesor de negocios inspirador. Explica el error de fondo, usa una analogía del mundo real. Hazlo memorable.
+
+─────────────────────────────
+🎯 VERSIÓN SMART
+─────────────────────────────
+Reescribe el goal. Máximo 2 líneas.
+Regla de oro: si no puedes marcar en un calendario el día que lo logras, no es un SMART goal.
+Prohibido: "mejorar", "fortalecer", "potenciar", "incrementar" sin número.
+
+─────────────────────────────
+❓ PREGUNTA DE CIERRE
+─────────────────────────────
+Una sola pregunta para confirmar que capturas bien la intención.
+
+Responde siempre en el idioma en que te escriben. Si el goal ya es SMART, celébralo con la misma energía y explica por qué es bueno — eso también enseña.
+
+Si te comparten varios goals a la vez, evalúa cada uno por separado con el mismo formato completo, numerándolos.</div>
+
+    <button class="copy-btn" onclick="copyPrompt(this)">📋 Copiar Prompt</button>
+
+    <div class="ai-links">
+      <a href="https://claude.ai" target="_blank" class="ai-btn ai-claude">Claude.ai →</a>
+      <a href="https://chatgpt.com" target="_blank" class="ai-btn ai-chatgpt">ChatGPT →</a>
+      <a href="https://gemini.google.com" target="_blank" class="ai-btn ai-gemini">Gemini →</a>
+    </div>
+    <p class="ai-note">Todos gratis · Sin registro obligatorio en Claude y Gemini</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-txt">
+          <strong>Copia el prompt</strong>
+          <span>Click en "Copiar Prompt" arriba</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-txt">
+          <strong>Abre un AI</strong>
+          <span>Claude, ChatGPT o Gemini — los 3 son gratis</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-txt">
+          <strong>Pega y agrega tu goal</strong>
+          <span>Al final del prompt escribe: "Mi goal es: [tu goal]"</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ═════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-bar"></div>
+  <p>YNG LATAM · FY 26-27 · <a href="https://yponextgen.org" target="_blank">yponextgen.org</a></p>
+</footer>
+
+<script>
+  // Acordeón
+  function toggle(card) {
+    const isOpen = card.classList.contains('open');
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('open'));
+    if (!isOpen) card.classList.add('open');
+  }
+
+  // Copiar prompt
+  function copyPrompt(btn) {
+    const el = document.getElementById('promptText');
+    const text = el.innerText;
+    if (navigator.clipboard && location.protocol !== 'file:') {
+      navigator.clipboard.writeText(text).then(() => flashCopied(btn));
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); document.body.removeChild(ta);
+      flashCopied(btn);
+    }
+  }
+  function flashCopied(btn) {
+    btn.textContent = '✅ ¡Copiado!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 Copiar Prompt'; btn.classList.remove('copied'); }, 2500);
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
