@@ -496,29 +496,39 @@ body{
 /* ══ SLIDE 8: PORTFOLIO ══════════════════════════════ */
 #s8{background:var(--navy);}
 .port-list{display:flex;flex-direction:column;gap:.6rem;margin-top:1.2rem;}
+.port-list{display:flex;flex-direction:column;gap:.6rem;}
 .port-row{
-  display:grid;grid-template-columns:50px 180px 1fr;
-  align-items:center;gap:1rem;
+  display:grid;grid-template-columns:52px 1fr;
+  gap:1rem;align-items:start;
   background:var(--glass);border:1px solid var(--glass-border);
   backdrop-filter:blur(8px);
-  border-radius:.7rem;padding:.75rem 1rem;
+  border-radius:.75rem;padding:.85rem 1rem;
   transition:transform .2s,border-color .2s;
 }
-.port-row:hover{transform:translateX(4px);border-color:rgba(214,157,35,.25);}
-@media(max-width:600px){.port-row{grid-template-columns:40px 1fr;}}
+.port-row:hover{transform:translateX(3px);border-color:rgba(214,157,35,.2);}
 .port-avatar{
-  width:40px;height:40px;border-radius:50%;
+  width:44px;height:44px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  font-weight:800;font-size:.88rem;flex-shrink:0;
+  font-weight:800;font-size:.82rem;flex-shrink:0;margin-top:2px;
 }
-.port-name{font-size:.85rem;font-weight:700;}
-.port-person{font-size:.72rem;color:var(--gray);margin-top:.1rem;}
-.port-goals{display:flex;gap:.5rem;flex-wrap:wrap;}
-.port-tag{
-  background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.12);
-  border-radius:.4rem;padding:.28rem .6rem;
-  font-size:.72rem;color:var(--gray);font-style:italic;
+.port-header{display:flex;align-items:baseline;gap:.7rem;margin-bottom:.45rem;}
+.port-name{font-size:.9rem;font-weight:800;}
+.port-person{font-size:.72rem;color:var(--gray);}
+.port-goals{display:flex;gap:.4rem;flex-wrap:wrap;}
+.port-goal{
+  display:flex;align-items:center;gap:.35rem;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+  border-radius:.45rem;padding:.3rem .65rem;
+  font-size:.72rem;
 }
+.port-goal-num{
+  width:16px;height:16px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.6rem;font-weight:800;flex-shrink:0;
+}
+.port-goal-slot{color:rgba(255,255,255,.38);font-style:italic;}
+.port-goal-slash{color:rgba(255,255,255,.15);margin:0 .2rem;}
+.port-goal-date{color:rgba(255,255,255,.22);font-size:.68rem;}
 
 /* ══ SLIDE 9: CLOSING ════════════════════════════════ */
 #s9{background:var(--navy);}
@@ -844,29 +854,29 @@ body{
       <!-- Left: PlayBook page example - bigger, clearer -->
       <div style="background:var(--glass);border:1px solid var(--glass-border);border-radius:1rem;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.4);">
         <div style="background:linear-gradient(135deg,rgba(20,123,209,.25),rgba(20,123,209,.08));border-bottom:3px solid var(--blue);padding:1.1rem 1.3rem;">
-          <div style="font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--blue);margin-bottom:.3rem;">PORTFOLIO · MEMBRESÍA · COSTA RICA</div>
-          <div style="font-size:1.3rem;font-weight:800;font-family:'Syne',sans-serif;color:#fff;">Sebastian Sayagues</div>
-          <div style="font-size:.88rem;color:var(--gray);margin-top:.15rem;">Incoming Membership Officer · YNG LATAM</div>
+          <div style="font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--blue);margin-bottom:.3rem;">PORTFOLIO · MEMBRESÍA · COSTA RICA</div>
+          <div style="font-size:1.5rem;font-weight:800;font-family:'Syne',sans-serif;color:#fff;">Sebastian Sayagues</div>
+          <div style="font-size:.92rem;color:var(--gray);margin-top:.15rem;">Incoming Membership Officer · YNG LATAM</div>
         </div>
         <div style="padding:1rem 1.3rem;">
-          <div style="font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--blue);margin-bottom:.7rem;">3 SMART Goals · FY 26-27</div>
+          <div style="font-size:.74rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--blue);margin-bottom:.7rem;">3 SMART Goals · FY 26-27</div>
           <div style="display:flex;flex-direction:column;gap:.55rem;">
-            <div style="background:rgba(20,123,209,.1);border-radius:.5rem;padding:.65rem .8rem;border-left:3px solid var(--blue);">
-              <div style="font-size:.92rem;font-weight:700;color:#fff;">Llevar enrollment LATAM de 31% → 38%</div>
-              <div style="font-size:.8rem;color:var(--gray);margin-top:.15rem;">Owner: Sebastian · Fecha: Jun 2027</div>
+            <div style="background:rgba(20,123,209,.1);border-radius:.5rem;padding:.7rem .9rem;border-left:3px solid var(--blue);">
+              <div style="font-size:.98rem;font-weight:700;color:#fff;">Llevar enrollment LATAM de 31% → 38%</div>
+              <div style="font-size:.84rem;color:var(--gray);margin-top:.15rem;">Owner: Sebastian · Fecha: Jun 2027</div>
             </div>
-            <div style="background:rgba(20,123,209,.1);border-radius:.5rem;padding:.65rem .8rem;border-left:3px solid var(--blue);">
-              <div style="font-size:.92rem;font-weight:700;color:#fff;">Brasil: activar de 14% → 22%</div>
-              <div style="font-size:.8rem;color:var(--gray);margin-top:.15rem;">Owner: Sebastian · Fecha: Mar 2027</div>
+            <div style="background:rgba(20,123,209,.1);border-radius:.5rem;padding:.7rem .9rem;border-left:3px solid var(--blue);">
+              <div style="font-size:.98rem;font-weight:700;color:#fff;">Brasil: activar de 14% → 22%</div>
+              <div style="font-size:.84rem;color:var(--gray);margin-top:.15rem;">Owner: Sebastian · Fecha: Mar 2027</div>
             </div>
-            <div style="background:rgba(255,255,255,.04);border-radius:.5rem;padding:.65rem .8rem;border-left:3px dashed rgba(255,255,255,.2);">
-              <div style="font-size:.92rem;color:rgba(255,255,255,.45);font-style:italic;">Goal 3 → lo definimos hoy juntos</div>
+            <div style="background:rgba(255,255,255,.04);border-radius:.5rem;padding:.7rem .9rem;border-left:3px dashed rgba(255,255,255,.2);">
+              <div style="font-size:.98rem;color:rgba(255,255,255,.45);font-style:italic;">Goal 3 → lo definimos hoy juntos</div>
             </div>
           </div>
           <div style="display:flex;gap:.8rem;margin-top:.8rem;flex-wrap:wrap;">
-            <div style="font-size:.75rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:.4rem;padding:.3rem .6rem;color:var(--gray);">Review 30 días</div>
-            <div style="font-size:.75rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:.4rem;padding:.3rem .6rem;color:var(--gray);">Review 60 días</div>
-            <div style="font-size:.75rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:.4rem;padding:.3rem .6rem;color:var(--gray);">Review 90 días</div>
+            <div style="font-size:.8rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:.4rem;padding:.3rem .6rem;color:var(--gray);">Review 30 días</div>
+            <div style="font-size:.8rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:.4rem;padding:.3rem .6rem;color:var(--gray);">Review 60 días</div>
+            <div style="font-size:.8rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:.4rem;padding:.3rem .6rem;color:var(--gray);">Review 90 días</div>
           </div>
         </div>
       </div>
@@ -1444,28 +1454,73 @@ body{
     <div class="port-list">
       <div class="port-row reveal">
         <div class="port-avatar" style="background:rgba(214,157,35,.15);color:var(--orange);">RC</div>
-        <div><div class="port-name">LATAM Chair</div><div class="port-person">Ricardo Chavez · Peru</div></div>
-        <div class="port-goals"><span class="port-tag">Goal 1 →</span><span class="port-tag">Goal 2 →</span><span class="port-tag">Goal 3 →</span></div>
+        <div>
+          <div class="port-header">
+            <span class="port-name" style="color:var(--orange);">LATAM Chair</span>
+            <span class="port-person">Ricardo Chavez · Peru</span>
+          </div>
+          <div class="port-goals">
+            <span class="port-goal" style="border-color:rgba(214,157,35,.2)"><span class="port-goal-num" style="background:rgba(214,157,35,.6);color:#fff;">1</span><span class="port-goal-slot">meta · número</span><span class="port-goal-slash">/</span><span class="port-goal-date">fecha</span></span>
+            <span class="port-goal" style="border-color:rgba(214,157,35,.2)"><span class="port-goal-num" style="background:rgba(214,157,35,.6);color:#fff;">2</span><span class="port-goal-slot">meta · número</span><span class="port-goal-slash">/</span><span class="port-goal-date">fecha</span></span>
+            <span class="port-goal" style="border-color:rgba(214,157,35,.2)"><span class="port-goal-num" style="background:rgba(214,157,35,.6);color:#fff;">3</span><span class="port-goal-slot">meta · número</span><span class="port-goal-slash">/</span><span class="port-goal-date">fecha</span></span>
+          </div>
+        </div>
       </div>
       <div class="port-row reveal" style="transition-delay:.08s">
         <div class="port-avatar" style="background:rgba(46,116,173,.15);color:var(--blue);">SS</div>
-        <div><div class="port-name">Membership</div><div class="port-person">Sebastian Sayagues · Costa Rica</div></div>
-        <div class="port-goals"><span class="port-tag">Goal 1 →</span><span class="port-tag">Goal 2 →</span><span class="port-tag">Goal 3 →</span></div>
+        <div>
+          <div class="port-header">
+            <span class="port-name" style="color:var(--blue);">Membership</span>
+            <span class="port-person">Sebastian Sayagues · Costa Rica</span>
+          </div>
+          <div class="port-goals">
+            <span class="port-goal" style="border-color:rgba(46,116,173,.2)"><span class="port-goal-num" style="background:rgba(46,116,173,.6);color:#fff;">1</span><span class="port-goal-slot">meta · número</span><span class="port-goal-slash">/</span><span class="port-goal-date">fecha</span></span>
+            <span class="port-goal" style="border-color:rgba(46,116,173,.2)"><span class="port-goal-num" style="background:rgba(46,116,173,.6);color:#fff;">2</span><span class="port-goal-slot">meta · número</span><span class="port-goal-slash">/</span><span class="port-goal-date">fecha</span></span>
+            <span class="port-goal" style="border-color:rgba(46,116,173,.2)"><span class="port-goal-num" style="background:rgba(46,116,173,.6);color:#fff;">3</span><span class="port-goal-slot">meta · número</span><span class="port-goal-slash">/</span><span class="port-goal-date">fecha</span></span>
+          </div>
+        </div>
       </div>
       <div class="port-row reveal" style="transition-delay:.16s">
         <div class="port-avatar" style="background:rgba(110,177,65,.15);color:var(--green);">DD</div>
-        <div><div class="port-name">Forum Officer</div><div class="port-person">Daniela Dassum · Ecuador</div></div>
-        <div class="port-goals"><span class="port-tag">Goal 1 →</span><span class="port-tag">Goal 2 →</span><span class="port-tag">Goal 3 →</span></div>
+        <div>
+          <div class="port-header">
+            <span class="port-name" style="color:var(--green);">Forum Officer</span>
+            <span class="port-person">Daniela Dassum · Ecuador</span>
+          </div>
+          <div class="port-goals">
+            <span class="port-goal" style="border-color:rgba(110,177,65,.2)"><span class="port-goal-num" style="background:rgba(110,177,65,.6);color:#fff;">1</span><span class="port-goal-slot">meta · número</span><span class="port-goal-slash">/</span><span class="port-goal-date">fecha</span></span>
+            <span class="port-goal" style="border-color:rgba(110,177,65,.2)"><span class="port-goal-num" style="background:rgba(110,177,65,.6);color:#fff;">2</span><span class="port-goal-slot">meta · número</span><span class="port-goal-slash">/</span><span class="port-goal-date">fecha</span></span>
+            <span class="port-goal" style="border-color:rgba(110,177,65,.2)"><span class="port-goal-num" style="background:rgba(110,177,65,.6);color:#fff;">3</span><span class="port-goal-slot">meta · número</span><span class="port-goal-slash">/</span><span class="port-goal-date">fecha</span></span>
+          </div>
+        </div>
       </div>
       <div class="port-row reveal" style="transition-delay:.24s">
         <div class="port-avatar" style="background:rgba(124,58,237,.15);color:var(--purple);">SB</div>
-        <div><div class="port-name">Engagement</div><div class="port-person">Sophia Brenneken · Brazil</div></div>
-        <div class="port-goals"><span class="port-tag">Goal 1 →</span><span class="port-tag">Goal 2 →</span><span class="port-tag">Goal 3 →</span></div>
+        <div>
+          <div class="port-header">
+            <span class="port-name" style="color:var(--purple);">Engagement</span>
+            <span class="port-person">Sophia Brenneken · Brazil</span>
+          </div>
+          <div class="port-goals">
+            <span class="port-goal" style="border-color:rgba(124,58,237,.2)"><span class="port-goal-num" style="background:rgba(124,58,237,.6);color:#fff;">1</span><span class="port-goal-slot">meta · número</span><span class="port-goal-slash">/</span><span class="port-goal-date">fecha</span></span>
+            <span class="port-goal" style="border-color:rgba(124,58,237,.2)"><span class="port-goal-num" style="background:rgba(124,58,237,.6);color:#fff;">2</span><span class="port-goal-slot">meta · número</span><span class="port-goal-slash">/</span><span class="port-goal-date">fecha</span></span>
+            <span class="port-goal" style="border-color:rgba(124,58,237,.2)"><span class="port-goal-num" style="background:rgba(124,58,237,.6);color:#fff;">3</span><span class="port-goal-slot">meta · número</span><span class="port-goal-slash">/</span><span class="port-goal-date">fecha</span></span>
+          </div>
+        </div>
       </div>
       <div class="port-row reveal" style="transition-delay:.32s">
-        <div class="port-avatar" style="background:rgba(240,86,100,.15);color:var(--red);">G·H</div>
-        <div><div class="port-name">Learning</div><div class="port-person">Guerrero · Harb</div></div>
-        <div class="port-goals"><span class="port-tag">Goal 1 →</span><span class="port-tag">Goal 2 →</span><span class="port-tag">Goal 3 →</span></div>
+        <div class="port-avatar" style="background:rgba(240,86,100,.15);color:var(--red);">GH</div>
+        <div>
+          <div class="port-header">
+            <span class="port-name" style="color:var(--red);">Learning</span>
+            <span class="port-person">Guerrero · Harb</span>
+          </div>
+          <div class="port-goals">
+            <span class="port-goal" style="border-color:rgba(240,86,100,.2)"><span class="port-goal-num" style="background:rgba(240,86,100,.6);color:#fff;">1</span><span class="port-goal-slot">meta · número</span><span class="port-goal-slash">/</span><span class="port-goal-date">fecha</span></span>
+            <span class="port-goal" style="border-color:rgba(240,86,100,.2)"><span class="port-goal-num" style="background:rgba(240,86,100,.6);color:#fff;">2</span><span class="port-goal-slot">meta · número</span><span class="port-goal-slash">/</span><span class="port-goal-date">fecha</span></span>
+            <span class="port-goal" style="border-color:rgba(240,86,100,.2)"><span class="port-goal-num" style="background:rgba(240,86,100,.6);color:#fff;">3</span><span class="port-goal-slot">meta · número</span><span class="port-goal-slash">/</span><span class="port-goal-date">fecha</span></span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
