@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YNG LATAM · Strategic Planning · Bogotá 2026</title>
+<style>
+:root {
+  --navy:#0A1628; --navy2:#132240; --navy3:#1a2f52;
+  --orange:#ED9400; --blue:#2E74AD; --green:#6EB141;
+  --red:#F05664; --white:#fff; --gray:#8899AA; --light:#F0F4F8;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-snap-type:y mandatory;overflow-y:scroll;scroll-behavior:smooth;}
+body{font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--navy);color:var(--white);}
+
+/* ── SLIDE BASE ──────────────────────────── */
+.slide{
+  scroll-snap-align:start;
+  min-height:100vh; width:100%;
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  padding:3rem 2rem; position:relative;
+  overflow:hidden;
+}
+.slide-inner{max-width:1100px;width:100%;}
+
+/* ── NAV DOTS ────────────────────────────── */
+.nav-dots{
+  position:fixed;right:1.2rem;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:.55rem;z-index:100;
+}
+.dot{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(255,255,255,.25);cursor:pointer;
+  transition:background .2s,transform .2s;
+}
+.dot.active{background:var(--orange);transform:scale(1.4);}
+
+/* slide counter */
+.slide-num{
+  position:absolute;bottom:1.2rem;right:1.6rem;
+  font-size:.75rem;color:rgba(255,255,255,.3);font-weight:700;
+}
+
+/* orange accent bar (top) */
+.bar-top{position:absolute;top:0;left:0;right:0;height:4px;background:var(--orange);}
+
+/* ── 1. COVER ────────────────────────────── */
+#s1{background:linear-gradient(135deg,var(--navy) 0%,var(--navy3) 100%);}
+#s1::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 75% 40%,rgba(237,148,0,.14) 0%,transparent 55%);}
+.cover-tag{
+  display:inline-block;background:var(--orange);color:var(--navy);
+  font-size:.72rem;font-weight:800;letter-spacing:.15em;padding:.3rem 1rem;
+  border-radius:2rem;text-transform:uppercase;margin-bottom:1.4rem;
+}
+.cover-title{font-size:clamp(3rem,9vw,7rem);font-weight:900;line-height:.95;letter-spacing:-.03em;}
+.cover-title span{color:var(--orange);display:block;}
+.cover-meta{margin-top:1.8rem;display:flex;gap:2rem;flex-wrap:wrap;}
+.cover-meta-item{display:flex;flex-direction:column;gap:.2rem;}
+.cover-meta-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gray);}
+.cover-meta-val{font-size:1rem;font-weight:700;color:var(--white);}
+.cover-line{position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--orange);}
+
+/* ── 2. AGENDA ───────────────────────────── */
+#s2{background:var(--navy2);}
+.agenda-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1.8rem;}
+@media(max-width:600px){.agenda-grid{grid-template-columns:1fr;}}
+.agenda-item{
+  display:flex;gap:1rem;align-items:flex-start;
+  background:rgba(255,255,255,.04);border-radius:.6rem;
+  padding:.9rem 1.1rem;border-left:3px solid transparent;
+}
+.agenda-item.break{border-color:var(--orange);background:rgba(237,148,0,.08);}
+.agenda-item.data{border-color:var(--blue);}
+.agenda-item.theme{border-color:#9B59B6;}
+.agenda-item.dive{border-color:var(--green);}
+.agenda-item.smart{border-color:var(--orange);}
+.agenda-time{font-size:.75rem;font-weight:800;color:var(--gray);white-space:nowrap;min-width:70px;padding-top:.1rem;}
+.agenda-txt strong{display:block;font-size:.9rem;margin-bottom:.15rem;}
+.agenda-txt span{font-size:.78rem;color:var(--gray);}
+
+/* ── 3. NUMBERS ──────────────────────────── */
+#s3{background:var(--navy);}
+.nums-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:1.8rem;}
+@media(max-width:600px){.nums-grid{grid-template-columns:1fr 1fr;}}
+.num-card{
+  background:var(--navy2);border-radius:.8rem;
+  padding:1.5rem 1rem;text-align:center;
+  border-top:3px solid var(--blue);position:relative;overflow:hidden;
+}
+.num-card::after{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(46,116,173,.1),transparent 70%);}
+.num-card.orange{border-color:var(--orange);}
+.num-card.red{border-color:var(--red);}
+.num-card.green{border-color:var(--green);}
+.num-big{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:900;line-height:1;}
+.num-card.orange .num-big{color:var(--orange);}
+.num-card.red .num-big{color:var(--red);}
+.num-card.green .num-big{color:var(--green);}
+.num-card:not(.orange):not(.red):not(.green) .num-big{color:var(--blue);}
+.num-label{font-size:.78rem;color:var(--gray);margin-top:.4rem;}
+.num-insight{
+  margin-top:1.8rem;padding:1rem 1.4rem;
+  background:rgba(240,86,100,.08);border:1px solid rgba(240,86,100,.2);
+  border-radius:.6rem;font-size:.9rem;color:rgba(255,255,255,.8);text-align:center;
+}
+.num-insight strong{color:var(--red);}
+
+/* ── 4. MEMBERSHIP GAP ───────────────────── */
+#s4{background:var(--navy2);}
+.gap-table{width:100%;border-collapse:collapse;margin-top:1.5rem;}
+.gap-table th{
+  text-align:left;padding:.5rem .8rem;
+  font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;
+  color:var(--gray);border-bottom:1px solid rgba(255,255,255,.08);
+}
+.gap-table td{padding:.55rem .8rem;font-size:.88rem;border-bottom:1px solid rgba(255,255,255,.04);}
+.gap-table tr:hover td{background:rgba(255,255,255,.03);}
+.bar-wrap{width:120px;background:rgba(255,255,255,.07);border-radius:4px;height:8px;display:inline-block;vertical-align:middle;}
+.bar-fill{height:8px;border-radius:4px;display:block;}
+.pct-val{display:inline-block;margin-left:.5rem;font-size:.8rem;font-weight:800;vertical-align:middle;}
+.flag-badge{
+  display:inline-block;font-size:.65rem;font-weight:800;
+  padding:.15rem .5rem;border-radius:2rem;
+  background:rgba(237,148,0,.2);color:var(--orange);
+}
+
+/* ── 5. BOARD FEEDBACK ───────────────────── */
+#s5{background:var(--navy);}
+.feedback-cols{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.8rem;}
+@media(max-width:600px){.feedback-cols{grid-template-columns:1fr;}}
+.fb-col h3{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.9rem;}
+.fb-col.good h3{color:var(--green);}
+.fb-col.bad h3{color:var(--red);}
+.fb-item{
+  display:flex;gap:.7rem;padding:.65rem 0;
+  border-bottom:1px solid rgba(255,255,255,.05);font-size:.88rem;
+  color:rgba(255,255,255,.8);line-height:1.45;align-items:flex-start;
+}
+.fb-item:last-child{border-bottom:none;}
+.fb-icon{flex-shrink:0;margin-top:.1rem;}
+.fb-quote{
+  margin-top:1.8rem;text-align:center;
+  font-size:1.1rem;font-style:italic;color:var(--gray);
+  padding:1rem 2rem;border-top:1px solid rgba(255,255,255,.07);
+}
+.fb-quote strong{color:var(--orange);font-style:normal;}
+
+/* ── 6. QR SLIDE ─────────────────────────── */
+#s6{background:linear-gradient(135deg,var(--navy3),var(--navy));}
+.qr-layout{display:flex;gap:3rem;align-items:center;flex-wrap:wrap;justify-content:center;}
+.qr-text h2{font-size:clamp(1.8rem,5vw,3.2rem);font-weight:900;line-height:1.1;margin-bottom:1rem;}
+.qr-text p{color:var(--gray);font-size:1rem;max-width:440px;line-height:1.6;}
+.qr-box{
+  width:200px;height:200px;background:var(--white);
+  border-radius:1rem;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  border:4px solid var(--orange);flex-shrink:0;
+  font-size:.8rem;color:var(--navy);font-weight:800;
+  text-align:center;padding:1rem;
+}
+.qr-box img{width:150px;height:150px;object-fit:contain;}
+
+/* ── 7. THEMES ───────────────────────────── */
+#s7{background:var(--navy2);}
+.themes-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.8rem;}
+@media(max-width:600px){.themes-grid{grid-template-columns:1fr;}}
+.theme-card{
+  border-radius:1rem;padding:2rem;
+  display:flex;flex-direction:column;gap:.8rem;min-height:220px;
+}
+.theme-card.t1{background:linear-gradient(135deg,var(--navy),var(--navy3));border:2px solid var(--orange);}
+.theme-card.t2{background:linear-gradient(135deg,var(--navy),#1a3a5c);border:2px solid var(--blue);}
+.theme-num{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.15em;}
+.theme-card.t1 .theme-num{color:var(--orange);}
+.theme-card.t2 .theme-num{color:var(--blue);}
+.theme-name{font-size:clamp(1.4rem,3vw,2rem);font-weight:900;}
+.theme-desc{font-size:.88rem;color:var(--gray);line-height:1.5;flex:1;}
+.theme-stat{
+  display:inline-block;padding:.3rem .8rem;border-radius:2rem;
+  font-size:.78rem;font-weight:700;
+}
+.theme-card.t1 .theme-stat{background:rgba(237,148,0,.15);color:var(--orange);}
+.theme-card.t2 .theme-stat{background:rgba(46,116,173,.2);color:var(--blue);}
+
+/* ── 8. SMART GOALS ──────────────────────── */
+#s8{background:var(--navy);}
+.portfolio-grid{display:flex;flex-direction:column;gap:.7rem;margin-top:1.5rem;}
+.port-row{
+  display:grid;grid-template-columns:180px 1fr;gap:1rem;
+  background:var(--navy2);border-radius:.6rem;padding:.9rem 1.2rem;
+  align-items:center;
+}
+@media(max-width:600px){.port-row{grid-template-columns:1fr;}}
+.port-name{font-size:.82rem;font-weight:800;color:var(--white);}
+.port-person{font-size:.72rem;color:var(--gray);margin-top:.15rem;}
+.port-goals{display:flex;gap:.6rem;flex-wrap:wrap;}
+.port-goal-tag{
+  background:rgba(255,255,255,.06);border:1px dashed rgba(255,255,255,.15);
+  border-radius:.4rem;padding:.3rem .7rem;font-size:.75rem;color:var(--gray);
+  font-style:italic;
+}
+
+/* ── 9. CLOSING ──────────────────────────── */
+#s9{background:linear-gradient(135deg,var(--navy3),var(--navy));}
+.close-q{
+  font-size:clamp(1.4rem,4vw,2.4rem);font-weight:700;
+  line-height:1.3;text-align:center;margin-bottom:2rem;max-width:700px;margin-left:auto;margin-right:auto;
+}
+.close-q span{color:var(--orange);}
+.next-steps{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem;}
+.ns-item{
+  background:var(--navy2);border-radius:.6rem;padding:.8rem 1.2rem;
+  font-size:.85rem;display:flex;gap:.5rem;align-items:center;
+  border-left:3px solid var(--orange);
+}
+
+/* ── SECTION HEADING ─────────────────────── */
+.s-tag{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.15em;color:var(--orange);margin-bottom:.4rem;}
+.s-title{font-size:clamp(1.5rem,4vw,2.6rem);font-weight:900;line-height:1.1;margin-bottom:.4rem;}
+.s-sub{font-size:.92rem;color:var(--gray);}
+
+/* ── 10. SMART LETTERS ───────────────────── */
+#s10{background:var(--navy);}
+.smart-letters{display:grid;grid-template-columns:repeat(5,1fr);gap:.8rem;margin-top:1.5rem;}
+@media(max-width:700px){.smart-letters{grid-template-columns:1fr 1fr;}}
+.sl{background:var(--navy2);border-radius:.8rem;padding:1.2rem .8rem;text-align:center;
+  border-top:4px solid transparent;transition:transform .2s;}
+.sl:hover{transform:translateY(-4px);}
+.sl-letter{font-size:2.8rem;font-weight:900;line-height:1;margin-bottom:.2rem;}
+.sl-word{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.6rem;}
+.sl-joke{font-size:.75rem;line-height:1.5;color:rgba(255,255,255,.7);margin-bottom:.6rem;}
+.sl-dont{font-size:.68rem;background:rgba(240,86,100,.1);border-radius:.35rem;padding:.3rem .5rem;color:var(--red);margin-bottom:.3rem;}
+.sl-do{font-size:.68rem;background:rgba(110,177,65,.1);border-radius:.35rem;padding:.3rem .5rem;color:var(--green);}
+.sl-s{border-color:var(--orange);}.sl-s .sl-letter,.sl-s .sl-word{color:var(--orange);}
+.sl-m{border-color:var(--blue);}.sl-m .sl-letter,.sl-m .sl-word{color:var(--blue);}
+.sl-a{border-color:#9B59B6;}.sl-a .sl-letter,.sl-a .sl-word{color:#9B59B6;}
+.sl-r{border-color:var(--green);}.sl-r .sl-letter,.sl-r .sl-word{color:var(--green);}
+.sl-t{border-color:var(--red);}.sl-t .sl-letter,.sl-t .sl-word{color:var(--red);}
+.smart-tagline{text-align:center;margin-top:1.2rem;font-size:.88rem;color:var(--gray);font-style:italic;}
+.smart-tagline strong{color:var(--orange);font-style:normal;}
+
+/* ── 11. MINI-CLASE ──────────────────────── */
+#s11{background:var(--navy2);align-items:flex-start;overflow-y:auto;}
+.cards{display:flex;flex-direction:column;gap:.7rem;margin-top:1.2rem;}
+.card{background:var(--navy);border-radius:.7rem;border:1px solid rgba(255,255,255,.07);overflow:hidden;}
+.card.open{border-color:var(--orange);}
+.card-header{display:flex;align-items:center;gap:.8rem;padding:1rem 1.2rem;cursor:pointer;user-select:none;}
+.card-badge{flex-shrink:0;width:2rem;height:2rem;border-radius:.35rem;display:flex;align-items:center;justify-content:center;font-size:.9rem;}
+.card-badge.bad{background:rgba(240,86,100,.15);}
+.card-badge.good{background:rgba(110,177,65,.15);}
+.card-title{flex:1;}
+.card-portfolio{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--orange);margin-bottom:.15rem;}
+.card-goal{font-size:.88rem;font-weight:600;}
+.card-goal.bad{color:rgba(240,86,100,.9);}
+.card-goal.good{color:rgba(110,177,65,.9);}
+.card-arrow{flex-shrink:0;font-size:1rem;color:var(--gray);transition:transform .25s;}
+.card.open .card-arrow{transform:rotate(90deg);}
+.card-body{display:none;padding:0 1.2rem 1.2rem;border-top:1px solid rgba(255,255,255,.06);}
+.card.open .card-body{display:block;}
+.diag{margin:.9rem 0;}
+.diag-title{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--gray);margin-bottom:.5rem;}
+.diag-row{display:flex;align-items:flex-start;gap:.6rem;padding:.35rem 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.83rem;}
+.diag-row:last-child{border-bottom:none;}
+.diag-icon{flex-shrink:0;}
+.diag-key{flex-shrink:0;width:1.6rem;font-weight:800;}
+.diag-why{color:var(--gray);}
+.lesson{background:rgba(237,148,0,.07);border-left:3px solid var(--orange);border-radius:0 .5rem .5rem 0;padding:.8rem 1rem;margin:.8rem 0;font-size:.83rem;line-height:1.6;color:rgba(255,255,255,.85);}
+.lesson-tag{font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--orange);margin-bottom:.3rem;}
+.smart-version{background:rgba(110,177,65,.1);border:1px solid rgba(110,177,65,.3);border-radius:.5rem;padding:.8rem 1rem;margin-top:.8rem;}
+.smart-tag{font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--green);margin-bottom:.3rem;}
+.smart-text{font-size:.88rem;font-weight:700;color:var(--white);line-height:1.5;}
+
+/* ── 12. CHECKER ─────────────────────────── */
+#s12{background:var(--navy3);}
+.prompt-box{background:var(--navy);border:1px solid rgba(237,148,0,.3);border-radius:.7rem;padding:1.2rem;
+  font-family:'Courier New',monospace;font-size:.72rem;line-height:1.65;color:rgba(255,255,255,.72);
+  max-height:220px;overflow-y:auto;white-space:pre-wrap;margin:1rem 0 .8rem;}
+.copy-btn{width:100%;padding:.85rem;background:var(--orange);color:var(--navy);
+  border:none;border-radius:.6rem;font-size:1rem;font-weight:800;cursor:pointer;
+  transition:background .2s,transform .15s;margin-bottom:1.2rem;}
+.copy-btn:hover{background:#ffaa00;transform:translateY(-1px);}
+.copy-btn.copied{background:var(--green);}
+.ai-links{display:flex;gap:.7rem;flex-wrap:wrap;margin-bottom:.5rem;}
+.ai-btn{flex:1;min-width:110px;padding:.65rem .8rem;border-radius:.5rem;text-align:center;
+  text-decoration:none;font-weight:700;font-size:.85rem;transition:transform .15s;border:2px solid transparent;}
+.ai-btn:hover{transform:translateY(-2px);}
+.ai-claude{background:rgba(204,120,92,.15);border-color:rgba(204,120,92,.4);color:#CC785C;}
+.ai-chatgpt{background:rgba(16,163,127,.15);border-color:rgba(16,163,127,.4);color:#10A37F;}
+.ai-gemini{background:rgba(66,133,244,.15);border-color:rgba(66,133,244,.4);color:#4285F4;}
+.ai-note{font-size:.75rem;color:var(--gray);margin-top:.4rem;}
+.steps-row{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;}
+.step-item{flex:1;min-width:160px;display:flex;gap:.6rem;align-items:flex-start;}
+.step-num-circle{flex-shrink:0;width:1.8rem;height:1.8rem;background:var(--orange);color:var(--navy);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.85rem;}
+.step-item-txt strong{display:block;font-size:.85rem;margin-bottom:.15rem;}
+.step-item-txt span{font-size:.76rem;color:var(--gray);}
+</style>
+</head>
+<body>
+
+<!-- NAV DOTS -->
+<nav class="nav-dots" id="navDots"></nav>
+
+<!-- ══ SLIDE 1: COVER ═════════════════════════════════ -->
+<section class="slide" id="s1">
+  <div class="cover-line"></div>
+  <div class="slide-inner">
+    <div class="cover-tag">YNG LATAM · FY 26-27</div>
+    <div class="cover-title">
+      Strategic<span>Planning.</span>
+    </div>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Fecha</span>
+        <span class="cover-meta-val">14 de junio, 2026</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Lugar</span>
+        <span class="cover-meta-val">Bogotá, Colombia</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Coach</span>
+        <span class="cover-meta-val">Pablo Sardi</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Duración</span>
+        <span class="cover-meta-val">4 horas</span>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">1 / 12</div>
+</section>
+
+<!-- ══ SLIDE 2: AGENDA ═══════════════════════════════ -->
+<section class="slide" id="s2">
+  <div class="bar-top"></div>
+  <div class="slide-inner">
+    <div class="s-tag">Agenda</div>
+    <div class="s-title">El plan para hoy</div>
+    <div class="s-sub">4 horas · Bogotá · 14 junio 2026</div>
+    <div class="agenda-grid">
+      <div class="agenda-item data">
+        <span class="agenda-time">0:00 – 0:20</span>
+        <div class="agenda-txt"><strong>Bienvenida · Ground Rules · Icebreaker</strong><span>¿Qué esperas de este board?</span></div>
+      </div>
+      <div class="agenda-item data">
+        <span class="agenda-time">0:20 – 0:45</span>
+        <div class="agenda-txt"><strong>YNG LATAM: State of the Region</strong><span>Data real · 420 paying · 22 países</span></div>
+      </div>
+      <div class="agenda-item theme">
+        <span class="agenda-time">0:45 – 1:05</span>
+        <div class="agenda-txt"><strong>¿Qué está funcionando? ¿Qué no?</strong><span>QR Poll · Tu voz define el rumbo</span></div>
+      </div>
+      <div class="agenda-item theme">
+        <span class="agenda-time">1:05 – 1:25</span>
+        <div class="agenda-txt"><strong>Temas estratégicos del año</strong><span>Confirmamos los 2 focos de trabajo</span></div>
+      </div>
+      <div class="agenda-item break">
+        <span class="agenda-time">1:25 – 1:35</span>
+        <div class="agenda-txt"><strong>— BREAK —</strong><span>Café · Respira · Vuelve con energía</span></div>
+      </div>
+      <div class="agenda-item dive">
+        <span class="agenda-time">1:35 – 2:15</span>
+        <div class="agenda-txt"><strong>Deep Dive #1</strong><span>Current state → Future state → Acciones</span></div>
+      </div>
+      <div class="agenda-item dive">
+        <span class="agenda-time">2:15 – 2:55</span>
+        <div class="agenda-txt"><strong>Deep Dive #2</strong><span>Current state → Future state → Acciones</span></div>
+      </div>
+      <div class="agenda-item smart">
+        <span class="agenda-time">2:55 – 3:40</span>
+        <div class="agenda-txt"><strong>Visión · Valores · SMART Goals</strong><span>QR exercises + goals por portfolio</span></div>
+      </div>
+      <div class="agenda-item smart">
+        <span class="agenda-time">3:40 – 4:00</span>
+        <div class="agenda-txt"><strong>Playbook · Compromisos · Cierre</strong><span>I commit.</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">2 / 12</div>
+</section>
+
+<!-- ══ SLIDE 3: NUMBERS ══════════════════════════════ -->
+<section class="slide" id="s3">
+  <div class="slide-inner">
+    <div class="s-tag">Data · FY 25-26</div>
+    <div class="s-title">YNG LATAM en números</div>
+    <div class="nums-grid">
+      <div class="num-card orange">
+        <div class="num-big">420</div>
+        <div class="num-label">Paying Members</div>
+      </div>
+      <div class="num-card red">
+        <div class="num-big">1,777</div>
+        <div class="num-label">Unpaid / Inactivos</div>
+      </div>
+      <div class="num-card">
+        <div class="num-big">19%</div>
+        <div class="num-label">Tasa de Activación</div>
+      </div>
+      <div class="num-card green">
+        <div class="num-big">6</div>
+        <div class="num-label">Foros Activos</div>
+      </div>
+      <div class="num-card">
+        <div class="num-big">43</div>
+        <div class="num-label">Miembros en Foros</div>
+      </div>
+      <div class="num-card">
+        <div class="num-big">22</div>
+        <div class="num-label">Grupos Locales</div>
+      </div>
+    </div>
+    <div class="num-insight">
+      <strong>81% del potencial nunca ha activado</strong> · Solo 1 de cada 10 paying members está en un foro
+    </div>
+  </div>
+  <div class="slide-num">3 / 12</div>
+</section>
+
+<!-- ══ SLIDE 4: MEMBERSHIP GAP ═══════════════════════ -->
+<section class="slide" id="s4">
+  <div class="bar-top"></div>
+  <div class="slide-inner">
+    <div class="s-tag">Data · Membresía</div>
+    <div class="s-title">El gap de activación</div>
+    <div class="s-sub">Los 8 países con mayor oportunidad</div>
+    <table class="gap-table">
+      <thead>
+        <tr>
+          <th>País</th><th>Paying</th><th>Unpaid</th><th>Activación</th><th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Brazil</strong></td><td style="color:var(--blue);font-weight:700">100</td><td style="color:var(--red)">600</td><td><span class="bar-wrap"><span class="bar-fill" style="width:14%;background:var(--red)"></span></span><span class="pct-val" style="color:var(--red)">14%</span></td><td><span class="flag-badge">Mayor base</span></td></tr>
+        <tr><td><strong>Colombia</strong></td><td style="color:var(--blue);font-weight:700">27</td><td style="color:var(--red)">119</td><td><span class="bar-wrap"><span class="bar-fill" style="width:18%;background:var(--orange)"></span></span><span class="pct-val" style="color:var(--orange)">18%</span></td><td></td></tr>
+        <tr><td><strong>Guadalajara</strong></td><td style="color:var(--blue);font-weight:700">25</td><td style="color:var(--red)">120</td><td><span class="bar-wrap"><span class="bar-fill" style="width:17%;background:var(--orange)"></span></span><span class="pct-val" style="color:var(--orange)">17%</span></td><td></td></tr>
+        <tr><td><strong>Panama</strong></td><td style="color:var(--blue);font-weight:700">12</td><td style="color:var(--red)">115</td><td><span class="bar-wrap"><span class="bar-fill" style="width:9%;background:var(--red)"></span></span><span class="pct-val" style="color:var(--red)">9%</span></td><td><span class="flag-badge">Crítico</span></td></tr>
+        <tr><td><strong>Argentina</strong></td><td style="color:var(--blue);font-weight:700">6</td><td style="color:var(--red)">114</td><td><span class="bar-wrap"><span class="bar-fill" style="width:5%;background:var(--red)"></span></span><span class="pct-val" style="color:var(--red)">5%</span></td><td><span class="flag-badge">Crítico</span></td></tr>
+        <tr><td><strong>Ecuador</strong></td><td style="color:var(--blue);font-weight:700">5</td><td style="color:var(--red)">61</td><td><span class="bar-wrap"><span class="bar-fill" style="width:8%;background:var(--red)"></span></span><span class="pct-val" style="color:var(--red)">8%</span></td><td></td></tr>
+        <tr><td><strong>Peru</strong></td><td style="color:var(--blue);font-weight:700">1</td><td style="color:var(--red)">40</td><td><span class="bar-wrap"><span class="bar-fill" style="width:2%;background:var(--red)"></span></span><span class="pct-val" style="color:var(--red)">2%</span></td><td><span class="flag-badge">Crítico</span></td></tr>
+        <tr><td><strong>Monterrey</strong></td><td style="color:var(--blue);font-weight:700">18</td><td style="color:var(--red)">95</td><td><span class="bar-wrap"><span class="bar-fill" style="width:16%;background:var(--orange)"></span></span><span class="pct-val" style="color:var(--orange)">16%</span></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="slide-num">4 / 12</div>
+</section>
+
+<!-- ══ SLIDE 5: BOARD FEEDBACK ═══════════════════════ -->
+<section class="slide" id="s5">
+  <div class="slide-inner">
+    <div class="s-tag">Data · Feedback del Board 2026</div>
+    <div class="s-title">Lo que ustedes dijeron</div>
+    <div class="feedback-cols">
+      <div class="fb-col good">
+        <h3>✅ Lo que funcionó</h3>
+        <div class="fb-item"><span class="fb-icon">🏆</span>Exchange Brasil — mencionado por el 100% del board</div>
+        <div class="fb-item"><span class="fb-icon">🎯</span>Autonomía del board y cultura de accountability</div>
+        <div class="fb-item"><span class="fb-icon">📊</span>KPIs + reuniones periódicas mantuvieron al equipo alineado</div>
+        <div class="fb-item"><span class="fb-icon">🤝</span>Alta accesibilidad de los board members (4.7/5)</div>
+      </div>
+      <div class="fb-col bad">
+        <h3>🔧 Lo que hay que mejorar</h3>
+        <div class="fb-item"><span class="fb-icon">📡</span>Comunicación board → capítulos locales (esp. Brazil)</div>
+        <div class="fb-item"><span class="fb-icon">📅</span>Más eventos regionales — el Exchange no puede ser el único</div>
+        <div class="fb-item"><span class="fb-icon">💼</span>Eventos de carrera y desarrollo profesional (pedido explícito)</div>
+        <div class="fb-item"><span class="fb-icon">🔗</span>Más conexión con capítulos locales y sus eventos</div>
+        <div class="fb-item"><span class="fb-icon">🌐</span>Integrar esfuerzos con YNG Interest Groups</div>
+      </div>
+    </div>
+    <div class="fb-quote">
+      "El Exchange fue el momento que nos unió. <strong>¿Cómo multiplicamos esa energía durante el año?</strong>"
+    </div>
+  </div>
+  <div class="slide-num">5 / 12</div>
+</section>
+
+<!-- ══ SLIDE 6: QR POLL ═══════════════════════════════ -->
+<section class="slide" id="s6">
+  <div class="bar-top"></div>
+  <div class="slide-inner">
+    <div style="text-align:center;margin-bottom:2rem;">
+      <div class="s-tag" style="text-align:center">Tu turno</div>
+      <div class="s-title" style="text-align:center">¿Qué está funcionando?<br>¿Qué no?</div>
+      <div class="s-sub" style="text-align:center;margin-top:.5rem;">Escanea · Responde en 2 minutos · Tu voz define el rumbo</div>
+    </div>
+    <div class="qr-layout">
+      <div class="qr-box">
+        <img src="/tmp/qr_working.png" alt="QR Poll" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <div style="display:none;font-size:2rem">📱</div>
+        <div style="margin-top:.3rem;font-size:.72rem;color:var(--gray)">Escanear QR</div>
+      </div>
+      <div style="max-width:420px;">
+        <div style="display:flex;flex-direction:column;gap:.8rem;">
+          <div style="background:rgba(255,255,255,.05);border-radius:.6rem;padding:.9rem 1.1rem;font-size:.88rem;">
+            🟢 ¿Qué iniciativas del año pasado <strong>deberían continuar</strong>?
+          </div>
+          <div style="background:rgba(255,255,255,.05);border-radius:.6rem;padding:.9rem 1.1rem;font-size:.88rem;">
+            🔴 ¿Qué dejamos de hacer o <strong>necesita cambiar</strong>?
+          </div>
+          <div style="background:rgba(237,148,0,.08);border:1px solid rgba(237,148,0,.2);border-radius:.6rem;padding:.9rem 1.1rem;font-size:.88rem;">
+            💡 ¿Qué <strong>nunca hemos hecho</strong> y deberíamos intentar?
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">6 / 12</div>
+</section>
+
+<!-- ══ SLIDE 7: STRATEGIC THEMES ═════════════════════ -->
+<section class="slide" id="s7">
+  <div class="slide-inner">
+    <div class="s-tag">Temas Estratégicos</div>
+    <div class="s-title">Nuestros 2 focos este año</div>
+    <div class="s-sub">Basados en data + tu input — confirmados hoy</div>
+    <div class="themes-grid" style="margin-top:1.8rem;">
+      <div class="theme-card t1">
+        <div class="theme-num">Tema 1</div>
+        <div class="theme-name">[ Por confirmar<br>con Ana Victoria ]</div>
+        <div class="theme-desc">El tema será completado después de la llamada de las 11am.</div>
+        <span class="theme-stat">Datos lo respaldan</span>
+      </div>
+      <div class="theme-card t2">
+        <div class="theme-num">Tema 2</div>
+        <div class="theme-name">[ Por confirmar<br>con Ana Victoria ]</div>
+        <div class="theme-desc">El tema será completado después de la llamada de las 11am.</div>
+        <span class="theme-stat">Datos lo respaldan</span>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">7 / 12</div>
+</section>
+
+<!-- ══ SLIDE 8: SMART GOALS ══════════════════════════ -->
+<section class="slide" id="s8">
+  <div class="bar-top"></div>
+  <div class="slide-inner">
+    <div class="s-tag">SMART Goals · FY 26-27</div>
+    <div class="s-title">Compromisos por portfolio</div>
+    <div class="s-sub">3 goals por portfolio · Específicos · Con número · Con fecha</div>
+    <div class="portfolio-grid" style="margin-top:1.2rem;">
+      <div class="port-row">
+        <div><div class="port-name">LATAM Chair</div><div class="port-person">Ricardo Chavez · Peru</div></div>
+        <div class="port-goals">
+          <span class="port-goal-tag">Goal 1 →</span>
+          <span class="port-goal-tag">Goal 2 →</span>
+          <span class="port-goal-tag">Goal 3 →</span>
+        </div>
+      </div>
+      <div class="port-row">
+        <div><div class="port-name">Membership</div><div class="port-person">Sebastian Sayagues · Costa Rica</div></div>
+        <div class="port-goals">
+          <span class="port-goal-tag">Goal 1 →</span>
+          <span class="port-goal-tag">Goal 2 →</span>
+          <span class="port-goal-tag">Goal 3 →</span>
+        </div>
+      </div>
+      <div class="port-row">
+        <div><div class="port-name">Forum Officer</div><div class="port-person">Daniela Dassum · Ecuador</div></div>
+        <div class="port-goals">
+          <span class="port-goal-tag">Goal 1 →</span>
+          <span class="port-goal-tag">Goal 2 →</span>
+          <span class="port-goal-tag">Goal 3 →</span>
+        </div>
+      </div>
+      <div class="port-row">
+        <div><div class="port-name">Engagement</div><div class="port-person">Sophia Brenneken · Brazil</div></div>
+        <div class="port-goals">
+          <span class="port-goal-tag">Goal 1 →</span>
+          <span class="port-goal-tag">Goal 2 →</span>
+          <span class="port-goal-tag">Goal 3 →</span>
+        </div>
+      </div>
+      <div class="port-row">
+        <div><div class="port-name">Learning</div><div class="port-person">Guerrero · Harb</div></div>
+        <div class="port-goals">
+          <span class="port-goal-tag">Goal 1 →</span>
+          <span class="port-goal-tag">Goal 2 →</span>
+          <span class="port-goal-tag">Goal 3 →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">8 / 12</div>
+</section>
+
+<!-- ══ SLIDE 9: CLOSING ══════════════════════════════ -->
+<section class="slide" id="s9">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="s-tag" style="text-align:center">Cierre</div>
+    <div class="close-q">
+      ¿Qué fue lo más útil de hoy<br>y cómo te ayuda a<br><span>liderar YNG LATAM?</span>
+    </div>
+    <div class="next-steps">
+      <div class="ns-item">📋 Playbook compartido en 48h</div>
+      <div class="ns-item">📊 Revisar KPIs en cada board meeting</div>
+      <div class="ns-item">📅 Follow-up en 3 meses</div>
+      <div class="ns-item">✅ Validar SMART goals con el coach</div>
+    </div>
+    <div style="margin-top:2.5rem;font-size:3rem;font-weight:900;color:var(--orange);">
+      Thank you.
+    </div>
+    <div style="margin-top:.5rem;font-size:.8rem;color:var(--gray)">yponextgen.org</div>
+  </div>
+  <div class="slide-num">9 / 12</div>
+</section>
+
+<!-- ══ SLIDE 10: SMART DEFINITION ════════════════════════ -->
+<section class="slide" id="s10">
+  <div class="bar-top"></div>
+  <div class="slide-inner">
+    <div class="s-tag">SMART Goals</div>
+    <div class="s-title">5 letras. Sin excusas.</div>
+    <div class="s-sub">Un SMART goal no es un deseo. Es una promesa que puedes cumplir — o no.</div>
+    <div class="smart-letters">
+      <div class="sl sl-s">
+        <div class="sl-letter">S</div>
+        <div class="sl-word">Específico</div>
+        <div class="sl-joke">Si no puedes explicarlo sin usar "mejorar", "potenciar" o "fortalecer"... empieza de nuevo.</div>
+        <div class="sl-dont">❌ "Mejorar la comunicación"</div>
+        <div class="sl-do">✅ "Reporte mensual a 22 capítulos"</div>
+      </div>
+      <div class="sl sl-m">
+        <div class="sl-letter">M</div>
+        <div class="sl-word">Medible</div>
+        <div class="sl-joke">Sin número no es un goal. Es poesía. Bonita pero inútil para el board de YNG LATAM.</div>
+        <div class="sl-dont">❌ "Crecer la membresía"</div>
+        <div class="sl-do">✅ "De 420 a 520 paying"</div>
+      </div>
+      <div class="sl sl-a">
+        <div class="sl-letter">A</div>
+        <div class="sl-word">Alcanzable</div>
+        <div class="sl-joke">Ambicioso sí. Imposible no. "+300% en 3 meses" no es inspirador — es ficción.</div>
+        <div class="sl-dont">❌ "+300% miembros este año"</div>
+        <div class="sl-do">✅ "+24% paying en FY 26-27"</div>
+      </div>
+      <div class="sl sl-r">
+        <div class="sl-letter">R</div>
+        <div class="sl-word">Relevante</div>
+        <div class="sl-joke">¿Si logro esto, le importa a YNG LATAM o solo a mí? Si es "solo a mí"... es un goal personal.</div>
+        <div class="sl-dont">❌ "Aprender más liderazgo"</div>
+        <div class="sl-do">✅ "3 foros en países sin foro"</div>
+      </div>
+      <div class="sl sl-t">
+        <div class="sl-letter">T</div>
+        <div class="sl-word">Tiempo</div>
+        <div class="sl-joke">"Pronto" no existe en el calendario. "Este año" tampoco. Necesitas un día exacto.</div>
+        <div class="sl-dont">❌ "Antes de fin de año"</div>
+        <div class="sl-do">✅ "Antes del 31-mar-2027"</div>
+      </div>
+    </div>
+    <p class="smart-tagline">Regla de oro: <strong>si no puedes marcar el día exacto en el calendario, no es un SMART goal.</strong></p>
+  </div>
+  <div class="slide-num">10 / 12</div>
+</section>
+
+<!-- ══ SLIDE 11: MINI-CLASE ══════════════════════════════ -->
+<section class="slide" id="s11">
+  <div class="slide-inner" style="max-width:900px;padding-top:2rem;padding-bottom:2rem;">
+    <div class="s-tag">Mini-clase</div>
+    <div class="s-title">Goals reales · Buenos y malos</div>
+    <div class="s-sub">Haz click en cada tarjeta para ver el diagnóstico completo</div>
+    <div class="cards">
+      <div class="card" onclick="toggle(this)">
+        <div class="card-header">
+          <div class="card-badge bad">❌</div>
+          <div class="card-title">
+            <div class="card-portfolio">Membership Officer</div>
+            <div class="card-goal bad">"Crecer la membresía de YNG LATAM este año"</div>
+          </div>
+          <div class="card-arrow">›</div>
+        </div>
+        <div class="card-body">
+          <div class="diag">
+            <div class="diag-title">📋 Diagnóstico SMART</div>
+            <div class="diag-row"><span class="diag-icon">❌</span><span class="diag-key">S</span><span class="diag-why">No dice quién lo hace, en qué países ni qué tipo de membresía</span></div>
+            <div class="diag-row"><span class="diag-icon">❌</span><span class="diag-key">M</span><span class="diag-why">"Crecer" no es un número — ¿de cuánto a cuánto?</span></div>
+            <div class="diag-row"><span class="diag-icon">✅</span><span class="diag-key">R</span><span class="diag-why">Membership es el core del portfolio</span></div>
+            <div class="diag-row"><span class="diag-icon">❌</span><span class="diag-key">T</span><span class="diag-why">"Este año" no es una fecha. ¿Qué día del año?</span></div>
+          </div>
+          <div class="lesson"><div class="lesson-tag">💡 Piénsalo así</div>"Crecer la membresía" es como decirle a tu equipo de ventas: "vendan más". Nadie sabe a dónde ir ni si llegaron. Un goal sin número es un deseo. Un deseo sin fecha es un sueño.</div>
+          <div class="smart-version"><div class="smart-tag">🎯 Versión SMART</div><div class="smart-text">Convertir 50 miembros unpaid en paying en los 5 países con menor activación antes del 31-mar-2027, con reporte mensual al board.</div></div>
+        </div>
+      </div>
+      <div class="card" onclick="toggle(this)">
+        <div class="card-header">
+          <div class="card-badge bad">❌</div>
+          <div class="card-title">
+            <div class="card-portfolio">Forum Officer</div>
+            <div class="card-goal bad">"Fortalecer los foros y crear nuevos en la región"</div>
+          </div>
+          <div class="card-arrow">›</div>
+        </div>
+        <div class="card-body">
+          <div class="diag">
+            <div class="diag-title">📋 Diagnóstico SMART</div>
+            <div class="diag-row"><span class="diag-icon">❌</span><span class="diag-key">S</span><span class="diag-why">¿Cuántos foros? ¿En qué países? ¿Quién los lidera?</span></div>
+            <div class="diag-row"><span class="diag-icon">❌</span><span class="diag-key">M</span><span class="diag-why">"Fortalecer" no se puede medir. ¿Cuál es el número de éxito?</span></div>
+            <div class="diag-row"><span class="diag-icon">✅</span><span class="diag-key">R</span><span class="diag-why">Solo 10% de los paying están en foros — urgente</span></div>
+            <div class="diag-row"><span class="diag-icon">❌</span><span class="diag-key">T</span><span class="diag-why">Sin fecha límite</span></div>
+          </div>
+          <div class="lesson"><div class="lesson-tag">💡 Piénsalo así</div>"Fortalecer" es la palabra favorita de quienes no quieren comprometerse con un número. Es cómoda porque nadie puede decir que fallaste — pero tampoco que tuviste éxito.</div>
+          <div class="smart-version"><div class="smart-tag">🎯 Versión SMART</div><div class="smart-text">Lanzar 3 nuevos foros (Argentina, Panamá, Costa Rica) con mínimo 6 miembros activos cada uno antes del 28-feb-2027.</div></div>
+        </div>
+      </div>
+      <div class="card" onclick="toggle(this)">
+        <div class="card-header">
+          <div class="card-badge good">✅</div>
+          <div class="card-title">
+            <div class="card-portfolio">LATAM Chair</div>
+            <div class="card-goal good">"Pasar de 420 a 520 paying members antes de junio 2027"</div>
+          </div>
+          <div class="card-arrow">›</div>
+        </div>
+        <div class="card-body">
+          <div class="diag">
+            <div class="diag-title">📋 Diagnóstico SMART</div>
+            <div class="diag-row"><span class="diag-icon">✅</span><span class="diag-key">S</span><span class="diag-why">Crecimiento de paying members — claro y accionable</span></div>
+            <div class="diag-row"><span class="diag-icon">✅</span><span class="diag-key">M</span><span class="diag-why">De 420 a 520. El +24% está calculado. Sin ambigüedad</span></div>
+            <div class="diag-row"><span class="diag-icon">✅</span><span class="diag-key">A</span><span class="diag-why">+100 en 22 países = ~4-5 por país. Desafiante pero real</span></div>
+            <div class="diag-row"><span class="diag-icon">✅</span><span class="diag-key">R</span><span class="diag-why">Es la función del Chair: visión y posicionamiento regional</span></div>
+            <div class="diag-row"><span class="diag-icon">✅</span><span class="diag-key">T</span><span class="diag-why">Junio 2027 — ligada a la reunión global de YNG</span></div>
+          </div>
+          <div class="lesson"><div class="lesson-tag">💡 Piénsalo así</div>Un buen SMART goal tiene punto de partida y punto de llegada. "De 420 a 520" — ese número de salida es tan importante como el de llegada. Como un GPS: no te lleva a ningún lado si no sabe dónde estás hoy.</div>
+          <div class="smart-version"><div class="smart-tag">🎯 5 de 5 — este es el estándar</div><div class="smart-text">Pasar de 420 a 520 paying members en YNG LATAM antes de la reunión global de junio 2027, con reporte mensual de avance.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">11 / 12</div>
+</section>
+
+<!-- ══ SLIDE 12: CHECKER / VALIDADOR ═════════════════════ -->
+<section class="slide" id="s12">
+  <div class="bar-top"></div>
+  <div class="slide-inner">
+    <div class="s-tag">Validador · Ana Victoria</div>
+    <div class="s-title">Ahora valida tus goals</div>
+    <div class="s-sub">Copia el prompt → abre cualquier AI gratuito → pega + tu goal</div>
+
+    <div class="prompt-box" id="promptText">Eres un coach de SMART Goals con el estilo de un profesor de business inspirador: directo, cálido, con analogías reales y que hace pensar.
+
+Tu misión: ayudar al board de YNG LATAM a escribir goals que realmente se puedan ejecutar y medir.
+
+Cuando te compartan un goal, responde EXACTAMENTE así:
+
+─────────────────────────────
+📋 DIAGNÓSTICO SMART
+─────────────────────────────
+S — Específico   → ¿Se sabe exactamente QUÉ va a pasar y QUIÉN lo hace?
+M — Medible      → ¿Hay un número concreto para saber si se logró o no?
+A — Alcanzable   → ¿Es realista dado el tiempo y recursos disponibles?
+R — Relevante    → ¿Conecta directamente con las prioridades del portfolio?
+T — Tiempo       → ¿Tiene una fecha límite exacta (día/mes/año)?
+
+─────────────────────────────
+💡 PIÉNSALO ASÍ
+─────────────────────────────
+2-3 líneas como un coach inspirador. Explica el error de fondo con una analogía real.
+
+─────────────────────────────
+🎯 VERSIÓN SMART
+─────────────────────────────
+Reescribe el goal. Máximo 2 líneas.
+Regla de oro: si no puedes marcar en un calendario el día que lo logras, no es SMART.
+
+─────────────────────────────
+❓ PREGUNTA DE CIERRE
+─────────────────────────────
+Una pregunta para confirmar la intención.
+
+Responde en el idioma en que te escriben. Si te mandan varios goals, evalúa cada uno por separado.</div>
+
+    <button class="copy-btn" onclick="copyPrompt(this)">📋 Copiar Prompt</button>
+
+    <div class="ai-links">
+      <a href="https://claude.ai" target="_blank" class="ai-btn ai-claude">Claude.ai →</a>
+      <a href="https://chatgpt.com" target="_blank" class="ai-btn ai-chatgpt">ChatGPT →</a>
+      <a href="https://gemini.google.com" target="_blank" class="ai-btn ai-gemini">Gemini →</a>
+    </div>
+    <p class="ai-note">Todos gratis · Sin registro obligatorio en Claude y Gemini</p>
+
+    <div class="steps-row">
+      <div class="step-item"><div class="step-num-circle">1</div><div class="step-item-txt"><strong>Copia el prompt</strong><span>Click en "Copiar Prompt"</span></div></div>
+      <div class="step-item"><div class="step-num-circle">2</div><div class="step-item-txt"><strong>Abre un AI</strong><span>Claude, ChatGPT o Gemini</span></div></div>
+      <div class="step-item"><div class="step-num-circle">3</div><div class="step-item-txt"><strong>Pega + tu goal</strong><span>Al final escribe: "Mi goal es: [goal]"</span></div></div>
+    </div>
+  </div>
+  <div class="slide-num">12 / 12</div>
+</section>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const nav    = document.getElementById('navDots');
+
+// Build dots
+slides.forEach((s,i) => {
+  const d = document.createElement('div');
+  d.className = 'dot'; d.dataset.i = i;
+  d.onclick = () => s.scrollIntoView({behavior:'smooth'});
+  nav.appendChild(d);
+});
+
+// Update active dot on scroll
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      document.querySelectorAll('.dot').forEach((d,i) => {
+        d.classList.toggle('active', i === [...slides].indexOf(e.target));
+      });
+    }
+  });
+}, {threshold:.5});
+slides.forEach(s => obs.observe(s));
+
+// Acordeón mini-clase
+function toggle(card) {
+  const isOpen = card.classList.contains('open');
+  document.querySelectorAll('.card').forEach(c => c.classList.remove('open'));
+  if (!isOpen) card.classList.add('open');
+}
+
+// Copiar prompt
+function copyPrompt(btn) {
+  const el = document.getElementById('promptText');
+  const text = el.innerText;
+  if (navigator.clipboard && location.protocol !== 'file:') {
+    navigator.clipboard.writeText(text).then(() => flashCopied(btn));
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    flashCopied(btn);
+  }
+}
+function flashCopied(btn) {
+  btn.textContent = '✅ ¡Copiado!';
+  btn.classList.add('copied');
+  setTimeout(() => { btn.textContent = '📋 Copiar Prompt'; btn.classList.remove('copied'); }, 2500);
+}
+
+// Keyboard nav
+document.addEventListener('keydown', e => {
+  const active = [...slides].findIndex(s => s.getBoundingClientRect().top > -10 && s.getBoundingClientRect().top < window.innerHeight/2);
+  if (e.key==='ArrowDown'||e.key==='ArrowRight') slides[Math.min(active+1,slides.length-1)]?.scrollIntoView({behavior:'smooth'});
+  if (e.key==='ArrowUp'  ||e.key==='ArrowLeft' ) slides[Math.max(active-1,0)]?.scrollIntoView({behavior:'smooth'});
+});
+</script>
+</body>
+</html>
