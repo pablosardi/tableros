@@ -409,14 +409,14 @@ body{
 }
 .qr-layout{display:flex;gap:3rem;align-items:center;flex-wrap:wrap;justify-content:center;z-index:2;position:relative;}
 .qr-box{
-  width:200px;height:200px;background:var(--white);
-  border-radius:1rem;display:flex;flex-direction:column;
+  width:340px;height:340px;background:var(--white);
+  border-radius:1.2rem;display:flex;flex-direction:column;
   align-items:center;justify-content:center;
-  border:3px solid var(--orange);flex-shrink:0;
+  border:4px solid var(--orange);flex-shrink:0;
   position:relative;overflow:hidden;
-  box-shadow:0 0 40px rgba(214,157,35,.3);
+  box-shadow:0 0 60px rgba(214,157,35,.4);
 }
-.qr-box img{width:160px;height:160px;object-fit:contain;}
+.qr-box img{width:300px;height:300px;object-fit:contain;}
 .qr-scanner{
   position:absolute;left:0;right:0;height:3px;
   background:linear-gradient(90deg,transparent,rgba(214,157,35,.8),transparent);
@@ -1156,80 +1156,92 @@ body{
 </section>
 
 <!-- ══ SLIDE 3b: REGIONAL CONTEXT ════════════════════════════════════ -->
-<section class="slide" id="s-regional">
+<section class="slide" id="s-regional" style="background:linear-gradient(160deg,var(--navy) 0%,#0c1a2e 100%);">
   <div class="bar-top" style="background:linear-gradient(90deg,var(--blue),transparent);"></div>
   <div class="slide-inner">
+
     <div class="s-tag" style="color:var(--blue);">Contexto Global · YNG 2026</div>
-    <div class="s-title">¿Dónde estamos vs. el mundo?</div>
-    <div class="s-sub">LATAM creció — y tiene el camino más claro para llegar al top</div>
+    <div class="s-title" style="margin-bottom:.3rem;">¿Dónde estamos<br>vs. el mundo?</div>
+    <div class="s-sub" style="margin-bottom:1.2rem;">LATAM creció — y tiene el camino más claro para llegar al top</div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:.5rem;align-items:start;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;">
 
-      <!-- Left: ranking table -->
+      <!-- Left: compact ranking — 5 regions -->
       <div>
-        <div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--gray);margin-bottom:.6rem;">% Enrollment por Región — FY26</div>
-        <div style="display:flex;flex-direction:column;gap:.35rem;">
-          <div style="display:flex;align-items:center;gap:.6rem;padding:.5rem .7rem;background:rgba(100,167,11,.1);border:1px solid rgba(100,167,11,.25);border-radius:.5rem;">
-            <div style="font-size:.75rem;font-weight:700;color:var(--green);width:2.2rem;">61%</div>
-            <div style="flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;"><div style="width:100%;height:100%;background:var(--green);border-radius:3px;"></div></div>
-            <div style="font-size:.75rem;color:rgba(255,255,255,.8);">South Asia</div>
+        <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--gray);margin-bottom:.8rem;">% Enrollment por Región — FY26</div>
+        <div style="display:flex;flex-direction:column;gap:.5rem;">
+
+          <div style="display:flex;align-items:center;gap:.8rem;">
+            <div style="font-size:.9rem;font-weight:700;color:var(--green);width:3rem;text-align:right;">61%</div>
+            <div style="flex:1;height:10px;background:rgba(255,255,255,.06);border-radius:5px;overflow:hidden;">
+              <div style="width:61%;height:100%;background:var(--green);border-radius:5px;"></div>
+            </div>
+            <div style="font-size:.85rem;color:rgba(255,255,255,.7);width:9rem;">South Asia</div>
           </div>
-          <div style="display:flex;align-items:center;gap:.6rem;padding:.5rem .7rem;background:rgba(100,167,11,.07);border:1px solid rgba(100,167,11,.15);border-radius:.5rem;">
-            <div style="font-size:.75rem;font-weight:700;color:var(--green);width:2.2rem;">47%</div>
-            <div style="flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;"><div style="width:77%;height:100%;background:var(--green);border-radius:3px;"></div></div>
-            <div style="font-size:.75rem;color:rgba(255,255,255,.8);">Middle East / N. Africa</div>
+
+          <div style="display:flex;align-items:center;gap:.8rem;">
+            <div style="font-size:.9rem;font-weight:700;color:var(--green);width:3rem;text-align:right;">47%</div>
+            <div style="flex:1;height:10px;background:rgba(255,255,255,.06);border-radius:5px;overflow:hidden;">
+              <div style="width:47%;height:100%;background:var(--green);opacity:.7;border-radius:5px;"></div>
+            </div>
+            <div style="font-size:.85rem;color:rgba(255,255,255,.7);width:9rem;">Middle East</div>
           </div>
-          <div style="display:flex;align-items:center;gap:.6rem;padding:.5rem .7rem;background:rgba(100,167,11,.07);border:1px solid rgba(100,167,11,.15);border-radius:.5rem;">
-            <div style="font-size:.75rem;font-weight:700;color:var(--green);width:2.2rem;">46%</div>
-            <div style="flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;"><div style="width:75%;height:100%;background:var(--green);border-radius:3px;"></div></div>
-            <div style="font-size:.75rem;color:rgba(255,255,255,.8);">Africa</div>
+
+          <div style="display:flex;align-items:center;gap:.8rem;">
+            <div style="font-size:.9rem;font-weight:700;color:var(--green);width:3rem;text-align:right;">46%</div>
+            <div style="flex:1;height:10px;background:rgba(255,255,255,.06);border-radius:5px;overflow:hidden;">
+              <div style="width:46%;height:100%;background:var(--green);opacity:.6;border-radius:5px;"></div>
+            </div>
+            <div style="font-size:.85rem;color:rgba(255,255,255,.7);width:9rem;">Africa</div>
           </div>
-          <div style="display:flex;align-items:center;gap:.6rem;padding:.5rem .7rem;background:rgba(100,167,11,.07);border:1px solid rgba(100,167,11,.15);border-radius:.5rem;">
-            <div style="font-size:.75rem;font-weight:700;color:var(--green);width:2.2rem;">36%</div>
-            <div style="flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;"><div style="width:59%;height:100%;background:var(--green);border-radius:3px;"></div></div>
-            <div style="font-size:.75rem;color:rgba(255,255,255,.8);">North Asia</div>
+
+          <!-- LATAM — highlighted, bigger -->
+          <div style="display:flex;align-items:center;gap:.8rem;padding:.6rem .5rem;background:rgba(214,157,35,.1);border:1.5px solid rgba(214,157,35,.4);border-radius:.5rem;margin:.2rem 0;">
+            <div style="font-size:1.05rem;font-weight:800;color:var(--orange);width:3rem;text-align:right;">31%</div>
+            <div style="flex:1;height:12px;background:rgba(255,255,255,.06);border-radius:6px;overflow:hidden;">
+              <div style="width:31%;height:100%;background:var(--orange);border-radius:6px;box-shadow:0 0 8px rgba(214,157,35,.6);"></div>
+            </div>
+            <div style="font-size:.9rem;font-weight:800;color:var(--orange);width:9rem;">LATAM ← nosotros</div>
           </div>
-          <div style="display:flex;align-items:center;gap:.6rem;padding:.5rem .7rem;background:rgba(214,157,35,.15);border:2px solid rgba(214,157,35,.4);border-radius:.5rem;">
-            <div style="font-size:.8rem;font-weight:800;color:var(--orange);width:2.2rem;">31%</div>
-            <div style="flex:1;height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;"><div style="width:51%;height:100%;background:var(--orange);border-radius:3px;"></div></div>
-            <div style="font-size:.8rem;font-weight:700;color:var(--orange);">LATAM ← nosotros</div>
+
+          <div style="display:flex;align-items:center;gap:.8rem;">
+            <div style="font-size:.9rem;font-weight:700;color:var(--gray);width:3rem;text-align:right;">27%</div>
+            <div style="flex:1;height:10px;background:rgba(255,255,255,.06);border-radius:5px;overflow:hidden;">
+              <div style="width:27%;height:100%;background:rgba(255,255,255,.2);border-radius:5px;"></div>
+            </div>
+            <div style="font-size:.85rem;color:var(--gray);width:9rem;">Europe</div>
           </div>
-          <div style="display:flex;align-items:center;gap:.6rem;padding:.5rem .7rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:.5rem;">
-            <div style="font-size:.75rem;font-weight:700;color:var(--gray);width:2.2rem;">27%</div>
-            <div style="flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;"><div style="width:44%;height:100%;background:var(--gray);border-radius:3px;"></div></div>
-            <div style="font-size:.75rem;color:var(--gray);">Europe</div>
+
+          <div style="display:flex;align-items:center;gap:.8rem;">
+            <div style="font-size:.9rem;font-weight:700;color:var(--gray);width:3rem;text-align:right;">22%</div>
+            <div style="flex:1;height:10px;background:rgba(255,255,255,.06);border-radius:5px;overflow:hidden;">
+              <div style="width:22%;height:100%;background:rgba(255,255,255,.15);border-radius:5px;"></div>
+            </div>
+            <div style="font-size:.85rem;color:var(--gray);width:9rem;">Mid-America US</div>
           </div>
-          <div style="display:flex;align-items:center;gap:.6rem;padding:.5rem .7rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:.5rem;">
-            <div style="font-size:.75rem;font-weight:700;color:var(--gray);width:2.2rem;">26%</div>
-            <div style="flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;"><div style="width:43%;height:100%;background:var(--gray);border-radius:3px;"></div></div>
-            <div style="font-size:.75rem;color:var(--gray);">Australia / NZ</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:.6rem;padding:.5rem .7rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:.5rem;">
-            <div style="font-size:.75rem;font-weight:700;color:var(--gray);width:2.2rem;">22%</div>
-            <div style="flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;"><div style="width:36%;height:100%;background:var(--gray);border-radius:3px;"></div></div>
-            <div style="font-size:.75rem;color:var(--gray);">Mid-America US</div>
-          </div>
+
         </div>
       </div>
 
-      <!-- Right: trend + insight -->
+      <!-- Right: 3 insight cards -->
       <div style="display:flex;flex-direction:column;gap:1rem;">
-        <div style="background:rgba(214,157,35,.08);border:1px solid rgba(214,157,35,.2);border-radius:.8rem;padding:1.1rem 1.2rem;">
-          <div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--orange);margin-bottom:.5rem;">La tendencia de LATAM</div>
-          <div style="font-size:1.3rem;font-weight:800;font-family:'Syne',sans-serif;color:var(--white);">22% → 27% → 31%</div>
-          <div style="font-size:.8rem;color:var(--gray);margin-top:.3rem;">3 años consecutivos de crecimiento</div>
+
+        <div style="background:rgba(214,157,35,.08);border:1px solid rgba(214,157,35,.25);border-radius:.9rem;padding:1.3rem 1.4rem;">
+          <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--orange);margin-bottom:.5rem;">La tendencia de LATAM</div>
+          <div style="font-size:1.8rem;font-weight:800;font-family:'Syne',sans-serif;color:#fff;line-height:1.1;">22% → 27% → 31%</div>
+          <div style="font-size:.85rem;color:rgba(255,255,255,.5);margin-top:.4rem;">3 años consecutivos de crecimiento</div>
         </div>
-        <div style="background:rgba(20,123,209,.08);border:1px solid rgba(20,123,209,.2);border-radius:.8rem;padding:1.1rem 1.2rem;">
-          <div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--blue);margin-bottom:.5rem;">La pregunta de hoy</div>
-          <div style="font-size:.92rem;font-weight:700;color:var(--white);line-height:1.55;">¿Cómo pasamos de 31%<br>al <span style="color:var(--blue);">top 3</span> del mundo en FY 26-27?</div>
+
+        <div style="background:rgba(20,123,209,.08);border:1px solid rgba(20,123,209,.25);border-radius:.9rem;padding:1.3rem 1.4rem;">
+          <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--blue);margin-bottom:.5rem;">La pregunta de hoy</div>
+          <div style="font-size:1.1rem;font-weight:700;color:#fff;line-height:1.5;">¿Cómo pasamos de 31%<br>al <span style="color:var(--blue);">top 3</span> del mundo en FY 26-27?</div>
         </div>
-        <div style="background:rgba(100,167,11,.07);border:1px solid rgba(100,167,11,.2);border-radius:.8rem;padding:1.1rem 1.2rem;">
-          <div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--green);margin-bottom:.4rem;">La oportunidad concreta</div>
-          <div style="font-size:.82rem;color:rgba(255,255,255,.8);line-height:1.6;">
-            <strong style="color:var(--green);">1,937 elegibles sin activar</strong> en LATAM.<br>
-            La región con más potencial sin explotar.
-          </div>
+
+        <div style="background:rgba(100,167,11,.07);border:1px solid rgba(100,167,11,.25);border-radius:.9rem;padding:1.3rem 1.4rem;">
+          <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--green);margin-bottom:.4rem;">La oportunidad concreta</div>
+          <div style="font-size:1rem;color:#fff;line-height:1.6;"><strong style="color:var(--green);">1,937 elegibles sin activar</strong> en LATAM.<br>La región con más potencial sin explotar.</div>
         </div>
+
       </div>
     </div>
   </div>
@@ -1374,7 +1386,7 @@ body{
       <div class="qr-box">
         <div class="qr-ping"></div>
         <div class="qr-scanner"></div>
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://docs.google.com/forms/d/1FRtR5oFwkuVWiETYiMi5OUA-y38z8-m8RoWyBg8jzCI/viewform" alt="QR"
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://docs.google.com/forms/d/1FRtR5oFwkuVWiETYiMi5OUA-y38z8-m8RoWyBg8jzCI/viewform" alt="QR"
           onerror="this.outerHTML='<div style=\'font-size:2.5rem;color:var(--navy)\'>📱</div><div style=\'font-size:.7rem;color:var(--gray);margin-top:.3rem;\'>QR aquí</div>'">
       </div>
       <div class="qr-questions">
