@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YNG LATAM · Strategic Planning · Bogotá 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Epilogue:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0A1628; --navy2:#0f1e38; --navy3:#132240;
+  --orange:#D69D23; --orangeE:#E8650A;
+  --blue:#147BD1; --green:#64A70B; --red:#F8485E;
+  --purple:#753BBD; --white:#fff; --gray:#8899AA;
+  --glass:rgba(255,255,255,.06);
+  --glass-border:rgba(255,255,255,.1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-snap-type:y mandatory;overflow-y:scroll;scroll-behavior:smooth;cursor:none;}
+body{
+  font-family:'Epilogue',sans-serif;
+  background:var(--navy);color:var(--white);
+  overflow-x:hidden;
+}
+
+/* ── CUSTOM CURSOR ──────────────────── */
+#cursor{
+  position:fixed;width:12px;height:12px;
+  background:var(--orange);border-radius:50%;
+  pointer-events:none;z-index:99999;
+  transform:translate(-50%,-50%);
+  transition:transform .1s;
+  box-shadow:0 0 16px rgba(214,157,35,.8);
+}
+#cursor-ring{
+  position:fixed;width:36px;height:36px;
+  border:1.5px solid rgba(214,157,35,.4);border-radius:50%;
+  pointer-events:none;z-index:99998;
+  transform:translate(-50%,-50%);
+  transition:all .12s ease;
+}
+
+/* ── PROGRESS BAR ───────────────────── */
+#progress-bar{
+  position:fixed;top:0;left:0;height:3px;
+  background:linear-gradient(90deg,var(--orange),#ffcc44);
+  z-index:99998;transition:width .3s;width:0%;
+  box-shadow:0 0 8px var(--orange);
+}
+
+/* ── SLIDE BASE ─────────────────────── */
+.slide{
+  scroll-snap-align:start;
+  min-height:100vh;width:100%;
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  padding:3rem 2rem;position:relative;
+  overflow:hidden;
+}
+.slide-inner{max-width:1100px;width:100%;position:relative;z-index:2;}
+
+/* noise grain overlay */
+.slide::after{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:.5;pointer-events:none;z-index:1;
+}
+
+/* ── NAV DOTS ───────────────────────── */
+.nav-dots{
+  position:fixed;right:1.2rem;top:50%;
+  transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:.5rem;z-index:1000;
+}
+.dot{
+  width:7px;height:7px;border-radius:50%;
+  background:rgba(255,255,255,.2);cursor:pointer;
+  transition:all .25s;
+}
+.dot.active{
+  background:var(--orange);transform:scale(1.5);
+  box-shadow:0 0 8px var(--orange);
+}
+
+/* slide counter */
+.slide-num{
+  position:absolute;bottom:1.4rem;right:1.8rem;
+  font-size:.72rem;color:rgba(255,255,255,.2);
+  font-weight:700;letter-spacing:.1em;z-index:3;
+}
+
+/* shared section tags */
+.s-tag{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-size:.65rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.15em;color:var(--orange);margin-bottom:.5rem;
+}
+.s-title{
+  font-size:clamp(1.8rem,4.5vw,3rem);
+  font-family:'Syne',sans-serif;
+  font-weight:800;line-height:1.05;margin-bottom:.5rem;
+}
+.s-sub{font-size:.92rem;color:var(--gray);margin-bottom:1.5rem;}
+
+/* nirvana ai badge */
+.nai-badge{
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:rgba(232,101,10,.12);border:1px solid rgba(232,101,10,.3);
+  color:var(--orangeE);font-size:.65rem;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:.3rem .7rem;border-radius:2rem;
+}
+.nai-hex{
+  width:14px;height:14px;
+  background:var(--orangeE);
+  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+  flex-shrink:0;
+}
+
+/* bar top accent */
+.bar-top{position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--orange),transparent);z-index:3;}
+
+/* glass card */
+.glass-card{
+  background:var(--glass);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid var(--glass-border);
+  border-radius:.9rem;
+}
+
+/* animate in */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s,transform .6s;}
+.reveal.visible{opacity:1;transform:none;}
+.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity .6s,transform .6s;}
+.reveal-left.visible{opacity:1;transform:none;}
+
+/* ══ SLIDE 0: VIDEO INTRO ════════════════════════════ */
+#s0{background:#000;cursor:none;}
+#s0 video.bg-video{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;opacity:.55;z-index:0;
+}
+.video-overlay{
+  text-align:center;z-index:2;position:relative;
+  display:flex;flex-direction:column;align-items:center;gap:1.4rem;
+}
+.video-overlay .nai-badge{margin-bottom:.5rem;}
+.welcome-title{
+  font-size:clamp(3.5rem,10vw,8rem);font-weight:800;
+  font-family:'Syne',sans-serif;
+  line-height:.95;letter-spacing:-.03em;
+}
+.welcome-title span{
+  background:linear-gradient(135deg,var(--orange),#ffcc44);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.welcome-meta{font-size:1rem;color:rgba(255,255,255,.5);}
+.welcome-start{
+  margin-top:.5rem;
+  background:var(--orange);color:var(--navy);
+  border:none;padding:.85rem 2.2rem;border-radius:.5rem;
+  font-family:'Epilogue',sans-serif;
+  font-size:1rem;font-weight:800;cursor:none;
+  transition:transform .15s,box-shadow .15s;
+  letter-spacing:.03em;
+}
+.welcome-start:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(214,157,35,.5);}
+
+/* animated bg for no-video fallback */
+.video-bg-anim{
+  position:absolute;inset:0;z-index:0;
+  background:radial-gradient(ellipse at 30% 50%,rgba(46,116,173,.3),transparent 60%),
+             radial-gradient(ellipse at 70% 50%,rgba(214,157,35,.15),transparent 60%),
+             var(--navy);
+  animation:bgpulse 6s ease-in-out infinite alternate;
+}
+@keyframes bgpulse{
+  from{filter:brightness(1);}
+  to{filter:brightness(1.15);}
+}
+.floating-particles{position:absolute;inset:0;z-index:1;overflow:hidden;}
+
+/* ══ SLIDE 1: COVER ═════════════════════════════════ */
+#s1{background:var(--navy);}
+#s1 canvas{position:absolute;inset:0;z-index:0;}
+.cover-badge-row{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:1.8rem;}
+.cover-title{
+  font-size:clamp(4rem,11vw,9rem);font-weight:800;
+  font-family:'Syne',sans-serif;
+  line-height:.92;letter-spacing:-.04em;
+}
+.cover-title .line2{
+  background:linear-gradient(135deg,var(--orange) 0%,#ffcc44 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  display:block;
+}
+.cover-sub{
+  font-size:1.1rem;color:rgba(255,255,255,.45);
+  margin-top:1.5rem;margin-bottom:2rem;max-width:500px;
+  line-height:1.6;
+}
+.cover-meta-row{display:flex;gap:2.5rem;flex-wrap:wrap;}
+.cover-meta-item{display:flex;flex-direction:column;gap:.2rem;}
+.cover-meta-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.15em;color:rgba(255,255,255,.3);}
+.cover-meta-val{font-size:.95rem;font-weight:700;}
+.cover-left-bar{position:absolute;left:0;top:0;bottom:0;width:5px;
+  background:linear-gradient(to bottom,var(--orange),transparent);z-index:3;}
+.heartbeat{
+  display:inline-block;
+  animation:heartbeat 2.5s ease-in-out infinite;
+}
+@keyframes heartbeat{
+  0%,100%{transform:scale(1);}
+  14%{transform:scale(1.1);}
+  28%{transform:scale(1);}
+  42%{transform:scale(1.08);}
+  56%{transform:scale(1);}
+}
+
+/* ══ SLIDE 2: AGENDA ════════════════════════════════ */
+#s2{background:linear-gradient(135deg,var(--navy2),var(--navy));}
+.timeline{
+  margin-top:1.5rem;
+  border-left:2px solid rgba(214,157,35,.2);
+  padding-left:1.8rem;
+  display:flex;flex-direction:column;gap:.6rem;
+  position:relative;
+}
+.timeline-item{
+  display:flex;gap:1rem;align-items:flex-start;
+  position:relative;
+  opacity:0;transform:translateX(-20px);
+  transition:opacity .4s,transform .4s;
+}
+.timeline-item.in{opacity:1;transform:none;}
+.timeline-dot{
+  position:absolute;left:-2.35rem;top:.4rem;
+  width:12px;height:12px;border-radius:50%;
+  border:2px solid var(--navy2);flex-shrink:0;
+}
+.tl-time{
+  font-size:.72rem;font-weight:700;color:var(--gray);
+  white-space:nowrap;min-width:75px;padding-top:.2rem;
+  font-variant-numeric:tabular-nums;
+}
+.tl-item{
+  background:var(--glass);border:1px solid var(--glass-border);
+  border-radius:.55rem;padding:.65rem .9rem;flex:1;
+  border-left:3px solid transparent;
+  backdrop-filter:blur(8px);
+}
+.tl-item strong{display:block;font-size:.88rem;margin-bottom:.1rem;}
+.tl-item span{font-size:.76rem;color:var(--gray);}
+.tl-data{border-color:var(--blue);}
+.tl-theme{border-color:var(--purple);}
+.tl-break{border-color:var(--orange);background:rgba(214,157,35,.06);}
+.tl-dive{border-color:var(--green);}
+.tl-smart{border-color:var(--orange);}
+
+/* ══ SLIDE 3: NUMBERS ════════════════════════════════ */
+#s3{background:var(--navy);}
+.num-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1rem;margin-top:1.5rem;
+}
+@media(max-width:650px){.num-grid{grid-template-columns:1fr 1fr;}}
+.num-card{
+  background:var(--glass);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid var(--glass-border);
+  border-radius:.9rem;padding:1.4rem 1rem;text-align:center;
+  position:relative;overflow:hidden;
+  transition:transform .2s,box-shadow .2s;
+}
+.num-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.4);}
+.num-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--card-color,var(--blue));
+}
+.num-card::after{display:none;}
+.num-big{
+  font-size:clamp(2.5rem,5vw,3.8rem);font-weight:800;line-height:1;
+  color:var(--card-color,var(--blue));
+}
+.num-label{font-size:.78rem;color:var(--gray);margin-top:.4rem;line-height:1.4;}
+.num-card.orange{--card-color:var(--orange);}
+.num-card.red{--card-color:var(--red);}
+.num-card.green{--card-color:var(--green);}
+.num-card.purple{--card-color:var(--purple);}
+
+/* SVG ring */
+.ring-wrap{width:80px;height:80px;margin:0 auto .4rem;}
+.ring-wrap svg{transform:rotate(-90deg);}
+.ring-bg{fill:none;stroke:rgba(255,255,255,.07);stroke-width:6;}
+.ring-fill{fill:none;stroke-width:6;stroke-linecap:round;
+  transition:stroke-dashoffset 1.5s cubic-bezier(.4,0,.2,1);}
+.ring-text{
+  font-size:1rem;font-weight:800;fill:var(--ring-color,var(--orange));
+  text-anchor:middle;dominant-baseline:middle;
+  transform:rotate(90deg) translateX(0);
+}
+
+.num-insight{
+  margin-top:1.5rem;
+  background:rgba(240,86,100,.07);
+  border:1px solid rgba(240,86,100,.15);
+  border-radius:.7rem;padding:1rem 1.4rem;
+  font-size:.9rem;line-height:1.55;text-align:center;
+  color:rgba(255,255,255,.8);
+}
+.num-insight strong{color:var(--red);}
+
+/* ══ SLIDE 4: GAP ════════════════════════════════════ */
+#s4{background:linear-gradient(135deg,var(--navy2),var(--navy));}
+.gap-list{display:flex;flex-direction:column;gap:.6rem;margin-top:1.4rem;}
+.gap-row{
+  display:grid;grid-template-columns:140px 60px 1fr 80px;
+  align-items:center;gap:.8rem;
+  background:var(--glass);border:1px solid var(--glass-border);
+  backdrop-filter:blur(8px);
+  border-radius:.6rem;padding:.7rem 1rem;
+  opacity:0;transform:translateX(-24px);
+  transition:opacity .5s,transform .5s;
+}
+.gap-row.in{opacity:1;transform:none;}
+@media(max-width:620px){.gap-row{grid-template-columns:100px 40px 1fr 60px;}}
+.gap-country{font-size:.88rem;font-weight:700;}
+.gap-paying{font-size:.88rem;font-weight:800;color:var(--blue);text-align:right;}
+.bar-outer{background:rgba(255,255,255,.06);border-radius:4px;height:8px;overflow:hidden;}
+.bar-inner{height:8px;border-radius:4px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1);}
+.gap-pct{font-size:.82rem;font-weight:800;text-align:right;}
+.critical-tag{
+  font-size:.6rem;font-weight:800;text-transform:uppercase;
+  letter-spacing:.1em;padding:.15rem .45rem;border-radius:2rem;
+  background:rgba(240,86,100,.15);color:var(--red);
+  animation:pulse-red 2s ease-in-out infinite;
+  white-space:nowrap;
+}
+@keyframes pulse-red{
+  0%,100%{box-shadow:0 0 0 0 rgba(240,86,100,0);}
+  50%{box-shadow:0 0 0 4px rgba(240,86,100,.15);}
+}
+
+/* ══ SLIDE 5: FEEDBACK ═══════════════════════════════ */
+#s5{background:var(--navy);}
+.sticky-wall{
+  display:flex;flex-wrap:wrap;gap:.8rem;
+  margin-top:1.5rem;justify-content:center;
+}
+.sticky{
+  width:175px;min-height:110px;padding:1rem;
+  border-radius:.5rem;font-size:.82rem;line-height:1.5;
+  display:flex;flex-direction:column;gap:.5rem;
+  opacity:0;transform:translateY(30px) scale(.9);
+  transition:opacity .4s,transform .4s;
+  cursor:default;
+  transition:opacity .4s,transform .4s,box-shadow .2s;
+}
+.sticky:hover{box-shadow:0 12px 32px rgba(0,0,0,.4);transform:scale(1.04)!important;}
+.sticky.in{opacity:1;}
+.sticky.good{
+  background:linear-gradient(135deg,#1a3a20,#1e4a25);
+  border:1px solid rgba(110,177,65,.25);
+  box-shadow:0 4px 16px rgba(0,0,0,.3);
+}
+.sticky.bad{
+  background:linear-gradient(135deg,#3a1a1a,#4a1e1e);
+  border:1px solid rgba(240,86,100,.25);
+  box-shadow:0 4px 16px rgba(0,0,0,.3);
+}
+.sticky-icon{font-size:1.2rem;}
+.sticky-text{color:rgba(255,255,255,.85);flex:1;}
+.fb-quote{
+  margin-top:1.5rem;text-align:center;
+  font-size:1rem;font-style:italic;color:var(--gray);
+  padding-top:1rem;border-top:1px solid rgba(255,255,255,.06);
+}
+.fb-quote strong{color:var(--orange);font-style:normal;}
+
+/* ══ SLIDE 6: QR ═════════════════════════════════════ */
+#s6{
+  background:linear-gradient(135deg,#0a0f1e 0%,#0d1535 40%,#120a28 70%,#0a1628 100%);
+  animation:aurora-shift 12s ease-in-out infinite alternate;
+}
+@keyframes aurora-shift{
+  0%{background:linear-gradient(135deg,#0a0f1e 0%,#0d1535 40%,#120a28 70%,#0a1628 100%);}
+  50%{background:linear-gradient(135deg,#080d1c 0%,#0a2040 40%,#1a0a30 70%,#081020 100%);}
+  100%{background:linear-gradient(135deg,#0e0c22 0%,#0b1a40 40%,#180c2a 70%,#091220 100%);}
+}
+.aurora-bg{
+  position:absolute;inset:0;z-index:0;overflow:hidden;
+}
+.aurora-layer{
+  position:absolute;border-radius:50%;filter:blur(80px);opacity:.15;
+  animation:aurora-float 8s ease-in-out infinite alternate;
+}
+.aurora-layer:nth-child(1){width:600px;height:400px;top:-100px;left:-100px;
+  background:radial-gradient(var(--purple),transparent);animation-delay:0s;}
+.aurora-layer:nth-child(2){width:500px;height:300px;bottom:-50px;right:-50px;
+  background:radial-gradient(var(--blue),transparent);animation-delay:-3s;}
+.aurora-layer:nth-child(3){width:400px;height:400px;top:30%;left:30%;
+  background:radial-gradient(var(--green),transparent);animation-delay:-6s;}
+@keyframes aurora-float{
+  from{transform:translate(0,0) scale(1);}
+  to{transform:translate(40px,20px) scale(1.1);}
+}
+.qr-layout{display:flex;gap:3rem;align-items:center;flex-wrap:wrap;justify-content:center;z-index:2;position:relative;}
+.qr-box{
+  width:200px;height:200px;background:var(--white);
+  border-radius:1rem;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  border:3px solid var(--orange);flex-shrink:0;
+  position:relative;overflow:hidden;
+  box-shadow:0 0 40px rgba(214,157,35,.3);
+}
+.qr-box img{width:160px;height:160px;object-fit:contain;}
+.qr-scanner{
+  position:absolute;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,rgba(214,157,35,.8),transparent);
+  animation:scan 2.5s ease-in-out infinite;top:0;
+}
+@keyframes scan{
+  0%{top:0;opacity:1;}
+  100%{top:100%;opacity:.5;}
+}
+.qr-ping{
+  position:absolute;inset:-8px;border-radius:1.2rem;
+  border:2px solid rgba(214,157,35,.3);
+  animation:ping 2s ease-out infinite;
+}
+@keyframes ping{
+  0%{transform:scale(1);opacity:1;}
+  100%{transform:scale(1.2);opacity:0;}
+}
+.qr-questions{display:flex;flex-direction:column;gap:.7rem;max-width:400px;}
+.qr-q{
+  background:var(--glass);border:1px solid var(--glass-border);
+  backdrop-filter:blur(8px);
+  border-radius:.6rem;padding:.8rem 1rem;
+  font-size:.88rem;line-height:1.5;
+}
+
+/* ══ SLIDE 7: THEMES ═════════════════════════════════ */
+#s7{background:var(--navy2);}
+.themes-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.5rem;}
+@media(max-width:600px){.themes-grid{grid-template-columns:1fr;}}
+.theme-card{
+  border-radius:1rem;padding:2rem;
+  display:flex;flex-direction:column;gap:.8rem;min-height:220px;
+  position:relative;overflow:hidden;
+  transition:transform .3s,box-shadow .3s;
+}
+.theme-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.5);}
+.theme-card.t1{
+  background:linear-gradient(135deg,#0f1e38,#1a2040);
+  border:1px solid rgba(214,157,35,.2);
+}
+.theme-card.t2{
+  background:linear-gradient(135deg,#0a1628,#0f1f40);
+  border:1px solid rgba(46,116,173,.25);
+}
+.theme-border-anim{
+  position:absolute;inset:-1px;border-radius:1rem;
+  background:conic-gradient(from var(--angle,0deg),transparent 0deg,var(--b-color) 60deg,transparent 120deg);
+  animation:border-spin 4s linear infinite;
+  z-index:-1;
+  --b-color:rgba(214,157,35,.4);
+}
+.theme-card.t2 .theme-border-anim{--b-color:rgba(46,116,173,.4);}
+.theme-inner{background:inherit;border-radius:.9rem;padding:2rem;margin:-2rem;
+  display:flex;flex-direction:column;gap:.8rem;flex:1;}
+@property --angle{
+  syntax:'<angle>';inherits:false;initial-value:0deg;
+}
+@keyframes border-spin{to{--angle:360deg;}}
+.theme-num{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.18em;}
+.theme-card.t1 .theme-num{color:var(--orange);}
+.theme-card.t2 .theme-num{color:var(--blue);}
+.theme-name{font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:800;line-height:1.1;}
+.theme-desc{font-size:.85rem;color:var(--gray);line-height:1.5;flex:1;}
+.theme-chip{
+  display:inline-block;padding:.3rem .8rem;border-radius:2rem;
+  font-size:.72rem;font-weight:700;
+}
+.theme-card.t1 .theme-chip{background:rgba(214,157,35,.12);color:var(--orange);}
+.theme-card.t2 .theme-chip{background:rgba(46,116,173,.15);color:var(--blue);}
+
+/* ══ SLIDE 8: PORTFOLIO ══════════════════════════════ */
+#s8{background:var(--navy);}
+.port-list{display:flex;flex-direction:column;gap:.6rem;margin-top:1.2rem;}
+.port-row{
+  display:grid;grid-template-columns:50px 180px 1fr;
+  align-items:center;gap:1rem;
+  background:var(--glass);border:1px solid var(--glass-border);
+  backdrop-filter:blur(8px);
+  border-radius:.7rem;padding:.75rem 1rem;
+  transition:transform .2s,border-color .2s;
+}
+.port-row:hover{transform:translateX(4px);border-color:rgba(214,157,35,.25);}
+@media(max-width:600px){.port-row{grid-template-columns:40px 1fr;}}
+.port-avatar{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:.88rem;flex-shrink:0;
+}
+.port-name{font-size:.85rem;font-weight:700;}
+.port-person{font-size:.72rem;color:var(--gray);margin-top:.1rem;}
+.port-goals{display:flex;gap:.5rem;flex-wrap:wrap;}
+.port-tag{
+  background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.12);
+  border-radius:.4rem;padding:.28rem .6rem;
+  font-size:.72rem;color:var(--gray);font-style:italic;
+}
+
+/* ══ SLIDE 9: CLOSING ════════════════════════════════ */
+#s9{background:var(--navy);}
+#s9 canvas{position:absolute;inset:0;z-index:0;pointer-events:none;}
+.close-inner{text-align:center;position:relative;z-index:2;}
+.close-q{
+  font-size:clamp(1.3rem,3.5vw,2.2rem);font-weight:700;
+  line-height:1.4;max-width:680px;margin:0 auto 2rem;color:rgba(255,255,255,.8);
+}
+.close-q span{color:var(--orange);}
+.thank-you{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(4rem,12vw,10rem);font-weight:800;
+  letter-spacing:-.04em;line-height:1;
+  background:linear-gradient(135deg,var(--orange),#ffcc44);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.close-next{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;margin-top:2rem;}
+.close-chip{
+  background:var(--glass);border:1px solid var(--glass-border);
+  backdrop-filter:blur(8px);border-radius:.5rem;
+  padding:.65rem 1rem;font-size:.83rem;
+  border-left:3px solid var(--orange);
+}
+.close-meta{margin-top:2rem;font-size:.75rem;color:rgba(255,255,255,.2);letter-spacing:.08em;}
+
+/* ══ SLIDE 10: SMART DEF ══════════════════════════════ */
+#s10{background:linear-gradient(135deg,var(--navy),var(--navy2));}
+.smart-letters{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:.8rem;margin-top:1.5rem;
+}
+@media(max-width:700px){.smart-letters{grid-template-columns:1fr 1fr;}}
+.sl{
+  background:var(--glass);border:1px solid var(--glass-border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-radius:.9rem;padding:1.3rem .9rem;
+  text-align:center;border-top:3px solid var(--sl-color);
+  transition:transform .25s,box-shadow .25s;
+  perspective:600px;cursor:default;
+  opacity:0;transform:translateY(40px) scale(.9);
+}
+.sl.in{opacity:1;transform:none;transition:opacity .5s,transform .6s cubic-bezier(.34,1.56,.64,1);}
+.sl:hover{transform:translateY(-6px) rotateX(4deg);box-shadow:0 20px 40px rgba(0,0,0,.4);}
+.sl-letter{font-size:2.8rem;font-weight:800;line-height:1;color:var(--sl-color);margin-bottom:.2rem;}
+.sl-word{font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--sl-color);margin-bottom:.65rem;}
+.sl-joke{font-size:.76rem;line-height:1.55;color:rgba(255,255,255,.65);margin-bottom:.65rem;}
+.sl-dont{font-size:.68rem;background:rgba(240,86,100,.1);border-radius:.35rem;
+  padding:.3rem .55rem;color:var(--red);margin-bottom:.3rem;}
+.sl-do{font-size:.68rem;background:rgba(110,177,65,.1);border-radius:.35rem;
+  padding:.3rem .55rem;color:var(--green);}
+.sl-s{--sl-color:var(--orange);}
+.sl-m{--sl-color:var(--blue);}
+.sl-a{--sl-color:var(--purple);}
+.sl-r{--sl-color:var(--green);}
+.sl-t{--sl-color:var(--red);}
+.smart-tagline{text-align:center;margin-top:1.2rem;font-size:.87rem;
+  color:var(--gray);font-style:italic;}
+.smart-tagline strong{color:var(--orange);font-style:normal;}
+
+/* ══ SLIDE 11: MINI-CLASE ═════════════════════════════ */
+#s11{background:var(--navy2);align-items:flex-start;overflow-y:auto;}
+.cards{display:flex;flex-direction:column;gap:.65rem;margin-top:1.1rem;}
+.card{
+  background:var(--glass);border:1px solid var(--glass-border);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-radius:.75rem;overflow:hidden;
+  transition:border-color .2s;
+}
+.card.open{border-color:rgba(214,157,35,.4);}
+.card-header{
+  display:flex;align-items:center;gap:.8rem;
+  padding:.95rem 1.1rem;cursor:none;user-select:none;
+}
+.card-badge{width:2rem;height:2rem;border-radius:.35rem;
+  display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;}
+.card-badge.bad{background:rgba(240,86,100,.15);}
+.card-badge.good{background:rgba(110,177,65,.15);}
+.card-title{flex:1;}
+.card-portfolio{font-size:.63rem;font-weight:800;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--orange);margin-bottom:.12rem;}
+.card-goal{font-size:.88rem;font-weight:600;}
+.card-goal.bad{color:rgba(240,86,100,.9);}
+.card-goal.good{color:rgba(110,177,65,.9);}
+.card-arrow{flex-shrink:0;font-size:1rem;color:var(--gray);transition:transform .25s;}
+.card.open .card-arrow{transform:rotate(90deg);}
+.card-body{display:none;padding:0 1.1rem 1.1rem;border-top:1px solid rgba(255,255,255,.05);}
+.card.open .card-body{display:block;}
+.diag{margin:.9rem 0;}
+.diag-title{font-size:.63rem;font-weight:800;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--gray);margin-bottom:.5rem;}
+.diag-row{display:flex;align-items:flex-start;gap:.6rem;padding:.35rem 0;
+  border-bottom:1px solid rgba(255,255,255,.04);font-size:.83rem;}
+.diag-row:last-child{border-bottom:none;}
+.diag-key{flex-shrink:0;width:1.5rem;font-weight:800;}
+.diag-why{color:var(--gray);}
+.lesson{background:rgba(214,157,35,.06);border-left:3px solid var(--orange);
+  border-radius:0 .5rem .5rem 0;padding:.8rem 1rem;
+  margin:.8rem 0;font-size:.83rem;line-height:1.6;color:rgba(255,255,255,.82);}
+.lesson-tag{font-size:.6rem;font-weight:800;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--orange);margin-bottom:.3rem;}
+.smart-version{background:rgba(110,177,65,.08);border:1px solid rgba(110,177,65,.25);
+  border-radius:.55rem;padding:.8rem 1rem;margin-top:.8rem;}
+.smart-tag{font-size:.6rem;font-weight:800;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--green);margin-bottom:.3rem;}
+.smart-text{font-size:.88rem;font-weight:700;color:var(--white);line-height:1.5;}
+
+/* ══ SLIDE 12: CHECKER ════════════════════════════════ */
+#s12{background:var(--navy);}
+.terminal-header{
+  display:flex;align-items:center;gap:.6rem;
+  background:rgba(0,0,0,.4);border-radius:.6rem .6rem 0 0;
+  padding:.5rem 1rem;border-bottom:1px solid rgba(255,255,255,.07);
+}
+.terminal-dot{width:10px;height:10px;border-radius:50%;}
+.terminal-cmd{
+  font-family:'Courier New',monospace;font-size:.75rem;
+  color:rgba(255,255,255,.3);margin-left:.5rem;
+}
+.prompt-box{
+  background:rgba(0,0,0,.5);border:1px solid rgba(214,157,35,.2);
+  border-top:none;
+  border-radius:0 0 .7rem .7rem;
+  padding:1.2rem;
+  font-family:'Courier New',monospace;font-size:.75rem;line-height:1.7;
+  color:rgba(0,255,136,.75);max-height:200px;overflow-y:auto;
+  white-space:pre-wrap;margin-bottom:1rem;
+}
+.cursor-blink{
+  display:inline-block;width:8px;height:14px;
+  background:rgba(0,255,136,.75);margin-left:2px;
+  animation:blink .9s step-end infinite;vertical-align:text-bottom;
+}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+.copy-btn{
+  width:100%;padding:.9rem;
+  background:var(--orange);color:var(--navy);
+  border:none;border-radius:.6rem;
+  font-family:'Epilogue',sans-serif;
+  font-size:1rem;font-weight:800;cursor:none;
+  transition:background .2s,transform .15s,box-shadow .15s;
+  margin-bottom:1.2rem;position:relative;overflow:hidden;
+}
+.copy-btn:hover{background:#ffaa00;transform:translateY(-1px);box-shadow:0 8px 24px rgba(214,157,35,.4);}
+.copy-btn.copied{background:var(--green);}
+.ai-links{display:flex;gap:.7rem;flex-wrap:wrap;margin-bottom:.5rem;}
+.ai-btn{
+  flex:1;min-width:110px;padding:.65rem .8rem;
+  border-radius:.5rem;text-align:center;text-decoration:none;
+  font-family:'Epilogue',sans-serif;font-weight:700;
+  font-size:.85rem;transition:transform .15s,box-shadow .15s;
+  border:1px solid transparent;
+}
+.ai-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.3);}
+.ai-claude{background:rgba(204,120,92,.12);border-color:rgba(204,120,92,.3);color:#CC785C;}
+.ai-chatgpt{background:rgba(16,163,127,.12);border-color:rgba(16,163,127,.3);color:#10A37F;}
+.ai-gemini{background:rgba(66,133,244,.12);border-color:rgba(66,133,244,.3);color:#4285F4;}
+.ai-note{font-size:.73rem;color:var(--gray);margin-top:.4rem;}
+.steps-row{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.4rem;}
+.step-item{flex:1;min-width:150px;display:flex;gap:.6rem;align-items:flex-start;}
+.step-num-c{
+  flex-shrink:0;width:1.8rem;height:1.8rem;
+  background:var(--orange);color:var(--navy);
+  border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-weight:900;font-size:.82rem;
+}
+.step-item-txt strong{display:block;font-size:.83rem;margin-bottom:.12rem;}
+.step-item-txt span{font-size:.74rem;color:var(--gray);}
+
+/* ══ SCROLLBAR ════════════════════════════════════════ */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:rgba(214,157,35,.3);border-radius:2px;}
+</style>
+</head>
+<body>
+<div style="position:fixed;top:0;left:0;right:0;z-index:999999;background:#7C3AED;color:#fff;text-align:center;padding:8px 16px;font-family:monospace;font-size:12px;font-weight:700;letter-spacing:.5px;box-shadow:0 2px 8px rgba(0,0,0,.3)">⚗️ STAGING — No compartir · Revisar antes de promover · Decir 'promover a producción' cuando esté listo</div><div style="height:36px"></div>
+
+<!-- Custom cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- Progress bar -->
+<div id="progress-bar"></div>
+
+<!-- Nav dots -->
+<nav class="nav-dots" id="navDots"></nav>
+
+<!-- ══ SLIDE 0: VIDEO INTRO ══════════════════════════════════ -->
+<section class="slide" id="s0" style="cursor:none;">
+  <!-- Animated background (shows if no video) -->
+  <div class="video-bg-anim"></div>
+  <div class="floating-particles" id="floatParticles"></div>
+
+  <!-- Video (place welcome.mp4 in same folder) -->
+  <video class="bg-video" autoplay muted loop playsinline
+    onerror="this.style.display='none'">
+    <source src="welcome.mp4" type="video/mp4">
+  </video>
+
+  <div class="video-overlay">
+    <div class="nai-badge">
+      <div class="nai-hex"></div>
+      Nirvana AI
+    </div>
+    <div class="welcome-title">
+      Bienvenidos<br><span>a Bogotá.</span>
+    </div>
+    <p class="welcome-meta">YNG LATAM · Strategic Planning · 14 junio 2026</p>
+    <button class="welcome-start" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'})">
+      Comenzar la sesión →
+    </button>
+  </div>
+  <div class="slide-num">0 / 12</div>
+</section>
+
+<!-- ══ SLIDE 1: COVER ════════════════════════════════════════ -->
+<section class="slide" id="s1">
+  <canvas id="particleCanvas"></canvas>
+  <div class="cover-left-bar"></div>
+  <div class="slide-inner">
+    <div class="cover-badge-row">
+      <div class="nai-badge"><div class="nai-hex"></div> Nirvana AI</div>
+      <div class="nai-badge" style="--orangeE:var(--blue);background:rgba(46,116,173,.1);border-color:rgba(46,116,173,.25);color:var(--blue);">
+        FY 26-27
+      </div>
+    </div>
+    <div class="cover-title reveal-left">
+      Strategic<br><span class="line2 heartbeat">Planning.</span>
+    </div>
+    <p class="cover-sub reveal">El board que define el rumbo de YNG LATAM para los próximos 12 meses.</p>
+    <div class="cover-meta-row reveal">
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Fecha</span>
+        <span class="cover-meta-val">14 junio, 2026</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Lugar</span>
+        <span class="cover-meta-val">Bogotá, Colombia</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Facilitador</span>
+        <span class="cover-meta-val">Pablo Sardi</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Duración</span>
+        <span class="cover-meta-val">4 horas</span>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">1 / 12</div>
+</section>
+
+<!-- ══ SLIDE 2: AGENDA ═══════════════════════════════════════ -->
+<section class="slide" id="s2">
+  <div class="bar-top"></div>
+  <div class="slide-inner">
+    <div class="s-tag">Agenda</div>
+    <div class="s-title">El plan para hoy</div>
+    <div class="s-sub">4 horas · 10 bloques · 1 propósito</div>
+    <div class="timeline" id="timeline">
+      <div class="timeline-item" style="--delay:.05s">
+        <div class="timeline-dot" style="background:var(--blue)"></div>
+        <span class="tl-time">08:45</span>
+        <div class="tl-item tl-data"><strong>¿Qué es YNG? · La Directiva</strong><span>Guadalupe Madero · 15 minutos</span></div>
+      </div>
+      <div class="timeline-item" style="--delay:.12s">
+        <div class="timeline-dot" style="background:var(--purple)"></div>
+        <span class="tl-time">09:00</span>
+        <div class="tl-item tl-theme"><strong>Dinámica de conexión</strong><span>30 minutos · ¿Quién eres y qué traes a este board?</span></div>
+      </div>
+      <div class="timeline-item" style="--delay:.19s">
+        <div class="timeline-dot" style="background:var(--blue)"></div>
+        <span class="tl-time">09:30</span>
+        <div class="tl-item tl-data"><strong>State of the Region · FY 25-26</strong><span>Data real · 2,813 elegibles · qué logramos · qué no</span></div>
+      </div>
+      <div class="timeline-item" style="--delay:.26s">
+        <div class="timeline-dot" style="background:var(--green)"></div>
+        <span class="tl-time">10:15</span>
+        <div class="tl-item tl-dive"><strong>Deep Dive #1 — FOROS</strong><span>Hoy → Futuro → 3 acciones → Owner · KPI</span></div>
+      </div>
+      <div class="timeline-item" style="--delay:.33s">
+        <div class="timeline-dot" style="background:var(--orange)"></div>
+        <span class="tl-time">11:15</span>
+        <div class="tl-item tl-break"><strong>— BREAK —</strong><span>☕ 15 minutos</span></div>
+      </div>
+      <div class="timeline-item" style="--delay:.40s">
+        <div class="timeline-dot" style="background:var(--green)"></div>
+        <span class="tl-time">11:30</span>
+        <div class="tl-item tl-dive"><strong>Deep Dive #2 — MEMBRESÍA</strong><span>Hoy → Futuro → 3 acciones → Owner · KPI</span></div>
+      </div>
+      <div class="timeline-item" style="--delay:.47s">
+        <div class="timeline-dot" style="background:var(--orange)"></div>
+        <span class="tl-time">12:30</span>
+        <div class="tl-item tl-break"><strong>— ALMUERZO —</strong><span>60 minutos</span></div>
+      </div>
+      <div class="timeline-item" style="--delay:.54s">
+        <div class="timeline-dot" style="background:var(--red)"></div>
+        <span class="tl-time">13:30</span>
+        <div class="tl-item" style="border-left:3px solid var(--red);backdrop-filter:blur(8px);background:var(--glass);border-top:1px solid var(--glass-border);border-bottom:1px solid var(--glass-border);border-right:1px solid var(--glass-border);border-radius:.55rem;padding:.65rem .9rem;flex:1;"><strong>Learning · Reactivar FY 26-27</strong><span>Ana Orsolani · 30 minutos</span></div>
+      </div>
+      <div class="timeline-item" style="--delay:.61s">
+        <div class="timeline-dot" style="background:var(--orange)"></div>
+        <span class="tl-time">14:00</span>
+        <div class="tl-item tl-smart"><strong>KPIs + SMART Goals por Portafolio</strong><span>Cada portfolio sale con sus metas · Validación AI</span></div>
+      </div>
+      <div class="timeline-item" style="--delay:.68s">
+        <div class="timeline-dot" style="background:var(--orange)"></div>
+        <span class="tl-time">14:40</span>
+        <div class="tl-item tl-smart"><strong>Cierre · Compromisos · Buenos Aires</strong><span>I commit.</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">2 / 12</div>
+</section>
+
+<!-- ══ SLIDE 3: NUMBERS ══════════════════════════════════════ -->
+<section class="slide" id="s3">
+  <div class="slide-inner">
+    <div class="s-tag">Data · FY 25-26 <span style="color:var(--gray)">· Nirvana AI Analysis</span></div>
+    <div class="s-title">YNG LATAM en números</div>
+
+    <!-- Trend banner -->
+    <div style="display:flex;gap:2rem;align-items:center;flex-wrap:wrap;margin-bottom:1.5rem;">
+      <div class="ring-wrap reveal">
+        <svg width="80" height="80" viewBox="0 0 80 80">
+          <circle class="ring-bg" cx="40" cy="40" r="32"/>
+          <circle class="ring-fill" cx="40" cy="40" r="32"
+            stroke="var(--orange)"
+            stroke-dasharray="201"
+            stroke-dashoffset="201"
+            id="ring1"/>
+          <text class="ring-text" x="40" y="40" style="--ring-color:var(--orange);font-family:'Syne',sans-serif;">31%</text>
+        </svg>
+        <div style="text-align:center;font-size:.72rem;color:var(--gray);margin-top:.3rem;">Enrollment</div>
+      </div>
+      <div style="flex:1;min-width:200px;">
+        <div style="font-size:clamp(1rem,2vw,1.2rem);font-weight:700;line-height:1.7;color:rgba(255,255,255,.75);font-family:'Syne',sans-serif;">
+          <span style="color:var(--gray)">22%</span> →
+          <span style="color:var(--orange);opacity:.7">27%</span> →
+          <span style="color:var(--orange);font-size:1.3em">31%</span>
+          <br><span style="font-size:.75em;color:var(--gray);font-family:'Epilogue',sans-serif;">3 años de crecimiento consecutivo</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="num-grid">
+      <div class="num-card orange reveal">
+        <div class="num-big" data-count="2813" data-color="var(--orange)">0</div>
+        <div class="num-label">Total Elegibles LATAM</div>
+      </div>
+      <div class="num-card green reveal" style="transition-delay:.1s">
+        <div class="num-big" data-count="876" data-color="var(--green)">0</div>
+        <div class="num-label">Enrolled FY 26</div>
+      </div>
+      <div class="num-card red reveal" style="transition-delay:.2s">
+        <div class="num-big" data-count="1937" data-color="var(--red)">0</div>
+        <div class="num-label">Sin activar (oportunidad)</div>
+      </div>
+      <div class="num-card reveal" style="transition-delay:.3s">
+        <div class="num-big" data-count="6" data-color="var(--blue)">0</div>
+        <div class="num-label">Foros Regionales</div>
+      </div>
+      <div class="num-card green reveal" style="transition-delay:.4s">
+        <div class="num-big" data-count="22" data-color="var(--green)">0</div>
+        <div class="num-label">Grupos Locales Activos</div>
+      </div>
+      <div class="num-card purple reveal" style="transition-delay:.5s">
+        <div class="num-big" data-count="31" data-color="var(--purple)">0</div>
+        <div class="num-label">% Enrollment Rate FY26</div>
+      </div>
+    </div>
+    <div class="num-insight" style="background:rgba(100,167,11,.07);border:1px solid rgba(100,167,11,.2);">
+      LATAM pasó de <strong style="color:var(--green)">22% → 27% → 31%</strong> en 3 años. El potencial sin activar: <strong style="color:var(--red)">1,937 elegibles</strong> que aún no son parte de la comunidad.
+    </div>
+  </div>
+  <div class="slide-num">3 / 12</div>
+</section>
+
+<!-- ══ SLIDE 4: GAP ══════════════════════════════════════════ -->
+<section class="slide" id="s4">
+  <div class="bar-top"></div>
+  <div class="slide-inner">
+    <div class="s-tag">Data · Membresía</div>
+    <div class="s-title">El gap de activación</div>
+    <div class="s-sub">Los países con mayor oportunidad — y los más críticos</div>
+    <div class="gap-list" id="gapList">
+      <div class="gap-row" data-pct="14" data-color="var(--red)" style="transition-delay:.05s">
+        <div class="gap-country">🇧🇷 Brazil</div>
+        <div class="gap-paying">100</div>
+        <div class="bar-outer"><div class="bar-inner" style="background:var(--red)"></div></div>
+        <div class="gap-pct" style="color:var(--red)">14%</div>
+      </div>
+      <div class="gap-row" data-pct="18" data-color="var(--orange)" style="transition-delay:.1s">
+        <div class="gap-country">🇨🇴 Colombia</div>
+        <div class="gap-paying">27</div>
+        <div class="bar-outer"><div class="bar-inner" style="background:var(--orange)"></div></div>
+        <div class="gap-pct" style="color:var(--orange)">18%</div>
+      </div>
+      <div class="gap-row" data-pct="17" data-color="var(--orange)" style="transition-delay:.15s">
+        <div class="gap-country">🇲🇽 Guadalajara</div>
+        <div class="gap-paying">25</div>
+        <div class="bar-outer"><div class="bar-inner" style="background:var(--orange)"></div></div>
+        <div class="gap-pct" style="color:var(--orange)">17%</div>
+      </div>
+      <div class="gap-row" data-pct="9" data-color="var(--red)" style="transition-delay:.2s">
+        <div class="gap-country">🇵🇦 Panama</div>
+        <div class="gap-paying">12</div>
+        <div class="bar-outer"><div class="bar-inner" style="background:var(--red)"></div></div>
+        <div class="gap-pct"><span class="critical-tag">⚡ CRÍTICO</span></div>
+      </div>
+      <div class="gap-row" data-pct="5" data-color="var(--red)" style="transition-delay:.25s">
+        <div class="gap-country">🇦🇷 Argentina</div>
+        <div class="gap-paying">6</div>
+        <div class="bar-outer"><div class="bar-inner" style="background:var(--red)"></div></div>
+        <div class="gap-pct"><span class="critical-tag">⚡ CRÍTICO</span></div>
+      </div>
+      <div class="gap-row" data-pct="2" data-color="var(--red)" style="transition-delay:.3s">
+        <div class="gap-country">🇵🇪 Peru</div>
+        <div class="gap-paying">1</div>
+        <div class="bar-outer"><div class="bar-inner" style="background:var(--red)"></div></div>
+        <div class="gap-pct"><span class="critical-tag">⚡ CRÍTICO</span></div>
+      </div>
+      <div class="gap-row" data-pct="8" data-color="var(--red)" style="transition-delay:.35s">
+        <div class="gap-country">🇪🇨 Ecuador</div>
+        <div class="gap-paying">5</div>
+        <div class="bar-outer"><div class="bar-inner" style="background:var(--red)"></div></div>
+        <div class="gap-pct" style="color:var(--red)">8%</div>
+      </div>
+      <div class="gap-row" data-pct="16" data-color="var(--orange)" style="transition-delay:.4s">
+        <div class="gap-country">🇲🇽 Monterrey</div>
+        <div class="gap-paying">18</div>
+        <div class="bar-outer"><div class="bar-inner" style="background:var(--orange)"></div></div>
+        <div class="gap-pct" style="color:var(--orange)">16%</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">4 / 12</div>
+</section>
+
+<!-- ══ SLIDE 5: FEEDBACK ═════════════════════════════════════ -->
+<section class="slide" id="s5">
+  <div class="slide-inner">
+    <div class="s-tag">Data · Board Feedback 2026</div>
+    <div class="s-title">Lo que ustedes dijeron</div>
+    <div class="s-sub">Respuestas reales del board saliente — sin filtro</div>
+    <div class="sticky-wall" id="stickyWall">
+      <div class="sticky good" style="transform:rotate(-2deg)"><span class="sticky-icon">🏆</span><span class="sticky-text">Exchange Brasil — mencionado por el <strong>100% del board</strong></span></div>
+      <div class="sticky good" style="transform:rotate(1.5deg)"><span class="sticky-icon">🎯</span><span class="sticky-text">Autonomía del board y cultura de <strong>accountability</strong></span></div>
+      <div class="sticky good" style="transform:rotate(-1deg)"><span class="sticky-icon">📊</span><span class="sticky-text">KPIs + reuniones periódicas mantuvieron al equipo alineado</span></div>
+      <div class="sticky good" style="transform:rotate(2deg)"><span class="sticky-icon">🤝</span><span class="sticky-text">Alta accesibilidad de board members: <strong>4.7/5</strong></span></div>
+      <div class="sticky bad" style="transform:rotate(-1.5deg)"><span class="sticky-icon">📡</span><span class="sticky-text">Comunicación board → capítulos locales <strong>pendiente</strong></span></div>
+      <div class="sticky bad" style="transform:rotate(1deg)"><span class="sticky-icon">📅</span><span class="sticky-text">Más eventos regionales — el Exchange no puede ser el único</span></div>
+      <div class="sticky bad" style="transform:rotate(-2.5deg)"><span class="sticky-icon">💼</span><span class="sticky-text">Eventos de <strong>carrera y desarrollo</strong> profesional (pedido explícito)</span></div>
+      <div class="sticky bad" style="transform:rotate(2.5deg)"><span class="sticky-icon">🌐</span><span class="sticky-text">Integrar esfuerzos con YNG Interest Groups</span></div>
+      <div class="sticky bad" style="transform:rotate(-1deg)"><span class="sticky-icon">📚</span><span class="sticky-text"><strong>Learning: 0 eventos regionales propios</strong> en FY25-26 — urgente reactivar</span></div>
+    </div>
+    <p class="fb-quote">"El Exchange fue el momento que nos unió. <strong>¿Cómo multiplicamos esa energía?</strong>"</p>
+  </div>
+  <div class="slide-num">5 / 12</div>
+</section>
+
+<!-- ══ SLIDE 6: QR POLL ══════════════════════════════════════ -->
+<section class="slide" id="s6">
+  <div class="aurora-bg">
+    <div class="aurora-layer"></div>
+    <div class="aurora-layer"></div>
+    <div class="aurora-layer"></div>
+  </div>
+  <div class="slide-inner">
+    <div style="text-align:center;margin-bottom:2rem;position:relative;z-index:2;">
+      <div class="s-tag" style="justify-content:center;">Tu turno</div>
+      <div class="s-title">¿Qué está funcionando?<br>¿Qué no?</div>
+      <div class="s-sub">Escanea · Responde en 2 minutos · Tu voz define el rumbo</div>
+    </div>
+    <div class="qr-layout">
+      <div class="qr-box">
+        <div class="qr-ping"></div>
+        <div class="qr-scanner"></div>
+        <img src="/tmp/qr_working.png" alt="QR"
+          onerror="this.outerHTML='<div style=\'font-size:2.5rem;color:var(--navy)\'>📱</div><div style=\'font-size:.7rem;color:var(--gray);margin-top:.3rem;\'>QR aquí</div>'">
+      </div>
+      <div class="qr-questions">
+        <div class="qr-q">🟢 ¿Qué iniciativas del año pasado <strong>deberían continuar</strong>?</div>
+        <div class="qr-q">🔴 ¿Qué dejamos de hacer o <strong>necesita cambiar</strong>?</div>
+        <div class="qr-q" style="border:1px solid rgba(214,157,35,.2);background:rgba(214,157,35,.05);">💡 ¿Qué <strong>nunca hemos hecho</strong> y deberíamos intentar este año?</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">6 / 12</div>
+</section>
+
+<!-- ══ SLIDE 7: THEMES ═══════════════════════════════════════ -->
+<section class="slide" id="s7">
+  <div class="slide-inner">
+    <div class="s-tag">Temas Estratégicos</div>
+    <div class="s-title">Nuestros 2 focos este año</div>
+    <div class="s-sub">Confirmados hoy — basados en data + tu input</div>
+    <div class="themes-grid">
+      <div class="theme-card t1 reveal">
+        <div class="theme-border-anim"></div>
+        <div class="theme-inner">
+          <div class="theme-num">Tema 1</div>
+          <div class="theme-name">Foros</div>
+          <div class="theme-desc">LATAM tiene 2,813 elegibles y solo 6 foros regionales. El foro es el alma de YNG — más miembros necesitan acceder a esta experiencia transformadora.</div>
+          <span class="theme-chip">↑ Expandir cobertura regional</span>
+        </div>
+      </div>
+      <div class="theme-card t2 reveal" style="transition-delay:.15s">
+        <div class="theme-border-anim"></div>
+        <div class="theme-inner">
+          <div class="theme-num">Tema 2</div>
+          <div class="theme-name">Membresía</div>
+          <div class="theme-desc">876 enrolled de 2,813 elegibles. Pasamos de 22% → 27% → 31% en 3 años. Brasil y Centroamérica tienen el mayor potencial sin activar.</div>
+          <span class="theme-chip">↑ De 31% → 38% FY 26-27</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">7 / 12</div>
+</section>
+
+<!-- ══ SLIDE 8: PORTFOLIO ════════════════════════════════════ -->
+<section class="slide" id="s8">
+  <div class="bar-top"></div>
+  <div class="slide-inner">
+    <div class="s-tag">SMART Goals · FY 26-27</div>
+    <div class="s-title">Compromisos por portfolio</div>
+    <div class="s-sub">3 goals por portfolio · Con número · Con fecha</div>
+    <div class="port-list">
+      <div class="port-row reveal">
+        <div class="port-avatar" style="background:rgba(214,157,35,.15);color:var(--orange);">RC</div>
+        <div><div class="port-name">LATAM Chair</div><div class="port-person">Ricardo Chavez · Peru</div></div>
+        <div class="port-goals"><span class="port-tag">Goal 1 →</span><span class="port-tag">Goal 2 →</span><span class="port-tag">Goal 3 →</span></div>
+      </div>
+      <div class="port-row reveal" style="transition-delay:.08s">
+        <div class="port-avatar" style="background:rgba(46,116,173,.15);color:var(--blue);">SS</div>
+        <div><div class="port-name">Membership</div><div class="port-person">Sebastian Sayagues · Costa Rica</div></div>
+        <div class="port-goals"><span class="port-tag">Goal 1 →</span><span class="port-tag">Goal 2 →</span><span class="port-tag">Goal 3 →</span></div>
+      </div>
+      <div class="port-row reveal" style="transition-delay:.16s">
+        <div class="port-avatar" style="background:rgba(110,177,65,.15);color:var(--green);">DD</div>
+        <div><div class="port-name">Forum Officer</div><div class="port-person">Daniela Dassum · Ecuador</div></div>
+        <div class="port-goals"><span class="port-tag">Goal 1 →</span><span class="port-tag">Goal 2 →</span><span class="port-tag">Goal 3 →</span></div>
+      </div>
+      <div class="port-row reveal" style="transition-delay:.24s">
+        <div class="port-avatar" style="background:rgba(124,58,237,.15);color:var(--purple);">SB</div>
+        <div><div class="port-name">Engagement</div><div class="port-person">Sophia Brenneken · Brazil</div></div>
+        <div class="port-goals"><span class="port-tag">Goal 1 →</span><span class="port-tag">Goal 2 →</span><span class="port-tag">Goal 3 →</span></div>
+      </div>
+      <div class="port-row reveal" style="transition-delay:.32s">
+        <div class="port-avatar" style="background:rgba(240,86,100,.15);color:var(--red);">G·H</div>
+        <div><div class="port-name">Learning</div><div class="port-person">Guerrero · Harb</div></div>
+        <div class="port-goals"><span class="port-tag">Goal 1 →</span><span class="port-tag">Goal 2 →</span><span class="port-tag">Goal 3 →</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">8 / 12</div>
+</section>
+
+<!-- ══ SLIDE 9: CLOSING ══════════════════════════════════════ -->
+<section class="slide" id="s9">
+  <canvas id="confettiCanvas"></canvas>
+  <div class="slide-inner close-inner">
+    <div class="close-q reveal">
+      ¿Qué fue lo más útil de hoy<br>y cómo te ayuda a<br><span>liderar YNG LATAM?</span>
+    </div>
+    <div class="thank-you reveal">Thank you.</div>
+    <div class="close-next reveal" style="transition-delay:.2s">
+      <div class="close-chip">📋 Playbook en 48h</div>
+      <div class="close-chip">📊 KPIs en cada board meeting</div>
+      <div class="close-chip">✅ Validar SMART goals con AI</div>
+    </div>
+    <div class="close-meta reveal" style="transition-delay:.3s">
+      Powered by Nirvana AI · YNG LATAM · Bogotá, junio 2026
+    </div>
+  </div>
+  <div class="slide-num">9 / 12</div>
+</section>
+
+<!-- ══ SLIDE 10: SMART DEF ════════════════════════════════════ -->
+<section class="slide" id="s10">
+  <div class="bar-top"></div>
+  <div class="slide-inner">
+    <div class="s-tag">SMART Goals <span style="color:var(--gray)">· Nirvana AI</span></div>
+    <div class="s-title">5 letras. Sin excusas.</div>
+    <div class="s-sub">Un SMART goal no es un deseo. Es una promesa medible.</div>
+    <div class="smart-letters" id="smartLetters">
+      <div class="sl sl-s"><div class="sl-letter">S</div><div class="sl-word">Específico</div><div class="sl-joke">Si no puedes explicarlo sin "mejorar", "potenciar" o "fortalecer"... empieza de nuevo.</div><div class="sl-dont">❌ "Mejorar la comunicación"</div><div class="sl-do">✅ "Reporte mensual a 22 capítulos"</div></div>
+      <div class="sl sl-m"><div class="sl-letter">M</div><div class="sl-word">Medible</div><div class="sl-joke">Sin número no es un goal. Es poesía. Bonita pero inútil para el board de YNG LATAM.</div><div class="sl-dont">❌ "Crecer la membresía"</div><div class="sl-do">✅ "De 420 a 520 paying"</div></div>
+      <div class="sl sl-a"><div class="sl-letter">A</div><div class="sl-word">Alcanzable</div><div class="sl-joke">Ambicioso sí. Imposible no. "+300% en 3 meses" no es inspirador — es ficción.</div><div class="sl-dont">❌ "+300% miembros hoy"</div><div class="sl-do">✅ "+24% paying en FY 26-27"</div></div>
+      <div class="sl sl-r"><div class="sl-letter">R</div><div class="sl-word">Relevante</div><div class="sl-joke">¿Si logro esto, le importa a YNG LATAM o solo a mí? Si es "solo a mí"... es un goal personal.</div><div class="sl-dont">❌ "Aprender liderazgo"</div><div class="sl-do">✅ "3 foros en países sin foro"</div></div>
+      <div class="sl sl-t"><div class="sl-letter">T</div><div class="sl-word">Tiempo</div><div class="sl-joke">"Pronto" no existe en el calendario. Necesitas un día exacto en Google Calendar.</div><div class="sl-dont">❌ "Fin de año"</div><div class="sl-do">✅ "31 marzo 2027"</div></div>
+    </div>
+    <p class="smart-tagline">Regla de oro: <strong>si no puedes marcar el día en el calendario, no es un SMART goal.</strong></p>
+  </div>
+  <div class="slide-num">10 / 12</div>
+</section>
+
+<!-- ══ SLIDE 11: MINI-CLASE ═══════════════════════════════════ -->
+<section class="slide" id="s11">
+  <div class="slide-inner" style="max-width:900px;padding-top:2rem;padding-bottom:2rem;">
+    <div class="s-tag">Mini-clase</div>
+    <div class="s-title">Goals reales · Buenos y malos</div>
+    <div class="s-sub">Click en cada tarjeta para ver el diagnóstico completo</div>
+    <div class="cards">
+      <div class="card" onclick="toggle(this)">
+        <div class="card-header">
+          <div class="card-badge bad">❌</div>
+          <div class="card-title"><div class="card-portfolio">Membership Officer</div><div class="card-goal bad">"Crecer la membresía de YNG LATAM este año"</div></div>
+          <div class="card-arrow">›</div>
+        </div>
+        <div class="card-body">
+          <div class="diag"><div class="diag-title">📋 Diagnóstico SMART</div>
+            <div class="diag-row"><span>❌</span><span class="diag-key">S</span><span class="diag-why">No dice quién lo hace, en qué países ni qué tipo de membresía</span></div>
+            <div class="diag-row"><span>❌</span><span class="diag-key">M</span><span class="diag-why">"Crecer" no es un número — ¿de cuánto a cuánto?</span></div>
+            <div class="diag-row"><span>✅</span><span class="diag-key">R</span><span class="diag-why">Membership es el core del portfolio</span></div>
+            <div class="diag-row"><span>❌</span><span class="diag-key">T</span><span class="diag-why">"Este año" no es una fecha. ¿Qué día?</span></div>
+          </div>
+          <div class="lesson"><div class="lesson-tag">💡 Piénsalo así</div>"Crecer la membresía" es como decirle a tu equipo: "vendan más". Nadie sabe a dónde ir ni si llegaron. Un goal sin número es un deseo. Un deseo sin fecha es un sueño.</div>
+          <div class="smart-version"><div class="smart-tag">🎯 Versión SMART</div><div class="smart-text">Convertir 50 miembros unpaid en paying en los 5 países con menor activación antes del 31-mar-2027.</div></div>
+        </div>
+      </div>
+      <div class="card" onclick="toggle(this)">
+        <div class="card-header">
+          <div class="card-badge bad">❌</div>
+          <div class="card-title"><div class="card-portfolio">Forum Officer</div><div class="card-goal bad">"Fortalecer los foros y crear nuevos en la región"</div></div>
+          <div class="card-arrow">›</div>
+        </div>
+        <div class="card-body">
+          <div class="diag"><div class="diag-title">📋 Diagnóstico SMART</div>
+            <div class="diag-row"><span>❌</span><span class="diag-key">S</span><span class="diag-why">¿Cuántos foros? ¿En qué países? ¿Quién los lidera?</span></div>
+            <div class="diag-row"><span>❌</span><span class="diag-key">M</span><span class="diag-why">"Fortalecer" no se puede medir. ¿Cuál es el número de éxito?</span></div>
+            <div class="diag-row"><span>✅</span><span class="diag-key">R</span><span class="diag-why">Solo 10% de los paying están en foros — urgente</span></div>
+            <div class="diag-row"><span>❌</span><span class="diag-key">T</span><span class="diag-why">Sin fecha límite</span></div>
+          </div>
+          <div class="lesson"><div class="lesson-tag">💡 Piénsalo así</div>"Fortalecer" es la palabra favorita de quienes no quieren comprometerse con un número. Es cómoda porque nadie puede decir que fallaste — pero tampoco que tuviste éxito.</div>
+          <div class="smart-version"><div class="smart-tag">🎯 Versión SMART</div><div class="smart-text">Lanzar 3 nuevos foros (Argentina, Panamá, Costa Rica) con mínimo 6 miembros activos cada uno antes del 28-feb-2027.</div></div>
+        </div>
+      </div>
+      <div class="card" onclick="toggle(this)">
+        <div class="card-header">
+          <div class="card-badge good">✅</div>
+          <div class="card-title"><div class="card-portfolio">LATAM Chair</div><div class="card-goal good">"Pasar de 420 a 520 paying members antes de junio 2027"</div></div>
+          <div class="card-arrow">›</div>
+        </div>
+        <div class="card-body">
+          <div class="diag"><div class="diag-title">📋 Diagnóstico SMART</div>
+            <div class="diag-row"><span>✅</span><span class="diag-key">S</span><span class="diag-why">Crecimiento de paying members — claro y accionable</span></div>
+            <div class="diag-row"><span>✅</span><span class="diag-key">M</span><span class="diag-why">De 420 a 520 — el +24% está calculado. Sin ambigüedad</span></div>
+            <div class="diag-row"><span>✅</span><span class="diag-key">A</span><span class="diag-why">+100 en 22 países = ~4-5 por país. Desafiante pero real</span></div>
+            <div class="diag-row"><span>✅</span><span class="diag-key">R</span><span class="diag-why">Es la función del Chair: visión y posicionamiento regional</span></div>
+            <div class="diag-row"><span>✅</span><span class="diag-key">T</span><span class="diag-why">Junio 2027 — ligada a reunión global de YNG</span></div>
+          </div>
+          <div class="lesson"><div class="lesson-tag">💡 Piénsalo así</div>Un buen SMART goal tiene punto de partida Y punto de llegada. "De 420 a 520" — ese número de salida es tan importante como el de llegada. Como un GPS: no te lleva a ningún lado si no sabe dónde estás hoy.</div>
+          <div class="smart-version"><div class="smart-tag">🎯 5 de 5 — este es el estándar</div><div class="smart-text">Pasar de 420 a 520 paying members en YNG LATAM antes de la reunión global de junio 2027, con reporte mensual de avance.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">11 / 12</div>
+</section>
+
+<!-- ══ SLIDE 12: CHECKER ═════════════════════════════════════ -->
+<section class="slide" id="s12">
+  <div class="slide-inner">
+    <div class="s-tag">Validador · Nirvana AI</div>
+    <div class="s-title">Ahora valida tus goals</div>
+    <div class="s-sub">Copia el prompt → abre cualquier AI gratuito → pega + tu goal</div>
+
+    <div class="terminal-header">
+      <div class="terminal-dot" style="background:#ff5f57"></div>
+      <div class="terminal-dot" style="background:#febc2e"></div>
+      <div class="terminal-dot" style="background:#28c840"></div>
+      <span class="terminal-cmd">> coach.smart_goals --mode=yng_latam --lang=es</span>
+    </div>
+    <div class="prompt-box" id="promptText">Eres un coach de SMART Goals con el estilo de un profesor de business inspirador: directo, cálido, con analogías reales y que hace pensar.
+
+Tu misión: ayudar al board de YNG LATAM a escribir goals que realmente se puedan ejecutar y medir.
+
+Cuando te compartan un goal, responde EXACTAMENTE así:
+
+─────────────────────────────
+📋 DIAGNÓSTICO SMART
+─────────────────────────────
+S — Específico   → ¿Se sabe exactamente QUÉ va a pasar y QUIÉN lo hace?
+M — Medible      → ¿Hay un número concreto para saber si se logró o no?
+A — Alcanzable   → ¿Es realista dado el tiempo y recursos disponibles?
+R — Relevante    → ¿Conecta directamente con las prioridades del portfolio?
+T — Tiempo       → ¿Tiene una fecha límite exacta (día/mes/año)?
+
+─────────────────────────────
+💡 PIÉNSALO ASÍ
+─────────────────────────────
+2-3 líneas como un coach inspirador. Analogía del mundo real.
+
+─────────────────────────────
+🎯 VERSIÓN SMART
+─────────────────────────────
+Reescribe el goal. Máximo 2 líneas.
+Regla: si no puedes marcar el día en el calendario, no es SMART.
+
+─────────────────────────────
+❓ PREGUNTA DE CIERRE
+─────────────────────────────
+Una pregunta para confirmar la intención.
+
+Responde en el idioma en que te escriben. Si te mandan varios goals, evalúa cada uno por separado.<span class="cursor-blink"></span></div>
+
+    <button class="copy-btn" onclick="copyPrompt(this)">📋 Copiar Prompt</button>
+
+    <div class="ai-links">
+      <a href="https://claude.ai" target="_blank" class="ai-btn ai-claude">Claude.ai →</a>
+      <a href="https://chatgpt.com" target="_blank" class="ai-btn ai-chatgpt">ChatGPT →</a>
+      <a href="https://gemini.google.com" target="_blank" class="ai-btn ai-gemini">Gemini →</a>
+    </div>
+    <p class="ai-note">Todos gratis · Sin registro obligatorio en Claude y Gemini</p>
+
+    <div class="steps-row">
+      <div class="step-item"><div class="step-num-c">1</div><div class="step-item-txt"><strong>Copia el prompt</strong><span>Click en "Copiar Prompt"</span></div></div>
+      <div class="step-item"><div class="step-num-c">2</div><div class="step-item-txt"><strong>Abre un AI</strong><span>Claude, ChatGPT o Gemini</span></div></div>
+      <div class="step-item"><div class="step-num-c">3</div><div class="step-item-txt"><strong>Pega + tu goal</strong><span>Al final: "Mi goal es: [goal]"</span></div></div>
+    </div>
+  </div>
+  <div class="slide-num">12 / 12</div>
+</section>
+
+<script>
+// ── CURSOR ─────────────────────────────────────────────────────
+const cur = document.getElementById('cursor');
+const curRing = document.getElementById('cursor-ring');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top  = e.clientY + 'px';
+  curRing.style.left = e.clientX + 'px';
+  curRing.style.top  = e.clientY + 'px';
+});
+document.querySelectorAll('button,a,.card,.sticky').forEach(el => {
+  el.addEventListener('mouseenter', () => cur.style.transform = 'translate(-50%,-50%) scale(2)');
+  el.addEventListener('mouseleave', () => cur.style.transform = 'translate(-50%,-50%) scale(1)');
+});
+
+// ── SLIDES + NAV DOTS + PROGRESS ────────────────────────────────
+const slides = document.querySelectorAll('.slide');
+const nav = document.getElementById('navDots');
+const bar = document.getElementById('progress-bar');
+
+slides.forEach((s, i) => {
+  const d = document.createElement('div');
+  d.className = 'dot';
+  d.onclick = () => s.scrollIntoView({behavior:'smooth'});
+  nav.appendChild(d);
+});
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const i = [...slides].indexOf(e.target);
+      document.querySelectorAll('.dot').forEach((d,j) => d.classList.toggle('active', j === i));
+      bar.style.width = ((i / (slides.length - 1)) * 100) + '%';
+      // trigger slide-specific animations
+      triggerSlide(e.target.id);
+    }
+  });
+}, {threshold:.5});
+slides.forEach(s => obs.observe(s));
+
+// ── KEYBOARD NAV ─────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  const active = [...slides].findIndex(s =>
+    s.getBoundingClientRect().top > -100 && s.getBoundingClientRect().top < window.innerHeight/2);
+  if (e.key==='ArrowDown'||e.key==='ArrowRight') slides[Math.min(active+1,slides.length-1)]?.scrollIntoView({behavior:'smooth'});
+  if (e.key==='ArrowUp'  ||e.key==='ArrowLeft' ) slides[Math.max(active-1,0)]?.scrollIntoView({behavior:'smooth'});
+});
+
+// ── REVEAL OBSERVER ──────────────────────────────────────────────
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:.1});
+document.querySelectorAll('.reveal,.reveal-left').forEach(el => revObs.observe(el));
+
+// ── PARTICLES (COVER) ────────────────────────────────────────────
+const pCanvas = document.getElementById('particleCanvas');
+if(pCanvas){
+  const pCtx = pCanvas.getContext('2d');
+  let particles = [];
+  function resizeCanvas(){pCanvas.width=window.innerWidth;pCanvas.height=window.innerHeight;}
+  resizeCanvas(); window.addEventListener('resize',resizeCanvas);
+  for(let i=0;i<80;i++){
+    particles.push({
+      x:Math.random()*window.innerWidth,
+      y:Math.random()*window.innerHeight,
+      r:Math.random()*2+.5,
+      vx:(Math.random()-.5)*.4,
+      vy:(Math.random()-.5)*.4,
+      alpha:Math.random()*.5+.1,
+      color:Math.random()>.6?'214,157,35':'20,123,209'
+    });
+  }
+  function drawParticles(){
+    pCtx.clearRect(0,0,pCanvas.width,pCanvas.height);
+    particles.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0)p.x=pCanvas.width; if(p.x>pCanvas.width)p.x=0;
+      if(p.y<0)p.y=pCanvas.height; if(p.y>pCanvas.height)p.y=0;
+      pCtx.beginPath();
+      pCtx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      pCtx.fillStyle=`rgba(${p.color},${p.alpha})`;
+      pCtx.fill();
+    });
+    // connect close particles
+    particles.forEach((a,i)=>{
+      particles.slice(i+1).forEach(b=>{
+        const d=Math.hypot(a.x-b.x,a.y-b.y);
+        if(d<120){
+          pCtx.beginPath();
+          pCtx.moveTo(a.x,a.y);pCtx.lineTo(b.x,b.y);
+          pCtx.strokeStyle=`rgba(214,157,35,${.12*(1-d/120)})`;
+          pCtx.lineWidth=.5;
+          pCtx.stroke();
+        }
+      });
+    });
+    requestAnimationFrame(drawParticles);
+  }
+  drawParticles();
+}
+
+// floating particles on slide 0
+(function(){
+  const fp = document.getElementById('floatParticles');
+  if(!fp) return;
+  for(let i=0;i<30;i++){
+    const d = document.createElement('div');
+    const size = Math.random()*4+2;
+    const left = Math.random()*100;
+    const delay = Math.random()*8;
+    const dur = Math.random()*10+8;
+    d.style.cssText=`position:absolute;left:${left}%;bottom:-20px;
+      width:${size}px;height:${size}px;border-radius:50%;
+      background:rgba(214,157,35,${Math.random()*.4+.1});
+      animation:floatUp ${dur}s ${delay}s ease-in-out infinite;`;
+    fp.appendChild(d);
+  }
+  const st = document.createElement('style');
+  st.textContent=`@keyframes floatUp{0%{bottom:-20px;opacity:0;}20%{opacity:1;}80%{opacity:.5;}100%{bottom:110%;opacity:0;transform:translateX(${Math.random()>0.5?'':'−'}20px);}}`;
+  document.head.appendChild(st);
+})();
+
+// ── COUNT UP ─────────────────────────────────────────────────────
+function countUp(el, target, duration=1400){
+  const start = Date.now();
+  const step = ()=>{
+    const p = Math.min((Date.now()-start)/duration,1);
+    const ease = 1-Math.pow(1-p,3);
+    el.textContent = Math.floor(ease*target).toLocaleString();
+    if(p<1) requestAnimationFrame(step);
+    else el.textContent = target.toLocaleString();
+  };
+  requestAnimationFrame(step);
+}
+
+// ── RING ANIMATION ───────────────────────────────────────────────
+function animateRing(id, pct, circumference=201){
+  const ring = document.getElementById(id);
+  if(!ring) return;
+  const offset = circumference - (pct/100)*circumference;
+  ring.style.strokeDashoffset = offset;
+}
+
+// ── GAP BARS ─────────────────────────────────────────────────────
+function animateGapBars(){
+  document.querySelectorAll('.gap-row').forEach((row,i)=>{
+    setTimeout(()=>{
+      row.classList.add('in');
+      const pct = parseFloat(row.dataset.pct)||0;
+      const bar = row.querySelector('.bar-inner');
+      if(bar) bar.style.width = pct+'%';
+    }, i*80);
+  });
+}
+
+// ── STICKY NOTES ─────────────────────────────────────────────────
+function animateStickies(){
+  document.querySelectorAll('.sticky').forEach((s,i)=>{
+    setTimeout(()=>{
+      s.classList.add('in');
+      const rot = (parseFloat(s.style.transform.replace('rotate(','').replace(')','').replace('deg',''))||0);
+      s.style.transform = `rotate(${rot}deg) translateY(0)`;
+    }, i*80);
+  });
+}
+
+// ── SMART LETTERS BOUNCE IN ──────────────────────────────────────
+function animateSmartLetters(){
+  document.querySelectorAll('#smartLetters .sl').forEach((sl,i)=>{
+    setTimeout(()=>sl.classList.add('in'), i*120);
+  });
+}
+
+// ── TIMELINE ─────────────────────────────────────────────────────
+function animateTimeline(){
+  document.querySelectorAll('.timeline-item').forEach((item,i)=>{
+    setTimeout(()=>item.classList.add('in'), i*70);
+  });
+}
+
+// ── CONFETTI ─────────────────────────────────────────────────────
+let confettiStarted = false;
+function launchConfetti(){
+  if(confettiStarted) return;
+  confettiStarted = true;
+  const canvas = document.getElementById('confettiCanvas');
+  if(!canvas) return;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const ctx = canvas.getContext('2d');
+  const colors = ['#D69D23','#F8485E','#64A70B','#147BD1','#753BBD','#fff','#ffcc44'];
+  let pieces = [];
+  for(let i=0;i<180;i++){
+    pieces.push({
+      x:Math.random()*canvas.width, y:-20,
+      r:Math.random()*6+3,
+      vy:Math.random()*3+2, vx:(Math.random()-0.5)*3,
+      rot:Math.random()*360, rotv:Math.random()*8-4,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      alpha:1, shape:Math.random()>.5?'rect':'circle'
+    });
+  }
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach((p,i)=>{
+      p.y+=p.vy; p.x+=p.vx; p.rot+=p.rotv; p.alpha-=.005;
+      if(p.alpha<=0) return;
+      ctx.save();
+      ctx.globalAlpha=p.alpha;
+      ctx.fillStyle=p.color;
+      ctx.translate(p.x,p.y);
+      ctx.rotate(p.rot*Math.PI/180);
+      if(p.shape==='rect'){ctx.fillRect(-p.r,-p.r/2,p.r*2,p.r);}
+      else{ctx.beginPath();ctx.arc(0,0,p.r,0,Math.PI*2);ctx.fill();}
+      ctx.restore();
+    });
+    pieces = pieces.filter(p=>p.alpha>0);
+    if(pieces.length>0) requestAnimationFrame(draw);
+    else ctx.clearRect(0,0,canvas.width,canvas.height);
+  }
+  draw();
+}
+
+// ── SLIDE TRIGGER ─────────────────────────────────────────────────
+function triggerSlide(id){
+  if(id==='s2') animateTimeline();
+  if(id==='s3'){
+    document.querySelectorAll('[data-count]').forEach(el=>{
+      countUp(el, parseInt(el.dataset.count));
+    });
+    setTimeout(()=>animateRing('ring1',31),300);
+  }
+  if(id==='s4') animateGapBars();
+  if(id==='s5') animateStickies();
+  if(id==='s9') setTimeout(launchConfetti, 600);
+  if(id==='s10') animateSmartLetters();
+}
+
+// ── ACCORDION ────────────────────────────────────────────────────
+function toggle(card){
+  const isOpen = card.classList.contains('open');
+  document.querySelectorAll('.card').forEach(c=>c.classList.remove('open'));
+  if(!isOpen) card.classList.add('open');
+}
+
+// ── COPY PROMPT ──────────────────────────────────────────────────
+function copyPrompt(btn){
+  const el = document.getElementById('promptText');
+  const text = el.innerText.replace(/[\r\n]*$/, '');
+  if(navigator.clipboard && location.protocol !== 'file:'){
+    navigator.clipboard.writeText(text).then(()=>flashCopied(btn));
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value=text; ta.style.cssText='position:fixed;opacity:0;';
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    flashCopied(btn);
+  }
+}
+function flashCopied(btn){
+  btn.textContent='✅ ¡Prompt copiado!';
+  btn.classList.add('copied');
+  setTimeout(()=>{btn.textContent='📋 Copiar Prompt';btn.classList.remove('copied');},2500);
+}
+</script>
+</body>
+</html>
