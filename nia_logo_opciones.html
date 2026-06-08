@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHBvbHlnb24gcG9pbnRzPSIxNiwxIDI5LDguNSAyOSwyMy41IDE2LDMxIDMsMjMuNSAzLDguNSIgZmlsbD0iI0U4NjUwQSIvPjx0ZXh0IHg9IjE2IiB5PSIyMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMC41Ij5OQUk8L3RleHQ+PC9zdmc+">
+<title>NAI — Preview favicon</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; background:#ECEEF2; padding:48px 24px; }
+
+  .wrap { max-width:700px; margin:0 auto; }
+
+  h1 { font-size:14px; font-weight:700; color:#1B3A6B; letter-spacing:1px; text-transform:uppercase; margin-bottom:32px; }
+
+  /* ── BROWSER MOCK ── */
+  .browser { background:#E0E2E8; border-radius:10px; overflow:hidden; box-shadow:0 8px 32px rgba(0,0,0,.15); margin-bottom:40px; }
+  .browser-bar { background:#D4D6DC; padding:10px 12px 0; display:flex; gap:6px; align-items:flex-end; }
+  .browser-controls { display:flex; gap:5px; align-items:center; padding-bottom:10px; margin-right:10px; }
+  .dot { width:11px; height:11px; border-radius:50%; }
+  .dot-r { background:#FF5F57; }
+  .dot-y { background:#FFBD2E; }
+  .dot-g { background:#28C840; }
+
+  /* tabs */
+  .tabs { display:flex; gap:2px; align-items:flex-end; flex:1; }
+  .tab { display:flex; align-items:center; gap:6px; background:#ECEEF2; border-radius:7px 7px 0 0; padding:7px 14px 8px; font-size:11px; color:#333; font-weight:500; min-width:160px; max-width:200px; position:relative; }
+  .tab.active { background:#fff; }
+  .tab-inactive { background:#C8CAD0; color:#888; }
+  .tab-favicon { width:14px; height:14px; flex-shrink:0; }
+  .tab-title { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .tab-close { margin-left:auto; color:#999; font-size:10px; }
+
+  .browser-url { background:#fff; padding:8px 14px; display:flex; align-items:center; gap:8px; font-size:11px; color:#555; border-bottom:1px solid #ddd; }
+  .url-bar { background:#ECEEF2; border-radius:20px; padding:4px 14px; flex:1; color:#333; font-size:11px; }
+  .browser-content { background:#ECEEF2; height:180px; display:flex; align-items:center; justify-content:center; color:#aaa; font-size:12px; }
+
+  /* ── FAVICON SIZES ── */
+  .sizes { background:#fff; border-radius:8px; padding:24px; box-shadow:0 1px 3px rgba(0,0,0,.06); margin-bottom:32px; }
+  .sizes h2 { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:#6B7280; margin-bottom:20px; }
+  .size-row { display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
+  .size-item { display:flex; flex-direction:column; align-items:center; gap:8px; }
+  .size-label { font-size:10px; color:#9CA3AF; letter-spacing:0.5px; }
+
+  /* SVG favicon rendered at sizes */
+  .fav-svg { flex-shrink:0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Preview — NAI Hexagon favicon en pestaña del browser</h1>
+
+  <!-- BROWSER MOCKUP -->
+  <div class="browser">
+    <div class="browser-bar">
+      <div class="browser-controls">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+      </div>
+      <div class="tabs">
+        <!-- TAB ACTIVA CON FAVICON NIA -->
+        <div class="tab active">
+          <svg class="tab-favicon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="16,1 29,8.5 29,23.5 16,31 3,23.5 3,8.5" fill="#E8650A"/>
+            <text x="16" y="22" text-anchor="middle" fill="white" font-size="10" font-weight="900" font-family="Arial,sans-serif" letter-spacing="0.5">NAI</text>
+          </svg>
+          <span class="tab-title">Radar Competitivo Ashley</span>
+          <span class="tab-close">✕</span>
+        </div>
+        <!-- TAB INACTIVA -->
+        <div class="tab tab-inactive">
+          <svg class="tab-favicon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="16,1 29,8.5 29,23.5 16,31 3,23.5 3,8.5" fill="#E8650A" opacity="0.6"/>
+            <text x="16" y="22" text-anchor="middle" fill="white" font-size="10" font-weight="900" font-family="Arial,sans-serif" letter-spacing="0.5">NAI</text>
+          </svg>
+          <span class="tab-title">Flujo de Caja — AS</span>
+          <span class="tab-close">✕</span>
+        </div>
+        <div class="tab tab-inactive">
+          <svg class="tab-favicon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="16,1 29,8.5 29,23.5 16,31 3,23.5 3,8.5" fill="#E8650A" opacity="0.6"/>
+            <text x="16" y="22" text-anchor="middle" fill="white" font-size="10" font-weight="900" font-family="Arial,sans-serif" letter-spacing="0.5">NAI</text>
+          </svg>
+          <span class="tab-title">Tablero PGC</span>
+          <span class="tab-close">✕</span>
+        </div>
+      </div>
+    </div>
+    <div class="browser-url">
+      🔒 <span class="url-bar">pablosardi.github.io/tableros/Radar_Ashley.html</span>
+    </div>
+    <div class="browser-content">
+      contenido del tablero...
+    </div>
+  </div>
+
+  <!-- TAMAÑOS -->
+  <div class="sizes">
+    <h2>El ícono a distintos tamaños</h2>
+    <div class="size-row">
+      <div class="size-item">
+        <svg class="fav-svg" width="64" height="64" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="16,1 29,8.5 29,23.5 16,31 3,23.5 3,8.5" fill="#E8650A"/>
+          <text x="16" y="22" text-anchor="middle" fill="white" font-size="10" font-weight="900" font-family="Arial,sans-serif" letter-spacing="0.5">NAI</text>
+        </svg>
+        <span class="size-label">64px</span>
+      </div>
+      <div class="size-item">
+        <svg class="fav-svg" width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="16,1 29,8.5 29,23.5 16,31 3,23.5 3,8.5" fill="#E8650A"/>
+          <text x="16" y="22" text-anchor="middle" fill="white" font-size="10" font-weight="900" font-family="Arial,sans-serif" letter-spacing="0.5">NAI</text>
+        </svg>
+        <span class="size-label">32px</span>
+      </div>
+      <div class="size-item">
+        <svg class="fav-svg" width="16" height="16" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="16,1 29,8.5 29,23.5 16,31 3,23.5 3,8.5" fill="#E8650A"/>
+          <text x="16" y="22" text-anchor="middle" fill="white" font-size="10" font-weight="900" font-family="Arial,sans-serif" letter-spacing="0.5">NAI</text>
+        </svg>
+        <span class="size-label">16px (pestaña)</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
