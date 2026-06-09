@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propuesta Modelo GT v2 — Ashley Colombia · Junio 2026</title>
+  <link rel="icon" type="image/png" href="../../assets/nirvana-ai-logo.png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+    :root {
+      --orange: #F0841A; --charcoal: #3D3935; --navy: #0E1B33;
+      --warm: #F7F4F0; --border: #E8E0D8; --muted: #9B8F84;
+      --text: #4A423C; --light: #7A6F68; --white: #FFFFFF;
+      --green: #16A34A; --green-bg: #F0FEF4; --green-border: #BBF7D0;
+      --blue: #2563EB; --blue-bg: #EFF6FF; --blue-border: #BFDBFE;
+      --info: #334155; --info-bg: #F1F5F9; --info-border: #CBD5E1;
+      --nivel-proceso: #3D3935; --nivel-procedimiento: #2563EB; --nivel-manual: #16A34A;
+      --red: #DC2626; --red-bg: #FEF2F2; --red-border: #FECACA;
+      --amber: #D97706; --amber-bg: #FFFBEB; --amber-border: #FDE68A;
+      --purple: #7C3AED; --purple-bg: #F5F3FF; --purple-border: #DDD6FE;
+      --gold: #B8860B; --gold-bg: #FEFCE8;
+      --font-h: 'Playfair Display', Georgia, serif;
+      --font-b: 'DM Sans', -apple-system, sans-serif;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background: var(--warm); font-family: var(--font-b); color: var(--text); font-size: 14px; line-height: 1.6; }
+
+    /* HEADER */
+    .brand-bar {
+      position: sticky; top: 0; z-index: 201;
+      background: var(--charcoal); height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 32px; border-bottom: 3px solid var(--orange);
+    }
+    .brand-left { display: flex; align-items: center; }
+    .brand-ashley { height: 28px; filter: brightness(0) invert(1); }
+    .brand-sep { width: 1px; height: 32px; background: rgba(255,255,255,0.15); margin: 0 16px; }
+    .brand-nirvana { height: 20px; filter: invert(1); mix-blend-mode: screen; opacity: 0.80; }
+    .brand-context { font-size: 11px; color: rgba(255,255,255,0.45); margin-left: 20px; }
+    .user-chip { display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.08); padding:6px 14px; cursor:pointer; transition:background 0.15s; }
+    .user-chip:hover { background:rgba(255,255,255,0.14); }
+    .user-avatar { width:24px; height:24px; border-radius:50%; background:var(--orange); display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; color:white; }
+    .user-name { font-size:12px; font-weight:500; color:rgba(255,255,255,0.85); }
+    .toolbar {
+      position: sticky; top: 56px; z-index: 200;
+      background: white; border-bottom: 1px solid var(--border);
+      padding: 0 32px; height: 44px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .toolbar-breadcrumb { font-size: 12px; color: var(--light); }
+    .toolbar-breadcrumb span { color: var(--charcoal); font-weight: 500; }
+    .pill {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.8px; padding: 3px 10px; border-radius: 20px;
+    }
+    .pill-draft { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
+    .pill-v2 { background: var(--border); color: var(--muted); }
+
+    /* LAYOUT */
+    .layout { max-width: 960px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* HERO */
+    .hero { background: white; padding: 48px 48px 40px; border-bottom: 1px solid var(--border); margin-bottom: 32px; border-radius: 0 0 8px 8px; }
+    .hero-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+    .hero-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); }
+    .hero-eyebrow-text { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); }
+    .hero-title { font-family: var(--font-h); font-size: 34px; font-weight: 800; color: var(--charcoal); line-height: 1.1; margin-bottom: 12px; }
+    .hero-sub { font-size: 15px; color: var(--light); max-width: 640px; line-height: 1.65; font-weight: 300; }
+    .hero-meta { display: flex; gap: 40px; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+    .hero-meta-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 4px; }
+    .hero-meta-value { font-size: 13px; font-weight: 500; color: var(--charcoal); }
+    .for-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--purple-bg); border: 1px solid var(--purple-border); border-radius: 20px; padding: 4px 12px; font-size: 11px; font-weight: 600; color: var(--purple); }
+
+    /* SECTION HEADERS */
+    .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; margin-top: 40px; }
+    .section-number { width: 28px; height: 28px; border-radius: 50%; background: var(--orange); color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+    .section-title { font-family: var(--font-h); font-size: 22px; font-weight: 700; color: var(--charcoal); }
+
+    /* CARDS */
+    .card { background: white; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 20px; overflow: hidden; }
+    .card-header { padding: 18px 28px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
+    .card-title { font-size: 15px; font-weight: 600; color: var(--charcoal); }
+    .card-subtitle { font-size: 12px; color: var(--light); margin-top: 2px; }
+    .card-body { padding: 24px 28px; }
+    .card-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+    .icon-orange { background: #FEF0E1; }
+    .icon-blue { background: var(--info-bg); }
+    .icon-green { background: var(--green-bg); }
+    .icon-purple { background: var(--purple-bg); }
+    .icon-amber { background: var(--amber-bg); }
+
+    /* PROBLEM ITEMS */
+    .problem-list { display: flex; flex-direction: column; gap: 16px; }
+    .problem-item { display: flex; gap: 16px; padding: 16px; border-radius: 6px; background: var(--red-bg); border: 1px solid var(--red-border); }
+    .problem-num { width: 24px; height: 24px; border-radius: 50%; background: var(--red); color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .problem-text strong { display: block; font-size: 13px; font-weight: 600; color: var(--charcoal); margin-bottom: 4px; }
+    .problem-text p { font-size: 12px; color: var(--light); line-height: 1.5; }
+
+    /* DATA TABLES */
+    .data-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 0; }
+    .data-table thead th { background: var(--charcoal); color: white; padding: 10px 16px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; }
+    .data-table tbody td { padding: 10px 16px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    .data-table tbody tr:last-child td { border-bottom: none; }
+    .data-table tbody tr:hover { background: var(--warm); }
+    .tag-green { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; }
+    .tag-amber { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; }
+    .tag-red { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border); border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; }
+    .tag-blue { background: var(--info-bg); color: var(--info); border: 1px solid var(--info-border); border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; }
+    .tag-muted { background: var(--border); color: var(--muted); border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; }
+    .fw600 { font-weight: 600; color: var(--charcoal); }
+
+    /* FORMULA BOX */
+    .formula-box {
+      background: var(--warm); border: 1px solid var(--border); border-radius: 6px;
+      padding: 18px 22px; margin-bottom: 20px;
+      font-family: 'Courier New', monospace; font-size: 13px; color: var(--charcoal); line-height: 2;
+    }
+    .formula-label { font-family: var(--font-b); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 10px; }
+    .f-plus { color: var(--green); font-weight: 700; }
+    .f-eq { color: var(--orange); font-weight: 700; }
+    .f-main { color: var(--charcoal); font-weight: 700; font-size: 14px; }
+    .f-dim { color: var(--light); }
+
+    /* BASE SALARY CARDS */
+    .base-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+    .base-card { border-radius: 8px; padding: 24px; border: 2px solid; }
+    .base-card.estandar { background: var(--info-bg); border-color: var(--info-border); }
+    .base-card.flagship { background: var(--gold-bg); border-color: #F6E05E; }
+    .base-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+    .base-card.estandar .base-label { color: var(--info); }
+    .base-card.flagship .base-label { color: var(--gold); }
+    .base-threshold { font-size: 12px; color: var(--light); margin-bottom: 12px; }
+    .base-amount { font-family: var(--font-h); font-size: 32px; font-weight: 800; }
+    .base-card.estandar .base-amount { color: var(--info); }
+    .base-card.flagship .base-amount { color: var(--gold); }
+    .base-stores { font-size: 11px; margin-top: 10px; font-weight: 500; }
+    .base-card.estandar .base-stores { color: var(--info); }
+    .base-card.flagship .base-stores { color: var(--gold); }
+
+    /* POOL RATE BANDS */
+    .pool-bands { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; }
+    .pool-band { border-radius: 6px; padding: 16px; text-align: center; border: 1px solid; }
+    .pool-band.p8 { background: var(--green-bg); border-color: var(--green-border); }
+    .pool-band.p6 { background: var(--info-bg); border-color: var(--info-border); }
+    .pool-band.p3 { background: var(--amber-bg); border-color: var(--amber-border); }
+    .pool-band.p0 { background: var(--red-bg); border-color: var(--red-border); }
+    .pool-band-margin { font-size: 12px; font-weight: 700; margin-bottom: 6px; }
+    .pool-band.p8 .pool-band-margin { color: var(--green); }
+    .pool-band.p6 .pool-band-margin { color: var(--info); }
+    .pool-band.p3 .pool-band-margin { color: var(--amber); }
+    .pool-band.p0 .pool-band-margin { color: var(--red); }
+    .pool-band-rate { font-family: var(--font-h); font-size: 30px; font-weight: 800; }
+    .pool-band.p8 .pool-band-rate { color: var(--green); }
+    .pool-band.p6 .pool-band-rate { color: var(--info); }
+    .pool-band.p3 .pool-band-rate { color: var(--amber); }
+    .pool-band.p0 .pool-band-rate { color: var(--red); }
+    .pool-band-msg { font-size: 10px; color: var(--light); margin-top: 6px; line-height: 1.4; }
+
+    /* COMPONENTS SUMMARY */
+    .components-stack { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+    .comp-row { display: flex; align-items: flex-start; gap: 14px; padding: 14px 18px; border-radius: 6px; background: white; border: 1px solid var(--border); }
+    .comp-num { width: 24px; height: 24px; border-radius: 50%; background: var(--orange); color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .comp-name { font-size: 13px; font-weight: 600; color: var(--charcoal); margin-bottom: 3px; }
+    .comp-desc { font-size: 12px; color: var(--light); }
+    .comp-special { border-style: dashed; background: var(--warm); }
+    .comp-special .comp-num { background: var(--muted); }
+
+    /* SCENARIO CARDS */
+    .gt-section { margin-bottom: 32px; }
+    .gt-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 6px; }
+    .gt-name { font-family: var(--font-h); font-size: 20px; font-weight: 700; color: var(--charcoal); margin-bottom: 4px; }
+    .gt-meta { font-size: 12px; color: var(--light); margin-bottom: 18px; }
+
+    .scenarios-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .scenario-card { border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+    .scenario-hdr { padding: 12px 16px; }
+    .scenario-hdr.dif { background: var(--red-bg); border-bottom: 2px solid var(--red); }
+    .scenario-hdr.nor { background: var(--info-bg); border-bottom: 2px solid var(--info); }
+    .scenario-hdr.exc { background: var(--green-bg); border-bottom: 2px solid var(--green); }
+    .scenario-tag { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
+    .scenario-hdr.dif .scenario-tag { color: var(--red); }
+    .scenario-hdr.nor .scenario-tag { color: var(--info); }
+    .scenario-hdr.exc .scenario-tag { color: var(--green); }
+    .scenario-context { font-size: 11px; color: var(--charcoal); font-weight: 500; }
+    .scenario-body { padding: 14px 16px; background: white; }
+    .s-row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border); font-size: 11px; }
+    .s-row:last-child { border-bottom: none; }
+    .s-row.s-total { font-weight: 700; font-size: 13px; padding-top: 10px; margin-top: 4px; border-top: 2px solid var(--border); border-bottom: none; }
+    .s-row .s-label { color: var(--light); }
+    .s-row.s-total .s-label { color: var(--charcoal); }
+    .s-row .s-val { font-weight: 500; color: var(--charcoal); }
+    .s-row.s-total .s-val { color: var(--orange); font-family: var(--font-h); font-size: 15px; }
+    .s-row.s-gate .s-val { color: var(--red); }
+    .s-diff { margin-top: 8px; padding: 6px 10px; border-radius: 4px; font-size: 10px; font-weight: 600; }
+    .diff-pos { background: var(--green-bg); color: var(--green); }
+    .diff-neg { background: var(--red-bg); color: var(--red); }
+    .diff-info { background: var(--info-bg); color: var(--info); }
+
+    /* COMPARISON TABLE */
+    .compare-card { background: var(--charcoal); border-radius: 8px; overflow: hidden; margin-bottom: 32px; }
+    .compare-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .compare-table thead th { padding: 12px 20px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.5); font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .compare-table tbody td { padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); color: rgba(255,255,255,0.85); }
+    .compare-table tbody tr:last-child td { border-bottom: none; }
+    .compare-table .c-name { font-weight: 600; color: white; }
+    .compare-table .c-store { font-size: 11px; color: rgba(255,255,255,0.5); }
+    .compare-table .c-old { color: rgba(255,255,255,0.6); }
+    .compare-table .c-new { color: var(--orange); font-weight: 700; font-size: 15px; }
+    .compare-table .c-diff { color: var(--green); font-weight: 600; }
+    .compare-title { padding: 20px 20px 0; font-family: var(--font-h); font-size: 16px; color: white; }
+
+    /* DECISIONS */
+    .decision-card { background: white; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 16px; overflow: hidden; }
+    .decision-header { padding: 16px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; background: var(--warm); }
+    .decision-num { width: 28px; height: 28px; border-radius: 50%; background: var(--amber); color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+    .decision-title { font-size: 14px; font-weight: 600; color: var(--charcoal); }
+    .decision-body { padding: 20px 24px; }
+    .decision-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+    .opt { padding: 12px 16px; border-radius: 6px; border: 1px solid; font-size: 12px; }
+    .opt-a { background: var(--info-bg); border-color: var(--info-border); }
+    .opt-b { background: var(--green-bg); border-color: var(--green-border); }
+    .opt-c { background: var(--amber-bg); border-color: var(--amber-border); }
+    .opt strong { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+    .opt-a strong { color: var(--info); }
+    .opt-b strong { color: var(--green); }
+    .opt-c strong { color: var(--amber); }
+    .rec-box { background: var(--orange); color: white; border-radius: 6px; padding: 10px 14px; font-size: 12px; font-weight: 500; }
+    .rec-box strong { font-weight: 700; }
+    .decision-question { font-size: 13px; color: var(--charcoal); font-style: italic; margin-bottom: 14px; }
+
+    /* STEPS */
+    .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+    .step-card { background: white; border-radius: 8px; border: 1px solid var(--border); padding: 18px 16px; }
+    .step-num { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--orange); margin-bottom: 8px; }
+    .step-title { font-size: 13px; font-weight: 600; color: var(--charcoal); margin-bottom: 6px; line-height: 1.3; }
+    .step-who { font-size: 11px; color: var(--light); }
+    .step-date { font-size: 10px; font-weight: 600; color: var(--orange); margin-top: 8px; }
+
+    /* APPENDIX */
+    .appendix-row td { font-size: 12px; }
+    .source-ok { color: var(--green); font-weight: 600; }
+    .source-pending { color: var(--red); font-weight: 600; }
+
+    /* DIVIDER */
+    .divider { height: 1px; background: var(--border); margin: 32px 0; }
+
+    /* CALLOUT */
+    .callout { border-radius: 8px; padding: 18px 22px; margin-bottom: 20px; font-size: 13px; display: flex; gap: 12px; align-items: flex-start; }
+    .callout-info { background: var(--info-bg); border: 1px solid var(--info-border); }
+    .callout-warn { background: var(--amber-bg); border: 1px solid var(--amber-border); }
+    .callout-success { background: var(--green-bg); border: 1px solid var(--green-border); }
+    .callout-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+    .callout-text { color: var(--charcoal); line-height: 1.5; }
+    .callout-text strong { font-weight: 600; }
+
+    /* TWO COL */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .small-note { font-size: 11px; color: var(--muted); margin-top: 12px; font-style: italic; }
+  </style>
+</head>
+<body>
+
+<!-- BRAND BAR -->
+<div class="brand-bar">
+  <div class="brand-left">
+    <img src="../../assets/ashley-logo-white.png" class="brand-ashley" alt="Ashley">
+    <div class="brand-sep"></div>
+    <img src="../../assets/nirvana-logo.png" class="brand-nirvana" alt="Nirvana">
+    <span class="brand-context">Compensación Comercial · Ashley Colombia</span>
+  </div>
+  <div class="user-chip" id="user-chip">
+    <div class="user-avatar" id="user-avatar">PS</div>
+    <span class="user-name" id="user-name">Pablo</span>
+  </div>
+  <div style="display:flex;gap:8px">
+    <span class="pill pill-draft">Para revisión</span>
+    <span class="pill pill-v2">v2.0 · Jun 2026</span>
+  </div>
+</div>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+  <div class="toolbar-breadcrumb">
+    Compensación Comercial &rsaquo; <span>Propuesta Modelo GT — Versión 2.0</span>
+  </div>
+  <div style="display:flex;gap:8px;align-items:center">
+    <span class="for-badge">Para: Nadia Saavedra &amp; Julian Piñeros</span>
+  </div>
+</div>
+
+<div class="layout">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">
+      <div class="hero-dot"></div>
+      <div class="hero-eyebrow-text">Propuesta — Gerentes de Tienda · Modelo Unificado</div>
+    </div>
+    <div class="hero-title">Nuevo Modelo de Compensación<br>para Gerentes de Tienda</div>
+    <div class="hero-sub">Reemplaza los Track A y Track B por un modelo unificado, autofinanciado y sensible al margen. Diseñado a partir de datos reales de BigQuery y los tres GTs actuales.</div>
+    <div class="hero-meta">
+      <div>
+        <div class="hero-meta-label">Elaborado por</div>
+        <div class="hero-meta-value">Pablo Sardi · CEO Ashley Colombia</div>
+      </div>
+      <div>
+        <div class="hero-meta-label">Fecha</div>
+        <div class="hero-meta-value">Junio 2026</div>
+      </div>
+      <div>
+        <div class="hero-meta-label">Estado</div>
+        <div class="hero-meta-value">Propuesta — pendiente 4 decisiones</div>
+      </div>
+      <div>
+        <div class="hero-meta-label">Implementación sugerida</div>
+        <div class="hero-meta-value">Julio 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- I. PROBLEMA -->
+  <div class="section-header">
+    <div class="section-number">I</div>
+    <div class="section-title">El problema que resuelve</div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="problem-list">
+        <div class="problem-item">
+          <div class="problem-num">1</div>
+          <div class="problem-text">
+            <strong>El modelo no distingue entre tiendas</strong>
+            <p>Una tienda que vende $900M y una que vende $350M tienen el mismo techo de bono y la misma estructura. El GT de la tienda grande está permanentemente limitado en su upside. Eso ya generó conversaciones difíciles con Jeison — y con razón.</p>
+          </div>
+        </div>
+        <div class="problem-item">
+          <div class="problem-num">2</div>
+          <div class="problem-text">
+            <strong>El margen no mueve nada en el bolsillo del GT</strong>
+            <p>Un punto porcentual de margen bruto real equivale a $8.8M en contribución sobre una tienda de $880M. Hoy eso no se refleja en nada en la compensación del GT, entonces no hay incentivo real para cuidarlo. El GT prioriza cerrar la venta, no cerrarla bien.</p>
+          </div>
+        </div>
+        <div class="problem-item">
+          <div class="problem-num">3</div>
+          <div class="problem-text">
+            <strong>No hay incentivo para traer clientes nuevos</strong>
+            <p>El modelo actual premia el volumen total: incluye tanto clientes fieles (que vienen solos) como clientes nuevos (que requieren trabajo activo del GT). No hay diferencia entre los dos. Eso desincentiva la construcción de cartera.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- II. OBJETIVO -->
+  <div class="section-header">
+    <div class="section-number">II</div>
+    <div class="section-title">Objetivo y criterio de éxito</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon icon-orange">🎯</div>
+      <div>
+        <div class="card-title">Objetivo del modelo</div>
+        <div class="card-subtitle">Lo que debe ser cierto para que este modelo funcione</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div style="padding:16px;background:var(--green-bg);border:1px solid var(--green-border);border-radius:6px">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--green);margin-bottom:8px">Criterio 1</div>
+          <div style="font-size:13px;font-weight:600;color:var(--charcoal)">Autofinanciado por el valor generado</div>
+          <div style="font-size:12px;color:var(--light);margin-top:4px">Cada peso adicional pagado al GT sale del valor incremental real que generó la tienda — nunca de un presupuesto de bonos excepcionales.</div>
+        </div>
+        <div style="padding:16px;background:var(--info-bg);border:1px solid var(--info-border);border-radius:6px">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--info);margin-bottom:8px">Criterio 2</div>
+          <div style="font-size:13px;font-weight:600;color:var(--charcoal)">El margen se siente</div>
+          <div style="font-size:12px;color:var(--light);margin-top:4px">Un punto de margen que se pierde cuesta al GT entre $500K y $1.5M en pool ese mes. No teórico — matemático.</div>
+        </div>
+        <div style="padding:16px;background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:6px">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--amber);margin-bottom:8px">Criterio 3</div>
+          <div style="font-size:13px;font-weight:600;color:var(--charcoal)">Sin techo artificial para Jeison</div>
+          <div style="font-size:12px;color:var(--light);margin-top:4px">En un mes excepcional como marzo 2026 ($963M), Jeison debe poder ganar $13M+ en lugar de $7.7M con techo.</div>
+        </div>
+        <div style="padding:16px;background:var(--purple-bg);border:1px solid var(--purple-border);border-radius:6px">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--purple);margin-bottom:8px">Criterio 4</div>
+          <div style="font-size:13px;font-weight:600;color:var(--charcoal)">Los tres niveles alineados</div>
+          <div style="font-size:12px;color:var(--light);margin-top:4px">Asesor → GT → Nadia empujan en la misma dirección. Lo que cuida el asesor mejora el pool del GT. Lo que cuida el GT mejora el bonus de Nadia.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- III. LO QUE SE TOMÓ EN CUENTA -->
+  <div class="section-header">
+    <div class="section-number">III</div>
+    <div class="section-title">Lo que se tomó en cuenta</div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-blue">📊</div>
+        <div>
+          <div class="card-title">Datos reales de las tres tiendas</div>
+          <div class="card-subtitle">BigQuery · Financiero_Comercial</div>
+        </div>
+      </div>
+      <div class="card-body" style="padding:0">
+        <table class="data-table">
+          <thead>
+            <tr><th>Tienda</th><th>Presup. ref.</th><th>Inversión</th><th>Payback</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="fw600">Av 19</td><td>$850M</td><td>$2,000M</td><td><span class="tag-green">15 m ✓</span></td></tr>
+            <tr><td class="fw600">Multiparque</td><td>$350M</td><td>$1,750M</td><td><span class="tag-amber">37 m</span></td></tr>
+            <tr><td class="fw600">Barranquilla</td><td>$313M</td><td>$2,150M</td><td><span class="tag-red">PE mar 2026</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-green">🏷️</div>
+        <div>
+          <div class="card-title">Etiquetas reales de clientes</div>
+          <div class="card-subtitle">BigQuery · Fidelizacion_clientes</div>
+        </div>
+      </div>
+      <div class="card-body" style="padding:0">
+        <table class="data-table">
+          <thead>
+            <tr><th>Estado</th><th>Clientes (2025+)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>eventual</td><td>1,436</td></tr>
+            <tr><td>nuevo</td><td>1,005</td></tr>
+            <tr><td>frecuente</td><td>544</td></tr>
+            <tr><td>ocasional</td><td>192</td></tr>
+            <tr><td>recurrente</td><td>53</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon icon-amber">🌎</div>
+      <div>
+        <div class="card-title">Benchmark Ashley US</div>
+        <div class="card-subtitle">Investigado y evaluado — descartado como modelo a replicar</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        <div style="flex:1;min-width:200px;padding:14px;background:var(--warm);border-radius:6px;border:1px solid var(--border)">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px">Ashley US — estructura</div>
+          <div style="font-size:12px;color:var(--text)">Base ~$73K USD/año · Bono solo ~20% del total · Revisión cada 6 meses</div>
+        </div>
+        <div style="flex:1;min-width:200px;padding:14px;background:var(--red-bg);border-radius:6px;border:1px solid var(--red-border)">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--red);margin-bottom:6px">Por qué no replicar</div>
+          <div style="font-size:12px;color:var(--text)">Mercado laboral diferente. El bono bajo (20%) no genera el incentivo suficiente en Colombia.</div>
+        </div>
+        <div style="flex:1;min-width:200px;padding:14px;background:var(--green-bg);border-radius:6px;border:1px solid var(--green-border)">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--green);margin-bottom:6px">Principio que sí se tomó</div>
+          <div style="font-size:12px;color:var(--text)">"3 áreas: volumen, costo de ventas (descuentos/margen), shrink (pérdida)." Inspiró los 3 componentes variables.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IV. EL MODELO -->
+  <div class="section-header">
+    <div class="section-number">IV</div>
+    <div class="section-title">El modelo propuesto</div>
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-header">
+      <div class="card-icon icon-orange">⚙️</div>
+      <div><div class="card-title">Estructura general</div><div class="card-subtitle">Fórmula de ingreso mensual del GT</div></div>
+    </div>
+    <div class="card-body">
+      <div class="formula-box">
+        <div class="formula-label">Ingreso mensual GT</div>
+        <span class="f-main">INGRESO MENSUAL</span> <span class="f-eq">=</span><br>
+        &nbsp;&nbsp;<span class="f-dim">Salario base</span> <span class="f-dim">(por tamaño de tienda)</span><br>
+        &nbsp;&nbsp;<span class="f-plus">+</span> <span class="f-dim">Pool de contribución incremental</span> <span class="f-dim">(tasa sensible al margen)</span><br>
+        &nbsp;&nbsp;<span class="f-plus">+</span> <span class="f-dim">Prima de cartera</span> <span class="f-dim">(por clientes nuevos)</span><br>
+        &nbsp;&nbsp;<span class="f-plus">+</span> <span class="f-dim">SSS Waterfall</span> <span class="f-dim">(por crecimiento YoY — semestral)</span><br>
+        &nbsp;&nbsp;<span class="f-plus">+</span> <span class="f-dim">[ Hito punto de equilibrio — solo tiendas nuevas meses 1-6 ]</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPONENTE 1: BASE -->
+  <div class="card">
+    <div class="card-header">
+      <div style="width:28px;height:28px;border-radius:50%;background:var(--orange);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">1</div>
+      <div>
+        <div class="card-title">Salario Base</div>
+        <div class="card-subtitle">Diferenciado por tamaño de tienda — no por persona</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="base-grid">
+        <div class="base-card estandar">
+          <div class="base-label">Tienda estándar</div>
+          <div class="base-threshold">Presupuesto &lt; $800M/mes</div>
+          <div class="base-amount">$3,500,000</div>
+          <div class="base-stores">Hoy: Multiparque · Barranquilla</div>
+        </div>
+        <div class="base-card flagship">
+          <div class="base-label">Tienda flagship</div>
+          <div class="base-threshold">Presupuesto ≥ $800M/mes</div>
+          <div class="base-amount">$5,500,000</div>
+          <div class="base-stores">Hoy: Av 19</div>
+        </div>
+      </div>
+      <div class="callout callout-info">
+        <div class="callout-icon">ℹ️</div>
+        <div class="callout-text"><strong>Es un umbral de tienda, no de persona.</strong> Si Multiparque llega sostenidamente a $800M/mes, Javier pasa automáticamente a $5.5M. Si la tienda baja, el umbral se revisa con 3 meses de anticipación.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPONENTE 2: POOL -->
+  <div class="card">
+    <div class="card-header">
+      <div style="width:28px;height:28px;border-radius:50%;background:var(--orange);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">2</div>
+      <div>
+        <div class="card-title">Pool de Contribución Incremental</div>
+        <div class="card-subtitle">Activo solo cuando la tienda supera presupuesto — la tasa depende del margen real del mes</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="formula-box">
+        <div class="formula-label">Fórmula del pool</div>
+        Contribución real &nbsp;<span class="f-eq">=</span>&nbsp; Ventas netas &nbsp;<span class="f-times" style="color:var(--info);font-weight:700">×</span>&nbsp; Margen bruto real<br>
+        Pool bruto &nbsp;<span class="f-eq">=</span>&nbsp; (Contribución real &minus; Contribución presupuestada) &nbsp;<span class="f-times" style="color:var(--info);font-weight:700">×</span>&nbsp; Tasa<br>
+        <span class="f-main">Pago mensual</span> &nbsp;<span class="f-eq">=</span>&nbsp; Pool bruto &nbsp;<span class="f-times" style="color:var(--info);font-weight:700">×</span>&nbsp; 70%&nbsp;&nbsp;<span class="f-dim">(30% se ajusta y paga trimestralmente)</span>
+      </div>
+
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:12px">Tasa según margen bruto real del mes</div>
+      <div class="pool-bands">
+        <div class="pool-band p8">
+          <div class="pool-band-margin">Margen &gt; 61%</div>
+          <div class="pool-band-rate">8%</div>
+          <div class="pool-band-msg">Máximo upside</div>
+        </div>
+        <div class="pool-band p6">
+          <div class="pool-band-margin">59% — 61%</div>
+          <div class="pool-band-rate">6%</div>
+          <div class="pool-band-msg">Pool activo</div>
+        </div>
+        <div class="pool-band p3">
+          <div class="pool-band-margin">57% — 59%</div>
+          <div class="pool-band-rate">3%</div>
+          <div class="pool-band-msg">Pool reducido</div>
+        </div>
+        <div class="pool-band p0">
+          <div class="pool-band-margin">Margen &lt; 57%</div>
+          <div class="pool-band-rate">0%</div>
+          <div class="pool-band-msg">Gate — sin pool</div>
+        </div>
+      </div>
+
+      <div class="callout callout-warn">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-text"><strong>El margen se siente directamente:</strong> Si Av 19 vende $880M con 61% de margen en lugar de 62%, la tasa de pool baja de 8% a 6%. El GT pierde ~$720K en pool ese mes por ese solo punto de margen.</div>
+      </div>
+
+      <div style="font-size:12px;color:var(--light);margin-top:4px"><strong style="color:var(--charcoal)">Exclusión:</strong> Feria del Hogar, Black Friday y activaciones especiales definidas por Pablo/Nadia se excluyen del cálculo del incremento. El pool premia gestión orgánica, no volumen de eventos.</div>
+    </div>
+  </div>
+
+  <!-- COMPONENTE 3: PRIMA -->
+  <div class="card">
+    <div class="card-header">
+      <div style="width:28px;height:28px;border-radius:50%;background:var(--orange);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">3</div>
+      <div>
+        <div class="card-title">Prima de Cartera — Clientes Nuevos</div>
+        <div class="card-subtitle">Premia al GT por traer clientes que NUNCA han comprado en Ashley</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="formula-box">
+        <div class="formula-label">Fórmula</div>
+        <span class="f-main">Prima</span> <span class="f-eq">=</span> Ventas a clientes nuevos del mes <span class="f-times" style="color:var(--info);font-weight:700">×</span> <span style="color:var(--orange);font-weight:700">0.8%</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+        <div style="padding:14px;background:var(--green-bg);border:1px solid var(--green-border);border-radius:6px">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--green);margin-bottom:6px">Definición — aprobada Pablo jun 2026</div>
+          <div style="font-size:12px;color:var(--charcoal);font-family:monospace">cliente_nuevo_mes = '1'</div>
+          <div style="font-size:11px;color:var(--light);margin-top:4px">Primera compra en la historia del cliente con Ashley. Verificado en <code>Fidelizacion_clientes</code> BigQuery.</div>
+        </div>
+        <div style="padding:14px;background:var(--warm);border:1px solid var(--border);border-radius:6px">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px">Referencia junio 2026</div>
+          <div style="font-size:20px;font-weight:700;color:var(--charcoal)">$129M</div>
+          <div style="font-size:11px;color:var(--light)">en ventas a clientes nuevos este mes en la red → Prima total ~$1.0M</div>
+        </div>
+      </div>
+      <div class="callout callout-info">
+        <div class="callout-icon">💡</div>
+        <div class="callout-text"><strong>¿Por qué solo clientes nuevos y no los eventuales?</strong> Los clientes <em>eventual</em> e <em>inactivo</em> ya existen en la base de Ashley — pueden volver solos o por CRM (que ya se mide en el scorecard del asesor). La prima recompensa traer alguien que Ashley nunca tuvo.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPONENTE 4: SSS -->
+  <div class="card">
+    <div class="card-header">
+      <div style="width:28px;height:28px;border-radius:50%;background:var(--orange);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">4</div>
+      <div>
+        <div class="card-title">SSS Waterfall — Same-Store Sales</div>
+        <div class="card-subtitle">Solo tiendas con ≥ 12 meses de historia · Pagado en 6 cuotas mensuales el semestre siguiente</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="formula-box">
+        <div class="formula-label">Fórmula — liquidación al cierre de cada semestre</div>
+        SSS bonus <span class="f-eq">=</span> (Ventas H actual &minus; Ventas H anterior) <span class="f-times" style="color:var(--info);font-weight:700">×</span> <span style="color:var(--orange);font-weight:700">0.15%</span><br>
+        <span class="f-main">Cuota mensual</span> <span class="f-eq">=</span> SSS bonus <span class="f-eq">÷</span> 6
+      </div>
+      <table class="data-table" style="margin-bottom:16px">
+        <thead><tr><th>Semestre que genera el bonus</th><th>Semestre de pago</th><th>Disponibilidad actual</th></tr></thead>
+        <tbody>
+          <tr><td>H1 (enero — junio)</td><td>H2 (julio — diciembre)</td><td><span class="tag-green">Jeison: activo desde H2 2026</span></td></tr>
+          <tr><td>H2 (julio — diciembre)</td><td>H1 siguiente año</td><td><span class="tag-blue">Javier: activo desde jul 2026</span></td></tr>
+          <tr><td colspan="2" style="color:var(--light)">Alejandra (Barranquilla)</td><td><span class="tag-muted">Disponible ene 2027</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- COMPONENTE ESPECIAL -->
+  <div class="card" style="border-style:dashed;border-color:var(--muted)">
+    <div class="card-header" style="background:var(--warm)">
+      <div style="width:28px;height:28px;border-radius:50%;background:var(--muted);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">★</div>
+      <div>
+        <div class="card-title">Componente especial — Tiendas nuevas</div>
+        <div class="card-subtitle">Solo aplica en los primeros 18 meses de operación de una tienda nueva</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="two-col">
+        <div style="padding:16px;background:var(--green-bg);border:1px solid var(--green-border);border-radius:6px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--green);margin-bottom:8px">Hito de Punto de Equilibrio</div>
+          <div style="font-size:12px;color:var(--charcoal);margin-bottom:8px"><strong>Condición:</strong> primer trimestre completo con EBITDA mensual positivo sostenido.</div>
+          <div style="font-size:12px;color:var(--charcoal)"><strong>Pago:</strong> $10,000,000 en 6 cuotas mensuales ($1,666,667/mes)</div>
+          <div style="margin-top:10px;padding:8px;background:white;border-radius:4px;font-size:11px;color:var(--green);font-weight:600">Alejandra (Barranquilla): activado en Q1-2026 ✓</div>
+        </div>
+        <div style="padding:16px;background:var(--purple-bg);border:1px solid var(--purple-border);border-radius:6px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--purple);margin-bottom:8px">Bono Payback</div>
+          <div style="font-size:12px;color:var(--charcoal);margin-bottom:8px"><strong>Condición:</strong> GT que ABRE la tienda + EBITDA acumulado = inversión en &lt; 18 meses.</div>
+          <div style="font-size:12px;color:var(--charcoal)"><strong>Pago:</strong> Monto a definir con Pablo · referencia $30M-$50M en 12 cuotas</div>
+          <div style="margin-top:10px;padding:8px;background:white;border-radius:4px;font-size:11px;color:var(--muted)">Aplica al GT que abra 12 de Octubre u otras tiendas futuras</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- V. ESCENARIOS -->
+  <div class="section-header">
+    <div class="section-number">V</div>
+    <div class="section-title">Escenarios — los tres GTs actuales</div>
+  </div>
+
+  <!-- JEISON -->
+  <div class="gt-section">
+    <div class="card">
+      <div class="card-header" style="background:var(--gold-bg)">
+        <div class="card-icon" style="background:var(--gold-bg);font-size:20px">🏆</div>
+        <div>
+          <div class="card-title">Jeison — Av 19 (flagship)</div>
+          <div class="card-subtitle">Base $5,500,000 · Contribución budget $510M (= $850M × 60%) · SSS activo</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="scenarios-grid">
+          <div class="scenario-card">
+            <div class="scenario-hdr dif">
+              <div class="scenario-tag">Mes difícil</div>
+              <div class="scenario-context">$700M · Margen 57%</div>
+            </div>
+            <div class="scenario-body">
+              <div class="s-row s-gate"><span class="s-label">Pool</span><span class="s-val" style="color:var(--red)">$0 (gate 57%)</span></div>
+              <div class="s-row"><span class="s-label">Prima cartera</span><span class="s-val">$400,000</span></div>
+              <div class="s-row"><span class="s-label">SSS cuota</span><span class="s-val">$480,000</span></div>
+              <div class="s-row s-total"><span class="s-label">Total</span><span class="s-val">$6,380,000</span></div>
+              <div class="s-diff diff-neg">vs modelo actual: −$220K (correcto)</div>
+            </div>
+          </div>
+          <div class="scenario-card">
+            <div class="scenario-hdr nor">
+              <div class="scenario-tag">Mes normal ✅</div>
+              <div class="scenario-context">$880M · Margen 62%</div>
+            </div>
+            <div class="scenario-body">
+              <div class="s-row"><span class="s-label">Base</span><span class="s-val">$5,500,000</span></div>
+              <div class="s-row"><span class="s-label">Pool (8% × $35.6M × 70%)</span><span class="s-val">$1,994,000</span></div>
+              <div class="s-row"><span class="s-label">Prima cartera</span><span class="s-val">$1,600,000</span></div>
+              <div class="s-row"><span class="s-label">SSS cuota</span><span class="s-val">$480,000</span></div>
+              <div class="s-row s-total"><span class="s-label">Total</span><span class="s-val">$9,574,000</span></div>
+              <div class="s-diff diff-pos">vs modelo actual: +$1,908K · Ratio 18:1</div>
+            </div>
+          </div>
+          <div class="scenario-card">
+            <div class="scenario-hdr exc">
+              <div class="scenario-tag">Mes excepcional 🚀</div>
+              <div class="scenario-context">$965M · Margen 63% (real: mar 2026)</div>
+            </div>
+            <div class="scenario-body">
+              <div class="s-row"><span class="s-label">Base</span><span class="s-val">$5,500,000</span></div>
+              <div class="s-row"><span class="s-label">Pool (8% × $97.9M × 70%)</span><span class="s-val">$5,482,000</span></div>
+              <div class="s-row"><span class="s-label">Prima cartera</span><span class="s-val">$2,000,000</span></div>
+              <div class="s-row"><span class="s-label">SSS cuota</span><span class="s-val">$480,000</span></div>
+              <div class="s-row s-total"><span class="s-label">Total</span><span class="s-val">$13,462,000</span></div>
+              <div class="s-diff diff-pos">vs modelo actual $7.7M: +$5,796K · Ratio 17:1</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVIER -->
+  <div class="gt-section">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-blue" style="font-size:20px">🏪</div>
+        <div>
+          <div class="card-title">Javier — Multiparque</div>
+          <div class="card-subtitle">Base $3,500,000 · Contribución budget $210M (= $350M × 60%) · SSS desde jul 2026</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="scenarios-grid">
+          <div class="scenario-card">
+            <div class="scenario-hdr dif">
+              <div class="scenario-tag">Mes difícil</div>
+              <div class="scenario-context">$295M · Margen 58% (real: mar 2026)</div>
+            </div>
+            <div class="scenario-body">
+              <div class="s-row s-gate"><span class="s-label">Pool</span><span class="s-val" style="color:var(--red)">$0 (bajo presupuesto)</span></div>
+              <div class="s-row"><span class="s-label">Prima cartera</span><span class="s-val">$240,000</span></div>
+              <div class="s-row s-total"><span class="s-label">Total</span><span class="s-val">$3,740,000</span></div>
+              <div class="s-diff diff-info">vs modelo actual ~$3,600K: +$140K</div>
+            </div>
+          </div>
+          <div class="scenario-card">
+            <div class="scenario-hdr nor">
+              <div class="scenario-tag">Mes normal ✅</div>
+              <div class="scenario-context">$372M · Margen 62% (real: may 2026)</div>
+            </div>
+            <div class="scenario-body">
+              <div class="s-row"><span class="s-label">Base</span><span class="s-val">$3,500,000</span></div>
+              <div class="s-row"><span class="s-label">Pool (8% × $20.6M × 70%)</span><span class="s-val">$1,154,000</span></div>
+              <div class="s-row"><span class="s-label">Prima cartera</span><span class="s-val">$400,000</span></div>
+              <div class="s-row s-total"><span class="s-label">Total</span><span class="s-val">$5,054,000</span></div>
+              <div class="s-diff diff-pos">vs modelo actual ~$4,200K: +$854K</div>
+            </div>
+          </div>
+          <div class="scenario-card">
+            <div class="scenario-hdr exc">
+              <div class="scenario-tag">Mes excepcional</div>
+              <div class="scenario-context">$430M · Margen 62%</div>
+            </div>
+            <div class="scenario-body">
+              <div class="s-row"><span class="s-label">Base</span><span class="s-val">$3,500,000</span></div>
+              <div class="s-row"><span class="s-label">Pool (8% × $56.6M × 70%)</span><span class="s-val">$3,170,000</span></div>
+              <div class="s-row"><span class="s-label">Prima cartera</span><span class="s-val">$500,000</span></div>
+              <div class="s-row s-total"><span class="s-label">Total</span><span class="s-val">$7,170,000</span></div>
+              <div class="s-diff diff-pos">vs modelo actual ~$5,200K: +$1,970K</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALEJANDRA -->
+  <div class="gt-section">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-green" style="font-size:20px">🌱</div>
+        <div>
+          <div class="card-title">Alejandra — Barranquilla</div>
+          <div class="card-subtitle">Base $3,500,000 · Contribución budget $188M · Hito PE activo (+$1,667K/mes × 6 meses)</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="callout callout-warn" style="margin-bottom:18px">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-text"><strong>Cliff en mes 7:</strong> cuando termine el hito de punto de equilibrio (6 cuotas), el ingreso cae ~$1.67M/mes. El SSS no estará activo hasta enero 2027. Hay 6 meses de brecha que deben comunicarse desde el día 1. Ver decisión pendiente #4.</div>
+        </div>
+        <div class="scenarios-grid">
+          <div class="scenario-card">
+            <div class="scenario-hdr dif">
+              <div class="scenario-tag">Mes difícil</div>
+              <div class="scenario-context">$280M · Margen 57%</div>
+            </div>
+            <div class="scenario-body">
+              <div class="s-row s-gate"><span class="s-label">Pool</span><span class="s-val" style="color:var(--red)">$0 (gate)</span></div>
+              <div class="s-row"><span class="s-label">Prima cartera</span><span class="s-val">$200,000</span></div>
+              <div class="s-row"><span class="s-label">Hito PE</span><span class="s-val">$1,666,667</span></div>
+              <div class="s-row s-total"><span class="s-label">Total (con hito)</span><span class="s-val">$5,367,000</span></div>
+              <div class="s-diff diff-pos">vs modelo actual ~$3,600K: +$1,767K</div>
+            </div>
+          </div>
+          <div class="scenario-card">
+            <div class="scenario-hdr nor">
+              <div class="scenario-tag">Mes normal + hito</div>
+              <div class="scenario-context">$350M · Margen 60%</div>
+            </div>
+            <div class="scenario-body">
+              <div class="s-row"><span class="s-label">Base</span><span class="s-val">$3,500,000</span></div>
+              <div class="s-row"><span class="s-label">Pool (6% × $22M × 70%)</span><span class="s-val">$924,000</span></div>
+              <div class="s-row"><span class="s-label">Prima cartera</span><span class="s-val">$480,000</span></div>
+              <div class="s-row"><span class="s-label">Hito PE</span><span class="s-val">$1,666,667</span></div>
+              <div class="s-row s-total"><span class="s-label">Total</span><span class="s-val">$6,571,000</span></div>
+              <div class="s-diff diff-pos">vs modelo actual ~$3,600K: +$2,971K</div>
+            </div>
+          </div>
+          <div class="scenario-card">
+            <div class="scenario-hdr nor" style="background:var(--amber-bg);border-bottom-color:var(--amber)">
+              <div class="scenario-tag" style="color:var(--amber)">Mes normal sin hito (mes 7+)</div>
+              <div class="scenario-context">$350M · Margen 60%</div>
+            </div>
+            <div class="scenario-body">
+              <div class="s-row"><span class="s-label">Base</span><span class="s-val">$3,500,000</span></div>
+              <div class="s-row"><span class="s-label">Pool</span><span class="s-val">$924,000</span></div>
+              <div class="s-row"><span class="s-label">Prima cartera</span><span class="s-val">$480,000</span></div>
+              <div class="s-row"><span class="s-label">Hito PE</span><span class="s-val" style="color:var(--muted)">$0 (terminó)</span></div>
+              <div class="s-row s-total"><span class="s-label">Total</span><span class="s-val">$4,904,000</span></div>
+              <div class="s-diff diff-neg">Caída de $1,667K vs mes anterior — comunicar</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VI. COMPARATIVO -->
+  <div class="section-header">
+    <div class="section-number">VI</div>
+    <div class="section-title">Comparativo — modelo actual vs propuesta</div>
+  </div>
+
+  <div class="compare-card">
+    <div class="compare-title">Mes normal — los tres GTs</div>
+    <table class="compare-table">
+      <thead>
+        <tr><th>GT</th><th>Tienda</th><th>Modelo actual</th><th>Modelo nuevo</th><th>Diferencia</th><th>Es autofinanciado</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="c-name">Jeison</span><br><span class="c-store">$880M · 62% margen</span></td>
+          <td>Av 19</td>
+          <td class="c-old">~$7,666,000</td>
+          <td class="c-new">$9,574,000</td>
+          <td class="c-diff">+$1,908,000</td>
+          <td style="color:rgba(255,255,255,0.7);font-size:12px">Sí · Ashley recibe $35.6M extra</td>
+        </tr>
+        <tr>
+          <td><span class="c-name">Javier</span><br><span class="c-store">$372M · 62% margen</span></td>
+          <td>Multiparque</td>
+          <td class="c-old">~$4,200,000</td>
+          <td class="c-new">$5,054,000</td>
+          <td class="c-diff">+$854,000</td>
+          <td style="color:rgba(255,255,255,0.7);font-size:12px">Sí · Ashley recibe $20.6M extra</td>
+        </tr>
+        <tr>
+          <td><span class="c-name">Alejandra</span><br><span class="c-store">$350M · 60% margen + hito</span></td>
+          <td>Barranquilla</td>
+          <td class="c-old">~$3,600,000</td>
+          <td class="c-new">$6,571,000</td>
+          <td class="c-diff">+$2,971,000</td>
+          <td style="color:rgba(255,255,255,0.7);font-size:12px">Pool sí · Hito = inversión en equipo</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- VII. DECISIONES PENDIENTES -->
+  <div class="section-header">
+    <div class="section-number">VII</div>
+    <div class="section-title">Decisiones pendientes antes de implementar</div>
+  </div>
+
+  <div class="callout callout-warn">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-text"><strong>Estas 4 decisiones requieren criterio de negocio de Nadia y Pablo.</strong> No se pueden resolver con datos solos. El modelo no puede implementarse sin cerrarlas.</div>
+  </div>
+
+  <div class="decision-card">
+    <div class="decision-header">
+      <div class="decision-num">1</div>
+      <div class="decision-title">Gate duro vs piso mínimo cuando el margen cae por debajo del 57%</div>
+    </div>
+    <div class="decision-body">
+      <div class="decision-options">
+        <div class="opt opt-a"><strong>Opción A — Gate duro</strong>Margen &lt;57% = pool 0%. Mensaje pedagógico claro, sin excepciones. Javier en marzo 2026 (58%) hubiera tenido pool de 3% — no llega al gate.</div>
+        <div class="opt opt-b"><strong>Opción B — Piso de 1%</strong>Margen &lt;57% = pool 1% en lugar de 0%. El GT no pierde todo en un mes muy malo. Incentivo más suave.</div>
+      </div>
+      <div class="rec-box"><strong>Recomendación:</strong> Opción A. El mensaje pedagógico vale más que la diferencia económica (~$200K en el peor caso).</div>
+    </div>
+  </div>
+
+  <div class="decision-card">
+    <div class="decision-header">
+      <div class="decision-num">2</div>
+      <div class="decision-title">¿Quién fija el presupuesto mensual, cuándo y cómo entra a BigQuery?</div>
+    </div>
+    <div class="decision-body">
+      <p class="decision-question">"El pool requiere un número de contribución presupuestada firmado antes del día 1 del mes. Hoy ese número vive en Excel. ¿Quién lo fija, cuándo, y cómo se migra a BigQuery para que el dashboard funcione automáticamente?"</p>
+      <div class="callout callout-warn" style="margin:0">
+        <div class="callout-icon">🔴</div>
+        <div class="callout-text"><strong>Bloqueador técnico:</strong> Sin el presupuesto mensual en BigQuery, el dashboard de compensación en tiempo real no puede calcular el pool. Es el único dato que no está disponible hoy.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="decision-card">
+    <div class="decision-header">
+      <div class="decision-num">3</div>
+      <div class="decision-title">Sub-métricas del componente "Proceso" en el scorecard</div>
+    </div>
+    <div class="decision-body">
+      <p class="decision-question">"El pool tiene un 30% de componente proceso. ¿Estas tres métricas representan bien el trabajo del GT?"</p>
+      <table class="data-table" style="margin-bottom:16px">
+        <thead><tr><th>Métrica propuesta</th><th>Fuente BigQuery</th><th>Meta</th></tr></thead>
+        <tbody>
+          <tr><td>Conversión tienda</td><td>crm_lead</td><td>≥ 2.5%</td></tr>
+          <tr><td>CRM calidad (email + teléfono capturados)</td><td>crm_lead</td><td>≥ 95%</td></tr>
+          <tr><td>OTIF (entregado a tiempo vs prometido)</td><td>stock_move</td><td>≥ 95%</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--light)"><strong>Para Nadia:</strong> ¿Falta alguna métrica? ¿Sobra alguna? ¿Los pesos (33% cada una) están bien o alguna tiene más peso?</p>
+    </div>
+  </div>
+
+  <div class="decision-card">
+    <div class="decision-header">
+      <div class="decision-num">4</div>
+      <div class="decision-title">Cliff de Alejandra al mes 7 — cómo comunicarlo y si se crea un puente</div>
+    </div>
+    <div class="decision-body">
+      <p class="decision-question">"Al mes 7 el hito termina y el ingreso de Alejandra cae $1.67M/mes. El SSS no estará activo hasta enero 2027. ¿Qué hacemos con esos 6 meses de brecha?"</p>
+      <div class="decision-options">
+        <div class="opt opt-a"><strong>Opción A</strong>Comunicar el cliff desde el día 1. Alejandra lo acepta como parte del modelo. Transparencia total.</div>
+        <div class="opt opt-b"><strong>Opción B</strong>Crear un componente puente temporal (6 meses) para la brecha. Más complejo, pero suaviza la caída.</div>
+        <div class="opt opt-c"><strong>Opción C</strong>Activar SSS anticipadamente para Barranquilla (excepción a la regla de 12 meses). Más simple que un puente, pero sienta precedente.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIII. PRÓXIMOS PASOS -->
+  <div class="section-header">
+    <div class="section-number">VIII</div>
+    <div class="section-title">Próximos pasos</div>
+  </div>
+
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">Paso 1 · Esta semana</div>
+      <div class="step-title">Revisar y comentar este documento</div>
+      <div class="step-who">Nadia + Julian</div>
+      <div class="step-date">→ Cerrar las 4 decisiones</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">Paso 2 · Semana 2</div>
+      <div class="step-title">Migrar presupuesto mensual de Excel a BigQuery</div>
+      <div class="step-who">Julian</div>
+      <div class="step-date">→ Desbloqueador del dashboard</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">Paso 3 · Semana 3</div>
+      <div class="step-title">Construir vistas BigQuery con la lógica del pool y la prima</div>
+      <div class="step-who">Julian + eng</div>
+      <div class="step-date">→ Base del dashboard en tiempo real</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">Paso 4 · Semana 4</div>
+      <div class="step-title">Dashboard Looker Studio + conversación individual con cada GT</div>
+      <div class="step-who">Pablo + Nadia</div>
+      <div class="step-date">→ Implementación mes siguiente</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- APÉNDICE -->
+  <div class="section-header">
+    <div class="section-number" style="background:var(--muted)">A</div>
+    <div class="section-title">Apéndice — Fuentes de datos BigQuery verificadas</div>
+  </div>
+
+  <div class="card">
+    <div class="card-body" style="padding:0">
+      <table class="data-table appendix-row">
+        <thead><tr><th>Componente</th><th>Tabla BigQuery</th><th>Campo</th><th>Estado</th></tr></thead>
+        <tbody>
+          <tr><td>Ventas netas</td><td>Fidelizacion_clientes</td><td>price_subtotal</td><td><span class="source-ok">✓ Disponible</span></td></tr>
+          <tr><td>Margen bruto real</td><td>Fidelizacion_clientes</td><td>(price_subtotal - costo) / price_subtotal</td><td><span class="source-ok">✓ Disponible</span></td></tr>
+          <tr><td>Cliente nuevo (prima)</td><td>Fidelizacion_clientes</td><td>cliente_nuevo_mes = '1'</td><td><span class="source-ok">✓ Disponible · aprobado</span></td></tr>
+          <tr><td>Estado fidelización</td><td>Fidelizacion_clientes</td><td>Estado_y_frecuencia</td><td><span class="source-ok">✓ Disponible</span></td></tr>
+          <tr><td>Conversión CRM</td><td>crm_lead</td><td>stage_id / won</td><td><span class="source-ok">✓ Disponible</span></td></tr>
+          <tr><td>NPS</td><td>NPS_Cliente</td><td>Score mensual</td><td><span class="source-ok">✓ Disponible</span></td></tr>
+          <tr><td>EBITDA por tienda</td><td>EBITDA_x_Tienda_x_Cuenta</td><td>Por centro de costo</td><td><span class="source-ok">✓ Disponible</span></td></tr>
+          <tr><td style="font-weight:600;color:var(--red)">Presupuesto mensual</td><td style="color:var(--muted)">— (hoy en Excel)</td><td style="color:var(--muted)">—</td><td><span class="source-pending">❌ Pendiente migrar</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div style="text-align:center;padding:32px 0;font-size:11px;color:var(--muted)">
+    Propuesta elaborada con datos reales de BigQuery · Ashley Furniture Colombia · Junio 2026<br>
+    Versión 2.0 del modelo de compensación GT — reemplaza Track A / Track B por modelo unificado
+  </div>
+
+</div>
+</body>
+</html>
