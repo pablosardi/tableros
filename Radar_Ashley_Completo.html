@@ -303,11 +303,12 @@
   .presence-card .stores-label { font-size: 10px; color: var(--text-light); margin-bottom: 8px; }
   .presence-card .cities { font-size: 11px; color: var(--gray); }
   .presence-card .opening-badge {
-    position: absolute; top: 10px; right: 10px;
+    display: inline-block;
     background: var(--red); color: white;
     font-size: 9px; font-weight: 700;
-    padding: 2px 6px; border-radius: 10px;
+    padding: 3px 8px; border-radius: 10px;
     text-transform: uppercase;
+    margin: 4px 0 2px; line-height: 1.35; max-width: 100%;
   }
   .presence-card .opening-badge.gold { background: var(--ashley-gold); color: var(--ashley-navy); }
 
@@ -827,7 +828,6 @@ function pgcheck(){
           <div class="brand">Tugó</div>
           <div class="stores-num">9–10</div>
           <div class="stores-label">tiendas activas</div>
-          <div class="opening-badge">🆕 Parque La Colina BG (formato mall) · Lima Perú operativo</div>
           <div class="cities">Bogotá (4–5), Medellín, Cali, Barranquilla + Lima Perú · Pipeline: Villavicencio, Montería</div>
         </div>
         <div class="presence-card">
