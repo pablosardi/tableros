@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<title>Radar Competitivo — Ashley Furniture Colombia · 13 junio 2026 · Edición #8</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap');
+
+  :root {
+    --ashley-navy: #1B3A6B;
+    --ashley-gold: #C9A84C;
+    --ashley-light: #F4F6FA;
+    --ashley-white: #FFFFFF;
+    --red: #D94040;
+    --red-light: #FDECEA;
+    --yellow: #E8A020;
+    --yellow-light: #FEF6E6;
+    --green: #2E7D52;
+    --green-light: #E8F5EE;
+    --gray: #6B7280;
+    --gray-light: #F9FAFB;
+    --border: #E5E7EB;
+    --text: #111827;
+    --text-light: #6B7280;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #ECEEF2; color: var(--text); font-size: 13px; line-height: 1.6; }
+
+  .header { background: var(--ashley-navy); padding: 0; position: relative; overflow: hidden; }
+  .header-stripe { height: 4px; background: linear-gradient(90deg, var(--ashley-gold) 0%, #E8C86A 50%, var(--ashley-gold) 100%); }
+  .header-inner { max-width: 900px; margin: 0 auto; padding: 32px 40px 28px; display: flex; justify-content: space-between; align-items: flex-end; }
+  .header-left h1 { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--ashley-white); font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; }
+  .header-left .subtitle { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 6px; font-weight: 400; letter-spacing: 0.3px; }
+  .header-right { text-align: right; }
+  .header-right .date { font-size: 11px; color: var(--ashley-gold); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  .header-right .edition { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 3px; }
+  .header-logo { display: inline-block; background: var(--ashley-gold); color: var(--ashley-navy); font-weight: 800; font-size: 11px; padding: 4px 10px; border-radius: 3px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
+
+  .page { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+
+  .section { background: var(--ashley-white); border-radius: 8px; margin-top: 16px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  .section-header { padding: 14px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+  .section-header .icon { width: 28px; height: 28px; border-radius: 6px; background: var(--ashley-navy); display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+  .section-header h2 { font-size: 13px; font-weight: 700; color: var(--ashley-navy); text-transform: uppercase; letter-spacing: 0.8px; }
+  .section-header .badge { margin-left: auto; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px; background: var(--ashley-light); color: var(--ashley-navy); }
+  .section-body { padding: 20px 24px; }
+
+  .alert-banner { background: var(--ashley-navy); margin-top: 16px; border-radius: 8px; overflow: hidden; }
+  .alert-banner-header { background: var(--red); padding: 10px 24px; display: flex; align-items: center; gap: 8px; }
+  .alert-banner-header span { font-size: 11px; font-weight: 700; color: white; text-transform: uppercase; letter-spacing: 1px; }
+  .alert-items { padding: 16px 24px; display: flex; flex-direction: column; gap: 12px; }
+  .alert-item { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 12px; }
+  .alert-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .alert-label { font-size: 10px; font-weight: 700; color: var(--ashley-gold); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 3px; }
+  .alert-text { font-size: 12px; color: rgba(255,255,255,0.85); line-height: 1.5; }
+  .alert-action-label { font-size: 10px; font-weight: 700; color: #86EFAC; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 3px; }
+
+  .exec-bullets { display: flex; flex-direction: column; gap: 10px; }
+  .exec-bullet { display: flex; gap: 12px; padding: 12px 14px; background: var(--ashley-light); border-radius: 6px; border-left: 3px solid var(--ashley-navy); }
+  .exec-bullet .num { font-size: 18px; font-weight: 800; color: var(--ashley-gold); line-height: 1; flex-shrink: 0; width: 20px; }
+  .exec-bullet p { font-size: 12.5px; color: var(--text); line-height: 1.55; }
+  .exec-bullet strong { color: var(--ashley-navy); }
+
+  .scoreboard-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .scoreboard-table th { text-align: center; padding: 8px 6px; font-size: 10px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.6px; border-bottom: 2px solid var(--border); }
+  .scoreboard-table th:first-child { text-align: left; padding-left: 0; }
+  .scoreboard-table td { padding: 9px 6px; text-align: center; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  .scoreboard-table td:first-child { text-align: left; font-weight: 600; font-size: 12px; padding-left: 0; color: var(--ashley-navy); }
+  .scoreboard-table tr:last-child td { border-bottom: none; }
+
+  .dot { width: 20px; height: 20px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; }
+  .dot-red { background: var(--red); color: white; }
+  .dot-yellow { background: var(--yellow); color: white; }
+  .dot-green { background: var(--green); color: white; }
+
+  .source-tag { display: inline-block; font-size: 9px; background: var(--ashley-light); color: var(--text-light); padding: 1px 6px; border-radius: 3px; margin-left: 4px; vertical-align: middle; }
+
+  .footer { max-width: 900px; margin: 12px auto 0; padding: 0 16px 24px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; color: var(--text-light); }
+  .footer strong { color: var(--ashley-navy); }
+</style>
+</head>
+<body>
+
+<div id="pgwall" style="position:fixed;inset:0;z-index:99999;background:#0f1d35;
+  display:flex;align-items:center;justify-content:center;font-family:-apple-system,Arial,sans-serif;">
+  <div style="background:#16284a;padding:40px 36px;border-radius:14px;text-align:center;
+    box-shadow:0 20px 60px rgba(0,0,0,.5);max-width:340px;">
+    <div style="font-size:30px;margin-bottom:10px;">&#128274;</div>
+    <h2 style="color:#fff;margin:0 0 6px;font-size:20px;">Acceso Privado</h2>
+    <p style="color:#9fb0cc;margin:0 0 18px;font-size:13px;">Radar Competitivo Ashley Colombia</p>
+    <input id="pgpwd" type="password" placeholder="Contrase&ntilde;a"
+      onkeydown="if(event.key==='Enter')pgcheck()"
+      style="width:100%;padding:11px 14px;border:1px solid #2c4163;border-radius:8px;
+        background:#0f1d35;color:#fff;font-size:14px;box-sizing:border-box;outline:none;">
+    <button onclick="pgcheck()" style="width:100%;margin-top:12px;padding:11px;border:0;
+      border-radius:8px;background:#E8650A;color:#fff;font-size:14px;font-weight:700;cursor:pointer;">
+      Entrar</button>
+    <div id="pgerr" style="display:none;color:#ff8a80;font-size:12px;margin-top:10px;">
+      Contrase&ntilde;a incorrecta</div>
+  </div>
+</div>
+<script>
+document.getElementById('pgpwd').focus();
+function pgcheck(){
+  if(document.getElementById('pgpwd').value==='Naranja01'){
+    document.getElementById('pgwall').style.display='none';
+  }else{
+    document.getElementById('pgerr').style.display='block';
+    document.getElementById('pgpwd').value='';document.getElementById('pgpwd').focus();
+  }
+}
+</script>
+
+<div class="header">
+  <div class="header-stripe"></div>
+  <div class="header-inner">
+    <div class="header-left">
+      <div class="header-logo">Ashley Colombia</div>
+      <h1>Radar Competitivo<br>Muebles Colombia</h1>
+      <p class="subtitle">Inteligencia competitiva semanal · Comité de Gerencia</p>
+    </div>
+    <div class="header-right">
+      <div class="date">SEMANA DEL 29 DE JUNIO DE 2026</div>
+      <div class="edition">Edición #11 · Actualizado 29 junio 2026</div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- ALERT BANNER -->
+  <div class="alert-banner">
+    <div class="alert-banner-header">
+      <span>⚡ Alertas urgentes — semana 29 junio 2026</span>
+    </div>
+    <div class="alert-items">
+
+      <div class="alert-item">
+        <div>
+          <div class="alert-label">🚨 Alerta #1 — Decreto 614 "Aranceles Inteligentes": entra en vigor ~1 jul 2026</div>
+          <div class="alert-text">Firmado el 17 jun 2026, el Decreto 614 aplica +10–15 puntos porcentuales a colchones (partida 9404) y muebles metálicos (partida 9401) importados desde países sin TLC activo con Colombia — principalmente China. Competidores que importan desde China verán subir sus costos o comprimir sus márgenes desde el 1–2 de julio de 2026. <strong>Ashley importa desde EE.UU. (TLC vigente desde 2012 → 0% arancel) y NO está afectada.</strong> Esta es una ventaja competitiva directa, verificable y comunicable durante los próximos 12 meses. Fuentes: mincit.gov.co · deloitte.com · portafolio.co · Decreto 614/2026.</div>
+        </div>
+        <div>
+          <div class="alert-action-label">✅ Acción sugerida</div>
+          <div class="alert-text">Confirmar con Operaciones/Legal que todo el inventario activo es de origen USA. Desarrollar mensaje comercial: <em>"Ashley: muebles USA, sin sobrecostos de importación."</em> Activar en RRSS, material POS en tienda y briefing a asesores comerciales. Verificar si algún proveedor secundario importa desde China. Responsable: Gerencia de Operaciones / Legal / Marketing. <strong>Deadline: jue 2 jul.</strong></div>
+        </div>
+      </div>
+
+      <div class="alert-item">
+        <div>
+          <div class="alert-label">🔴 Alerta #2 — Easy "Prima Easy 2026" solapada con Aniversario Ashley (activa hasta 12 jul)</div>
+          <div class="alert-text">Easy (Cencosud) lanzó el 25 de junio su campaña de prima semestral en muebles de sala, comedor y dormitorio, activa hasta el 12 de julio en sus 15 tiendas. La ventana se superpone exactamente con el Aniversario Sale 2026 de Ashley. Con precio de entrada como palanca principal, Easy puede capturar clientes indecisos que de otra forma compararían con Ashley. Adicionalmente, Jamar tiene activo el catálogo "Alegría+ Mundial" (hasta 15 jul) con financiamiento Credijamar de 3–44 meses. Son las dos campañas de precio más activas del mercado en este momento. Fuente: easy.com.co · jamar.com jun 2026.</div>
+        </div>
+        <div>
+          <div class="alert-action-label">✅ Acción sugerida</div>
+          <div class="alert-text">Publicar 2–3 posts de RRSS esta semana con mensaje diferenciador: <em>"En Ashley tu prima rinde más — diseño premium, entrega 48h, garantía, rating 5.0 ⭐."</em> No igualar en precio — reforzar calidad, experiencia de tienda y velocidad de entrega. Verificar si Ashley tiene oferta de financiamiento activa para responder a Credijamar. Responsable: Marketing / Community Manager. <strong>Deadline: vie 4 jul.</strong></div>
+        </div>
+      </div>
+
+      <div class="alert-item">
+        <div>
+          <div class="alert-label">🟡 Alerta #3 — IKEA nombra nueva Country Manager: señal de consolidación agresiva</div>
+          <div class="alert-text">El 24 de junio de 2026 IKEA Colombia anunció a María Fabiana Traboulsi Luna como nueva Country Manager, marcando la transición de fase de expansión a fase de consolidación y crecimiento sostenido. Esto anticipa una estrategia más agresiva en fidelización, omnicanal y precios durante los próximos trimestres. IKEA ya domina el top 3 orgánico en los 5 términos SEO monitoreados esta semana — con un liderazgo ejecutivo renovado, esta presencia digital puede intensificarse. Campaña activa: camas y colchones post-Black Friday (18 jun–12 jul). Fuente: americaretail-malls.com jun 2026.</div>
+        </div>
+        <div>
+          <div class="alert-action-label">✅ Acción sugerida</div>
+          <div class="alert-text">Monitorear cambios en precios, campañas y mensajes de IKEA durante las próximas 2 semanas tras el cambio de liderazgo. Ashley debe reforzar su mensaje de experiencia de tienda, personalización de diseño y servicio posventa como diferenciador frente al volumen de IKEA. Si IKEA lanza nueva campaña de precio en julio, escalar a Gerencia. Responsable: Gerencia de Marca. <strong>Deadline: vie 4 jul.</strong></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- EXEC SUMMARY -->
+  <div class="section">
+    <div class="section-header">
+      <div class="icon">📋</div>
+      <h2>Resumen Ejecutivo</h2>
+      <div class="badge">4 insights clave</div>
+    </div>
+    <div class="section-body">
+      <div class="exec-bullets">
+        <div class="exec-bullet">
+          <div class="num">1</div>
+          <p><strong>Decreto 614 convierte el origen USA de Ashley en ventaja comercial inmediata:</strong> Desde el 1–2 de julio de 2026, importadores de muebles y colchones desde China enfrentan +10–15pp de arancel adicional. Ashley importa desde EE.UU. bajo TLC (0%). Es una ventaja de precio estructural durante los próximos 12 meses que ningún competidor con cadena de suministro China puede replicar a corto plazo. El mensaje debe estar en tiendas y RRSS antes del viernes 4 de julio.</p>
+        </div>
+        <div class="exec-bullet">
+          <div class="num">2</div>
+          <p><strong>Ashley lidera el crecimiento porcentual del sector con +71% en Q1 2026:</strong> El sector muebles Bogotá creció +29.9% en abril 2026. Ashley crece más del doble que el mercado. Jamar (+45% en 2025) y Aristas (+54% proyectado a 2 años) van detrás en velocidad porcentual interanual. Con el Decreto 614 reduciendo la competitividad de muebles importados de China, el contexto macro favorece a Ashley para sostener ese ritmo en Q2 y Q3 2026.</p>
+        </div>
+        <div class="exec-bullet">
+          <div class="num">3</div>
+          <p><strong>Medellín se convierte en el campo de batalla más urgente del semestre:</strong> Aristas ya opera en CC Oviedo y evalúa una segunda tienda en Medellín. Tugó tiene presencia. IKEA tiene tienda en Viva Envigado. Con cada mes que pasa sin Ashley en Medellín, los competidores acumulan base de clientes y reconocimiento de marca en la segunda ciudad del país. La decisión de apertura de la 4ª tienda Ashley debe tomarse esta semana, aunque la apertura física sea en Q4 2026 o Q1 2027.</p>
+        </div>
+        <div class="exec-bullet">
+          <div class="num">4</div>
+          <p><strong>Ashley es la marca mejor calificada del sector — y no lo está comunicando:</strong> Multiparque 5.0 ⭐ (641 reseñas), Carrera 19 4.9 ⭐ (447 reseñas), 12 de Octubre 4.9 ⭐ (7 reseñas), Barranquilla 5.0 ⭐ (70 reseñas). Ningún competidor tiene ratings verificados públicamente en ese nivel. Esta semana, Multiparque sumó +6 nuevas reseñas — señal de actividad de clientes activa. El rating debe aparecer explícitamente en posts de Instagram, banners en tienda y firma de correo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCOREBOARD -->
+  <div class="section">
+    <div class="section-header">
+      <div class="icon">🎯</div>
+      <h2>Scoreboard Ejecutivo</h2>
+      <div class="badge">Estado semana 29 jun 2026</div>
+    </div>
+    <div class="section-body">
+      <table class="scoreboard-table">
+        <thead>
+          <tr>
+            <th>Competidor</th>
+            <th>Precio</th>
+            <th>Reputación</th>
+            <th>Digital</th>
+            <th>Expansión</th>
+            <th>Marketing</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="6" style="padding:6px 0 2px;font-size:9px;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:0.5px;">Segmento Masivo</td></tr>
+          <tr>
+            <td>Muebles Jamar</td>
+            <td><span class="dot dot-red">!</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-red">!</span></td>
+            <td><span class="dot dot-red">!</span></td>
+          </tr>
+          <tr>
+            <td>IKEA Colombia</td>
+            <td><span class="dot dot-red">!</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-red">!</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+          </tr>
+          <tr>
+            <td>Homecenter</td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-red">!</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+          </tr>
+          <tr>
+            <td>Easy Colombia</td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-green">✓</span></td>
+            <td><span class="dot dot-green">✓</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+          </tr>
+          <tr><td colspan="6" style="padding:6px 0 2px;font-size:9px;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:0.5px;">Segmento Contemporáneo / Diseño</td></tr>
+          <tr>
+            <td>Tugó</td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+          </tr>
+          <tr>
+            <td>Aristas</td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-red">!</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+          </tr>
+          <tr><td colspan="6" style="padding:6px 0 2px;font-size:9px;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:0.5px;">Segmento Premium / Lujo</td></tr>
+          <tr>
+            <td>BoConcept</td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-green">✓</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+          </tr>
+          <tr>
+            <td>Zientte</td>
+            <td><span class="dot dot-green">✓</span></td>
+            <td><span class="dot dot-green">✓</span></td>
+            <td><span class="dot dot-green">✓</span></td>
+            <td><span class="dot dot-yellow">~</span></td>
+            <td><span class="dot dot-green">✓</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="font-size:10px;color:var(--text-light);margin-top:8px;">
+        <span class="dot dot-red">!</span> Amenaza activa &nbsp;
+        <span class="dot dot-yellow">~</span> Neutro / Sin novedades &nbsp;
+        <span class="dot dot-green">✓</span> Ventaja detectada
+      </div>
+    </div>
+  </div>
+
+  <!-- NOVEDADES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="icon">📰</div>
+      <h2>Novedades por Competidor</h2>
+      <div class="badge">Fuentes verificadas — semana 29 jun</div>
+    </div>
+    <div class="section-body">
+
+      <div style="margin-bottom:18px;">
+        <div style="font-size:11px;font-weight:700;color:var(--ashley-navy);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">JAMAR</div>
+        <p style="font-size:12px;line-height:1.6;margin-bottom:4px;">• <strong>Flagship Santa Bárbara en proceso de apertura:</strong> 2.500 m², inversión $15.000M COP, proyección $24.000M COP/año. Competencia directa con Ashley Carrera 19 en zona norte Bogotá. A 29 jun sin nota oficial de inauguración, pero la apertura es inminente. <span class="source-tag">portafolio.co mar 2026</span></p>
+        <p style="font-size:12px;line-height:1.6;margin-bottom:4px;">• <strong>Catálogo "Alegría+ Mundial" activo hasta 15 jul:</strong> Vinculado al fútbol como palanca de compra. Credijamar "Compre ahora, pague agosto" con financiamiento 3–44 meses, mínimo $2.7M COP. Sofá-cama en oferta desde $989.000. <span class="source-tag">jamar.com jun 2026</span></p>
+        <p style="font-size:12px;line-height:1.6;">• <strong>Escala digital:</strong> +1.4M usuarios/mes en canales digitales. Bogotá representa el 20% de ingresos Jamar con crecimiento YoY ~50%. Meta 2030: $1 billón COP. Cerró tienda Suba para priorizar formatos grandes (>2.000 m²). <span class="source-tag">portafolio.co 2026</span></p>
+      </div>
+
+      <div style="margin-bottom:18px;">
+        <div style="font-size:11px;font-weight:700;color:var(--ashley-navy);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">IKEA COLOMBIA</div>
+        <p style="font-size:12px;line-height:1.6;margin-bottom:4px;">• <strong>Nueva Country Manager (24 jun 2026):</strong> María Fabiana Traboulsi Luna asume el liderazgo. Señal de transición hacia fase de consolidación agresiva — mayor énfasis en fidelización, omnicanal y precios. <span class="source-tag">americaretail-malls.com jun 2026</span></p>
+        <p style="font-size:12px;line-height:1.6;margin-bottom:4px;">• <strong>Campaña post-Black Friday camas y colchones:</strong> Activa 18 jun–12 jul 2026. 3 tiendas operativas (Bogotá NQS, Cali, Viva Envigado). Sin nueva apertura en Colombia para 2026 — 4ª tienda regional será en Perú. <span class="source-tag">ikea.com/co jun 2026</span></p>
+        <p style="font-size:12px;line-height:1.6;">• <strong>Dominio SEO absoluto:</strong> Aparece en top 3 orgánico en los 5 términos clave monitoreados esta semana. Ashley ausente de todos los top 3. Nueva línea infantil BARNDROM (algodón orgánico 80%) lanzada. <span class="source-tag">Google search jun 2026</span></p>
+      </div>
+
+      <div style="margin-bottom:18px;">
+        <div style="font-size:11px;font-weight:700;color:var(--ashley-navy);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">ARISTAS</div>
+        <p style="font-size:12px;line-height:1.6;margin-bottom:4px;">• <strong>CC Oviedo Medellín operativa (~abril 2026):</strong> Primera tienda fuera de Bogotá. 9 tiendas totales: 8 en Bogotá + 1 en Medellín. Evalúa segunda tienda en Medellín y 2–3 aperturas adicionales. <span class="source-tag">aristas.co jun 2026</span></p>
+        <p style="font-size:12px;line-height:1.6;margin-bottom:4px;">• <strong>3 conceptos de diseño 2026:</strong> MAGNO (lujo contemporáneo), AURA (sofisticación + armonía), Bold (personalidad visual). Meta $120.000M COP 2026 vs $78.000M 2025 (+54% en cifras absolutas). <span class="source-tag">portafolio.co abr 2026</span></p>
+        <p style="font-size:12px;line-height:1.6;">• <strong>Expansión fábrica de colchones propia:</strong> Integración vertical de margen como diferenciador. Asesoría personalizada como modelo de venta. Competidor directo de Ashley en segmento contemporáneo en Bogotá y Medellín.</p>
+      </div>
+
+      <div style="margin-bottom:18px;">
+        <div style="font-size:11px;font-weight:700;color:var(--ashley-navy);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">TUGÓ</div>
+        <p style="font-size:12px;line-height:1.6;margin-bottom:4px;">• <strong>Promo "Compra hoy, paga agosto" vence 30 jun:</strong> 21.99% EA. Táctica de mitad de año para estimular demanda. Co-branded Davivienda/Mastercard activa: 10% dto. en cuotas, 100% digital. <span class="source-tag">tugo.co jun 2026</span></p>
+        <p style="font-size:12px;line-height:1.6;margin-bottom:4px;">• <strong>Nueva tienda Parque La Colina (788 m²):</strong> Primer formato de centro comercial de Tugó. 9–10 tiendas Colombia + 1 Lima (Perú). Planes de expansión: Villavicencio y Montería. <span class="source-tag">larepublica.co 2026</span></p>
+        <p style="font-size:12px;line-height:1.6;">• <strong>Colección "Elémental" reciente:</strong> Contenido blog "Estilo Tugó" activo (16 jun). Sin quejas de entrega documentadas esta semana, aunque es recurrente en medios. <span class="source-tag">blog.tugo.co jun 2026</span></p>
+      </div>
+
+      <div style="margin-bottom:18px;">
+        <div style="font-size:11px;font-weight:700;color:var(--ashley-navy);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">EASY COLOMBIA</div>
+        <p style="font-size:12px;line-height:1.6;margin-bottom:4px;">• <strong>"Prima Easy 2026" lanzada 25 jun — NUEVA ESTA SEMANA:</strong> Activa hasta 12 jul. Muebles sala, comedor y dormitorio. 15 tiendas en Bogotá, Medellín, Cali. Campaña solapada con Aniversario Ashley — riesgo de captura de demanda de prima semestral. <span class="source-tag">easy.com.co jun 2026</span></p>
+        <p style="font-size:12px;line-height:1.6;">• <strong>Optimización de área física:</strong> Cedió 50% del área en Centro Mayor (2.100 m²) a Decathlon. Cencosud cerró Spid completamente (reenfoque en Easy+Jumbo+Metro). Easy mantiene 15 tiendas activas. <span class="source-tag">pulzo.com · portafolio.co jun 2026</span></p>
+      </div>
+
+      <div style="margin-bottom:18px;">
+        <div style="font-size:11px;font-weight:700;color:var(--ashley-navy);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">BOCONCEPT</div>
+        <p style="font-size:12px;line-height:1.6;margin-bottom:4px;">• <strong>Colecciones Catskills + AXO activas en Colombia:</strong> Catskills con Helena Christensen (Global Artistic Director) desde mayo 2026; colección AXO (atelier axo) desde abril 2026. Herramientas de personalización 3D y Compact Living como diferenciadores. <span class="source-tag">descifrado.com · revistapym.com.co may 2026</span></p>
+        <p style="font-size:12px;line-height:1.6;">• Sin eventos Colombia-específicos detectados en semana 22–29 jun. 2 tiendas: Calle 81 Bogotá (Zona Rosa) + Milla de Oro Medellín. Nicho premium muy específico — amenaza en segmento aspiracional alto.</p>
+      </div>
+
+      <div style="margin-bottom:18px;">
+        <div style="font-size:11px;font-weight:700;color:var(--ashley-navy);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">ZIENTTE</div>
+        <p style="font-size:12px;line-height:1.6;margin-bottom:4px;">• <strong>Plan de internacionalización 2026:</strong> Abre en Las Mercedes, Caracas con socio local. Evalúa Quito (tienda propia). En ruta: Costa Rica, República Dominicana, México y EE.UU. <span class="source-tag">portafolio.co 2025–2026</span></p>
+        <p style="font-size:12px;line-height:1.6;">• <strong>Meta Colombia 2026:</strong> $23.000M COP (+15% vs año anterior). 5–7 tiendas. Sin movimientos Colombia-específicos detectados esta semana. Segmento lujo — sin amenaza directa esta semana. <span class="source-tag">portafolio.co 2026</span></p>
+      </div>
+
+      <div style="margin-bottom:0;">
+        <div style="font-size:11px;font-weight:700;color:var(--ashley-navy);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">ASHLEY — NUESTRO ESTADO</div>
+        <p style="font-size:12px;line-height:1.6;margin-bottom:4px;">• <strong>Aniversario Sale 2026 + "Tiempo de Renovar 2026" activos:</strong> Dos campañas simultáneas en ashleycolombia.com. Crecimiento +71% Q1 2026 vs Q1 2025 — mayor porcentaje del sector. Entrega 48h Bogotá / 3 días hábiles nacional, sin equivalente verificado en competidores. <span class="source-tag">ashleycolombia.com jun 2026</span></p>
+        <p style="font-size:12px;line-height:1.6;margin-bottom:4px;">• <strong>3 tiendas HomeStore operativas:</strong> Multiparque BG, Carrera 19 BG, Barranquilla. Pipeline: Medellín El Poblado (confirmado) + 12 de Octubre BG. Instagram @ashleycolombia.oficial: 157K seguidores — crecimiento +10K desde mayo 2026 (+6.8%), mayor crecimiento porcentual entre marcas de muebles. <span class="source-tag">Instagram snippet Google jun 2026</span></p>
+        <p style="font-size:12px;line-height:1.6;">• <strong>Decreto 614 = ventaja estructural inmediata:</strong> Ashley importa desde USA (TLC 0%). Competidores con cadena China enfrentan +10–15pp desde ~1 jul 2026. Mensaje de comunicación debe estar activo antes del viernes. Responsable: Operaciones / Marketing.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- REPUTACIÓN GOOGLE REVIEWS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="icon">⭐</div>
+      <h2>Reputación — Google Reviews por tienda Ashley</h2>
+      <div class="badge">Semana 29 jun 2026</div>
+    </div>
+    <div class="section-body">
+      <table class="scoreboard-table">
+        <thead>
+          <tr>
+            <th>Tienda</th>
+            <th>Rating ⭐</th>
+            <th>Total reseñas</th>
+            <th>Nuevas esta semana</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Multiparque Bogotá</strong></td>
+            <td><strong>5.0 ⭐</strong></td>
+            <td>641</td>
+            <td style="font-weight:700;color:#1a7a3c;">+6 🏆</td>
+          </tr>
+          <tr>
+            <td>Carrera 19 Bogotá</td>
+            <td>4.9 ⭐</td>
+            <td>447</td>
+            <td style="color:#555;">+2</td>
+          </tr>
+          <tr>
+            <td>12 de Octubre Bogotá</td>
+            <td>4.9 ⭐</td>
+            <td>7</td>
+            <td style="color:#555;">+2</td>
+          </tr>
+          <tr>
+            <td>Barranquilla</td>
+            <td>5.0 ⭐</td>
+            <td>70</td>
+            <td style="color:#bbb;">+0</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="font-size:11px;color:var(--text-light);margin-top:10px;line-height:1.6;">
+        <strong style="color:var(--ashley-navy);">Promedio red Ashley:</strong> 4.95 ⭐ · 1.165 reseñas totales acumuladas. &nbsp;|&nbsp;
+        <strong style="color:#1a7a3c;">🏆 Multiparque +6</strong> — mayor actividad de reseñas de la semana. &nbsp;|&nbsp;
+        Ningún competidor tiene ratings verificados públicamente en este nivel. <strong>Acción sugerida:</strong> Comunicar activamente los ratings en posts de Instagram, banners en tienda y firma de correo. Responsable: Marketing. Deadline: vie 4 jul.
+      </div>
+    </div>
+  </div>
+
+  <!-- FEEDBACK CTA -->
+  <div style="background:var(--ashley-navy);border-radius:8px;padding:20px 28px;margin-top:16px;border-left:4px solid var(--ashley-gold);">
+    <div style="font-size:12px;font-weight:700;color:var(--ashley-gold);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;">📬 ¿Tienes feedback sobre este radar?</div>
+    <p style="font-size:13px;color:rgba(255,255,255,.85);line-height:1.6;margin:0;">
+      Responde este correo con tus comentarios, correcciones o sugerencias. Cada respuesta se lee, se analiza y se convierte en una mejora para la siguiente edición. El equipo procesa el feedback y Pablo recibe una propuesta de cambios antes del próximo lunes.
+    </p>
+  </div>
+
+</div><!-- .page -->
+
+<div class="footer">
+  <span><strong>Ashley Furniture Colombia</strong> · Radar Competitivo Semanal · Confidencial</span>
+  <span>Agente Editor + Verificación manual · 29 de junio de 2026 · <strong>Edición #11</strong></span>
+</div>
+</body>
+</html>
