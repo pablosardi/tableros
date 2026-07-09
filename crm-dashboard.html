@@ -277,10 +277,10 @@
 
     /* PERFIL BADGE */
     .perfil-badge { padding:2px 9px;border-radius:3px;font-size:11px;font-weight:700;display:inline-block; }
-    .perfil-closer    { background:#F0FEF4;color:#12853c;border:1px solid #86EFAC; }
+    .perfil-closer    { background:#F0FEF4;color:#16a34a;border:1px solid #86EFAC; }
     .perfil-connector { background:#F5F3FF;color:#7C3AED;border:1px solid #C4B5FD; }
-    .perfil-mixto     { background:#FFFBEB;color:#914f03;border:1px solid #FDE68A; }
-    .perfil-nuevo     { background:#F1F5F9;color:#525f71;border:1px solid #CBD5E1; }
+    .perfil-mixto     { background:#FFFBEB;color:#d97706;border:1px solid #FDE68A; }
+    .perfil-nuevo     { background:#F1F5F9;color:#64748b;border:1px solid #CBD5E1; }
     /* SPARKLINE */
     .spark { display:inline-flex;align-items:flex-end;gap:2px;height:22px;padding:2px 0; }
     .spark-bar { width:7px;border-radius:2px 2px 0 0; }
@@ -676,12 +676,12 @@ function actBar(pct) {
 
 function actBadge(tiene) {
   return tiene
-    ? '<span style="background:#F0FEF4;color:#12853c;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:600">✓ Activa</span>'
+    ? '<span style="background:#F0FEF4;color:#16a34a;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:600">✓ Activa</span>'
     : '<span style="background:#FEF2F2;color:#DC2626;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:600">✗ Sin actividad</span>';
 }
 
 function dlBadge(vencida, urgente) {
-  if (vencida) return '<span style="background:#FEF2F2;color:#b41f1f;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:600">⛔ Vencida</span>';
+  if (vencida) return '<span style="background:#FEF2F2;color:#dc2626;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:600">⛔ Vencida</span>';
   if (urgente) return '<span style="background:#FFFBEB;color:#D97706;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:600">⏰ Urgente</span>';
   return '';
 }
@@ -1266,7 +1266,7 @@ function renderPrioridades() {
         <div class="asesor-block-hdr">
           ${semaforoGestion(a.pct_actividad, a.act_vencidas)}
           <span style="color:var(--charcoal)">${a.asesor||'—'}</span>
-          ${!_v90p[a.asesor]?'<span style="background:#F1F5F9;color:#636d7a;padding:1px 6px;border-radius:2px;font-size:10px">⚪ sin ventas 90d</span>':''}
+          ${!_v90p[a.asesor]?'<span style="background:#F1F5F9;color:#94a3b8;padding:1px 6px;border-radius:2px;font-size:10px">⚪ sin ventas 90d</span>':''}
           <span style="color:var(--muted);font-size:11px;font-weight:400">${getFilteredCount(a)} opps · ${fmtCOP(getFilteredRev(a))}</span>
           ${(a.sin_contacto_14d||0)>0?`<span style="background:#FEF2F2;color:#DC2626;padding:1px 7px;border-radius:3px;font-size:11px;font-weight:600">🚨 ${a.sin_contacto_14d} sin ctc</span>`:''}
           ${(a.medidas_count||0)>0?`<span style="background:#FEF5EB;color:var(--orange);padding:1px 7px;border-radius:3px;font-size:11px;font-weight:600">🎯 ${a.medidas_count} medidas</span>`:''}
@@ -1718,7 +1718,7 @@ function signalBadge(dias) {
 }
 
 function balanceNetBadge(net) {
-  if (net > 2)  return '<span style="background:#FEF5EB;color:#a05811;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:700">+' + net + ' CLOSER</span>';
+  if (net > 2)  return '<span style="background:#FEF5EB;color:#f0841a;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:700">+' + net + ' CLOSER</span>';
   if (net < -2) return '<span style="background:#F5F3FF;color:#7C3AED;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:700">' + net + ' GENERADOR</span>';
   return '<span style="background:#F1F5F9;color:#64748B;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600">≈0 equilibrio</span>';
 }
