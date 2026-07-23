@@ -1,0 +1,157 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Cpolygon points=%2250,5 93,27 93,73 50,95 7,73 7,27%22 fill=%22%23E8650A%22/%3E%3C/svg%3E"></head><body><title>Propuesta — fecha de entrega por línea en Odoo</title>
+<style>
+  :root{--naranja:#F0841A;--charcoal:#3D3935;--tinta:#15202b;--rojo:#B91C1C;--ambar:#B45309;
+        --verde:#15803D;--papel:#fff;--nota:#faf9f7;--linea:#e7e4e0;--suave:#645d57;}
+  @media (prefers-color-scheme:dark){:root{--papel:#15181c;--nota:#1c2128;--linea:#2f353d;
+        --suave:#9aa3ad;--tinta:#e9ecef;--verde:#4ade80;--rojo:#f87171;--ambar:#fbbf24;}}
+  :root[data-theme=dark]{--papel:#15181c;--nota:#1c2128;--linea:#2f353d;--suave:#9aa3ad;
+        --tinta:#e9ecef;--verde:#4ade80;--rojo:#f87171;--ambar:#fbbf24;}
+  :root[data-theme=light]{--papel:#fff;--nota:#faf9f7;--linea:#e7e4e0;--suave:#645d57;
+        --tinta:#15202b;--verde:#15803D;--rojo:#B91C1C;--ambar:#B45309;}
+  body{font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;background:var(--papel);
+       color:var(--tinta);line-height:1.6;margin:0;padding:0 22px 70px;}
+  .env{max-width:820px;margin:0 auto;} p,li{max-width:72ch;}
+  .hero{background:var(--charcoal);margin:0 -22px 30px;padding:34px 30px;}
+  .hero .in{max-width:820px;margin:0 auto;}
+  .hero .tag{color:var(--naranja);font-size:11.5px;letter-spacing:2.5px;font-weight:700;}
+  .hero h1{color:#fff;font-size:clamp(23px,4vw,29px);margin:8px 0 8px;letter-spacing:-.4px;line-height:1.15;}
+  .hero p{color:#cdc7c1;margin:0;font-size:15px;}
+  h2{font-size:20px;margin:40px 0 6px;}h2::before{content:"";display:block;width:36px;height:3px;
+     background:var(--naranja);margin-bottom:12px;}
+  h3{font-size:15.5px;margin:20px 0 4px;}
+  table{border-collapse:collapse;width:100%;margin:14px 0;font-size:13.5px;}
+  th{text-align:left;font-size:11px;letter-spacing:.4px;text-transform:uppercase;color:var(--suave);
+     padding:0 12px 8px 0;border-bottom:1px solid var(--linea);}
+  td{padding:9px 12px 9px 0;border-bottom:1px solid var(--linea);vertical-align:top;}
+  td:last-child,th:last-child{padding-right:0;}
+  .marco{border-left:3px solid var(--naranja);padding:2px 0 2px 18px;margin:18px 0;}
+  .marco.bien{border-color:var(--verde);}.marco.alerta{border-color:var(--rojo);}
+  .marco .r{font-size:11.5px;letter-spacing:1.4px;font-weight:700;text-transform:uppercase;
+            color:var(--ambar);margin-bottom:4px;}.marco.bien .r{color:var(--verde);}.marco.alerta .r{color:var(--rojo);}
+  code{background:var(--nota);border:1px solid var(--linea);padding:1px 6px;border-radius:4px;
+       font-family:ui-monospace,Menlo,monospace;font-size:12px;}
+  .big{font-size:30px;font-weight:800;line-height:1;}
+  .cards{display:flex;gap:14px;flex-wrap:wrap;margin:16px 0;}
+  .card{flex:1;min-width:150px;background:var(--nota);border:1px solid var(--linea);border-radius:8px;padding:14px 16px;}
+  .card .l{font-size:12px;color:var(--suave);margin-top:4px;}
+  .flujo{background:var(--nota);border:1px solid var(--linea);border-radius:8px;padding:16px 18px;margin:14px 0;font-size:13.5px;}
+  .conf{font-size:11px;font-weight:700;padding:1px 7px;border-radius:20px;color:#fff;}
+  .h{background:var(--verde);}.m{background:var(--ambar);color:#15202b;}.l{background:var(--rojo);}
+  .pie{margin-top:44px;padding-top:16px;border-top:1px solid var(--linea);color:var(--suave);font-size:13px;}
+</style>
+
+<div class="hero"><div class="in">
+  <div class="tag">PLANNER COMPRAS · PROPUESTA PARA APROBAR</div>
+  <h1>Fecha de entrega por línea en Odoo — la base para forecast, cumplimiento y reservas</h1>
+  <p>Que cada línea de una orden tenga su fecha real de llegada, alimentada del correo por el robot,
+     con el historial en el log. 23 de julio de 2026.</p>
+</div></div>
+
+<div class="env">
+
+<h2>El problema, en una frase</h2>
+<p>Una orden de Ashley <b>se parte en varios contenedores</b> y cada uno llega en fecha distinta, pero
+hoy escribimos <b>una sola fecha para toda la orden</b>. Eso obliga a mil correcciones a mano y hace que
+ningún tablero muestre la realidad. La consecuencia: no se puede proyectar el quiebre, ni saber si
+cumplimos al cliente, ni optimizar qué stock reservado liberar.</p>
+
+<h2>Lo que ya verificamos — la base es robusta</h2>
+<div class="cards">
+  <div class="card"><div class="big" style="color:var(--verde)">93</div>
+    <div class="l">órdenes ya tienen <b>fechas distintas por línea</b> hoy — el campo nativo funciona en la realidad</div></div>
+  <div class="card"><div class="big" style="color:var(--verde)">9</div>
+    <div class="l">fechas distintas <b>bajan a la recepción</b> (stock.move) — Nadia y el CEDIS lo ven</div></div>
+  <div class="card"><div class="big" style="color:var(--rojo)">0</div>
+    <div class="l">de 4.497 líneas usan el módulo de <b>contenedor</b> (`purchase.container`): está muerto</div></div>
+</div>
+<p>El campo <code>purchase.order.line.date_planned</code> ("Expected Arrival") es <b>nativo de Odoo</b>
+(sobrevive upgrades), <b>ya carga fechas distintas por línea</b> en 93 órdenes reales, y <b>fluye a la
+bodega</b>. El módulo de contenedor de terceros es un cascarón sin usar — <b>la base robusta es el nativo</b>,
+no el contenedor.</p>
+
+<h2>La confiabilidad de hoy — por qué duele</h2>
+<p>De las <b>1.041 líneas pendientes</b> (aún sin recibir):</p>
+<table>
+  <tr><th>Estado</th><th>Líneas</th><th>Lectura</th></tr>
+  <tr><td>🔴 Fecha vencida y sin recibir</td><td><b>336</b></td><td>La fecha ya mintió: pasó y no llegó</td></tr>
+  <tr><td>⚪ Sin fecha</td><td>25</td><td>No hay con qué planear</td></tr>
+  <tr><td>🟢 Fecha futura vigente</td><td>680</td><td>Confiable, por ahora</td></tr>
+</table>
+<p><b>~35% de las líneas pendientes (361 de 1.041) tienen una fecha en la que no se puede confiar hoy.</b>
+Ese es el trabajo manual que estamos pagando.</p>
+
+<h2>De dónde sale la fecha por línea — el mapeo del correo</h2>
+<p>Ashley usa <b>5 identificadores</b>: <code>C#</code> (la orden = <code>partner_ref</code>),
+<code>PO#</code> nuestro, <code>P-code</code> (orden de contenedor), <code>Trip#</code> (el embarque),
+<code>Equipment#</code> (el contenedor físico). El mapeo real:</p>
+<div class="flujo"><b>ítem → C# (orden) → contenedor (Trip/Equipment) → fecha del ASN</b><br>
+Los ítems del mismo contenedor comparten fecha; los de otro contenedor de la misma orden, no.</div>
+<table>
+  <tr><th>Correo</th><th>¿Fecha por línea?</th><th>Rol</th><th>Conf.</th></tr>
+  <tr><td><b>ASN</b> (aviso de embarque)</td><td>Por <b>contenedor</b> — todos sus ítems comparten fecha</td>
+      <td>La fecha firme cuando ya embarcó</td><td><span class="conf h">HIGH</span></td></tr>
+  <tr><td><b>SOA</b> (confirmación)</td><td><b>Sí, por ítem</b> (ship estimado)</td>
+      <td>Estimado inicial mientras no hay ASN</td><td><span class="conf m">MEDIUM</span></td></tr>
+  <tr><td><b>CNW Date Change</b></td><td>Por contenedor (ETD), no por ítem</td>
+      <td>Afina el estimado</td><td><span class="conf m">MEDIUM</span></td></tr>
+  <tr><td><b>CNW Quantity (=0)</b></td><td>—</td>
+      <td>Marca la línea <b>sacada</b> del contenedor (aplicar ANTES de fechar)</td><td><span class="conf h">HIGH</span></td></tr>
+</table>
+
+<h2>El historial — lo que Odoo no guarda y el robot sí</h2>
+<div class="marco">
+  <div class="r">Se conoce la fecha original y cada cambio — pero no en Odoo</div>
+  <p><code>date_planned</code> <b>no es campo trackeado</b> en Odoo: no guarda el historial. El historial
+  <b>vive en los correos</b> (CNW Date Change trae <code>ETD previo → ETD nuevo</code>). El robot reconstruye
+  <b>la película</b> —original → cada cambio → llegada real— y la deja <b>firmada en el log</b> de la orden.
+  Eso es lo que Odoo nativo no hace solo.</p>
+</div>
+
+<h2>Qué destraba — tus tres casos</h2>
+<table>
+  <tr><th>Caso</th><th>Qué habilita la fecha confiable por línea</th></tr>
+  <tr><td><b>Proyección de quiebre anticipada</b></td>
+      <td>Saber <i>cuándo</i> aterriza cada reposición → proyectar el quiebre antes de que pase</td></tr>
+  <tr><td><b>Cumplimiento a cliente</b></td>
+      <td>Saber si vas a cumplir la fecha prometida; hoy 336 líneas la rompieron en silencio</td></tr>
+  <tr><td><b>Optimización de reservas</b></td>
+      <td>Reservar al pedido con la fecha de cliente más cercana y <b>liberar</b> el stock reservado
+      para lo que llega tarde, para venderlo ya</td></tr>
+</table>
+
+<h2 style="color:var(--rojo)">El hueco crítico — resolver ANTES de cablear</h2>
+<div class="marco alerta">
+  <div class="r">Confirmar con Ashley qué es "Planned Delivery Date"</div>
+  <p>El campo de fecha del ASN <b>puede no ser la llegada a Colombia</b>. Para el trip 69515 el ETD fue
+  23-jul y el PDD 27-jul (4 días), pero el tránsito Vietnam→Colombia son <b>semanas</b>. Ese PDD parece
+  ser fecha <b>en origen</b>, no llegada al CEDIS. Escribirlo como "fecha de llegada" sin confirmar sería
+  meter una fecha falsa por línea — justo lo que queremos evitar. <b>La llegada real a Colombia no está en
+  ningún correo de Ashley: la tiene el forwarder / agente de aduana (Colmas).</b></p>
+</div>
+
+<h2>La propuesta</h2>
+<ol>
+  <li><b>Base:</b> el campo nativo <code>date_planned</code> por línea. Robusto, vivo, fluye a bodega.</li>
+  <li><b>El robot lo llena por línea desde el correo</b>, en capas que se afinan hacia la llegada:
+    SOA (estimado por ítem) → CNW Date Change (ETD por contenedor) → ASN (fecha firme del contenedor),
+    aplicando primero las bajas de línea (Qty=0).</li>
+  <li><b>Cada escritura deja nota firmada en el log</b> (original → cambio → llegada) — el historial que Odoo no guarda.</li>
+  <li><b>Se prueba en STAGE</b> primero (una orden real, escribir fechas distintas por línea, verificar que
+    aguantan y bajan a la recepción), nunca en producción sin tu OK.</li>
+</ol>
+
+<h2>Lo que se necesita para avanzar</h2>
+<table>
+  <tr><th>Qué falta</th><th>Dueño</th></tr>
+  <tr><td><b>Confirmar qué es "Planned Delivery Date"</b> del ASN (origen vs llegada Colombia)</td><td>Ashley / Juan pregunta</td></tr>
+  <tr><td><b>La fecha de llegada real a Colombia</b> (nacionalización) — no está en el correo de Ashley</td><td>Forwarder / Colmas</td></tr>
+  <tr><td><b>Rama de staging viva en Odoo.sh</b> (la actual está caída)</td><td>Julián</td></tr>
+</table>
+
+<div class="pie">
+  Propuesta del Planner de Compras. Base verificada sobre 491 órdenes / 4.497 líneas reales (solo lectura).
+  Nada se escribe en Odoo sin aprobación y sin probar en stage. 23-jul-2026.
+</div>
+
+</div>
+</body></html>
